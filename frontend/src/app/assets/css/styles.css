@@ -1,0 +1,61 @@
+html,
+body {
+    background-image: url(/assets/img/stadium1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100%;
+}
+
+#footer {
+    height: 30px;
+    background-color: #ff0000;
+    vertical-align: middle;
+}
+
+.avenue-yellow-text {
+    color: #FAE900;
+}
+
+.pull-left {
+    float: left;
+    max-width: 300px;
+    height: 50px
+}
+
+;
+.a-orange-text {
+    color: #FAE900;
+}
+
+.avenue-heading {
+    background-color: #D90404;
+    color: #FAE900;
+    min-height: 40px;
+}
+
+.avenue-body {
+    background-color: #303030;
+    color: white;
+}
+
+.a-adminMenu {
+    position: fixed;
+}
+
+.a-modal-row {
+    margin-top: 4px;
+}
+
+;
+.a-panel-heading {
+    background-color: #D90404;
+    color: #FAE900;
+}
+
+.a-panel-body {
+    background-color: #303030;
+    color: white;
+    height: 100%;
+}

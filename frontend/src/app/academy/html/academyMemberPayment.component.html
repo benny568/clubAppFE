@@ -1,0 +1,66 @@
+<td-steps mode="horizontal">
+    <td-step label="Terms & Conditions" sublabel="Read and accept T&Cs" [active]="step1enabled" [disabled]="!step1enabled">
+
+    </td-step>
+    <td-step label="Registration Form" sublabel="Fill in personal details" [active]="step2enabled" [disabled]="!step2enabled">
+
+    </td-step>
+    <td-step label="Review & Payment" sublabel="Review form, submit details and make payment." [active]="true" [disabled]="false">
+
+    </td-step>
+
+</td-steps>
+
+<div class="panel">
+    <div class="panel-heading avenue-heading">
+        Step 3: Payment
+    </div>
+    <div class="panel-body avenue-body">
+
+        <div *ngFor="let item of ar$.regData">
+
+            <div class="ui-grid-row" *ngIf="(item.type==='md-input')&&(item.display)" style="margin-bottom:5px;">
+
+                <div class="table-container">
+                    <div class="table-column">
+                        <strong>{{item.name}}:</strong>
+                    </div>
+                    <div class="table-column">
+                        {{item.value}}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- End of ngFor -->
+
+        <!-- Leave a space -->
+        <div class="ui-grid-row">
+            <br />
+        </div>
+
+        <!-- Add the total cost calculations -->
+
+        <div class="table-container">
+            <div class="table-column">
+                <strong>TOTAL PAYMENT DUE:</strong>
+            </div>
+            <div class="table-column">
+                {{ar$.payment | currency:'EUR':true:'1.2-2'}}
+            </div>
+        </div>
+
+        <div class="ui-grid-row" style="padding-top:50px;">
+            <div class="ui-grid-col-12">
+                <button type="button" class="btn btn-warning" (click)="back()">Back</button>
+            </div>
+            <div class="ui-grid-col-12"></div>
+            <div class="ui-grid-col-7">
+                <button type="button" (click)="ar$.payPal()" style="float:right;">
+                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

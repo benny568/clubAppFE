@@ -1,0 +1,36 @@
+img {
+    float: left;
+    margin: 0 20px 20px 0;
+}
+
+p {
+    text-align: justify;
+    text-indent: 2em;
+}
+
+.center-me {
+    margin: 0 auto;
+}
+
+.parent {
+    position: relative;
+}
+
+.child {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-10%);
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.backbtn {
+    background-color: #D90404;
+    color: #FAE900;
+}
