@@ -34,7 +34,7 @@ export class CommonService {
         if ( this.CurrentServerMode === this.modes.LOCAL )
         {
            // _home = 'http://localhost:8080/clubRegisterApp';
-        	 _home = 'http://localhost:8081/backend/';
+        	 _home = 'http://localhost:8080/backend/';
         } else if ( this.CurrentServerMode === this.modes.REMOTE )
         {
             _home = 'http://www.avenueunited.ie/backend/';

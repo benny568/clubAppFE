@@ -25,30 +25,34 @@
                 </md-input-container>
             </div>
             <div layout="row" layout-margin>
-                <md-input-container flex>
+                <md-input-container dividerColor="accent" flex>
                     <input required [formControl]="regForm.controls['firstname']" md-input placeholder="First name" mdTooltip="Please enter the childs first name" mdTooltipPosition="above">
+                    <md-hint>Enter child's first name</md-hint>
                 </md-input-container>
-                <md-input-container flex>
+                <md-input-container dividerColor="accent" flex>
                     <input [formControl]="regForm.controls['lastname']" md-input placeholder="Last Name" mdTooltip="Please enter the childs last name" mdTooltipPosition="above">
+                    <md-hint>Enter child's surname</md-hint>
                 </md-input-container>
-                <md-input-container flex>
+                <md-input-container dividerColor="accent" flex>
                     <input [formControl]="regForm.controls['dob']" md-input placeholder="Date of Birth" mdTooltip="Please enter the childs date of birth in dd/mm/yy format" mdTooltipPosition="above">
+                    <md-hint>Enter Child's date of birth</md-hint>
                 </md-input-container>
             </div>
 
             <div layout="row" layout-margin>
-                <md-input-container flex>
+                <md-input-container dividerColor="accent" flex>
                     <textarea [formControl]="regForm.controls['allergies']" md-input placeholder="Allergy information - please specify" mdTooltip="Please enter the childs first name" mdTooltipPosition="above">
                     </textarea>
                 </md-input-container>
             </div>
 
             <div layout="row" layout-margin>
-                <md-input-container flex>
+                <md-input-container dividerColor="accent" flex>
                     <textarea [formControl]="regForm.controls['medication']" md-input placeholder="Medication" mdTooltip="Please enter details of any medication your child is on or may need during sessions." mdTooltipPosition="above">
+                    <md-hint>Give details of any medication your child may need during sessions</md-hint>
                     </textarea>
                 </md-input-container>
-                <md-input-container flex>
+                <md-input-container dividerColor="accent" flex>
                     <textarea [formControl]="regForm.controls['notes']" md-input placeholder="Additional notes" mdTooltip="Any additional information you feel may be relevant for your child." mdTooltipPosition="above">
                     </textarea>
                 </md-input-container>
@@ -56,14 +60,14 @@
 
             <div layout="row" layout-wrap layout-padding>
                 <div flex="33">
-                    <md-checkbox [formControl]="regForm.controls['asthma']" class="red">
+                    <md-checkbox [formControl]="regForm.controls['asthma']">
                         <div style="font-weight: normal">
                             My child has Asthma
                         </div>
                     </md-checkbox>
                 </div>
                 <div flex="33">
-                    <md-checkbox [formControl]="regForm.controls['diabetes']" class="red">
+                    <md-checkbox [formControl]="regForm.controls['diabetes']">
                         <div style="font-weight: normal">
                             My child has Diabetes
                         </div>
@@ -80,30 +84,31 @@
                 </md-input-container>
             </div>
             <div layout="row" layout-margin>
-                <md-input-container flex>
+                <md-input-container dividerColor="accent" flex>
                     <input [formControl]="regForm.controls['fathername']" md-input placeholder="Father's Name">
                 </md-input-container>
-                <md-input-container flex>
+                <md-input-container dividerColor="accent" flex>
                     <input [formControl]="regForm.controls['mothername']" md-input placeholder="Mother's Name">
                 </md-input-container>
-                <md-input-container flex>
+                <md-input-container dividerColor="accent" flex>
                     <input [formControl]="regForm.controls['address']" md-input placeholder="Mailing Address">
                 </md-input-container>
             </div>
 
             <div layout="row" layout-margin>
-                <md-input-container flex>
-                    <input [formControl]="regForm.controls['email']" md-input placeholder="email">
+                <md-input-container dividerColor="accent" flex>
+                    <input type="email" [formControl]="regForm.controls['email']" md-input placeholder="email">
+                    <md-hint>Enter parents email address</md-hint>
                 </md-input-container>
-                <md-input-container flex>
+                <md-input-container dividerColor="accent" flex>
                     <input md-input #postalCode placeholder="Postal Code">
                 </md-input-container>
             </div>
             <div layout="row" layout-margin>
-                <md-input-container flex>
+                <md-input-container dividerColor="accent" flex>
                     <input [formControl]="regForm.controls['phone1']" md-input placeholder="Mother's phone number">
                 </md-input-container>
-                <md-input-container flex>
+                <md-input-container dividerColor="accent" flex>
                     <input [formControl]="regForm.controls['phone2']" md-input placeholder="Father's phone number">
                 </md-input-container>
             </div>

@@ -33,9 +33,9 @@ export class SessionDataService {
     // dsTrainingRecords = [];
     // dsTrainingPerMember = [];
     dsAllMembers : Array<Member>;
-    dsNewsStories : Array<NewsStory>;
     dsPosition : Array<string>;
     dsSponsors : Array<Sponsor>;
+    showTeamArray = [];
 
     logdepth = 3;
     loghdr = "";
@@ -69,8 +69,12 @@ export class SessionDataService {
         //this.dsTeamMembers = new Array(500);
         this.dsCurrentUser = new User();
         this.dsAllMembers = new Array<Member>();
-        this.dsNewsStories = new Array<NewsStory>();
         this.dsSponsors = new Array<Sponsor>();
+
+        for ( let i = 0; i < this.showTeamArray.length; i++ )
+		{
+			this.showTeamArray[i] = false;
+		}
 
     }
 
@@ -87,115 +91,6 @@ export class SessionDataService {
          this.dsCurrentMember = member;
          this.displayMember = true;
      }
-
-    /**********************************************************
-     * Name:		hasPermission()
-     * Description:	Check the user's permission to perform the
-     * 				given action
-     * Scope:		Externally accessible
-     * Params in:	action: the action being requested
-     * Return:		true or false depending on the permissions
-     **********************************************************/
-    hasPermission(action, params)
-    {
-        var team = '';
-        var allow = false;
-        var index = 0;
-
-        console.log("-->" + "hasPermission(" + action + "," + params + ")");
-
-        if ( typeof action === undefined || params === undefined )
-        {
-            return false;
-        }
-
-        for ( var r = 0; r < this.dsCurrentUser.roles.length; r++ )
-        {
-            if ( this.dsCurrentUser.roles[r] === "ROLE_SUPER" )
-            {
-                // Super user has permissions to do anything
-                //log.trace(loghdr + " -> hasPermission("+action+"): YES");
-            	console.log(" -> hasPermission(" + action + "): YES");
-                return true;
-            }
-        }
-        switch ( action )
-        {
-            case 'MANAGE_TEAM':
-                team = params;
-                // Check if the user is a manager of this team
-                for ( var i = 0; i < this.dsCurrentUser.permissions.teams.length; i++ )
-                {
-                    for ( var t = 0; t < this.dsTeams.length; t++ )
-                    {
-                        if (  this.dsTeams[t].id === this.dsCurrentUser.permissions.teams[i] )
-                        {
-                            index = t;
-                            break;
-                        }
-                    }
-
-                    if ( this.dsTeams[index].name === team )
-                    {
-                        if ( this.dsCurrentUser.permissions.positions[i] === 0 )
-                        {
-                            allow = true;
-                            break;
-                        }
-                    }
-                }
-                break;
-
-            case 'ADD_TEAM':
-            case 'EDIT_TEAM':
-                for ( var r = 0; r < this.dsCurrentUser.roles.length; r++ )
-                {
-                    if ( this.dsCurrentUser.roles[r] === "ROLE_SUPER" )
-                    {
-                        // Super user has permissions to do anything
-                        allow = true;
-                        break;
-                    } else if ( this.dsCurrentUser.roles[r] === "ROLE_EDIT_TEAM" )
-                    {
-                        allow = true;
-                        break;
-                    }
-                }
-                break;
-            case 'DEL_TEAM':
-                for ( var r = 0; r < this.dsCurrentUser.roles.length; r++ )
-                {
-                    if ( this.dsCurrentUser.roles[r] === "ROLE_SUPER" )
-                    {
-                        // Super user has permissions to do anything
-                        allow = true;
-                        break;
-                    } else if ( this.dsCurrentUser.roles[r] === "ROLE_DEL_TEAM" )
-                    {
-                        allow = true;
-                        break;
-                    }
-                }
-                break;
-
-            case 'ADD_USER':
-            case 'EDIT_USER':
-            case 'DELETE_USER':
-            case 'VIEW_USERS':
-                for ( var r = 0; r < this.dsCurrentUser.roles.length; r++ )
-                {
-                     if ( this.dsCurrentUser.roles[r] === "ROLE_SUPER" )
-                    {
-                        // Super user has permissions to do anything
-                        allow = true;
-                        break;
-                    }
-                }
-                break;
-        }
-
-        return allow;
-    }
 
     /**********************************************************
      * Name:		difference()
@@ -218,21 +113,7 @@ export class SessionDataService {
         return diff;
     }
 
-    /**********************************************************
-     * Name:		editMember()
-     * Description:	Edit the member chosen
-     * Scope:		Externally accessable
-     * Params in:	Member in question
-     * Return:
-     **********************************************************/
-    editMember( member:Member )
-	{
-    	console.log("    |-> editMember(" + member.name + ")");
-
-		console.log("    |<- editMember()");
-
-	}
-
+    
     /**********************************************************
      * Name:		applyMemberChange()
      * Description:	Applies a change to the local data so the
@@ -275,7 +156,7 @@ export class SessionDataService {
      * Params in:	None
      * Return:
      **********************************************************/
-    deleteMember( member:Member )
+    /*deleteMember( member:Member )
 	{
     	console.log("    |-> deleteMember(" + member.name + ")");
     	var home = this.getHome();
@@ -302,7 +183,7 @@ export class SessionDataService {
 						err  => console.error("DataService: ERROR deleting member from server!"),
 						()   => console.log("    |<- deleteMember()")
 					);
-	}
+	}*/
 
     /**********************************************************
      * Name:		applyMemberDel()
@@ -312,7 +193,7 @@ export class SessionDataService {
      * Params in:	None
      * Return:
      **********************************************************/
-    applyMemberDel( members, member )
+    /*applyMemberDel( members, member )
 	{
 		var index:number = SessionDataService.findMemberIndex( members, member );
 
@@ -323,7 +204,7 @@ export class SessionDataService {
 		{   // Delete the member at index
 		    members.splice( index, 1 );
 		}
-	}
+	}*/
 
     /**********************************************************
      * Name:		applyMemberAdd()
@@ -333,7 +214,7 @@ export class SessionDataService {
      * Params in:	None
      * Return:
      **********************************************************/
-    applyMemberAdd( members, member )
+   /* applyMemberAdd( members, member )
 	{
 		if ( this.dsTeamMembers[member.team] === undefined )
 		{
@@ -349,7 +230,7 @@ export class SessionDataService {
 		{
 			//log.debug(loghdr + "###### ERROR: applyMemberAdd - member not found!");
 		}
-	}
+	}*/
 
     /**********************************************************
      * Name:		applyTeamChange()
@@ -475,27 +356,6 @@ export class SessionDataService {
         }
     }
 
-    /**********************************************************
-     * Name:		loadNewsStories()
-     * Description:	Retrieves a list of Newws from the server
-     * Scope:		Internal
-     * Params in:	None
-     * Return:		Sets dsNewsStories
-     **********************************************************/
-    loadNewsStories()
-    {
-        console.log("-->" + "loadNewsStories()..");
-        var url = this.getHome();
-
-        return this._http.get( url + '/stories' )
-            			.map(response => response.json());
-     }
-
-    setNews( data )
-    {
-    	console.log("->" + "setNews()...recieved news stories: " + data);
-    	this.dsNewsStories = data;
-    }
 
     private handleError( error: any ) {
         // In a real world app, we might use a remote logging infrastructure
@@ -522,7 +382,7 @@ export class SessionDataService {
         {
             //log.debug(loghdr + "     | _home is LOCAL");
             //_home = 'http://localhost:8080/clubRegisterApp';
-            _home = 'http://localhost:8081/backend/';
+            _home = 'http://localhost:8080/backend/';
         } else if ( this.CurrentServerMode === this.modes.REMOTE )
         {
         	//log.debug(loghdr + "     | _home is REMOTE");
@@ -742,7 +602,8 @@ export class SessionDataService {
 
         this.dsSponsors = [ {name:"Enzo's Takeaway", image:"../../assets/img/adverts/enzos.png"},
                             {name:"Rochford's Pharmacy", image: "../../assets/img/adverts/main-sponsor.png"},
-                            {name:"Ennis Cabs", image: "../../assets/img/adverts/ec.png"}
+                            {name:"Ennis Cabs", image: "../../assets/img/adverts/ec.png"},
+                            {name:"Cahill Taxation Services", image: "../../assets/img/adverts/CTS-logo.png"}
                         ];
         return this.dsSponsors;
     }
@@ -794,7 +655,7 @@ export class SessionDataService {
 	    let options = new RequestOptions({ headers: headers });
 
 	    console.log("    Calling POST on /login")
-	    return this._http.post( this.getHome() + '/login', body, options);
+	    return this._http.post( this.getHome() + 'login', body, options);
 //        return this._http.post( this.getHome() + '/login?' + creds, body, options);
     }
 

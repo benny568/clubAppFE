@@ -3,9 +3,9 @@
  */
 import { Component }            from '@angular/core';
 
-import { SessionDataService }   from "../services/session-data.service";
-import { LoggerService }        from "../services/logger.service";
-import { NewsComponent }        from "../news/news.component";
+import { SessionDataService }   from '../services/session-data.service';
+import { LoggerService }        from '../services/logger.service';
+import { NewsService }          from '../services/news.service';
 
 @Component({
   templateUrl: './html/academyHome.component.html',
@@ -16,13 +16,13 @@ export class AcademyHomeComponent {
 	componentName:string = 'AcademyHomeComponent';
 	logdepth:number = 1;
 
-    constructor( private d$: SessionDataService, private lg$: LoggerService ) {}
+    constructor( private news$: NewsService, private lg$: LoggerService ) {}
 
     ngOnInit() {
         this.lg$.setLogHdr(this.logdepth, this.componentName);
-        this.d$.loadNewsStories()
+        this.news$.loadNewsStories()
           .subscribe(
-		            	data => this.d$.setNews(data),
+		            	data => this.news$.setNews(data),
 		            	error => this.lg$.error("===> Error getting news from server: " + error),
 		            	() => this.lg$.log(" <=== Received news from server. <====")
 		            );

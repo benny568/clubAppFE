@@ -1,0 +1,115 @@
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flex-colum-container-labels {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+.flex-colum-container {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+.flex-item {
+    width: auto;
+    height: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: flex-start;
+    margin: 2px;
+}
+
+.section-header {
+    color: blue;
+    font-weight: bold;
+}
+
+.namefield {
+    width: 200px;
+    margin-right: 10px;
+}
+
+.dobfield {
+    width: 100px;
+    margin-right: 10px;
+}
+
+.lidfield {
+    width: 100px;
+    margin-right: 10px;
+}
+
+.phonefield {
+    width: 200px;
+}
+
+.emailfield {
+    width: 200px;
+}
+
+.amountfield {
+    width: 200px;
+}
+
+.receiptidfield {
+    width: 200px;
+}
+
+.teamfield {
+    width: 200px;
+}
+
+.positionfield {
+    width: 200px;
+}
+
+.favteamfield {
+    width: 200px;
+}
+
+.favplayerfield {
+    width: 200px;
+}
+
+.sappearsfield {
+    width: 200px;
+}
+
+.sassistsfield {
+    width: 200px;
+}
+
+.sgoalsfield {
+    width: 200px;
+}
+
+.photofield {
+    width: 200px;
+}
+
+.achievementsfield {
+    width: 100%;
+    max-width: 100%;
+}
+
+.statusfield {
+    width: 200px;
+}
+
+.academyinfofield {
+    width: 200px;
+}
+
+.pull-left {
+    float: left;
+}

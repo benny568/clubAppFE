@@ -1,11 +1,13 @@
 import { Component }          from '@angular/core';
 import { Router }             from '@angular/router';
 import { FormGroup,
-	       Validators,
-	       FormBuilder }        from '@angular/forms';
+	     Validators,
+	     FormBuilder }        from '@angular/forms';
 
 import { SessionDataService } from '../services/session-data.service';
 import { LoggerService }      from '../services/logger.service';
+import { LoginService }       from '../services/login.service';
+import { UserService }        from '../services/user.service';
 
 @Component({
   templateUrl: './login.component.html',
@@ -18,80 +20,84 @@ export class LoginComponent {
 	logdepth = 2;
 	form: FormGroup;
 	loginDetails;
+	showPassword: string = 'password';
+	message: string = '';
+	showMsg: boolean = false;
 
 	constructor( private lg$: LoggerService,
-			         private d$: SessionDataService,
-			         private _router: Router,
-			         private fb: FormBuilder )
+				 private login$: LoginService,
+				 private user$: UserService,
+			     private _router: Router,
+			     private fb: FormBuilder )
 	{
 		this.lg$.setLogHdr(this.logdepth, this.componentName);
 		this.loginDetails = { username: '', password: ''};
+		this.showMsg = false;
+
 		this.form = fb.group({
             "username":["", Validators.required],
             "password":["", Validators.required]
         });
+		
+		if( localStorage.getItem('AdminHasLoggedIn') === '' || localStorage.getItem('AdminHasLoggedIn') === null )
+		{
+			this.user$.usLoggedIn = false;
+		}
+		else
+		{
+			this.user$.usLoggedIn = true;
+		}
 	}
-
-	login(user)
-	{
-		this.lg$.log("#### login() function called...");
-		this.lg$.log("username: " + user.username );
-		this.lg$.log("password: " + user.password );
-	}
-
-
-//	onSubmit(form: any): void {
-//		this.lg$.log( "->onSubmit(): you submitted value:" + this.form);
-//
-//		var subscriber = this.d$.authenticate2( this.form.value, this.getUserDetails2(this.form.value.username) );
-//	}
 
 	onSubmit(form: any): void {
-		this.lg$.log( "->onSubmit(): you submitted values:" + this.form);
+		this.lg$.log( "->onSubmit(): you submitted values:" + form.username);
+		this.user$.CurrentUser.username = form.username;
 
-		var subscriber = this.d$.authenticate( this.form.value.username, this.form.value.password );
-		subscriber.subscribe(
-								data => this.getUserDetails(this.form.value.username, data),
-								err => console.log("ERROR: " + err)
-								);
+		this.login$.authenticate( form.username, form.password )
+			.subscribe(
+				res => {
+							this.getUserDetails(this.user$.CurrentUser.username),
+							this.user$.setUserAsAuthenticated();
+				},
+				err => {
+						this.lg$.error("ERROR: " + err);
+						
+						if( err.status === 401 )
+						{
+							this.message = 'Incorrect username and/or password!';
+							this.showMsg = true;
+						}
+				}
+			);
 	}
 
-	getUserDetails(username, data)
+	private getUserDetails( username: string )
 	{
-		this.lg$.log("->getUserDetails(" + username + "): " + data );
 
-		this.d$.dsCurrentUser.username = username;
-
-		var subscriber = this.d$.getUser( username );
-		subscriber.subscribe(
-								data => this.d$.dsCurrentUser = data,
-								err => console.log("ERROR: " + err),
-								() => this.goToAdmin( username )
-							);
+		this.user$.getUserDetails( username )
+			.subscribe(
+				data => this.setUserDetails(data.json()),
+				err => console.log("ERROR: Cannot retrieve user details from server!")
+			);
 	}
 
-	getUserDetails2(username)
+	private setUserDetails( user )
 	{
-		this.lg$.log("->getUserDetails2(" + username + ")");
-
-		this.d$.dsCurrentUser.username = username;
-
-		var subscriber = this.d$.getUser( username );
-		subscriber.subscribe(
-								data => this.d$.dsCurrentUser = data,
-								err => console.log("ERROR: " + err),
-								() => this.goToAdmin( username )
-							);
-	}
-
-	goToAdmin( username )
-	{
-		this.lg$.log("->goToAdmin(" + username + ")" );
-		this.d$.dsCurrentUser.username = username;
-		this.d$.dsAuthenticated = true;
-		this.lg$.log("######>>>>>> AUTHENTICATED: [" + this.d$.dsCurrentUser.username + "] <<<<<<#####");
-		this.lg$.log("Authenticated: " + this.d$.dsAuthenticated );
+		this.lg$.log("-> setUserDetails()");
+		this.user$.setCurrentUser( user );
 		this._router.navigate( ['adminHome', {}] );
+	}
+
+	toggleShowPassword()
+	{
+		if( this.showPassword === 'password' )
+		{
+			this.showPassword = 'text';
+		}
+		else
+		{
+			this.showPassword = 'password';
+		}
 	}
 
 }

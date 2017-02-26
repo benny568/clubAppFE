@@ -1,6 +1,9 @@
 import { Component }          from '@angular/core';
+import { Router }             from '@angular/router';
+
 import { SessionDataService } from '../services/session-data.service';
 import { LoggerService }      from '../services/logger.service';
+import { MemberService }      from '../services/member.service';
 
 @Component({
 	template: `
@@ -20,21 +23,21 @@ import { LoggerService }      from '../services/logger.service';
 				<div *ngFor="let team of d$.dsTeams">
 					<div class="panel">
 						<div class="panel-heading avenue-heading" style="min-height:35px;">
-							<div class="col-md-10 teamHdr" *ngIf="!showArray[team.id]"><span class="glyphicon glyphicon-triangle-bottom" (click)="getMembers4team(team.id)" style="cursor:pointer;"></span> {{team.name}}</div>
-							<div class="col-md-10 teamHdr" *ngIf="showArray[team.id]"><span class="glyphicon glyphicon-triangle-top" (click)="toggleView(team.id)" style="cursor:pointer;"></span> {{team.name}}</div>
+							<div class="col-md-10 teamHdr" *ngIf="!d$.showTeamArray[team.id]"><span class="glyphicon glyphicon-triangle-bottom" (click)="getMembers4team(team.id)" style="cursor:pointer;"></span> {{team.name}}</div>
+							<div class="col-md-10 teamHdr" *ngIf="d$.showTeamArray[team.id]"><span class="glyphicon glyphicon-triangle-top" (click)="toggleView(team.id)" style="cursor:pointer;"></span> {{team.name}}</div>
 							<div  style="float:right; align:bottom;">
 								<button type="button" class="btn btn-warning btn-xs" (click)="addMember(team.id)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right">Add Member</button>
 							</div>
 						</div>
 			    		<div class="panel-body avenue-body" style="height:100%;">
-							<div *ngIf="showArray[team.id]">
+							<div *ngIf="d$.showTeamArray[team.id]">
 								<div class="row">
 								    <div class="col-md-3 tblHdr">Name</div>
 								    <div class="col-md-5 tblHdr">Address</div>
 								    <div class="col-md-2 tblHdr">Phone</div>
 								    <div class="col-md-2 tblHdr">Operations</div>
 								</div> <!-- end of row -->
-								<div *ngFor="let member of d$.dsTeamMembers[team.id]" class="row light-line">							    
+								<div *ngFor="let member of mem$.msTeamMembers[team.id]" class="row light-line">							    
 						    		<div class="col-md-3">{{member.name}}</div>
 									<div class="col-md-5">{{member.address}}</div>
 									<div class="col-md-2">{{member.phone}}</div>
@@ -57,10 +60,11 @@ import { LoggerService }      from '../services/logger.service';
 export class AdminMembersComponent {
 	component:string = 'AdminMembersComponent';
 	logdepth:number = 0;
-	showArray = [];
 	
 	constructor( private lg$: LoggerService, 
-				 public d$: SessionDataService ) 
+				 public d$: SessionDataService,
+				 private mem$: MemberService,
+				 private router$: Router ) 
 	{
 		this.lg$.setLogHdr(this.logdepth, this.component);
 	}
@@ -71,33 +75,35 @@ export class AdminMembersComponent {
 		// (1) Read in the teams
 		//this.d$.dsGetTeams();
 		
-		for ( var i = 0; i < this.showArray.length; i++ )
-		{
-			this.showArray[i] = false;
-		}
-		
 		this.lg$.log("<- ngOnInit()");
 	}
 	
 	getMembers4team(iTeam) {
 		this.lg$.log("-> getMembers4team(" + iTeam + ")");
 		var self = this;
+		let team = iTeam;
 				
-		this.d$.loadCurrentTeamMembersByName( this.d$.getTeamNameFrmId(iTeam, (this.logdepth + 1)),
+		/*this.d$.loadCurrentTeamMembersByName( this.d$.getTeamNameFrmId(iTeam, (this.logdepth + 1)),*/
+		this.mem$.loadCurrentTeamMembersByTeamId( iTeam,
 											  function(data) {
 												console.log("****** MY CALLBACK *******");
-												self.d$.dsTeamMembers[iTeam] = data;
-												self.showArray[iTeam] = true;
+												self.mem$.msTeamMembers[iTeam] = data;
+												self.d$.showTeamArray[team] = true;
 											});
-		this.showArray[iTeam] = true;
-		this.lg$.log("<- getMembers4team(): " + this.showArray[iTeam]);
+		self.d$.showTeamArray[iTeam] = true;
+		for ( var i = 0; i < self.d$.showTeamArray.length; i++ )
+		{
+			self.d$.showTeamArray[i] = false;
+		}
+		self.d$.showTeamArray[iTeam] = true;
+		this.lg$.log("<- getMembers4team(" + iTeam + "): " + self.d$.showTeamArray[iTeam]);
 	}
 	
 	toggleView(iTeam) {
 		this.lg$.log("-> toggleView(" + iTeam + ")");
 		
-		this.showArray[iTeam] = !this.showArray[iTeam];
-		this.lg$.log("    |- showArray value: " + this.showArray[iTeam] );
+		this.d$.showTeamArray[iTeam] = !this.d$.showTeamArray[iTeam];
+		this.lg$.log("    |- showArray value: " + this.d$.showTeamArray[iTeam] );
 		 
 		this.lg$.log("<- toggleView()");
 	}
@@ -120,7 +126,9 @@ export class AdminMembersComponent {
 	{
 		this.lg$.log("-> editMember()");
 		
-		this.d$.editMember( member );
+		// TBD: Input the member to the called component
+		this.mem$.msCurrentMember = member;
+		this.router$.navigate(['editMember', {}]);
 		 
 		this.lg$.log("<- editMember()");
 	}
@@ -129,7 +137,7 @@ export class AdminMembersComponent {
 	{
 		this.lg$.log("-> deleteMember()");
 		
-		this.d$.deleteMember( member );
+		this.mem$.deleteMember( member );
 		 
 		this.lg$.log("<- deleteMember()");
 	}

@@ -1,0 +1,76 @@
+.a-orange-text {color:#FAE900;}
+.loginbox {
+	position:relative;
+	margin-right:auto;
+	margin-left:auto;
+	width: 400px;
+}
+
+.loginbox .loginhead {
+/* 	background: url(../images/User-icon.png)no-repeat 10px 10px #D90404; */
+	background: #D90404;
+	height:40px;
+	outline: none;
+	color:#FFFF33;
+	min-height:30px;
+	text-align: center;
+	padding: 10px 0px 10px 0px;
+	font-size:20px;
+}
+.loginbox .loginbody {
+	padding: 10px 0px 0px 0px;
+	background: #2E2E2E;
+	padding: 37.5px 35px 30px 35px;
+	color:white;
+}
+
+.loginbox .loginbody input[type="text"] {
+    background: no-repeat 10px 10px #3B3B3B;
+	outline: none;
+	font-size: 14px;
+	font-weight: 600;
+	color: #7E7E7E;
+	padding: 12px 12px 12px 33px;
+	border: 1px solid #4B4A4A;
+	margin: 0px 0px 15px 0px;
+	width: 100%;
+	height: auto;
+	-webkit-appearance: none;
+}
+
+.loginbox .loginbody input[type="password"]{
+    background: no-repeat 10px 11px #3F3F3F;
+	outline: none;
+	font-size: 14px;
+	font-weight: 600;
+	color: #7E7E7E;
+	padding: 12px 12px 12px 33px;
+	border: 1px solid #4B4A4A;
+	margin: 0px 0px 25px 0px;
+	width: 100%;
+	-webkit-appearance: none;
+}
+
+.loginbox .loginbody input[type="submit"] {
+  background: no-repeat 9px 8px #D90404;
+  color: #FAE900;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 19px 8px 30px;
+  width: 40%;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  cursor: pointer;
+}
+
+.a-form input.ng-invalid.ng-touched
+{
+	background-color: #FA787E;
+}
+
+.a-form input.ng-valid.ng-touched 
+{
+    background-color: #78FA89;
+}

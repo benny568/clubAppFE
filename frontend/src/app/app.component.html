@@ -121,20 +121,20 @@
                         <li><a routerLink="/academyCoaches"><i class="fa fa-group"></i> Coaches</a></li>
                         <li><a routerLink="/academySchedule"><i class="fa fa-calendar"></i> Schedule</a></li>
                         <li><a routerLink="/academyTandC"><i class="fa fa-pencil-square-o "></i> Registration</a></li>
-                        <li *ngIf="d$.dsAuthenticated"><a routerLink="/academyCarea"><i class="fa fa-futbol-o "></i> Coaches Area</a></li>
+                        <li *ngIf="user$.isAuthenticated"><a routerLink="/academyCarea"><i class="fa fa-futbol-o "></i> Coaches Area</a></li>
                     </ul>
                 </li>
                 <li><a [routerLink]="['merchandise']"><i class="fa fa-shopping-cart"></i> Merchandise</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown" *ngIf="d$.dsAuthenticated">
+                <li class="dropdown" *ngIf="user$.isAuthenticated">
                     <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a routerLink="/adminHome"><i class="fa fa-home"></i> Admin Home</a></li>
                         <li><a routerLink="/adminOverview"><i class="fa fa-sun-o"></i> Overview</a></li>
                         <li><a routerLink="/adminTutorials"><i class="fa fa-book"></i> Tutorials</a></li>
                         <li><a routerLink="/members"><i class="fa fa-child"></i> Members</a></li>
-                        <li><a *ngIf="d$.hasPermission('VIEW_USERS', '*')" (onClick)="usersAdmin"><i class="fa fa-child"></i> Users</a></li>
+                        <li><a *ngIf="user$.hasPermission('VIEW_USERS', '*')" (onClick)="usersAdmin"><i class="fa fa-child"></i> Users</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -153,8 +153,8 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a routerLink="/login" *ngIf="!d$.dsAuthenticated"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        <li><a (click)="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a routerLink="/login" *ngIf="!user$.isAuthenticated"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a (click)="logout()" *ngIf="user$.isAuthenticated"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>
             </ul>

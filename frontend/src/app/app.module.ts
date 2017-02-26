@@ -40,6 +40,7 @@ import { AdminOverviewComponent } from './admin/adminOverview.component';
 import { AdminTutorialsComponent } from './admin/adminTutorials.component';
 import { AdminMembersComponent } from './admin/adminMembers.component';
 import { AdminUsersComponent } from './admin/adminUsers.component';
+import { EditMemberComponent } from './admin/member/editMember.component';
 import { CoachesAreaComponent } from './admin/adminCoachesArea.component';
 import { PhotosComponent } from './photos/photos.component';
 
@@ -48,9 +49,13 @@ import { RequestInterceptor } from '../config/interceptors/request.interceptor';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { SessionDataService } from './services/session-data.service';
+import { LoginService } from './services/login.service';
+import { NewsService }  from './services/news.service';
 import { LoggerService } from './services/logger.service';
 import { CommonService } from './services/common.service';
 import { ErrorService } from './services/error.service';
+import { UserService } from './services/user.service';
+import { MemberService } from './services/member.service';
 import { AcademyRegistrationService }  from './academy/academyRegistration.service';
 
 const httpInterceptorProviders: Type<any>[] = [
@@ -89,6 +94,7 @@ const httpInterceptorProviders: Type<any>[] = [
     AdminTutorialsComponent,
     AdminMembersComponent,
     AdminUsersComponent,
+    EditMemberComponent,
     CoachesAreaComponent,
     PhotosComponent
   ], // directives, components, and pipes owned by this NgModule
@@ -117,6 +123,10 @@ const httpInterceptorProviders: Type<any>[] = [
     CommonService,
     ErrorService,
     AcademyRegistrationService,
+    LoginService,
+    UserService,
+    NewsService,
+    MemberService
   ], // additional providers needed for this module
   entryComponents: [ ],
   bootstrap: [ AppComponent ],

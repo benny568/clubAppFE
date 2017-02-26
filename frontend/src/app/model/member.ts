@@ -1,7 +1,6 @@
-export /**
- * name
- */
-class Member {
+import { Position } from './position'
+
+export class Member {
 	id:number;
     name:string;
     address:string;
@@ -9,7 +8,7 @@ class Member {
     phone2:string;
     email:string;
     dob:string;
-    amount:number;
+    amount:string;
     receiptid:string;
     team:number;
     team2:number;
@@ -27,5 +26,33 @@ class Member {
     achievements:string;
     status:string;
     academyinfo:string;
+
+    constructor() {
+        this.id = 0;
+        this.name = '';
+        this.address = '';
+        this.phone = '';
+        this.phone2 = '';
+        this.email = '';
+        this.dob = '';
+        this.amount = 0;
+        this.receiptid = '';
+        this.team = 0;
+        this.team2 = 0;
+        this.team3 = 0;
+        this.position = Position.Undefined;
+        this.position2 = Position.Undefined;
+        this.position3 = Position.Undefined;
+        this.lid = 0;
+        this.favteam = '';
+        this.favplayer = '';
+        this.sappears = 0;
+        this.sassists = 0;
+        this.sgoals = 0;
+        this.photo = '';
+        this.achievements = '';
+        this.status = '';
+        this.academyinfo = '';
+    }
 
 }
