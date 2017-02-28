@@ -13,7 +13,7 @@ import { Member }         from '../model/member';
 @Injectable()
 export class AcademyRegistrationService {
 	member = new Member();
-	payment: number;
+	payment: string;
 
 	regData = [
 	           { id: 0, name: 'First name', value: '', required: true, display: true, type: 'md-input',
@@ -106,7 +106,7 @@ export class AcademyRegistrationService {
     calculateTotalCost()
 	{
     	console.log( "### Single Term: " + this.getFieldValue('Single Term') );
-		this.payment = this.getFieldValue('Single Term') ? 60 : 120;
+		this.payment = this.getFieldValue('Single Term') ? '60' : '120';
 	}
 
     getFieldValue( field )

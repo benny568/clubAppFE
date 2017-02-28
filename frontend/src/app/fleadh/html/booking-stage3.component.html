@@ -1,0 +1,51 @@
+<td-steps mode="horizontal">
+    <td-step label="Terms & Conditions" sublabel="Read and accept T&Cs" [active]="step1enabled" [disabled]="!step1enabled">
+
+    </td-step>
+    <td-step label="Arrival/departure dates" sublabel="Pick your dates" [active]="step2enabled" [disabled]="!step2enabled">
+
+    </td-step>
+    <td-step label="Parking" sublabel="Reserve parking" [active]="step3enabled" [disabled]="!step3enabled">
+
+    </td-step>
+    <td-step label="Personal Details" sublabel="Contact Details" [active]="step4enabled" [disabled]="!step4enabled">
+
+    </td-step>
+    <td-step label="Payment" sublabel="Pay Deposit" [active]="step5enabled" [disabled]="!step5enabled">
+
+    </td-step>
+</td-steps>
+
+<div class="panel">
+    <div class="panel-heading avenue-heading">
+        Step 3: Parking Requirements
+    </div>
+</div>
+
+<div class="base-container">
+    <md-card>
+        <div class="flex-container">
+
+            <img src="assets/img/fleadh/parking.png" width="100%" />
+            <div>
+                <label>Parking Required</label>
+                <md-checkbox [(ngModel)]="parkingRequired"></md-checkbox>
+            </div>
+
+        </div>
+        <br />
+        <div *ngIf="parkingRequired">Please enter the number of parking spaces required:</div>
+        <br />
+        <div *ngIf="parkingRequired">
+            <i class="fa fa-car" aria-hidden="true"></i> &nbsp;&nbsp;
+            <label>Number of Cars:</label>
+            <md-slider min="1" max="16" thumbLabel tickInterval="1" [(ngModel)]="bkng$.parking"></md-slider>
+        </div>
+
+
+        <div class="flex-container-button">
+            <button md-raised-button color="primary" (click)="back()">Back</button>
+            <button md-raised-button color="primary" (click)="next()">Next</button>
+        </div>
+    </md-card>
+</div>

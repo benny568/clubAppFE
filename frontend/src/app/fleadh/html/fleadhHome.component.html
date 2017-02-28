@@ -1,0 +1,82 @@
+<td-steps mode="horizontal">
+    <td-step label="Terms & Conditions" sublabel="Read and accept T&Cs" [active]="step1enabled" [disabled]="!step1enabled">
+
+    </td-step>
+    <td-step label="Arrival/departure dates" sublabel="Pick your dates" [active]="step2enabled" [disabled]="!step2enabled">
+
+    </td-step>
+    <td-step label="Parking" sublabel="Reserve parking" [active]="step3enabled" [disabled]="!step2enabled">
+
+    </td-step>
+    <td-step label="Personal Details" sublabel="Contact Details" [active]="step4enabled" [disabled]="!step4enabled">
+
+    </td-step>
+    <td-step label="Payment" sublabel="Pay Deposit" [active]="step5enabled" [disabled]="!step5enabled">
+
+    </td-step>
+</td-steps>
+
+<div class="panel">
+    <div class="panel-heading avenue-heading">
+        Step 1: Instructions and Terms & Conditions
+    </div>
+    <div class="panel-body">
+        <div class="flex-container">
+            <md-card>
+                <md-card-title>Details</md-card-title>
+                <md-card-subtitle>Details</md-card-subtitle>
+                <p>
+                    <strong>Up to 2-Night Stay: </strong> Price per night: €40 <br /><br />
+
+                    <strong>3-Night Stay or more: </strong> Price per night: €35 <br /><br /> Includes: <br /> 1 x camping area for up to 2 people <br /> 1 x parking space <br />
+                </p>
+                <p>
+                    NOTE: <br /> - €5 extra per person above 2 and up to 8 <br /> - Extra parking space €5 per day - NO CAMPERVANS
+                </p>
+                <p>There are four steps in the booking process:
+                    <br />1. Pick the dates you prefer and the number of people staying
+                    <br />2. Indicate if you require parking and the number of parking spaces
+                    <br />3. Provide your contact details
+                    <br />4. Pay the deposit (€50) via PayPal, <strong>Balance payable ON ARRIVAL.</strong></p>
+            </md-card>
+            <md-card>
+                <div style="padding-left: 10px;">
+                    <h4>Fleadh Cheoil 2017, Camping at Avenue United FC</h4>
+
+
+                    Roslevan, Tulla Road, Ennis <br /> Take exit 13 off Motorway, and you’re there!<br /><br />
+
+
+                    <h5>INFORMATION & RULES</h5>
+
+                    <ul>
+                        <li>Campsite Opens 1pm on Wed August 17th</li>
+                        <li>Tents & Cars only. NO caravans or campervans, sorry.</li>
+                        <li>NO noise after Midnight</li>
+                        <li>Toilets & Showers are Provided.</li>
+                        <li>Anyone under 18 MUST be accompanied by an adult</li>
+                        <li>NO PETS (except guide / assistive dogs)</li>
+                        <li>Balance must be paid on arrival. You will NOT be admitted until balance is paid.</li>
+                        <li>No Sterling accepted for balance. EURO cash only.</li>
+                        <li>No refunds for early departure.</li>
+                        <li>No electrical connections are available. Bring plenty batteries!</li>
+                        <li> STRICTLY NO GLASS BOTTLES ALLOWED ON SITE.<br />This is our soccer pitch where our kids play matches. NO Glass means NO Glass.<br />Plastic only. This WILL be enforced.</li>
+                        <li>You must be vacated by 5pm on Mon 22 Aug.</li>
+                        <li> By booking you agree to the above conditions.</li>
+                    </ul>
+                    <md-checkbox labelPosition="before" [checked]="tandc" (change)="tandc=$event.checked">
+                        <div style="font-weight: normal">
+                            I agree to the above conditions
+                        </div>
+                    </md-checkbox>
+                    <br /><br /> We hope you enjoy your stay!
+                </div>
+            </md-card>
+        </div>
+        <div class="flex-container">
+            <button md-raised-button color="primary" (click)="back()">Back</button>
+            <button md-raised-button color="primary" (click)="next()">Next</button>
+        </div>
+
+    </div>
+</div>

@@ -43,6 +43,12 @@ import { AdminUsersComponent } from './admin/adminUsers.component';
 import { EditMemberComponent } from './admin/member/editMember.component';
 import { CoachesAreaComponent } from './admin/adminCoachesArea.component';
 import { PhotosComponent } from './photos/photos.component';
+import { FleadhHomeComponent } from './fleadh/fleadhHome.component';
+import { AdvertComponent } from './advert/advert.component';
+import { BookingStage2Component } from './fleadh/booking-stage2.component';
+import { BookingStage3Component } from './fleadh/booking-stage3.component';
+import { BookingStage4Component } from './fleadh/booking-stage4.component';
+import { BookingStage5Component } from './fleadh/booking-stage5.component';
 
 import { RequestInterceptor } from '../config/interceptors/request.interceptor';
 
@@ -57,6 +63,7 @@ import { ErrorService } from './services/error.service';
 import { UserService } from './services/user.service';
 import { MemberService } from './services/member.service';
 import { AcademyRegistrationService }  from './academy/academyRegistration.service';
+import { BookingService } from './fleadh/booking.service';
 
 const httpInterceptorProviders: Type<any>[] = [
   RequestInterceptor,
@@ -96,7 +103,13 @@ const httpInterceptorProviders: Type<any>[] = [
     AdminUsersComponent,
     EditMemberComponent,
     CoachesAreaComponent,
-    PhotosComponent
+    PhotosComponent,
+    FleadhHomeComponent,
+    AdvertComponent,
+    BookingStage2Component,
+    BookingStage3Component,
+    BookingStage4Component,
+    BookingStage5Component
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     BrowserModule,
@@ -126,7 +139,8 @@ const httpInterceptorProviders: Type<any>[] = [
     LoginService,
     UserService,
     NewsService,
-    MemberService
+    MemberService,
+    BookingService
   ], // additional providers needed for this module
   entryComponents: [ ],
   bootstrap: [ AppComponent ],
