@@ -1,5 +1,6 @@
 html,
 body {
+    direction: ltr;
     background-image: url("assets/img/stadium1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -59,3 +60,54 @@ body {
     color: white;
     height: 100%;
 }
+
+.flex-container {
+    min-width: 300px;
+    height: auto;
+    width: auto;
+    border: 2px dashed;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    /* Halndles alignment and spacing on main axis, values: flex-start, flex-end, center, space-beeteen, space-around */
+    /* space-between: 1st element at main start line, last element flush with end line, remaining elements evenly distributed */
+    /* space-around: Adds equal amount of space around elements */
+    align-items: flex-start;
+    /* Handles alignment and spacing on cross axis, values: flex-start, flex-end, center, stretch, baseline */
+    /* strech: equal height columns */
+    /* center: flexible vertical centering */
+    align-content: flex-start;
+    /* Controls the space remaining in the cross-access between mulitple lines of flex items, values: flex-start, flex-end, center, stretch, space-between, space-around */
+}
+
+.column {
+    flex-flow: column nowrap;
+}
+
+.flex-box {
+    height: auto;
+    background: #eee;
+    border: 1px solid;
+    flex-grow: 1;
+    /* Sets the proportion of available space that a flex item tekes up within their container */
+    flex-shrink: 1;
+    /* Defines the proportion in which the element will shrink if it nees to do so, if it has a valeu of 2 it will shrink twice as fast as elements with a value of 1 */
+    flex-basis: auto;
+    /* values: auto (default), n pixels (30px), % (33%) */
+    /* Defines the size of an item before all of the remaining space in the the flex continer is allocated to the other items. */
+    /* This allows an ellement to have a fixed or fluid size and have all other items auto expand/contract to fill up the available space */
+    /*flex: 1 1 auto;*/
+    /* order must be grow, shrink, basis */
+    /* Combines flex-grow, flex-shrink, flex-basis on one line */
+    /*align-self: ;*/
+    /* Values: flex-start, flex-end, center, stretch, baseline */
+    /* The direction of flow is controlled by the config of the parent container. This allows an item to diverg from this. It allows the cross-axis alignment to be overriden */
+    /*order: ;*/
+    /* Allows the visual order of the elements to be changed from the normal order in the html document */
+    /* Values: A digit, positive or negative from it's current position. */
+}
+
+
+/*.box:nth-child(2) {
+    flex-grow: 2;
+}*/

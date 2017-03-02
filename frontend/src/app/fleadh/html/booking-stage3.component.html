@@ -26,26 +26,26 @@
     <md-card>
         <div class="flex-container">
 
-            <img src="assets/img/fleadh/parking.png" width="100%" />
+            <div><img src="assets/img/fleadh/parking.png" width="100%" style="max-width: 300px;" /></div>
             <div>
-                <label>Parking Required</label>
+                <label style="padding-left: 5%">Please tick the box if Parking is Required</label>
                 <md-checkbox [(ngModel)]="parkingRequired"></md-checkbox>
+
+                <br />
+                <div *ngIf="parkingRequired" class="numCars">Please select the number of parking spaces required using the slider:</div>
+                <br />
+                <div *ngIf="parkingRequired" class="numCars">
+                    <i class="fa fa-car" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <label>Number of Cars:</label>
+                    <md-slider min="1" max="5" thumbLabel tickInterval="1" [(ngModel)]="bkng$.parking"></md-slider>
+                </div>
             </div>
 
         </div>
-        <br />
-        <div *ngIf="parkingRequired">Please enter the number of parking spaces required:</div>
-        <br />
-        <div *ngIf="parkingRequired">
-            <i class="fa fa-car" aria-hidden="true"></i> &nbsp;&nbsp;
-            <label>Number of Cars:</label>
-            <md-slider min="1" max="16" thumbLabel tickInterval="1" [(ngModel)]="bkng$.parking"></md-slider>
-        </div>
 
-
-        <div class="flex-container-button">
-            <button md-raised-button color="primary" (click)="back()">Back</button>
-            <button md-raised-button color="primary" (click)="next()">Next</button>
+        <div class="flex-button-container">
+            <button md-raised-button class="btn btn-warning" (click)="back()">Back</button>
+            <button md-raised-button class="btn btn-warning" (click)="next()">Next</button>
         </div>
     </md-card>
 </div>

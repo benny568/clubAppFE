@@ -24,41 +24,40 @@
 
 <div class="base-container">
 
-    <md-card>
 
+
+    <div class="form-container">
         <form [formGroup]="bookingForm">
-
-            <div class="flex-container-column">
-                <div class="flex-container">
-                    <label for="name">First Name: </label>
-                    <input [formControl]="bookingForm.controls['firstname']" md-input placeholder="First name" mdTooltip="Please enter your first name" mdTooltipPosition="above">
-                </div>
-                <div class="flex-container">
-                    <label for="name">Surname: </label>
-                    <input [formControl]="bookingForm.controls['surname']" md-input placeholder="Last Name" mdTooltip="Please enter your last name" mdTooltipPosition="above">
-                </div>
-                <div class="flex-container">
-                    <label for="name">Email: </label>
-                    <input type="email" [formControl]="bookingForm.controls['email']" md-input placeholder="email">
-                </div>
-                <div class="flex-container">
-                    <label for="name">Country: </label>
-                    <input type="text" [formControl]="bookingForm.controls['country']" md-input id="country" placeholder="Enter your country of origin">
-                </div>
-                <div class="flex-container">
-                    <label for="name">Mobile: </label>
-                    <input type="text" [formControl]="bookingForm.controls['phone']" md-input id="mobile" placeholder="Enter your mobile number">
-                </div>
-                <div class="flex-container">
-                    <label for="name">Car Reg: </label>
-                    <input type="text" id="vehicalReg" placeholder="Enter your car reg" [formControl]="bookingForm.controls['vehicalReg']" md-input>
-                </div>
+            <div class="form-field">
+                <label for="name">First Name: </label>
+                <input [formControl]="bookingForm.controls['firstname']" md-input placeholder="First name" [value]="bkng$.firstname" mdTooltip="Please enter your first name" mdTooltipPosition="above">
             </div>
-            <div class="flex-container-button">
+            <div class="form-field">
+                <label for="name">Surname: </label>
+                <input [formControl]="bookingForm.controls['surname']" md-input placeholder="Last Name" [value]="bkng$.surname" mdTooltip="Please enter your last name" mdTooltipPosition="above">
+            </div>
+            <div class="form-field">
+                <label for="name">Email: </label>
+                <input type="email" [formControl]="bookingForm.controls['email']" md-input placeholder="email" [value]="bkng$.email">
+            </div>
+            <div class="form-field">
+                <label for="name">Country: </label>
+                <input type="text" [formControl]="bookingForm.controls['country']" md-input id="country" placeholder="Enter your country of origin" [value]="bkng$.country">
+            </div>
+            <div class="form-field">
+                <label for="name">Mobile: </label>
+                <input type="text" [formControl]="bookingForm.controls['phone']" md-input id="mobile" placeholder="Enter your mobile number" [value]="bkng$.phone">
+            </div>
+            <div class="form-field">
+                <label for="name">Car Reg: </label>
+                <input type="text" id="vehicalReg" placeholder="Enter your car reg" [formControl]="bookingForm.controls['vehicalReg']" md-input [value]="bkng$.vehicalReg">
+            </div>
+            <div class="flex-button-container">
                 <button md-raised-button class="btn btn-warning" (click)="back()">Back</button>
                 <button md-raised-button class="btn btn-warning" (click)="submit(bookingForm.value)">Next</button>
             </div>
         </form>
+    </div>
 
-    </md-card>
+
 </div>

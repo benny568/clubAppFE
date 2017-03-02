@@ -6,8 +6,7 @@ import { RequestOptions } from '@angular/http';
 
 import { LoggerService }  from '../services/logger.service';
 import { CommonService }  from '../services/common.service';
-import { ServerMode }     from '../dao/server-mode';
-import { Booking }        from '../dao/booking';
+import { Booking }        from '../model/booking';
 
 @Injectable()
 export class BookingService {

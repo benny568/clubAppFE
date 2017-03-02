@@ -23,8 +23,8 @@
     <div class="panel-body">
         <div class="flex-container">
             <md-card>
-                <md-card-title>Details</md-card-title>
-                <md-card-subtitle>Details</md-card-subtitle>
+                <md-card-title>Details & Prices</md-card-title>
+
                 <p>
                     <strong>Up to 2-Night Stay: </strong> Price per night: €40 <br /><br />
 
@@ -34,17 +34,20 @@
                     NOTE: <br /> - €5 extra per person above 2 and up to 8 <br /> - Extra parking space €5 per day - NO CAMPERVANS
                 </p>
                 <p>There are four steps in the booking process:
-                    <br />1. Pick the dates you prefer and the number of people staying
-                    <br />2. Indicate if you require parking and the number of parking spaces
-                    <br />3. Provide your contact details
-                    <br />4. Pay the deposit (€50) via PayPal, <strong>Balance payable ON ARRIVAL.</strong></p>
+                    <ol>
+                        <li>Agree to the conditions on this page by clicking on the check box</li>
+                        <li>Pick the dates you prefer and the number of people staying</li>
+                        <li>Indicate if you require parking and the number of parking spaces</li>
+                        <li>Provide your contact details</li>
+                        <li>Pay the deposit (€50) via PayPal, <strong>Balance payable ON ARRIVAL.</strong></li>
+                    </ol>
             </md-card>
             <md-card>
-                <div style="padding-left: 10px;">
-                    <h4>Fleadh Cheoil 2017, Camping at Avenue United FC</h4>
+                <div style="padding: 10px;">
+                    <md-card-title>Fleadh Cheoil 2017, Camping at Avenue United FC</md-card-title>
 
 
-                    Roslevan, Tulla Road, Ennis <br /> Take exit 13 off Motorway, and you’re there!<br /><br />
+                    <md-card-subtitle>Roslevan, Tulla Road, Ennis <br /> Take exit 13 off Motorway, and you’re there!</md-card-subtitle>
 
 
                     <h5>INFORMATION & RULES</h5>
@@ -74,8 +77,8 @@
             </md-card>
         </div>
         <div class="flex-container">
-            <button md-raised-button color="primary" (click)="back()">Back</button>
-            <button md-raised-button color="primary" (click)="next()">Next</button>
+            <button md-raised-button class="btn btn-warning" (click)="back()">Back</button>
+            <button md-raised-button class="btn btn-warning" (click)="next()">Next</button>
         </div>
 
     </div>

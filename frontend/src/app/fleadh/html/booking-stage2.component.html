@@ -27,21 +27,21 @@
         <div class="flex-container">
             <div class="bootstrap-iso">
                 <label>Arrival Date:</label>
-                <input type="date" [(ngModel)]="bkng$.arrivalDate" />
+                <input type="date" [(ngModel)]="bkng$.arrivalDate" mdTooltip="Click on arrow to the right for drop down calendar" mdTooltipPosition="above" />
             </div>
 
             <div class="bootstrap-iso">
                 <label class="control-label" for="date">Departure Date:</label>
-                <input type="date" [(ngModel)]="bkng$.departureDate" />
+                <input type="date" [(ngModel)]="bkng$.departureDate" mdTooltip="Click on arrow to the right for drop down calendar" mdTooltipPosition="above" />
             </div>
             <div>
                 <label>Number of People:</label>
-                <md-slider min="1" max="16" thumbLabel tickInterval="1" [(ngModel)]="bkng$.numberOfPeople"></md-slider>
+                <md-slider min="1" max="16" thumbLabel tickInterval="1" [(ngModel)]="bkng$.numberOfPeople" mdTooltip="Slide for the number of people" mdTooltipPosition="above"></md-slider>
             </div>
         </div>
         <div class="flex-container-button">
-            <button md-raised-button color="primary" (click)="back()">Back</button>
-            <button md-raised-button color="primary" (click)="next()">Next</button>
+            <button md-raised-button class="btn btn-warning" (click)="back()">Back</button>
+            <button md-raised-button class="btn btn-warning" (click)="next()">Next</button>
         </div>
     </md-card>
 </div>

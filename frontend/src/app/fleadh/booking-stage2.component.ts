@@ -61,6 +61,7 @@ export class BookingStage2Component {
         if( aparts[YearPart] !== '2017' || eparts[YearPart] !== '2017' )
         {
             this.showYearError();
+            return -1;
             // Check the month
         } else if( aparts[MonthPart] !== '08' || eparts[MonthPart] !== '08' ) 
         {
