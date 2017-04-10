@@ -1,8 +1,6 @@
 import { Component }      from '@angular/core';
 import { Router }         from '@angular/router';
 
-import { StepState, TdMediaService } from '@covalent/core';
-
 import { LoggerService }  from '../services/logger.service';
 import { ErrorService }  from '../services/error.service';
 
@@ -22,7 +20,6 @@ export class AcademyTandCComponent {
     step1enabled: boolean = true;
 	step2enabled: boolean = false;
 	step3enabled: boolean = false;
-    state: StepState = StepState.Required; // or state: string = "required";
 	
 	constructor( private lg$: LoggerService, private router: Router, private err$: ErrorService  ) {}
 	

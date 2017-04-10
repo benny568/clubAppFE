@@ -5,8 +5,6 @@ import {
   FormGroup  
 } from '@angular/forms';
 
-import { StepState, TdMediaService } from '@covalent/core';
-
 import { LoggerService }   from '../services/logger.service';
 import { CommonService }   from '../services/common.service';
 import { ErrorService }    from '../services/error.service';

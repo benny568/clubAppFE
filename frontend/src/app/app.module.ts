@@ -1,13 +1,7 @@
 import { NgModule, Type } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { CovalentCoreModule } from '@covalent/core';
-import { CovalentHttpModule, IHttpInterceptor } from '@covalent/http';
-import { CovalentHighlightModule } from '@covalent/highlight';
-import { CovalentMarkdownModule } from '@covalent/markdown';
-import { CovalentChartsModule } from '@covalent/charts';
-import { CovalentDialogsModule } from '@covalent/core';
 
 import { AppComponent } from './app.component'; ;
 import { appRoutes, appRoutingProviders } from './app.routes';
@@ -43,16 +37,7 @@ import { AdminUsersComponent } from './admin/adminUsers.component';
 import { EditMemberComponent } from './admin/member/editMember.component';
 import { CoachesAreaComponent } from './admin/adminCoachesArea.component';
 import { PhotosComponent } from './photos/photos.component';
-import { FleadhHomeComponent } from './fleadh/fleadhHome.component';
 import { AdvertComponent } from './advert/advert.component';
-import { BookingStage2Component } from './fleadh/booking-stage2.component';
-import { BookingStage3Component } from './fleadh/booking-stage3.component';
-import { BookingStage4Component } from './fleadh/booking-stage4.component';
-import { BookingStage5Component } from './fleadh/booking-stage5.component';
-
-import { RequestInterceptor } from '../config/interceptors/request.interceptor';
-
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { SessionDataService } from './services/session-data.service';
 import { LoginService } from './services/login.service';
@@ -63,11 +48,6 @@ import { ErrorService } from './services/error.service';
 import { UserService } from './services/user.service';
 import { MemberService } from './services/member.service';
 import { AcademyRegistrationService }  from './academy/academyRegistration.service';
-import { BookingService } from './fleadh/booking.service';
-
-const httpInterceptorProviders: Type<any>[] = [
-  RequestInterceptor,
-];
 
 @NgModule({
   declarations: [
@@ -104,32 +84,17 @@ const httpInterceptorProviders: Type<any>[] = [
     EditMemberComponent,
     CoachesAreaComponent,
     PhotosComponent,
-    FleadhHomeComponent,
-    AdvertComponent,
-    BookingStage2Component,
-    BookingStage3Component,
-    BookingStage4Component,
-    BookingStage5Component
+    AdvertComponent
   ], // directives, components, and pipes owned by this NgModule
   imports: [
+    HttpModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    CovalentCoreModule.forRoot(),
-    CovalentChartsModule.forRoot(),
-    CovalentHttpModule.forRoot({
-      interceptors: [{
-        interceptor: RequestInterceptor, paths: ['**'],
-      }],
-    }),
-    CovalentHighlightModule.forRoot(),
-    CovalentMarkdownModule.forRoot(),
-    appRoutes,
-    NgxChartsModule,
+    appRoutes
   ], // modules needed to run this module
   providers: [
     appRoutingProviders,
-    httpInterceptorProviders,
     Title,
     SessionDataService,
     LoggerService,
@@ -139,8 +104,7 @@ const httpInterceptorProviders: Type<any>[] = [
     LoginService,
     UserService,
     NewsService,
-    MemberService,
-    BookingService
+    MemberService
   ], // additional providers needed for this module
   entryComponents: [ ],
   bootstrap: [ AppComponent ],

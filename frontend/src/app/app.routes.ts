@@ -18,7 +18,6 @@ import { FarViewComponent } from './farView/farView.component';
 import { PhotosComponent } from './photos/photos.component';
 import { academyRoutes } from './academy/academy.routes';
 import { adminRoutes } from './admin/admin.routes';
-import { fleadhRoutes } from './fleadh/fleadh.routes';
 
 const routes: Routes = [
   { path: '',                        component: HomeComponent },
@@ -36,8 +35,7 @@ const routes: Routes = [
   { path: 'media/:cat1/:cat2/:cat3', component: PhotosComponent },
   ...academyRoutes,
   ...adminRoutes,
-  ...academyRoutes,
-  ...fleadhRoutes
+  ...academyRoutes
 ];
 
 export const appRoutingProviders: any[] = [
