@@ -1,4 +1,7 @@
 {
     "angulardoc.repoId": "1ae25902-2959-4157-aca6-f21886285fec",
-    "angulardoc.lastSync": 0
+    "angulardoc.lastSync": 0,
+    "eslint.enable": false,
+    "jshint.enable": false,
+    "tslint.enable": false
 }

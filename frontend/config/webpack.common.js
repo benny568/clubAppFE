@@ -21,7 +21,7 @@ module.exports = function() {
         },
         output: {
             filename: '[name].[chunkhash].js',
-            path: path.resolve(rootDir, 'dist'),
+            path: path.resolve(rootDir, '../src/main/webapp/'),
             sourceMapFilename: '[name].map',
             chunkFilename: "[name].[chunkhash].js"
         },

@@ -2,18 +2,22 @@
 
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-const commonConfig = require('./webpack.common');
 const path = require('path');
 
-module.exports = function() {
+const rootDir = path.resolve(__dirname, '..');
+
+const commonConfig = require('./webpack.common');
+
+module.exports = function(env) {
     return webpackMerge(commonConfig(), {
-        module: {
-            rules: [
-                { test: /\.ts$/, loaders: ['ts-loader'] }
-            ]
-        },
 
         plugins: [
+            new webpack.DefinePlugin({
+                'process.env': {
+                    'NODE_ENV': JSON.stringify('production'),
+                    'DEBUG': JSON.stringify('false')
+                }
+            }),
             new webpack.optimize.UglifyJsPlugin({
                 beautify: false,
                 mangle: {
@@ -27,9 +31,12 @@ module.exports = function() {
                 comments: false
             }),
 
+            // Workaround for angular/angular#11580
             new webpack.ContextReplacementPlugin(
+                // The (\\|\/) piece accounts for path separators in *nix and Windows
                 /angular(\\|\/)core(\\|\/)@angular/,
-                path.resolve(__dirname, '../src')
+                path.resolve(__dirname, '../src'), // location of your src
+                {} // a map of your routes
             ),
         ]
     });
