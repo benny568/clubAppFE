@@ -14,8 +14,8 @@ const MonthPart: number = 1;
 const DayPart: number = 2;
 
 @Component({
-    template: require('./html/booking-stage2.component.html'),
-    styles: [require('./css/booking-stage2.component.css').toString()]
+    templateUrl: './html/booking-stage2.component.html',
+    styleUrls: ['./css/booking-stage2.component.css']
 })
 
 export class BookingStage2Component {

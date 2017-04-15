@@ -13,8 +13,8 @@ import '../../assets/img/news/u12nc.jpg';
 
 @Component({
     selector: 'news',
-    template: require('./news.component.html'),
-    styles: [ require('./news.component.css').toString() ]
+    templateUrl: './news.component.html',
+    styleUrls: ['./news.component.css']
 })
 
 
@@ -24,7 +24,7 @@ export class NewsComponent {
     logdepth = 2;
 
     constructor( private lg$: LoggerService,
-                 private news$: NewsService ) { }
+                 public news$: NewsService ) { }
 
     ngOnInit() {
     	this.lg$.setLogHdr(this.logdepth, this.componentName);

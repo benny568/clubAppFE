@@ -11,8 +11,8 @@ import { ErrorService }    from '../../services/error.service';
 import { AcademyRegistrationService }  from './academyRegistration.service';
 
 @Component({
-	template: require('./html/academyRegistration.component.html'),				
-	styles: [ require('./css/academyRegistration.component.css').toString() ]
+	templateUrl: './html/academyRegistration.component.html',				
+	styleUrls: [ './css/academyRegistration.component.css' ]
 	
 })
 

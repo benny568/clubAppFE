@@ -4,10 +4,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: require('./messageUs.component.html'),
-  styles: [ require('./messageUs.component.css').toString() ]
+  templateUrl: './messageUs.component.html',
+  styleUrls: ['./messageUs.component.css']
 })
 
 export class MessageUsComponent {
-
+  public resultMessage = "";
 }

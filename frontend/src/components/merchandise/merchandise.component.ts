@@ -6,12 +6,12 @@ import { Slide } from '../slide/slide.component';
 import { Carousel } from '../carousel/carousel.component';
 
 @Component({
-  template: require('./merchandise.component.html'),
-  styles: [ require('./merchandise.component.css').toString() ]
+  templateUrl: './merchandise.component.html',
+  styleUrls: ['./merchandise.component.css']
 })
 
 export class MerchandiseComponent {
-    private sponsorImage = require("../../assets/img/merchandise/sponsor.png");
+    public sponsorImage = require("../../assets/img/merchandise/sponsor.png");
     items: [{name: string, image: string, description: string, width: string, height: string}];
 
     ngOnInit() {

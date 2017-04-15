@@ -23,6 +23,6 @@ export class NumberOfPeople4ParkingComponent {
 	componentName:string = 'NumberOfPeople4ParkingComponent';
 	logdepth:number = 4;
 
-	constructor( private bkng$: BookingService ) { }
+	constructor( public bkng$: BookingService ) { }
 	
 }

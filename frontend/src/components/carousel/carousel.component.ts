@@ -5,8 +5,8 @@ export enum Direction {UNKNOWN, NEXT, PREV}
 
 @Component({
     selector: 'carousel',
-    template: require('./carousel.component.html'),
-    styles: [ require('./carousel.component.css').toString() ]
+    templateUrl: './carousel.component.html',
+    styleUrls: ['./carousel.component.css' ]
 })
 export class Carousel implements OnDestroy {
     @Input() public noWrap:boolean;
@@ -22,7 +22,7 @@ export class Carousel implements OnDestroy {
         this.restartTimer();
     }
 
-    private slides:Array<Slide> = [];
+    public slides:Array<Slide> = [];
     private currentInterval:any;
     private isPlaying:boolean;
     private destroyed:boolean = false;
@@ -77,7 +77,7 @@ export class Carousel implements OnDestroy {
         return !this.currentSlide ? 0 : this.currentSlide.index;
     }
 
-    private next() {
+    public next() {
         let newIndex = (this.getCurrentIndex() + 1) % this.slides.length;
 
         if (newIndex === 0 && this.noWrap) {
@@ -88,7 +88,7 @@ export class Carousel implements OnDestroy {
         return this.select(this.getSlideByIndex(newIndex), Direction.NEXT);
     }
 
-    private prev() {
+    public prev() {
         let newIndex = this.getCurrentIndex() - 1 < 0 ? this.slides.length - 1 : this.getCurrentIndex() - 1;
 
         if (this.noWrap && newIndex === this.slides.length - 1) {

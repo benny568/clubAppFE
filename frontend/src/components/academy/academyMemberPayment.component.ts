@@ -6,8 +6,8 @@ import { BookingService }  from '../../services/booking.service';
 import { AcademyRegistrationService }  from './academyRegistration.service';
 
 @Component({
-	template: require('./html/academyMemberPayment.component.html'),
-	styles: [ require('./css/academyMemberPayment.component.css').toString() ]
+	templateUrl: './html/academyMemberPayment.component.html',
+	styleUrls: [ './css/academyMemberPayment.component.css' ]
 })
 
 export class AcademyMemberPaymentComponent {

@@ -5,8 +5,8 @@ import { LoggerService }  from '../../services/logger.service';
 import { ErrorService }  from '../../services/error.service';
 
 @Component({
-	template: require('./html/academyTandC.component.html'),
-	styles: [require('./css/academyTandC.component.css').toString()]
+	templateUrl: './html/academyTandC.component.html',
+	styleUrls: ['./css/academyTandC.component.css']
 })
 
 export class AcademyTandCComponent {

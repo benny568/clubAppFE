@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: require('./html/academyCoaches.component.html'),
-  styles: [ require('./css/academyCoaches.component.css').toString() ]
+  templateUrl: './html/academyCoaches.component.html',
+  styleUrls: [ './css/academyCoaches.component.css' ]
 })
 
 export class AcademyCoachesComponent {

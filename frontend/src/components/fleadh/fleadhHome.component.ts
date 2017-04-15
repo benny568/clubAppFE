@@ -6,8 +6,8 @@ import { BookingService } from '../../services/booking.service';
 import { ErrorService }    from '../../services/error.service';
 
 @Component({
-    template: require('./html/fleadhHome.component.html'),
-    styles: [require('./css/fleadhHome.component.css').toString()]
+    templateUrl: './html/fleadhHome.component.html',
+    styleUrls: ['./css/fleadhHome.component.css']
 })
 
 export class FleadhHomeComponent {

@@ -11,8 +11,8 @@ import { LoggerService }      from '../../services/logger.service';
 
 @Component({
     selector: 'sponsors',
-    template: require('./sponsors.component.html'),
-    styles: [ require('./sponsors.component.css').toString() ]
+    templateUrl: './sponsors.component.html',
+    styleUrls: ['./sponsors.component.css']
 })
 
 export class SponsorsComponent {

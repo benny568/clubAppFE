@@ -2,6 +2,7 @@
 
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
+const ngToolsWebpack = require('@ngtools/webpack');
 const path = require('path');
 
 const rootDir = path.resolve(__dirname, '..');
@@ -11,7 +12,21 @@ const commonConfig = require('./webpack.common');
 module.exports = function(env) {
     return webpackMerge(commonConfig(), {
 
+        module: {
+            rules: [
+                { test: /\.ts$/, loader: '@ngtools/webpack' }
+            ]
+        },
+
+
         plugins: [
+            new ngToolsWebpack.AotPlugin({
+                tsConfigPath: '../frontend/tsconfig-aot.json'
+            }),
+            new webpack.LoaderOptionsPlugin({
+                minimize: true,
+                debug: false
+            }),
             new webpack.DefinePlugin({
                 'process.env': {
                     'NODE_ENV': JSON.stringify('production'),

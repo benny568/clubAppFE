@@ -16,8 +16,8 @@ import './favicon.ico';
 
 @Component({
   selector: 'app-root',
-  template: require('./app.component.html'),
-  styles: [require('./app.component.css').toString()],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
 
@@ -26,10 +26,10 @@ export class AppComponent implements OnInit {
   loggedIn = '';
 
   constructor( private lg$: LoggerService,
-               private d$: SessionDataService,
+               public d$: SessionDataService,
                private com$: CommonService,
                private login$: LoginService,
-               private user$: UserService,
+               public user$: UserService,
                private router: Router,
                private _http: Http )
   {
@@ -40,6 +40,11 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
+
+  }
+
+  public media(year:string, team:string, category:string)
+  {
 
   }
 

@@ -7,8 +7,8 @@ import { BookingService } from '../../services/booking.service';
 import { ErrorService }   from '../../services/error.service';
 
 @Component({
-    template: require('./html/booking-stage5.component.html'),
-    styles: [require('./css/booking-stage5.component.css').toString()]
+    templateUrl: './html/booking-stage5.component.html',
+    styleUrls: ['./css/booking-stage5.component.css']
 })
 
 export class BookingStage5Component implements OnInit {

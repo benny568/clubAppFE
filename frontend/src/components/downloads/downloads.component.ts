@@ -4,8 +4,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: require('./downloads.component.html'),
-  styles: [ require('./downloads.component.css').toString() ]
+  templateUrl: './downloads.component.html',
+  styleUrls: ['./downloads.component.css' ]
 })
 
 export class DownloadsComponent {
