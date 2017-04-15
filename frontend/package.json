@@ -12,10 +12,10 @@
         "rmaot": "rimraf ./aot",
         "rmwebapp": "rimraf ../src/main/webapp/*",
         "cleanup": "npm run rmaot && npm run rmwebapp",
-        "build": "rimraf dist && webpack --env=dev --config webpack.config.js --progress --profile --bail",
-        "build:prod": "rimraf ../src/main/webapp && webpack --config webpack.config.js --env=prod --progress",
-        "build:full": "rimraf ../src/main/webapp && compile:aot && rollup -c rollup-config.js",
-        "compile:aot": "ngc -p tsconfig-aot.json"
+        "build:dev": "npm run rmwebapp && webpack --env=dev --config webpack.config.js --progress --profile --bail",
+        "build:prod": "npm run rmwebapp && webpack --config webpack.config.js --env=prod --progress",
+        "compile:aot": "ngc -p tsconfig-aot.json",
+        "build:full": "npm run rmwebapp && npm run compile:aot && rollup -c rollup-config.js"
     },
     "repository": {
         "type": "git",
