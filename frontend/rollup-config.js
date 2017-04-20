@@ -8,7 +8,7 @@ import image from 'rollup-plugin-image';
 export default {
     entry: 'src/main-aot.js',
     dest: '../src/main/webapp/bundle.js',
-    sourceMap: false,
+    sourceMap: 'inline',
     format: 'iife',
     treeshake: true,
     onwarn: function(warning) {
