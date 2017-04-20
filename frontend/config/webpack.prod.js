@@ -52,7 +52,7 @@ module.exports = function(env) {
                 /angular(\\|\/)core(\\|\/)@angular/,
                 path.resolve(__dirname, '../src'), // location of your src
                 {} // a map of your routes
-            ),
+            )
         ]
     });
 }
