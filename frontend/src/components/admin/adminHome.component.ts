@@ -32,7 +32,7 @@ export class AdminHomeComponent
 
 	constructor( private lg$: LoggerService, 
                  private d$: SessionDataService,
-				 public user$: UserService ) {
+				 private user$: UserService ) {
 		this.lg$.setLogHdr(this.logdepth, this.componentName);
 
 		this.lg$.log("User is: " + this.user$.getUserName());

@@ -17,7 +17,6 @@ import { FarViewComponent } from './components/farView/farView.component';
 import { PhotosComponent } from './components/photos/photos.component';
 import { adminRoutes } from './components/admin/admin.routes';
 import { fleadhRoutes } from './components/fleadh/fleadh.routes';
-import { AcademyHomeComponent } from './components/academy/academyHome.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,10 +32,11 @@ export const routes: Routes = [
   { path: 'viewTeam', component: ViewTeamComponent },
   { path: 'farView', component: FarViewComponent },
   { path: 'media/:cat1/:cat2/:cat3', component: PhotosComponent }, 
-  { path: 'academyHome', component: AcademyHomeComponent },
+  /*{ path: 'academyHome', loadChildren: 'components/academy/academy.module#AcademyModule' },*/
   ...adminRoutes,
   ...fleadhRoutes
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

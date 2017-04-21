@@ -1,0 +1,83 @@
+<div class="panel">
+    <div class="panel-heading avenue-heading">
+        Step 4: Payment
+    </div>
+    <div class="panel-body avenue-body">
+        <p-tabView orientation="left" class="parent">
+            <p-tabPanel header="Step 1: Dates" [disabled]="true">
+                Booking Step 1
+            </p-tabPanel>
+            <p-tabPanel header="Step 2: Parking" [disabled]="true">
+                Parking
+            </p-tabPanel>
+            <p-tabPanel header="Step 3: Contact Details" [disabled]="true">
+                Contact Details
+            </p-tabPanel>
+            <p-tabPanel header="Step 4: Payment" [selected]="true">
+                Order summary:
+                <div style="border: 1px solid;">
+                    <table>
+                        <tr>
+                            <td>Name: </td>
+                            <td>{{bkng$.firstname}}&nbsp;{{bkng$.surname}}
+                                <td>
+                        </tr>
+                        <tr>
+                            <td>Email:&nbsp;</td>
+                            <td>{{bkng$.email}}
+                                <td>
+                        </tr>
+                        <tr>
+                            <td>Phone:&nbsp;</td>
+                            <td>{{bkng$.phone}}
+                                <td>
+                        </tr>
+                        <tr>
+                            <td>Car Reg:&nbsp;</td>
+                            <td>{{bkng$.vehicalReg}}
+                                <td>
+                        </tr>
+                        <tr>
+                            <td>Arrival:&nbsp;</td>
+                            <td>{{bkng$.arrivalDate}}
+                                <td>
+                        </tr>
+                        <tr>
+                            <td>Departure:&nbsp;</td>
+                            <td>{{bkng$.departureDate}}
+                                <td>
+                        </tr>
+                        <tr>
+                            <td>Nights:&nbsp;</td>
+                            <td>{{bkng$.numberOfNights}}
+                                <td>
+                        </tr>
+                        <tr>
+                            <td>People:&nbsp;</td>
+                            <td>{{bkng$.numberOfPeople}}
+                                <td>
+                        </tr>
+                        <tr>
+                            <td>Parking:&nbsp;</td>
+                            <td>{{bkng$.parking}} car<span *ngIf="(bkng$.parking>1)">s</span>
+                                <td>
+                        </tr>
+                    </table>
+                </div>
+                <br /><br />
+                <div style="float:left;">
+                    <button type="button" class="btn btn-warning" (click)="back()">Back</button>
+                </div>
+                <div style="float:left;min-width:10px;overflow:hidden;">&nbsp;&nbsp;</div>
+                <div style="float:left;">
+                    Total cost: €{{bkng$.totalCharge}} <br /> Cost of deposit: €{{bkng$.deposit}}
+                </div>
+                <div style="float:right;">
+                    <button type="button" (click)="payPal()" style="float:right;">
+					       			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0">
+					       		</button>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</div>

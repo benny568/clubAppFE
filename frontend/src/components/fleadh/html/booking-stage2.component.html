@@ -1,0 +1,55 @@
+<div class="panel">
+    <div class="panel-heading avenue-heading">
+        Step 2: Parking
+    </div>
+    <div class="panel-body avenue-body">
+        <p-tabView orientation="left" class="parent">
+            <p-tabPanel header="Step 1: Dates" [disabled]="true">
+                Booking Step 1
+            </p-tabPanel>
+            <p-tabPanel header="Step 2: Parking" [selected]="true">
+
+                <div class="ui-grid ui-grid-responsive">
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <img src="/assets/img/fleadh/parking.png" width="100%" />
+                        </div>
+                        <div class="ui-grid-col-12">
+                            <br /><br />
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <p-checkbox [(ngModel)]="parkingRequired" binary="true"></p-checkbox>
+                                </div>
+                                <div class="ui-grid-col-5"><label class="ui-widget">Parking Required</label></div>
+                            </div>
+                            <br />
+                            <div class="ui-grid-row" *ngIf="parkingRequired">Please enter the number of parking spaces required:</div>
+                            <br />
+                            <div class="ui-grid-row" *ngIf="parkingRequired">
+                                <i class="fa fa-car" aria-hidden="true"></i> &nbsp;&nbsp;
+                                <number-of-people-4parking></number-of-people-4parking>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row" style="padding-top:50px;">
+                        <div class="ui-grid-col-12">
+                            <button type="button" class="btn btn-warning" (click)="back()">Back</button>
+                        </div>
+                        <div class="ui-grid-col-12"></div>
+                        <div class="ui-grid-col-7">
+                            <button type="button" class="btn btn-warning" (click)="next()">Next</button>
+                        </div>
+                    </div>
+                </div>
+
+            </p-tabPanel>
+            <p-tabPanel header="Step 3: Contact Details" [disabled]="true">
+                Content 3
+            </p-tabPanel>
+            <p-tabPanel header="Step 4: Payment" [disabled]="true">
+                Payment
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</div>

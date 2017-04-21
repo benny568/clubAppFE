@@ -5,10 +5,10 @@ const pathToBg = require("../../assets/img/avenueCrest.png");
 
 @Component({
     selector: 'advert',
-    templateUrl: './advert.component.html',
-    styleUrls: ['./advert.component.css']
+    template: require('./advert.component.html'),
+    styles: [require('./advert.component.css').toString()]
 })
 
 export class AdvertComponent {
-    public backGround = "../../assets/img/fleadh/bg4.jpg";
+    private backGround = require("../../assets/img/fleadh/bg4.jpg");
 }

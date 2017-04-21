@@ -9,8 +9,8 @@ import { ErrorService }   from '../../services/error.service';
 
 enum ValidValue { FORM, SERVICE, NONE };
 @Component({
-    templateUrl: './html/booking-stage4.component.html',
-    styleUrls: ['./css/booking-stage4.component.css']
+    template: require('./html/booking-stage4.component.html'),
+    styles: [require('./css/booking-stage4.component.css').toString()]
 })
 
 export class BookingStage4Component {

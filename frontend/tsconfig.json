@@ -8,13 +8,22 @@
         "experimentalDecorators": true,
         "lib": ["es2015", "dom"],
         "noImplicitAny": true,
-        "suppressImplicitAnyIndexErrors": true
+        "suppressImplicitAnyIndexErrors": true,
+        "types": [
+            "node",
+            "hammerjs"
+        ],
+        "typeRoots": [
+            // add path to @types
+            "node_modules/@types"
+        ]
     },
-    "include": [
-        "src/**/*"
-    ],
     "exclude": [
         "node_modules",
         "**/*.spec.ts"
+    ],
+    "files": [
+        "src/app.module.ts",
+        "src/main.ts"
     ]
 }

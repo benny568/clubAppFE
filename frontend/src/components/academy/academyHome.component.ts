@@ -9,17 +9,17 @@ import { NewsService }          from '../../services/news.service';
 
 
 @Component({
-  templateUrl: './html/academyHome.component.html',
-  styleUrls: [ './css/academyHome.component.css' ]
+  template: require('./html/academyHome.component.html'),
+  styles: [ require('./css/academyHome.component.css').toString() ]
 })
 
 export class AcademyHomeComponent {
 	componentName:string = 'AcademyHomeComponent';
 	logdepth:number = 1;
-  public academyPoster = require("../../assets/img/academy/avenue-academy-15.1.jpg");
-  public drillOfTheWeek = require("../../assets/img/academy/drilloftheweek.png");
+  private academyPoster = require("../../assets/img/academy/avenue-academy-15.1.jpg");
+  private drillOfTheWeek = require("../../assets/img/academy/drilloftheweek.png");
 
-    constructor( public news$: NewsService, private lg$: LoggerService ) {}
+    constructor( private news$: NewsService, private lg$: LoggerService ) {}
 
     ngOnInit() {
         this.lg$.setLogHdr(this.logdepth, this.componentName);

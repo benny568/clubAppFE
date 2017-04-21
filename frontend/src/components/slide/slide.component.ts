@@ -7,8 +7,8 @@ import {Carousel, Direction} from  '../carousel/carousel.component';
 
 @Component({
     selector: 'slide',
-    templateUrl: './slide.component.html',
-    styleUrls: ['./slide.component.css']
+    template: require('./slide.component.html'),
+    styles: [ require('./slide.component.css').toString() ]
 })
 export class Slide implements OnInit, OnDestroy {
     @Input() public index:number;

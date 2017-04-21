@@ -19,6 +19,6 @@ import { BookingService }  from '../../services/booking.service';
 
 export class ArrivalDatepickerComponent {
 
-	constructor( public bkng$: BookingService ) { console.log("==> ArrivalDatepickerComponent..."); }
+	constructor( private bkng$: BookingService ) { console.log("==> ArrivalDatepickerComponent..."); }
 	
 }

@@ -1,0 +1,163 @@
+<td-steps mode="horizontal">
+    <td-step label="Terms & Conditions" sublabel="Read and accept T&Cs" [active]="step1enabled" [disabled]="!step1enabled">
+
+    </td-step>
+    <td-step label="Registration Form" sublabel="Fill in personal details" [active]="step2enabled" [disabled]="!step2enabled">
+
+    </td-step>
+    <td-step label="Review & Payment" sublabel="Review form, submit details and make payment." [active]="step3enabled" [disabled]="!step2enabled">
+
+    </td-step>
+
+</td-steps>
+
+<div class="panel">
+    <div class="panel-heading avenue-heading">
+        Step 2: Registration Form
+    </div>
+    <div class="panel-body">
+
+        <form [formGroup]="regForm" (ngSubmit)="submit(regForm.value)" autocomplete="off" novalidate>
+
+            <div layout="row" layout-margin>
+                <md-input-container flex>
+                    <input md-input disabled value="Child's' Details">
+                </md-input-container>
+            </div>
+            <div layout="row" layout-margin>
+                <md-input-container dividerColor="accent" flex>
+                    <input required [formControl]="regForm.controls['firstname']" md-input placeholder="First name" mdTooltip="Please enter the childs first name" mdTooltipPosition="above">
+                    <md-hint>Enter child's first name</md-hint>
+                </md-input-container>
+                <md-input-container dividerColor="accent" flex>
+                    <input [formControl]="regForm.controls['lastname']" md-input placeholder="Last Name" mdTooltip="Please enter the childs last name" mdTooltipPosition="above">
+                    <md-hint>Enter child's surname</md-hint>
+                </md-input-container>
+                <md-input-container dividerColor="accent" flex>
+                    <input [formControl]="regForm.controls['dob']" md-input placeholder="Date of Birth" mdTooltip="Please enter the childs date of birth in dd/mm/yy format" mdTooltipPosition="above">
+                    <md-hint>Enter Child's date of birth</md-hint>
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-margin>
+                <md-input-container dividerColor="accent" flex>
+                    <textarea [formControl]="regForm.controls['allergies']" md-input placeholder="Allergy information - please specify" mdTooltip="Please enter the childs first name" mdTooltipPosition="above">
+                    </textarea>
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-margin>
+                <md-input-container dividerColor="accent" flex>
+                    <textarea [formControl]="regForm.controls['medication']" md-input placeholder="Medication" mdTooltip="Please enter details of any medication your child is on or may need during sessions." mdTooltipPosition="above">
+                    <md-hint>Give details of any medication your child may need during sessions</md-hint>
+                    </textarea>
+                </md-input-container>
+                <md-input-container dividerColor="accent" flex>
+                    <textarea [formControl]="regForm.controls['notes']" md-input placeholder="Additional notes" mdTooltip="Any additional information you feel may be relevant for your child." mdTooltipPosition="above">
+                    </textarea>
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-wrap layout-padding>
+                <div flex="33">
+                    <md-checkbox [formControl]="regForm.controls['asthma']">
+                        <div style="font-weight: normal">
+                            My child has Asthma
+                        </div>
+                    </md-checkbox>
+                </div>
+                <div flex="33">
+                    <md-checkbox [formControl]="regForm.controls['diabetes']">
+                        <div style="font-weight: normal">
+                            My child has Diabetes
+                        </div>
+                    </md-checkbox>
+                </div>
+            </div>
+
+            <md-divider></md-divider>
+            <md-divider></md-divider>
+
+            <div layout="row" layout-margin>
+                <md-input-container flex>
+                    <input md-input disabled value="Parents Details">
+                </md-input-container>
+            </div>
+            <div layout="row" layout-margin>
+                <md-input-container dividerColor="accent" flex>
+                    <input [formControl]="regForm.controls['fathername']" md-input placeholder="Father's Name">
+                </md-input-container>
+                <md-input-container dividerColor="accent" flex>
+                    <input [formControl]="regForm.controls['mothername']" md-input placeholder="Mother's Name">
+                </md-input-container>
+                <md-input-container dividerColor="accent" flex>
+                    <input [formControl]="regForm.controls['address']" md-input placeholder="Mailing Address">
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-margin>
+                <md-input-container dividerColor="accent" flex>
+                    <input type="email" [formControl]="regForm.controls['email']" md-input placeholder="email">
+                    <md-hint>Enter parents email address</md-hint>
+                </md-input-container>
+                <md-input-container dividerColor="accent" flex>
+                    <input md-input #postalCode placeholder="Postal Code">
+                </md-input-container>
+            </div>
+            <div layout="row" layout-margin>
+                <md-input-container dividerColor="accent" flex>
+                    <input [formControl]="regForm.controls['phone1']" md-input placeholder="Mother's phone number">
+                </md-input-container>
+                <md-input-container dividerColor="accent" flex>
+                    <input [formControl]="regForm.controls['phone2']" md-input placeholder="Father's phone number">
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-wrap layout-padding>
+                <div flex="33">
+                    <md-checkbox [formControl]="regForm.controls['singleTerm']" class="red">
+                        <div style="font-weight: normal">
+                            Single Term Payment (€60)
+                        </div>
+                    </md-checkbox>
+                </div>
+                <div flex="33">
+                    <md-checkbox [formControl]="regForm.controls['secondChild']" class="red">
+                        <div style="font-weight: normal">
+                            Second Child Discount
+                        </div>
+                    </md-checkbox>
+                </div>
+            </div>
+
+            <div layout="row" layout-align="start top">
+                <div flex>
+                    <md-checkbox [formControl]="regForm.controls['consent']" labelPosition="before">
+                        <div style="font-weight: normal">
+                            I, the child's parent/guardian, give my consent for him/her to participate in All Avenue United Soccer Academy’s Coaching sessions, Organised Events, Blitz & Competitions etc. In the unlikely event of an Accident I/We give our permission for my child
+                            to be given immediate First Aid or taken to the nearest Hospital.
+                        </div>
+                    </md-checkbox>
+                </div>
+            </div>
+            <div layout="row" layout-align="start top">
+                <div flex>
+                    <md-checkbox [formControl]="regForm.controls['photoconsent']" labelPosition="before">
+                        <div style="font-weight: normal">
+                            I, the child's parent/guardian, give permission for the club to use our child's picture on their website
+                        </div>
+                    </md-checkbox>
+                </div>
+            </div>
+
+            <br />
+            <md-divider></md-divider>
+            <md-divider></md-divider>
+            <br />
+
+            <!-- Buttons below here -->
+            <button md-raised-button color="primary" (click)="back()">Back</button>
+            <button md-raised-button color="primary" class="pull-right">Next</button>
+        </form>
+    </div>
+</div>

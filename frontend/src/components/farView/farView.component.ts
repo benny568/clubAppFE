@@ -8,15 +8,15 @@ import { LoggerService }          from '../../services/logger.service';
 import { LeagueRepublicResults }  from '../lrResults/leagueRepublicResults.component';
 
 @Component({
-  templateUrl: './farView.component.html',
-  styleUrls: ['./farView.component.css' ]
+  template: require('./farView.component.html'),
+  styles: [ require('./farView.component.css').toString() ]
 })
 
 export class FarViewComponent {
     componentName:string = 'FarViewComponent';
 	logdepth:number = 2;
 
-    constructor(private lg$: LoggerService, public d$: SessionDataService) { }
+    constructor(private lg$: LoggerService, private d$: SessionDataService) { }
 
 	ngOnInit()
 	{

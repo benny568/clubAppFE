@@ -4,8 +4,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: './findUs.component.html',
-  styleUrls: ['./findUs.component.css' ]
+  template: require('./findUs.component.html'),
+  styles: [ require('./findUs.component.css').toString() ]
 })
 
 export class FindUsComponent {

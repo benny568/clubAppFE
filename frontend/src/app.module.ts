@@ -1,9 +1,9 @@
 import { NgModule, Type } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpModule } from '@angular/http';
-import { MdCheckboxModule } from '@angular/material';
+import { MaterialModule } from '@angular/material';
+
+import 'hammerjs';
 
 /* PrimeNG components */
 import { CheckboxModule } from 'primeng/primeng';
@@ -48,21 +48,12 @@ import { AdvertComponent } from './components/advert/advert.component';
 import { BookingStage2Component } from './components/fleadh/booking-stage2.component';
 import { BookingStage3Component } from './components/fleadh/booking-stage3.component';
 import { BookingStage4Component } from './components/fleadh/booking-stage4.component';
-import { BookingStage5Component } from './components/fleadh/booking-stage5.component';
 import { NumberOfPeople4ParkingComponent } from './components/fleadh/number-of-people-4parking.component';
 import { TandCComponent } from './components/fleadh/tandc.component';
 import { InstructionsComponent } from './components/fleadh/instructions.component';
 import { ArrivalDatepickerComponent } from './components/fleadh/arrival-datepicker.component';
 import { DepartureDatepickerComponent } from './components/fleadh/departure-datepicker.component';
 import { NumberOfPeopleComponent } from './components/fleadh/number-of-people.component';
-import { AcademyRoutingModule }          from './components/academy/academy-routes.module';
-import { AcademyHomeComponent }          from './components/academy/academyHome.component';
-import { AcademyOverviewComponent }      from './components/academy/academyOverview.component';
-import { AcademyCoachesComponent }       from './components/academy/academyCoaches.component';
-import { AcademyScheduleComponent }      from './components/academy/academySchedule.component';
-import { AcademyTandCComponent }         from './components/academy/academyTandC.component';
-import { AcademyRegistrationComponent }  from './components/academy/academyRegistration.component';
-import { AcademyMemberPaymentComponent } from './components/academy/academyMemberPayment.component';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -78,7 +69,7 @@ import { AcademyRegistrationService }  from './components/academy/academyRegistr
 import { BookingService } from './services/booking.service';
 
 /* Feature Modules */
-/*import { AcademyModule } from './components/academy/academy.module';*/
+import { AcademyModule } from './components/academy/academy.module';
 /*import { AcademyRoutingModule } from './components/academy/academy-routes.module';*/
 
 /* Routing Module */
@@ -118,29 +109,19 @@ import { AppRoutingModule }   from './app-routing.module';
     BookingStage2Component,
     BookingStage3Component,
     BookingStage4Component,
-    BookingStage5Component,
     NumberOfPeople4ParkingComponent,
     TandCComponent,
     InstructionsComponent,
     ArrivalDatepickerComponent,
     DepartureDatepickerComponent,
-    NumberOfPeopleComponent,
-    AcademyHomeComponent,
-    AcademyOverviewComponent,
-    AcademyCoachesComponent,
-    AcademyScheduleComponent,
-    AcademyTandCComponent,
-    AcademyRegistrationComponent,
-    AcademyMemberPaymentComponent
+    NumberOfPeopleComponent
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    HttpModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    MdCheckboxModule,
+    MaterialModule.forRoot(),
     CheckboxModule,
     ButtonModule,
     DialogModule,

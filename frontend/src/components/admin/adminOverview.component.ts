@@ -10,7 +10,7 @@ import { LoggerService }      from '../../services/logger.service';
 
 			<div class="panel" style="margin-right:30px;">
 				<div class="panel-heading avenue-heading" style="font-size:20px;">
-					Welcome <strong>{{d$.dsCurrentUser.username}}}</strong> to the Avenue United Administration Portal
+					Welcome <strong>{{_dataService.dsCurrentUser.username}}}</strong> to the Avenue United Administration Portal
 				</div>
 				<div class="panel-body avenue-body">
 					<img src="/assets/img/user-male-icon.png" align="left" HSPACE="5" VSPACE="5" height="200px" width="auto"/>
@@ -51,7 +51,7 @@ export class AdminOverviewComponent {
 	componentName = 'AdminHomeComponent';
 	logdepth = 2;
 
-	constructor( private lg$: LoggerService, public d$: SessionDataService ) { }
+	constructor( private lg$: LoggerService, private _dataService: SessionDataService ) { }
 
 	onInit()
     {

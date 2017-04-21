@@ -4,8 +4,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: './contactUs.component.html',
-  styleUrls: ['./contactUs.component.css' ]
+  template: require('./contactUs.component.html'),
+  styles: [ require('./contactUs.component.css').toString() ]
 })
 
 export class ContactUsComponent {

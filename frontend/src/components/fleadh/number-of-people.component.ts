@@ -10,7 +10,7 @@ import { BookingService }  from '../../services/booking.service';
 	template: `
 
 			<p-spinner size="2" 
-			           [(ngModel)]="bkng$.numberOfPeople" 
+			           [(ngModel)]="bk$.numberOfPeople" 
 			           [min]="1" 
 			           [max]="16" >
 			</p-spinner>
@@ -21,6 +21,6 @@ import { BookingService }  from '../../services/booking.service';
 
 export class NumberOfPeopleComponent {
 
-	constructor( public bkng$: BookingService ) { console.log("==> NumberOfPeopleComponent..."); }
+	constructor( private bk$: BookingService ) { console.log("==> NumberOfPeopleComponent..."); }
 	
 }

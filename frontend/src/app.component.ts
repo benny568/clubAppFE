@@ -12,12 +12,12 @@ import { LoginService }       from './services/login.service';
 import { UserService }        from './services/user.service';
 
 import './assets/css/styles.css';
-/*import './favicon.ico';*/
+import './favicon.ico';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: require('./app.component.html'),
+  styles: [require('./app.component.css').toString()],
 })
 export class AppComponent implements OnInit {
 
@@ -26,10 +26,10 @@ export class AppComponent implements OnInit {
   loggedIn = '';
 
   constructor( private lg$: LoggerService,
-               public d$: SessionDataService,
+               private d$: SessionDataService,
                private com$: CommonService,
                private login$: LoginService,
-               public user$: UserService,
+               private user$: UserService,
                private router: Router,
                private _http: Http )
   {
@@ -40,11 +40,6 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
-
-  }
-
-  public media(year:string, team:string, category:string)
-  {
 
   }
 

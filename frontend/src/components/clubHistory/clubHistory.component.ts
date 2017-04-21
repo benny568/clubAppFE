@@ -4,8 +4,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: './clubHistory.component.html',
-  styleUrls: ['./clubHistory.component.css' ]
+  template: require('./clubHistory.component.html'),
+  styles: [ require('./clubHistory.component.css').toString() ]
 })
 
 export class ClubHistoryComponent {

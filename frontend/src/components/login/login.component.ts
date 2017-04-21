@@ -12,8 +12,8 @@ import { UserService }        from '../../services/user.service';
 import { User }               from '../model/site-user';
 
 @Component({
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  template: require('./login.component.html'),
+  styles: [ require('./login.component.css').toString() ]
 })
 
 export class LoginComponent {

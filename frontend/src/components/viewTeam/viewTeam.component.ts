@@ -5,8 +5,8 @@ import { LoggerService }       from '../../services/logger.service';
 /*import { LeagueRepublicTable } from "./leagueRepublicTable.component";*/
 
 @Component({
-  templateUrl: './viewTeam.component.html',
-  styleUrls: ['./viewTeam.component.css']
+  template: require('./viewTeam.component.html'),
+  styles: [ require('./viewTeam.component.css').toString() ]
 })
 
 export class ViewTeamComponent {

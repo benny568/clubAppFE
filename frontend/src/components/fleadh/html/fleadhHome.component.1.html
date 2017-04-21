@@ -1,0 +1,76 @@
+<div class="panel">
+    <div class="panel-heading avenue-heading">
+        Step 1: Instructions and Terms & Conditions
+    </div>
+    <div class="panel-body">
+        <ul class="nav nav-tabs nav-justified">
+            <li id="step-active">Step 1: Terms & Conditions</li>
+            <li class="step">Arrival/departure dates</li>
+            <li class="step">Parking</li>
+            <li class="step">Personal Details</li>
+            <li class="step">Payment</li>
+        </ul>
+
+        <div class="step1-flex-container">
+            <md-card>
+                <md-card-title>Details & Prices</md-card-title>
+
+                <p>
+                    <strong>Up to 2-Night Stay: </strong> Price per night: €40 <br /><br />
+
+                    <strong>3-Night Stay or more: </strong> Price per night: €35 <br /><br /> Includes: <br /> 1 x camping area for up to 2 people <br /> 1 x parking space <br />
+                </p>
+                <p>
+                    NOTE: <br /> - €5 extra per person above 2 and up to 8 <br /> - Extra parking space €5 per day - NO CAMPERVANS
+                </p>
+                <p>There are four steps in the booking process:
+                    <ol>
+                        <li>Agree to the conditions on this page by clicking on the check box</li>
+                        <li>Pick the dates you prefer and the number of people staying</li>
+                        <li>Indicate if you require parking and the number of parking spaces</li>
+                        <li>Provide your contact details</li>
+                        <li>Pay the deposit (€50) via PayPal, <strong>Balance payable ON ARRIVAL.</strong></li>
+                    </ol>
+            </md-card>
+            <md-card>
+                <div style="padding: 10px;">
+                    <md-card-title>Fleadh Cheoil 2017, Camping at Avenue United FC</md-card-title>
+
+
+                    <md-card-subtitle>Roslevan, Tulla Road, Ennis <br /> Take exit 13 off Motorway, and you’re there!</md-card-subtitle>
+
+
+                    <h5>INFORMATION & RULES</h5>
+
+                    <ul>
+                        <li>Campsite Opens 1pm on Wed August 17th</li>
+                        <li>Tents & Cars only. NO caravans or campervans, sorry.</li>
+                        <li>NO noise after Midnight</li>
+                        <li>Toilets & Showers are Provided.</li>
+                        <li>Anyone under 18 MUST be accompanied by an adult</li>
+                        <li>NO PETS (except guide / assistive dogs)</li>
+                        <li>Balance must be paid on arrival. You will NOT be admitted until balance is paid.</li>
+                        <li>No Sterling accepted for balance. EURO cash only.</li>
+                        <li>No refunds for early departure.</li>
+                        <li>No electrical connections are available. Bring plenty batteries!</li>
+                        <li> STRICTLY NO GLASS BOTTLES ALLOWED ON SITE.<br />This is our soccer pitch where our kids play matches. NO Glass means NO Glass.<br />Plastic only. This WILL be enforced.</li>
+                        <li>You must be vacated by 5pm on Mon 22 Aug.</li>
+                        <li> By booking you agree to the above conditions.</li>
+                    </ul>
+
+                    <md-checkbox labelPosition="before" [checked]="tandc" (change)="tandc=$event.checked">
+                        <div style="font-weight: normal">
+                            Please tick the box to indicate that you agree to the above conditions
+                        </div>
+                    </md-checkbox>
+                    <span *ngIf="tandc"><br /><br /> We hope you enjoy your stay!</span>
+                </div>
+            </md-card>
+        </div>
+        <div class="flex-container">
+            <button md-raised-button class="btn btn-warning" (click)="back()">Back</button>
+            <button md-raised-button class="btn btn-warning" (click)="next()">Next</button>
+        </div>
+
+    </div>
+</div>

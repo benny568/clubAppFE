@@ -4,13 +4,13 @@
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: './links.component.html',
-  styleUrls: ['./links.component.css']
+  template: require('./links.component.html'),
+  styles: [ require('./links.component.css').toString() ]
 })
 
 export class LinksComponent {
-  public cdslImage = "../../assets/img/links/CDSL_Crest.jpg";
-  public csslImage = "../../assets/img/links/cssl.jpeg";
-  public faiImage = "../../assets/img/links/fai-crest.png";
+  private cdslImage = require("../../assets/img/links/CDSL_Crest.jpg");
+  private csslImage = require("../../assets/img/links/cssl.jpeg");
+  private faiImage = require("../../assets/img/links/fai-crest.png");
 
 }

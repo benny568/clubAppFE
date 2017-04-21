@@ -12,8 +12,8 @@ import { LoggerService }        from '../../services/logger.service';
 import { CommonService }        from '../../services/common.service';
 
 @Component({
-	templateUrl: './photos.component.html',
-  	styleUrls: ['./photos.component.css']
+	template: require('./photos.component.html'),
+  styles: [ require('./photos.component.css').toString() ]
 })
 
 export class PhotosComponent implements OnInit
