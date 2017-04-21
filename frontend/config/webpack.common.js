@@ -26,8 +26,12 @@ module.exports = function() {
             chunkFilename: "[name].[chunkhash].js"
         },
         module: {
-            rules: [
-                { test: /\.css$/, loader: 'raw-loader' },
+            rules: [{
+                    test: /\.css$/,
+                    use: ExtractTextPlugin.extract({
+                        use: 'css-loader'
+                    })
+                },
                 { loader: 'raw-loader', test: /\.(html)$/ },
                 {
                     test: /\.ts$/,

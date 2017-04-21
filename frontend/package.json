@@ -8,7 +8,7 @@
     "lint": "tslint -c ./tslint.json \"./src/**/*.ts\" -e \"./src/**/typings.d.ts\" -e \"./src/environments/**\"",
     "reinstall": "rm -rf node_modules tmp deploy dist && npm i",
     "start": "webpack-dev-server --env=dev --progress",
-    "build": "rimraf dist && webpack --env=dev --config webpack.config.js --progress --profile --bail",
+    "build": "rimraf ../src/main/webapp && webpack --env=dev --config webpack.config.js --progress --profile --bail",
     "build:prod": "webpack --config webpack.config.js --env=prod --progress",
     "compile:aot": "ngc -p tsconfig.json && cp src/app/* compiled"
   },
@@ -51,7 +51,7 @@
     "angular-router-loader": "^0.5.0",
     "chunk-manifest-webpack-plugin": "^1.0.0",
     "codelyzer": "2.0.0-beta.4",
-    "css-loader": "^0.26.2",
+    "css-loader": "^0.26.4",
     "ember-cli-inject-live-reload": "1.4.0",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.1",

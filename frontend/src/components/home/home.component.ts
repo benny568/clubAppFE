@@ -4,6 +4,7 @@ import { SessionDataService } from '../../services/session-data.service';
 import { LoggerService }      from '../../services/logger.service';
 import { CommonService }      from '../../services/common.service';
 
+import '../../assets/css/styles.css';
 @Component({
    // Our list of styles in our component. We may add more to compose many styles together
   styles: [ require('./home.component.css').toString() ],

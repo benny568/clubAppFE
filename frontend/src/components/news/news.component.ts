@@ -9,7 +9,10 @@ import { Carousel }           from '../carousel/carousel.component';
 import { LoggerService }      from '../../services/logger.service';
 import { NewsService }        from '../../services/news.service';
 
-import '../../assets/img/news/u12nc.jpg';
+/* Read in the standard news images so the'll be included in the relase by webpack */
+import '../../assets/img/news/200clubwinner.jpg';
+import '../../assets/img/news/and-the-winner-is.jpg';
+import '../../assets/img/news/Fixtures.jpg';
 
 @Component({
     selector: 'news',
