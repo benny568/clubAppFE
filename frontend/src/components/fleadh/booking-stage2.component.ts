@@ -9,6 +9,8 @@ import { NumberOfPeople4ParkingComponent } from './number-of-people-4parking.com
 import '../../assets/css/primeng/themes/omega/theme.css';
 import '../../assets/css/primeng/primeng.min.css';
 
+import '../../assets/img/fleadh/parking.png';
+
 const YearPart: number = 0;
 const MonthPart: number = 1;
 const DayPart: number = 2;

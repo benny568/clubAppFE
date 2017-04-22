@@ -1,6 +1,8 @@
 import { Component }      from '@angular/core';
 import { Router }         from '@angular/router';
 
+import { Message } from 'primeng/primeng';
+
 import { LoggerService }  from '../../services/logger.service';
 import { BookingService } from '../../services/booking.service';
 import { ErrorService }    from '../../services/error.service';
@@ -16,6 +18,7 @@ export class FleadhHomeComponent {
     step2enabled: boolean;
     step3enabled: boolean;
     step4enabled: boolean;
+    msgs: Message[] = [];
 
     constructor( private lg$: LoggerService,
                  private bkng$: BookingService,
@@ -63,6 +66,19 @@ export class FleadhHomeComponent {
     {
         this.bkng$.traceBookingDetails();
 
+        this.lg$.log("calcNumberOfNights( startdate: " + startdate + ", enddate: " + enddate + " )");
+
+        if( startdate === undefined )
+        {
+            this.showStartDateError();
+            return -1;
+        }
+        else if( enddate === undefined )
+        {
+            this.showEndDateError();
+            return -1;
+        }
+        else
         // Check the Year - must be 2017
         if( startdate.getFullYear() !== 2017 || enddate.getFullYear() !== 2017 )
         {
@@ -102,26 +118,64 @@ export class FleadhHomeComponent {
 
     private showYearError() {
     	this.lg$.log("----> showYearError()");
-        this.err$.openAlert('The selected date must be in 2017!');
+        this.msgs.pop(); // Remove any old message
+        this.msgs.push({    severity:'info', 
+                            summary:'Info Message', 
+                            detail:'The selected date must be in 2017!'
+                        });
     }
 
     private showMonthError() {
     	this.lg$.log("----> showMonthError()");
-        this.err$.openAlert('The selected month must be August!');
+        this.msgs.pop(); // Remove any old message
+        this.msgs.push({    severity:'info', 
+                            summary:'Info Message', 
+                            detail:'The selected month must be August!'
+                        });
     }
 
     private showDaysError() {
     	this.lg$.log("----> showDaysError()");
-        this.err$.openAlert('Minimum stay is 2 nights!');
+        this.msgs.pop(); // Remove any old message
+        this.msgs.push({    severity:'info', 
+                            summary:'Info Message', 
+                            detail:'Minimum stay is 2 nights!'
+                        });
     }
 
     private showPeopleError() {
     	this.lg$.log("----> showPeopleError()");
-        this.err$.openAlert('Minimum number of people is 1!');
+        this.msgs.pop(); // Remove any old message
+        this.msgs.push({    severity:'info', 
+                            summary:'Info Message', 
+                            detail:'Minimum number of people is 1!'
+                        });
     }
 
     private showTnCError() {
     	this.lg$.log("----> showTnCError()");
-        this.err$.openAlert('You must accept the Terms & Conditions to proceed!');
+        this.msgs.pop(); // Remove any old message
+        this.msgs.push({    severity:'info', 
+                            summary:'Info Message', 
+                            detail:'You must accept the Terms & Conditions to proceed!'
+                        });
+    }
+
+    private showStartDateError() {
+    	this.lg$.log("----> showStartDateError()");
+        this.msgs.pop(); // Remove any old message
+        this.msgs.push({    severity:'info', 
+                            summary:'Info Message', 
+                            detail:'You must enter a start date to proceed!'
+                        });
+    }
+
+    private showEndDateError() {
+    	this.lg$.log("----> showEndDateError()");
+        this.msgs.pop(); // Remove any old message
+        this.msgs.push({    severity:'info', 
+                            summary:'Info Message', 
+                            detail:'You must enter an end date to proceed!'
+                        });
     }
 }
