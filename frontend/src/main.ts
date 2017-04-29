@@ -9,6 +9,7 @@ import { AppModule } from './app.module';
 import './assets/css/styles.css';
 import './assets/img/stadium1.jpg';
 import './assets/img/banner.png';
+import './assets/img/avenueCrest.png';
 import './assets/img/academy/flag.gif';
 /*import './favicon.ico';*/
 import './assets/img/fleadh/parking.png';

@@ -4,25 +4,24 @@
         "module": "es2015",
         "moduleResolution": "node",
         "sourceMap": true,
+        "outDir": "dist/unbundled-aot",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "lib": ["es2015", "dom"],
         "noImplicitAny": true,
         "suppressImplicitAnyIndexErrors": true
     },
-    "exclude": [
-        "node_modules",
-        "**/*.spec.ts"
-    ],
+
 
     "files": [
         "src/app.module.ts",
-        "src/main-aot.ts"
+        "src/main-aot.ts",
+        "src/polyfills.ts",
+        "src/vendor.ts"
     ],
 
     "angularCompilerOptions": {
         "genDir": "aot",
-        "entryModule": "src/app.module#AppModule",
         "skipMetadataEmit": true
     }
 }

@@ -11,8 +11,11 @@ import { CommonService }      from './services/common.service';
 import { LoginService }       from './services/login.service';
 import { UserService }        from './services/user.service';
 
-import './assets/css/styles.css';
-/*import './favicon.ico';*/
+/* Import the images needed so that webpack will package them */
+/*import './assets/css/styles.css';
+import './assets/img/stadium1.jpg';
+import './assets/img/banner.png';
+import './favicon.ico';*/
 
 @Component({
   selector: 'app-root',

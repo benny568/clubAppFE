@@ -1,6 +1,15 @@
 html,
 body {
-    background-image: url("/src/assets/img/stadium1.jpg");
+    background-image: url(require("/src/assets/img/stadium1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100%;
+}
+
+.bkrnd {
+    background-image: url(require("/src/assets/img/stadium1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

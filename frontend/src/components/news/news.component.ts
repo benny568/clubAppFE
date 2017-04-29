@@ -9,7 +9,9 @@ import { Carousel }           from '../carousel/carousel.component';
 import { LoggerService }      from '../../services/logger.service';
 import { NewsService }        from '../../services/news.service';
 
-import '../../assets/img/news/u12nc.jpg';
+/*import '../../assets/img/news/200clubwinner.jpg';
+import '../../assets/img/news/Fixtures.jpg';
+import '../../assets/img/news/and-the-winner-is.jpg';*/
 
 @Component({
     selector: 'news',

@@ -4,12 +4,10 @@ import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 import css from 'rollup-plugin-css-only';
 import image from 'rollup-plugin-image';
-import builtins from 'rollup-plugin-node-builtins';
 
 export default {
-    entry: './dist/unbundled-aot/src/main-aot.js',
+    entry: 'src/main-aot.js',
     dest: '../src/main/webapp/bundle.js',
-    sourceMap: false,
     format: 'iife',
     treeshake: true,
     onwarn: function(warning) {
@@ -26,17 +24,12 @@ export default {
     },
     plugins: [
         nodeResolve({
-            es2015: true,
-            module: true,
             jsnext: true,
-            main: true,
-            sourceMap: false,
-            extensions: ['.js', '.json'],
-            preferBuiltins: false
+            main: true
         }),
         commonjs({
             include: [
-                'node_modules/**',
+                'node_modules/rxjs/**',
                 'node_modules/primeng/**'
             ],
             namedExports: {
@@ -55,7 +48,6 @@ export default {
         }),
         uglify(),
         css({ output: '../src/main/webapp/bundle.css' }),
-        image(),
-        builtins()
+        image()
     ]
 };
