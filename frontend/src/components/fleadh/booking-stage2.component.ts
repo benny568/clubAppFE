@@ -26,6 +26,7 @@ export class BookingStage2Component {
     step3enabled: boolean;
     step4enabled: boolean;
     parkingRequired: boolean;
+    private backGround = require("../../assets/img/fleadh/parking.png");
 
     constructor( private lg$: LoggerService,
                  private bkng$: BookingService,

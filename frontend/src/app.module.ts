@@ -1,9 +1,13 @@
 import { NgModule, Type } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpModule } from '@angular/http';
 
-import 'hammerjs';
+/* Angular Material modules */
+import { MdCheckboxModule } from '@angular/material';
+import { MdCardModule } from '@angular/material';
+import { MaterialModule } from '@angular/material';
 
 /* PrimeNG components */
 import { CheckboxModule } from 'primeng/primeng';
@@ -15,6 +19,10 @@ import { MessagesModule } from 'primeng/primeng';
 import { GrowlModule } from 'primeng/primeng';
 import { TooltipModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
+/* ********************************************* */
+
+/* Covalent modules */
+import { CovalentStepsModule } from '@covalent/core';
 /* ********************************************* */
 
 import { AppComponent } from './app.component';
@@ -54,6 +62,14 @@ import { InstructionsComponent } from './components/fleadh/instructions.componen
 import { ArrivalDatepickerComponent } from './components/fleadh/arrival-datepicker.component';
 import { DepartureDatepickerComponent } from './components/fleadh/departure-datepicker.component';
 import { NumberOfPeopleComponent } from './components/fleadh/number-of-people.component';
+import { AcademyRoutingModule }          from './components/academy/academy-routes.module';
+import { AcademyHomeComponent }          from './components/academy/academyHome.component';
+import { AcademyOverviewComponent }      from './components/academy/academyOverview.component';
+import { AcademyCoachesComponent }       from './components/academy/academyCoaches.component';
+import { AcademyScheduleComponent }      from './components/academy/academySchedule.component';
+import { AcademyTandCComponent }         from './components/academy/academyTandC.component';
+import { AcademyRegistrationComponent }  from './components/academy/academyRegistration.component';
+import { AcademyMemberPaymentComponent } from './components/academy/academyMemberPayment.component';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -69,7 +85,7 @@ import { AcademyRegistrationService }  from './components/academy/academyRegistr
 import { BookingService } from './services/booking.service';
 
 /* Feature Modules */
-import { AcademyModule } from './components/academy/academy.module';
+/*import { AcademyModule } from './components/academy/academy.module';*/
 /*import { AcademyRoutingModule } from './components/academy/academy-routes.module';*/
 
 /* Routing Module */
@@ -114,14 +130,25 @@ import { AppRoutingModule }   from './app-routing.module';
     InstructionsComponent,
     ArrivalDatepickerComponent,
     DepartureDatepickerComponent,
-    NumberOfPeopleComponent
+    NumberOfPeopleComponent,
+    AcademyHomeComponent,
+    AcademyOverviewComponent,
+    AcademyCoachesComponent,
+    AcademyScheduleComponent,
+    AcademyTandCComponent,
+    AcademyRegistrationComponent,
+    AcademyMemberPaymentComponent
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    HttpModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    MaterialModule.forRoot(),
+    MdCheckboxModule,
+    MdCardModule,
+    MaterialModule,
     CheckboxModule,
     ButtonModule,
     DialogModule,
@@ -130,7 +157,8 @@ import { AppRoutingModule }   from './app-routing.module';
     MessagesModule,
     GrowlModule,
     TooltipModule,
-    CalendarModule
+    CalendarModule,
+    CovalentStepsModule
   ], // modules needed to run this module
   providers: [
     Title,
