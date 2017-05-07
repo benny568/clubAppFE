@@ -8,13 +8,17 @@
         "experimentalDecorators": true,
         "lib": ["es2015", "dom"],
         "noImplicitAny": true,
-        "suppressImplicitAnyIndexErrors": true
+        "noEmitOnError": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "outDir": "dist/compiled/"
     },
-    "include": [
-        "src/**/*"
-    ],
     "exclude": [
         "node_modules",
         "**/*.spec.ts"
+    ],
+
+    "files": [
+        "src/app.module.ts",
+        "src/main.ts"
     ]
 }

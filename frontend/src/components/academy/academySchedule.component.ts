@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
 })
 
 export class AcademyScheduleComponent {
-  public academyPoster = require("../../assets/img/academy/avenue-academy-15.1.jpg");
+  public academyPoster = "../../assets/img/academy/avenue-academy-15.1.jpg";
 }

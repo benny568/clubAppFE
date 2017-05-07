@@ -40,17 +40,17 @@ export class NewsService {
     	console.log("->" + "setNews()...recieved news stories: " + data);
     	this.NewsStories = data;
 
-        if( process.env.NODE_ENV === 'development')
+        /*if( process.env.NODE_ENV === 'development')
         {
             for( let i=0; i<this.NewsStories.length; i++ )
             {
                 console.log("Image " + i + ": " + this.NewsStories[i].image);
             }
-        }
+        }*/
 
-        if (process.env.DEBUG) {
+        /*if (process.env.DEBUG) {
           console.log('Debugging output set');
-        }
+        }*/
     }
 
 }

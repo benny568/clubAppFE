@@ -4,7 +4,7 @@ import { Injectable }     from '@angular/core';
 export class LoggerService {
 	loghdr:string; // The header for this instance, to be used in each log message
 
-	trace(msg: any) { if(process.env.DEBUG) console.log(this.loghdr + msg); }
+	trace(msg: any) { /*if(process.env.DEBUG)*/ console.log(this.loghdr + msg); }
 	log(msg: any)   { console.log(this.loghdr + msg); }
 	error(msg: any) { console.error(this.loghdr + msg); }
 	warn(msg: any)  { console.warn(this.loghdr + msg); }

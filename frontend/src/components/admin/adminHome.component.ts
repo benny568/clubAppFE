@@ -6,7 +6,6 @@ import { UserService }        from '../../services/user.service';
 
 
 @Component({
-	//templateUrl: 'app/htmltemplates/adminHome.component.html',
 	template: `
 		<div class="container">
 			<div class="panel" style="marign-right:50px;">

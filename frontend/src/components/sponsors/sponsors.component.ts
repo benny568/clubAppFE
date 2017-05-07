@@ -39,10 +39,10 @@ export class SponsorsComponent {
     {
         console.log('-->' + 'loadCurrentSponsors()');
 
-        this.Sponsors = [ {name:"Enzo's Takeaway", image:require("../../assets/img/adverts/enzos.png")},
-                            {name:"Rochford's Pharmacy", image: require("../../assets/img/adverts/main-sponsor.png")},
-                            {name:"Ennis Cabs", image: require("../../assets/img/adverts/ec.png")},
-                            {name:"Cahill Taxation Services", image: require("../../assets/img/adverts/CTS-logo.png")}
+        this.Sponsors = [ {name:"Enzo's Takeaway", image: "../../assets/img/adverts/enzos.png" },
+                            {name:"Rochford's Pharmacy", image: "../../assets/img/adverts/main-sponsor.png"},
+                            {name:"Ennis Cabs", image: "../../assets/img/adverts/ec.png"},
+                            {name:"Cahill Taxation Services", image: "../../assets/img/adverts/CTS-logo.png"}
                         ];
         return this.Sponsors;
     }

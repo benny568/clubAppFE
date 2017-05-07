@@ -6,14 +6,14 @@ class ServerMode {
     currentMode:number;
 
     constructor() {
-        if( process.env.NODE_ENV === 'development' )
+        /*if( process.env.NODE_ENV === 'development' )
         {
             this.currentMode = this.modes.REMOTE;
         }
         else
-        {
+        {*/
             this.currentMode = this.modes.REMOTE;
-        }
+        /*}*/
     }
 
     getServerMode()

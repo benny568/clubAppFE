@@ -6,6 +6,7 @@
 /src/**/*.js.map
 /src/**/*.ngfactory.ts
 /src/**/*.ngsummary.json
+/src/.rpt2_cache/**/*
 
 # dependencies
 /node_modules

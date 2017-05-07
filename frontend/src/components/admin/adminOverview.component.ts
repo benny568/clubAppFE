@@ -4,7 +4,6 @@ import { SessionDataService } from '../../services/session-data.service';
 import { LoggerService }      from '../../services/logger.service';
 
 @Component({
-	//templateUrl: 'app/htmltemplates/adminOverview.component.html'
 	template: `
 			<div class="container t1">
 

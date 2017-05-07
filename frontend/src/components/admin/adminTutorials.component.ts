@@ -5,7 +5,6 @@ import { LoggerService }      from '../../services/logger.service';
 
 
 @Component({
-	//templateUrl: 'app/htmltemplates/adminTutorials.component.html'
 	template: `
 			<div class="container">
 			<div class="panel" style="marign-right:50px;">
