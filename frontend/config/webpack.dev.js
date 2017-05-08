@@ -28,7 +28,7 @@ module.exports = function(env) {
         },
         devServer: {
             contentBase: path.resolve(rootDir, 'dist'),
-            port: 9000
+            port: 9900
         },
         devtool: 'cheap-module-source-map',
         module: {
