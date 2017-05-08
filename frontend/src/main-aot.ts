@@ -6,6 +6,7 @@ import { AppModule } from './app.module';
 
 document.cookie = "XSRF-TOKEN=Dont-Tase-Me-Bro";
 
-enableProdMode();
+import 'zone.js';
+import 'reflect-metadata';
 
-platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
+platformBrowser().bootstrapModuleFactory(AppModuleNgFactory).catch(err => console.error(err));

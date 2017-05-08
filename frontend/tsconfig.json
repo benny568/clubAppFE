@@ -12,13 +12,12 @@
         "suppressImplicitAnyIndexErrors": true,
         "outDir": "dist/compiled/"
     },
-    "exclude": [
-        "node_modules",
-        "**/*.spec.ts"
-    ],
-
     "files": [
         "src/app.module.ts",
         "src/main.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
     ]
 }

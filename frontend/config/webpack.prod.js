@@ -5,12 +5,28 @@ const webpackMerge = require('webpack-merge');
 const ngToolsWebpack = require('@ngtools/webpack');
 const path = require('path');
 
-const rootDir = path.resolve(__dirname, '..');
+const rootDir = path.resolve(__dirname, '../dist/unbundled-aot/');
 
 const commonConfig = require('./webpack.common');
 
 module.exports = function(env) {
+
+    console.log("\n=================================");
+    console.log("=== WEBPACK PRODUCTION BUILD! ===");
+    console.log("=================================\n");
+
     return webpackMerge(commonConfig(), {
+
+        entry: [
+            './dist/unbundled-aot/src/vendor.js',
+            './dist/unbundled-aot/src/polyfills.js',
+            './dist/unbundled-aot/src/main-aot.js'
+        ],
+        output: {
+            filename: '[name].bundle.js',
+            path: path.resolve(rootDir, '../src/main/webapp/')
+        },
+        target: "web",
 
         module: {
             rules: [
@@ -25,7 +41,7 @@ module.exports = function(env) {
             }),
             new webpack.LoaderOptionsPlugin({
                 minimize: true,
-                debug: false
+                debug: true
             }),
             new webpack.DefinePlugin({
                 'process.env': {

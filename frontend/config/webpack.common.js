@@ -14,25 +14,16 @@ const rootDir = path.resolve(__dirname, '..');
 module.exports = function() {
     return {
 
-        entry: {
-            app: [path.resolve(rootDir, 'src', 'main')],
-            vendor: [path.resolve(rootDir, 'src', 'vendor')],
-            polyfills: [path.resolve(rootDir, 'src', 'polyfills')]
-        },
-        output: {
-            filename: '[name].[chunkhash].js',
-            path: path.resolve(rootDir, '../src/main/webapp/'),
-            sourceMapFilename: '[name].map',
-            chunkFilename: "[name].[chunkhash].js"
-        },
         module: {
-            rules: [
-                { test: /\.css$/, loader: 'raw-loader' },
-                { loader: 'raw-loader', test: /\.(html)$/ },
-                {
+            rules: [{
                     test: /\.ts$/,
-                    loaders: ['ts-loader', 'angular-router-loader?aot=true'],
-                    exclude: /(node_modules)/
+                    loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
+                    exclude: [/\.(spec|e2e)\.ts$/]
+                },
+                {
+                    test: /\.(html|css)$/,
+                    loader: 'raw-loader',
+                    exclude: /\.async\.(html|css)$/
                 },
                 {
                     test: /\.(png|jpe?g|gif|ico)$/,
@@ -53,14 +44,14 @@ module.exports = function() {
         },
 
         plugins: [
-            new ExtractTextPlugin('styles.css'),
-            new webpack.optimize.CommonsChunkPlugin({
+
+            /*new webpack.optimize.CommonsChunkPlugin({
                 names: ['vendor', 'manifest'], // Specify the common bundle's name.
                 minChunks: function(module) {
                     // this assumes your vendor imports exist in the node_modules directory
                     return module.context && module.context.indexOf('node_modules') !== -1;
                 }
-            }),
+            }),*/
             new webpack.HashedModuleIdsPlugin(),
             new WebpackChunkHash(),
             new ChunkManifestPlugin({
@@ -70,7 +61,7 @@ module.exports = function() {
             new HtmlWebpack({
                 filename: 'index.html',
                 inject: 'body',
-                title: 'Custom template using Handlebars',
+                title: 'Avenue United Website',
                 template: path.resolve(rootDir, 'src', 'index.html')
             }),
             new ManifestPlugin(),

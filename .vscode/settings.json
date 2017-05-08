@@ -3,5 +3,6 @@
     "angulardoc.lastSync": 0,
     "eslint.enable": false,
     "jshint.enable": false,
-    "tslint.enable": false
+    "tslint.enable": false,
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

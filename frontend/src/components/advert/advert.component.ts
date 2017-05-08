@@ -9,5 +9,5 @@ const pathToBg = "../../assets/img/avenueCrest.png";
 })
 
 export class AdvertComponent {
-    public backGround = "../../assets/img/fleadh/bg4.jpg";
+    /*public backGround = "../../assets/img/fleadh/bg4.jpg";*/
 }

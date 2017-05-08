@@ -127,7 +127,6 @@ export class BookingStage3Component {
 		
 		if ( ( email !== undefined ) && ( email !== '' ) )
 		{
-			// Commented out the reg exp as it's giving an error in lint, line too long. Need to split if possible
 			return /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i.test(email);
 		} else
 		{
