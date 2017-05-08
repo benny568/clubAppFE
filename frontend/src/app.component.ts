@@ -11,9 +11,6 @@ import { CommonService }      from './services/common.service';
 import { LoginService }       from './services/login.service';
 import { UserService }        from './services/user.service';
 
-import './assets/css/styles.css';
-/*import './favicon.ico';*/
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

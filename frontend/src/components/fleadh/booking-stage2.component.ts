@@ -6,9 +6,6 @@ import { BookingService } from '../../services/booking.service';
 import { ErrorService }    from '../../services/error.service';
 import { NumberOfPeople4ParkingComponent } from './number-of-people-4parking.component';
 
-import '../../assets/css/primeng/themes/omega/theme.css';
-import '../../assets/css/primeng/primeng.min.css';
-
 const YearPart: number = 0;
 const MonthPart: number = 1;
 const DayPart: number = 2;

@@ -9,8 +9,6 @@ import { Carousel }           from '../carousel/carousel.component';
 import { LoggerService }      from '../../services/logger.service';
 import { NewsService }        from '../../services/news.service';
 
-import '../../assets/img/news/u12nc.jpg';
-
 @Component({
     selector: 'news',
     templateUrl: './news.component.html',

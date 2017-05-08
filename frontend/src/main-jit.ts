@@ -1,11 +1,12 @@
-import { platformBrowser } from '@angular/platform-browser';
-import { AppModuleNgFactory } from '../aot/src/app.module.ngfactory';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
 import { environment } from './components/environments/environment';
 import { AppModule } from './app.module';
 
 document.cookie = "XSRF-TOKEN=Dont-Tase-Me-Bro";
 
-enableProdMode();
+if (environment.production) {
+  enableProdMode();
+}
 
-platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
+platformBrowserDynamic().bootstrapModule(AppModule);

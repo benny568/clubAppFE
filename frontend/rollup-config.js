@@ -1,5 +1,4 @@
-import rollup from 'rollup';
-import nodeResolve from 'rollup-plugin-node-resolve';
+import nodeResolve from 'rollup-plugin-node-resolve-angular';
 import typescript from 'rollup-plugin-typescript2';
 import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
@@ -11,7 +10,7 @@ import angular from 'rollup-plugin-angular';
 export default {
     entry: 'src/main.ts',
     //dest: '../src/main/webapp/bundle.js',
-    dest: 'dest/bundle.es2015.js',
+    dest: 'dist/bundle.es2015.js',
     sourceMap: 'inline',
     format: 'iife',
     treeshake: true,
@@ -19,6 +18,9 @@ export default {
         // Suppress this error message... there are hundreds of them. Angular team says to ignore it.
         // https://github.com/rollup/rollup/wiki/Troubleshooting#this-is-undefined
         if (/The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten./.test(warning)) {
+            return;
+        }
+        if (/'default' is not exported by/.test(warning)) {
             return;
         }
         // should intercept ... but doesn't in some rollup versions
@@ -31,10 +33,15 @@ export default {
         angular(),
         typescript(),
         nodeResolve({
+            // use "es2015" field for ES2015 modules with ES2015 code, 
+            // if possible 
+            es2015: true,
             jsnext: true,
             module: true,
             main: true, // for commonjs modules that have an index.js
-            browser: true
+            browser: true,
+            // not all files you want to resolve are .js files 
+            extensions: ['.js', '.json'] // Default: ['.js'] 
         }),
         commonjs({
             include: [

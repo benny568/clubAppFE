@@ -8,6 +8,6 @@ import '@angular/forms';
 
 import 'primeng/primeng';
 
-//import 'rxjs';
+import 'rxjs';
 
 import 'hammerjs';

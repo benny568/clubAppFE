@@ -21,7 +21,11 @@ export default {
         console.warn(warning.message)
     },
     plugins: [
-        typescript(),
+        typescript({
+            check: true,
+            verbosity: 3,
+            clean: true
+        }),
         angular(),
         alias({ rxjs: __dirname + '/node_modules/rxjs-es' }),
         resolve({
