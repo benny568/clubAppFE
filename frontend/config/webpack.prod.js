@@ -5,7 +5,7 @@ const webpackMerge = require('webpack-merge');
 const ngToolsWebpack = require('@ngtools/webpack');
 const path = require('path');
 
-const rootDir = path.resolve(__dirname, '../dist/unbundled-aot/');
+const rootDir = path.resolve(__dirname, '../dist/');
 
 const commonConfig = require('./webpack.common');
 
@@ -18,13 +18,12 @@ module.exports = function(env) {
     return webpackMerge(commonConfig(), {
 
         entry: [
-            './dist/unbundled-aot/src/vendor.js',
-            './dist/unbundled-aot/src/polyfills.js',
-            './dist/unbundled-aot/src/main-aot.js'
+            './src/main.ts'
         ],
         output: {
-            filename: '[name].bundle.js',
-            path: path.resolve(rootDir, '../src/main/webapp/')
+            path: '/home/odalybr/dev/clubAppFE/frontend/dist',
+            publicPath: '/',
+            filename: 'app.main.js'
         },
         target: "web",
 
@@ -37,7 +36,8 @@ module.exports = function(env) {
 
         plugins: [
             new ngToolsWebpack.AotPlugin({
-                tsConfigPath: '../frontend/tsconfig-aot.json'
+                tsConfigPath: './tsconfig.json',
+                entryModule: '/home/odalybr/dev/clubAppFE/frontend/src/app.module#AppModule'
             }),
             new webpack.LoaderOptionsPlugin({
                 minimize: true,

@@ -3,7 +3,6 @@ export * from './question.model';
 export * from './academy-member';
 export * from './booking';
 export * from './credentials';
-export * from './exRequestOptions';
 export * from './form-data.model';
 export * from './media';
 export * from './member';

@@ -16,11 +16,6 @@ module.exports = function() {
 
         module: {
             rules: [{
-                    test: /\.ts$/,
-                    loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
-                    exclude: [/\.(spec|e2e)\.ts$/]
-                },
-                {
                     test: /\.(html|css)$/,
                     loader: 'raw-loader',
                     exclude: /\.async\.(html|css)$/

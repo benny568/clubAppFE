@@ -1,4 +1,8 @@
-import { platformBrowser }    from '@angular/platform-browser';
-import { AppModuleNgFactory } from '../aot/src/app.module.ngfactory';
-console.log('Running AOT compiled');
-platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
+import 'core-js/shim';
+import 'zone.js/dist/zone';
+
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app.module';
+
+platformBrowserDynamic().bootstrapModule(AppModule);

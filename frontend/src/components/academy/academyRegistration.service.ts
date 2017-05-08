@@ -68,7 +68,7 @@ export class AcademyRegistrationService {
     loghdr = "";
     serviceName = 'AcademyRegistrationService';
 
-    constructor ( @Inject(Http) private lg$: LoggerService, private com$: CommonService, private _http: Http ) {}
+    constructor ( private lg$: LoggerService, private com$: CommonService, private _http: Http ) {}
 
     sortingHat( dob: string )
     {

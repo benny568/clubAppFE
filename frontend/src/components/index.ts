@@ -2,7 +2,6 @@ export * from '../app.component';
 export * from './academy/academyHome.component';
 export * from './academy/academyCoaches.component';
 export * from './academy/academyMemberPayment.component';
-export * from './academy/academyMenu.component';
 export * from './academy/academyOverview.component';
 export * from './academy/academyRegistration.component';
 export * from './academy/academySchedule.component';

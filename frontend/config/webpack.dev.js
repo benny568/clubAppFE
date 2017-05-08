@@ -31,6 +31,11 @@ module.exports = function(env) {
             port: 9000
         },
         devtool: 'cheap-module-source-map',
+        module: {
+            rules: [
+                { test: /\.ts$/, loader: 'awesome-typescript-loader' }
+            ]
+        },
         plugins: [
             new webpack.DefinePlugin({
                 'process.env': {
