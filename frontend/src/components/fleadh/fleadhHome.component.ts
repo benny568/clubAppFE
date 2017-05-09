@@ -5,6 +5,11 @@ import { LoggerService }  from '../../services/logger.service';
 import { BookingService } from '../../services/booking.service';
 import { ErrorService }    from '../../services/error.service';
 
+// The following imports are to make webpack include the files
+// in the build/release.
+import '../../assets/img/fleadh/bg4.jpg';
+import '../../assets/img/fleadh/parking.png';
+
 @Component({
     templateUrl: './html/fleadhHome.component.html',
     styleUrls: ['./css/fleadhHome.component.css']

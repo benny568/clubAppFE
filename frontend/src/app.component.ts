@@ -11,6 +11,20 @@ import { CommonService }      from './services/common.service';
 import { LoginService }       from './services/login.service';
 import { UserService }        from './services/user.service';
 
+// The following imports are to make webpack include the files
+// in the build/release.
+import './assets/img/avenueCrest.png';
+import './assets/img/stadium1.jpg';
+import './assets/img/banner.png';
+import './assets/img/user-female-icon.png';
+import './assets/img/user-male-icon.png';
+import './assets/icon/favicon.ico';
+import './assets/css/blink.css';
+import './assets/css/blink.css';
+import './assets/css/styles.css';
+import './assets/css/theme.css';
+import './assets/css/primeng/themes/omega/theme.css';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

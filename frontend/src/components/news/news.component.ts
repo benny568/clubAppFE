@@ -9,6 +9,13 @@ import { Carousel }           from '../carousel/carousel.component';
 import { LoggerService }      from '../../services/logger.service';
 import { NewsService }        from '../../services/news.service';
 
+// The following imports are to make webpack include the files
+// in the build/release.
+import '../../assets/img/news/200clubwinner.jpg';
+import '../../assets/img/news/and-the-winner-is.jpg';
+import '../../assets/img/news/Fixtures.jpg';
+import '../../assets/img/news/regnight.jpg';
+
 @Component({
     selector: 'news',
     templateUrl: './news.component.html',

@@ -9,6 +9,13 @@ import { Sponsor }            from '../../model/sponsor';
 import { SessionDataService } from "../../services/session-data.service";
 import { LoggerService }      from '../../services/logger.service';
 
+// The following imports are to make webpack include the files
+// in the build/release.
+import '../../assets/img/adverts/enzos.png';
+import '../../assets/img/adverts/ec.png';
+import '../../assets/img/adverts/main-sponsor.png';
+import '../../assets/img/adverts/CTS-logo.png';
+
 @Component({
     selector: 'sponsors',
     templateUrl: './sponsors.component.html',
@@ -39,17 +46,12 @@ export class SponsorsComponent {
     {
         console.log('-->' + 'loadCurrentSponsors()');
 
-        this.Sponsors = [ {name:"Enzo's Takeaway", image: "../../assets/img/adverts/enzos.png" },
-                            {name:"Rochford's Pharmacy", image: "../../assets/img/adverts/main-sponsor.png"},
-                            {name:"Ennis Cabs", image: "../../assets/img/adverts/ec.png"},
-                            {name:"Cahill Taxation Services", image: "../../assets/img/adverts/CTS-logo.png"}
+        this.Sponsors = [ {name:"Enzo's Takeaway", image: "./src/assets/img/adverts/enzos.png" },
+                            {name:"Rochford's Pharmacy", image: "./src/assets/img/adverts/main-sponsor.png"},
+                            {name:"Ennis Cabs", image: "./src/assets/img/adverts/ec.png"},
+                            {name:"Cahill Taxation Services", image: "./src/assets/img/adverts/CTS-logo.png"}
                         ];
 
-        /*this.Sponsors = [ {name:"Enzo's Takeaway", image:"../../assets/img/adverts/enzos.png"},
-                            {name:"Rochford's Pharmacy", image: "../../assets/img/adverts/main-sponsor.png"},
-                            {name:"Ennis Cabs", image: "../../assets/img/adverts/ec.png"},
-                            {name:"Cahill Taxation Services", image: "../../assets/img/adverts/CTS-logo.png"}
-                        ];*/
         return this.Sponsors;
     }
 }
