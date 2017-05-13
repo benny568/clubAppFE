@@ -3,6 +3,9 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
+import { HashLocationStrategy, 
+         Location, 
+         LocationStrategy } from '@angular/common';
 
 /* Angular Material modules */
 import { MdCheckboxModule } from '@angular/material';
@@ -70,12 +73,11 @@ import { CommonService } from './services/common.service';
 import { ErrorService } from './services/error.service';
 import { UserService } from './services/user.service';
 import { MemberService } from './services/member.service';
-import { AcademyRegistrationService }  from './components/academy/academyRegistration.service';
 import { BookingService } from './services/booking.service';
 
 /* Feature Modules */
 import { AcademyModule } from './components/academy/academy.module';
-import { AcademyRoutingModule } from './components/academy/academy-routes.module';
+
 
 /* Routing Module */
 import { AppRoutingModule }   from './app-routing.module';
@@ -129,6 +131,7 @@ import { AppRoutingModule }   from './app-routing.module';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
+    AcademyModule, // Note that feature modules must be imported before the routing module
     AppRoutingModule,
     MdCheckboxModule,
     MdCardModule,
@@ -148,12 +151,12 @@ import { AppRoutingModule }   from './app-routing.module';
     LoggerService,
     CommonService,
     ErrorService,
-    AcademyRegistrationService,
     LoginService,
     UserService,
     NewsService,
     MemberService,
-    BookingService
+    BookingService,
+    Location, {provide: LocationStrategy, useClass: HashLocationStrategy}
   ], // additional providers needed for this module
   entryComponents: [ ],
   bootstrap: [ AppComponent ],

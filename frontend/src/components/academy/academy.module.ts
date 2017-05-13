@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AcademyRoutingModule }          from './academy-routes.module';
 import { AcademyHomeComponent }          from './academyHome.component';
 import { AcademyOverviewComponent }      from './academyOverview.component';
 import { AcademyCoachesComponent }       from './academyCoaches.component';
@@ -15,8 +14,7 @@ import { LoggerService }                 from '../../services/logger.service';
 
 @NgModule({
     imports: [ CommonModule,
-               FormsModule, 
-               AcademyRoutingModule
+               FormsModule
              ],
     declarations: [ AcademyHomeComponent,
                     AcademyOverviewComponent,

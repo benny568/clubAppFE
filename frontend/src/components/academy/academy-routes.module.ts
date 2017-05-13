@@ -9,41 +9,25 @@ import { AcademyTandCComponent }         from './academyTandC.component';
 import { AcademyRegistrationComponent }  from './academyRegistration.component';
 import { AcademyMemberPaymentComponent } from './academyMemberPayment.component';
 
-const routes: Routes = [
-    { path: '', redirectTo: 'academyHome', pathMatch: 'full'},
-    {
-		path: 'academyHome',
-		component: AcademyHomeComponent
-	},
-	{
-		path: 'academyOverview',
-		component: AcademyOverviewComponent
-	},
-	{
-		path: 'academyCoaches',
-		component: AcademyCoachesComponent
-	}
-	,
-	{
-		path: 'academySchedule',
-		component: AcademyScheduleComponent
-	},
-	{
-		path: 'academyTandC',
-		component: AcademyTandCComponent
-	},
-	{
-		path: 'academyRegistration',
-		component: AcademyRegistrationComponent
-	},
-	{
-		path: 'academyPayment',
-		component: AcademyMemberPaymentComponent
-	}
+const academyRoutes: Routes = [
+
+		{ 
+			path: 'academy',
+	    children: 
+				[		
+					{ path: 'academyHome', component: AcademyHomeComponent },
+					{ path: 'academyOverview', component: AcademyOverviewComponent },
+					{ path: 'academyCoaches', component: AcademyCoachesComponent },
+					{ path: 'academySchedule', component: AcademyScheduleComponent },
+					{ path: 'academyTandC', component: AcademyTandCComponent },
+					/*{ path: 'academyRegistration', component: AcademyRegistrationComponen },*/
+					{ path: 'academyPayment', component: AcademyMemberPaymentComponent }
+				]
+	  }
   ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(academyRoutes)],
   exports: [RouterModule]
 })
 export class AcademyRoutingModule {}

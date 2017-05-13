@@ -17,7 +17,14 @@ import { FarViewComponent } from './components/farView/farView.component';
 import { PhotosComponent } from './components/photos/photos.component';
 import { adminRoutes } from './components/admin/admin.routes';
 import { fleadhRoutes } from './components/fleadh/fleadh.routes';
-import { AcademyHomeComponent } from './components/academy/academyHome.component';
+
+import { AcademyHomeComponent }          from './components/academy/academyHome.component';
+import { AcademyOverviewComponent }      from './components/academy/academyOverview.component';
+import { AcademyCoachesComponent }       from './components/academy/academyCoaches.component';
+import { AcademyScheduleComponent }      from './components/academy/academySchedule.component';
+import { AcademyTandCComponent }         from './components/academy/academyTandC.component';
+import { AcademyRegistrationComponent }  from './components/academy/academyRegistration.component';
+import { AcademyMemberPaymentComponent } from './components/academy/academyMemberPayment.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -32,8 +39,14 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'viewTeam', component: ViewTeamComponent },
   { path: 'farView', component: FarViewComponent },
-  { path: 'media/:cat1/:cat2/:cat3', component: PhotosComponent }, 
+  { path: 'media/:cat1/:cat2/:cat3', component: PhotosComponent },
   { path: 'academyHome', component: AcademyHomeComponent },
+  { path: 'academyOverview', component: AcademyOverviewComponent },
+  { path: 'academyCoaches', component: AcademyCoachesComponent },
+  { path: 'academySchedule', component: AcademyScheduleComponent },
+  { path: 'academyTandC', component: AcademyTandCComponent },
+  /*{ path: 'academyRegistration', component: AcademyRegistrationComponen },*/
+  { path: 'academyPayment', component: AcademyMemberPaymentComponent },
   ...adminRoutes,
   ...fleadhRoutes
 ];

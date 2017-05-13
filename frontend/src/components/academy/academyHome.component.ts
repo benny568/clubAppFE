@@ -22,8 +22,6 @@ import '../../assets/img/academy/flag.gif';
 export class AcademyHomeComponent {
 	componentName:string = 'AcademyHomeComponent';
 	logdepth:number = 1;
-  public academyPoster = "../../assets/img/academy/avenue-academy-15.1.jpg";
-  public drillOfTheWeek = "../../assets/img/academy/drilloftheweek.png";
 
     constructor( public news$: NewsService, private lg$: LoggerService ) {}
 

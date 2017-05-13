@@ -116,12 +116,12 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-child"></i> Academy<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a routerLink="/academyHome"><i class="fa fa-newspaper-o"></i> News</a></li>
-                        <li><a routerLink="/academyOverview"><i class="fa fa-eye"></i> Overview</a></li>
-                        <li><a routerLink="/academyCoaches"><i class="fa fa-group"></i> Coaches</a></li>
-                        <li><a routerLink="/academySchedule"><i class="fa fa-calendar"></i> Schedule</a></li>
-                        <li><a routerLink="/academyTandC"><i class="fa fa-pencil-square-o "></i> Registration</a></li>
-                        <li *ngIf="user$.isAuthenticated"><a routerLink="/academyCarea"><i class="fa fa-futbol-o "></i> Coaches Area</a></li>
+                        <li><a routerLink="/academyHome" routerLinkActive="active"><i class="fa fa-newspaper-o"></i> News</a></li>
+                        <li><a routerLink="/academyOverview" routerLinkActive="active"><i class="fa fa-eye"></i> Overview</a></li>
+                        <li><a routerLink="/academyCoaches" routerLinkActive="active"><i class="fa fa-group"></i> Coaches</a></li>
+                        <li><a routerLink="/academySchedule" routerLinkActive="active"><i class="fa fa-calendar"></i> Schedule</a></li>
+                        <li><a routerLink="/academyTandC" routerLinkActive="active"><i class="fa fa-pencil-square-o "></i> Registration</a></li>
+                        <li *ngIf="user$.isAuthenticated"><a routerLink="/academyCarea" routerLinkActive="active"><i class="fa fa-futbol-o "></i> Coaches Area</a></li>
                     </ul>
                 </li>
                 <li><a href="http://www.teamwearireland.com/avenue-united-fc-1379-c.asp"><i class="fa fa-shopping-cart"></i> Merchandise</a></li>
