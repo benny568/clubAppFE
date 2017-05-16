@@ -1,7 +1,5 @@
 import { Component }       from '@angular/core';
 
-import { Spinner }        from 'primeng/primeng';
-
 import { BookingService }  from '../../services/booking.service';
 
 

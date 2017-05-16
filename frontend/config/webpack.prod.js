@@ -3,9 +3,11 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const ngToolsWebpack = require('@ngtools/webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
 const rootDir = path.resolve(__dirname, '../dist/');
+const srcDir = path.resolve(__dirname, '../src/');
 
 const commonConfig = require('./webpack.common');
 
@@ -17,19 +19,21 @@ module.exports = function(env) {
 
     return webpackMerge(commonConfig(), {
 
-        entry: [
-            './src/main.ts'
-        ],
+        entry: {
+            app: './src/main.ts',
+            vendor: 'src/vendor.ts',
+            polyfills: 'src/polyfills.ts'
+        },
         output: {
-            path: '/home/odalybr/dev/clubAppFE/frontend/dist',
+            path: rootDir,
             publicPath: '/',
-            filename: 'app.main.js'
+            filename: '[name].js'
         },
         target: "web",
 
         module: {
             rules: [
-                { test: /\.ts$/, loader: '@ngtools/webpack' }
+                { test: /\.ts$/, loaders: ['@ngtools/webpack', 'angular2-template-loader'] }
             ]
         },
 
@@ -37,7 +41,7 @@ module.exports = function(env) {
         plugins: [
             new ngToolsWebpack.AotPlugin({
                 tsConfigPath: './tsconfig.json',
-                entryModule: '/home/odalybr/dev/clubAppFE/frontend/src/app.module#AppModule'
+                entryModule: path.resolve(srcDir, 'app.module#AppModule')
             }),
             new webpack.LoaderOptionsPlugin({
                 minimize: true,
@@ -49,15 +53,20 @@ module.exports = function(env) {
                     'DEBUG': JSON.stringify('false')
                 }
             }),
+            //new ExtractTextPlugin('[name].css'),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: ['app', 'vendor', 'polyfills']
+            }),
             new webpack.optimize.UglifyJsPlugin({
                 beautify: false,
                 mangle: {
-                    screw_ie8: true,
+                    /*screw_ie8: true,*/
                     keep_fnames: true
                 },
                 compress: {
-                    warnings: false,
-                    screw_ie8: true
+                    warnings: false
+                        /*,
+                                            screw_ie8: true*/
                 },
                 comments: false
             }),

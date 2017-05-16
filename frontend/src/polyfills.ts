@@ -17,7 +17,3 @@ import 'core-js/es6/weak-map';
 import 'core-js/es6/weak-set';
 import 'core-js/es6/typed';
 import 'core-js/es6/reflect';
-
-import 'reflect-metadata';
-import 'zone.js/dist/zone';
-import 'zone.js/dist/long-stack-trace-zone';

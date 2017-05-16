@@ -11,18 +11,7 @@ import { HashLocationStrategy,
 import { MdCheckboxModule } from '@angular/material';
 import { MdCardModule } from '@angular/material';
 
-/* PrimeNG components */
-import { CheckboxModule } from 'primeng/primeng';
-import { ButtonModule } from 'primeng/primeng';
-import { DialogModule } from 'primeng/primeng';
-import { TabViewModule } from 'primeng/primeng';
-import { SpinnerModule } from 'primeng/primeng';
-import { MessagesModule } from 'primeng/primeng';
-import { GrowlModule } from 'primeng/primeng';
-import { TooltipModule } from 'primeng/primeng';
-import { CalendarModule } from 'primeng/primeng';
-/* ********************************************* */
-
+/* Application Components */
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home';
 import { FindUsComponent } from './components/findus/findUs.component';
@@ -49,19 +38,7 @@ import { AdminUsersComponent } from './components/admin/adminUsers.component';
 import { EditMemberComponent } from './components/admin/member/editMember.component';
 import { CoachesAreaComponent } from './components/admin/adminCoachesArea.component';
 import { PhotosComponent } from './components/photos/photos.component';
-import { FleadhHomeComponent } from './components/fleadh/fleadhHome.component';
 import { AdvertComponent } from './components/advert/advert.component';
-import { BookingStage2Component } from './components/fleadh/booking-stage2.component';
-import { BookingStage3Component } from './components/fleadh/booking-stage3.component';
-import { BookingStage4Component } from './components/fleadh/booking-stage4.component';
-import { BookingStage5Component } from './components/fleadh/booking-stage5.component';
-import { NumberOfPeople4ParkingComponent } from './components/fleadh/number-of-people-4parking.component';
-import { TandCComponent } from './components/fleadh/tandc.component';
-import { InstructionsComponent } from './components/fleadh/instructions.component';
-import { ArrivalDatepickerComponent } from './components/fleadh/arrival-datepicker.component';
-import { DepartureDatepickerComponent } from './components/fleadh/departure-datepicker.component';
-import { NumberOfPeopleComponent } from './components/fleadh/number-of-people.component';
-import { SuccessComponent } from './components/fleadh/success.component';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -77,6 +54,7 @@ import { BookingService } from './services/booking.service';
 
 /* Feature Modules */
 import { AcademyModule } from './components/academy/academy.module';
+import { FleadhModule }  from './components/fleadh/fleadh.module';
 
 
 /* Routing Module */
@@ -111,19 +89,7 @@ import { AppRoutingModule }   from './app-routing.module';
     EditMemberComponent,
     CoachesAreaComponent,
     PhotosComponent,
-    FleadhHomeComponent,
-    AdvertComponent,
-    BookingStage2Component,
-    BookingStage3Component,
-    BookingStage4Component,
-    BookingStage5Component,
-    NumberOfPeople4ParkingComponent,
-    TandCComponent,
-    InstructionsComponent,
-    ArrivalDatepickerComponent,
-    DepartureDatepickerComponent,
-    NumberOfPeopleComponent,
-    SuccessComponent
+    AdvertComponent
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     BrowserModule,
@@ -132,18 +98,10 @@ import { AppRoutingModule }   from './app-routing.module';
     FormsModule,
     ReactiveFormsModule,
     AcademyModule, // Note that feature modules must be imported before the routing module
+    FleadhModule,
     AppRoutingModule,
     MdCheckboxModule,
-    MdCardModule,
-    CheckboxModule,
-    ButtonModule,
-    DialogModule,
-    TabViewModule,
-    SpinnerModule,
-    MessagesModule,
-    GrowlModule,
-    TooltipModule,
-    CalendarModule
+    MdCardModule
   ], // modules needed to run this module
   providers: [
     Title,
@@ -155,7 +113,6 @@ import { AppRoutingModule }   from './app-routing.module';
     UserService,
     NewsService,
     MemberService,
-    BookingService,
     Location, {provide: LocationStrategy, useClass: HashLocationStrategy}
   ], // additional providers needed for this module
   entryComponents: [ ],

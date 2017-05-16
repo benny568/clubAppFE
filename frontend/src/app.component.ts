@@ -20,7 +20,6 @@ import './assets/img/user-female-icon.png';
 import './assets/img/user-male-icon.png';
 import './assets/icon/favicon.ico';
 import './assets/css/blink.css';
-import './assets/css/blink.css';
 import './assets/css/styles.css';
 import './assets/css/theme.css';
 import './assets/css/primeng/themes/omega/theme.css';

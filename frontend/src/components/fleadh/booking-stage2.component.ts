@@ -6,6 +6,8 @@ import { BookingService } from '../../services/booking.service';
 import { ErrorService }    from '../../services/error.service';
 import { NumberOfPeople4ParkingComponent } from './number-of-people-4parking.component';
 
+import '../../assets/img/fleadh/parking.png';
+
 const YearPart: number = 0;
 const MonthPart: number = 1;
 const DayPart: number = 2;
