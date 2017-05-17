@@ -18,13 +18,8 @@ import { PhotosComponent } from './components/photos/photos.component';
 import { adminRoutes } from './components/admin/admin.routes';
 import { fleadhRoutes } from './features/fleadh/fleadh.routes';
 
-import { AcademyHomeComponent }          from './features/academy/academyHome.component';
-import { AcademyOverviewComponent }      from './features/academy/academyOverview.component';
-import { AcademyCoachesComponent }       from './features/academy/academyCoaches.component';
-import { AcademyScheduleComponent }      from './features/academy/academySchedule.component';
-import { AcademyTandCComponent }         from './features/academy/academyTandC.component';
-import { AcademyRegistrationComponent }  from './features/academy/academyRegistration.component';
-import { AcademyMemberPaymentComponent } from './features/academy/academyMemberPayment.component';
+import { AcademyModule } from './features/academy/academy.module';
+import { FleadhModule } from './features/fleadh/fleadh.module';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -40,15 +35,13 @@ export const routes: Routes = [
   { path: 'viewTeam', component: ViewTeamComponent },
   { path: 'farView', component: FarViewComponent },
   { path: 'media/:cat1/:cat2/:cat3', component: PhotosComponent },
-  { path: 'academyHome', component: AcademyHomeComponent },
-  { path: 'academyOverview', component: AcademyOverviewComponent },
-  { path: 'academyCoaches', component: AcademyCoachesComponent },
-  { path: 'academySchedule', component: AcademyScheduleComponent },
-  { path: 'academyTandC', component: AcademyTandCComponent },
-  /*{ path: 'academyRegistration', component: AcademyRegistrationComponen },*/
-  { path: 'academyPayment', component: AcademyMemberPaymentComponent },
-  ...adminRoutes,
-  ...fleadhRoutes
+  { path: 'academyHome', loadChildren: './features/academy/academy.module#AcademyModule' },
+  { path: 'academyOverview', loadChildren: './features/academy/academy.module#AcademyModule' },
+  { path: 'academyCoaches', loadChildren: './features/academy/academy.module#AcademyModule' },
+  { path: 'academySchedule', loadChildren: './features/academy/academy.module#AcademyModule' },
+  { path: 'academyTandC', loadChildren: './features/academy/academy.module#AcademyModule' },
+  { path: 'academyPayment', loadChildren: './features/academy/academy.module#AcademyModule' },
+  { path: 'fleadh', loadChildren: './features/fleadh/fleadh.module#FleadhModule' }
 ];
 
 @NgModule({

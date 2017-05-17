@@ -12,9 +12,12 @@ import { AcademyMemberPaymentComponent } from './academyMemberPayment.component'
 import { AcademyRegistrationService }    from './academyRegistration.service';
 import { LoggerService }                 from '../../services/logger.service';
 
+import { AcademyRoutingModule }          from './academy-routes.module';
+
 @NgModule({
     imports: [ CommonModule,
-               FormsModule
+               FormsModule,
+               AcademyRoutingModule
              ],
     declarations: [ AcademyHomeComponent,
                     AcademyOverviewComponent,

@@ -1,3 +1,4 @@
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FleadhHomeComponent }  from './fleadhHome.component';
 import { BookingStage2Component } from './booking-stage2.component';
@@ -11,3 +12,9 @@ export const fleadhRoutes: Routes = [
     { path: 'booking-stage3', component: BookingStage3Component },
     { path: 'booking-stage4', component: BookingStage4Component }
 ];
+
+@NgModule({
+  imports: [RouterModule.forChild(fleadhRoutes)],
+  exports: [RouterModule]
+})
+export class FleadhRoutingModule {}

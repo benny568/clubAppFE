@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /* PrimeNG components */
 import { CheckboxModule } from 'primeng/primeng';
@@ -27,6 +27,8 @@ import { NumberOfPeopleComponent } from './number-of-people.component';
 import { SuccessComponent } from './success.component';
 import { BookingService } from '../../services/booking.service';
 
+import { FleadhRoutingModule } from './fleadh.routes';
+
 @NgModule({
     declarations: [
         FleadhHomeComponent,
@@ -44,6 +46,8 @@ import { BookingService } from '../../services/booking.service';
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
+        FleadhRoutingModule,    
         CheckboxModule,
         ButtonModule,
         DialogModule,

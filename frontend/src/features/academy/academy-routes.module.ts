@@ -10,21 +10,13 @@ import { AcademyRegistrationComponent }  from './academyRegistration.component';
 import { AcademyMemberPaymentComponent } from './academyMemberPayment.component';
 
 const academyRoutes: Routes = [
-
-		{ 
-			path: 'academy',
-	    children: 
-				[		
-					{ path: 'academyHome', component: AcademyHomeComponent },
-					{ path: 'academyOverview', component: AcademyOverviewComponent },
-					{ path: 'academyCoaches', component: AcademyCoachesComponent },
-					{ path: 'academySchedule', component: AcademyScheduleComponent },
-					{ path: 'academyTandC', component: AcademyTandCComponent },
-					/*{ path: 'academyRegistration', component: AcademyRegistrationComponen },*/
-					{ path: 'academyPayment', component: AcademyMemberPaymentComponent }
-				]
-	  }
-  ];
+		{ path: 'academyHome', component: AcademyHomeComponent },
+		{ path: 'academyOverview', component: AcademyOverviewComponent },
+		{ path: 'academyCoaches', component: AcademyCoachesComponent },
+		{ path: 'academySchedule', component: AcademyScheduleComponent },
+		{ path: 'academyTandC', component: AcademyTandCComponent },
+		{ path: 'academyPayment', component: AcademyMemberPaymentComponent }
+	];
 
 @NgModule({
   imports: [RouterModule.forChild(academyRoutes)],

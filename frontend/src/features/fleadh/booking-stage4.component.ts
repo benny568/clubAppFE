@@ -17,7 +17,7 @@ export class BookingStage4Component {
 	componentName:string = 'BookingStage4Component';
 	logdepth:number = 4;
 
-	constructor( private lg$: LoggerService, private bkng$: BookingService, private router: Router  ) {}
+	constructor( private lg$: LoggerService, public bkng$: BookingService, private router: Router  ) {}
 	
 	ngOnInit() {
     	this.lg$.setLogHdr(this.logdepth, this.componentName);
@@ -33,7 +33,7 @@ export class BookingStage4Component {
         
 	}
 
-	submit()
+	public submit()
 	{
 		this.lg$.log("---- Arrival Date: " + this.bkng$.arrivalDate );
 		this.lg$.log("---- Departure Date: " + this.bkng$.departureDate );
@@ -73,13 +73,13 @@ export class BookingStage4Component {
 		this.lg$.log("---- Total Charge: " + this.bkng$.totalCharge);
 	}
 	
-	back()
+	public back()
 	{
 		this.lg$.log("-> back()");
 		this.router.navigate(['/booking-stage3']);
 	}
 	
-	payPal()
+	public payPal()
 	{
 		this.lg$.log("-> payPal()");
 		

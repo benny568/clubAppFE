@@ -25,7 +25,7 @@ export class BookingStage2Component {
     parkingRequired: boolean;
 
     constructor( private lg$: LoggerService,
-                 private bkng$: BookingService,
+                 public bkng$: BookingService,
                  private err$: ErrorService, 
                  private router: Router )
     {
@@ -36,12 +36,12 @@ export class BookingStage2Component {
         this.parkingRequired = false;
     }
 
-    private back() {
+    public back() {
         this.lg$.log("-> back()");
 		this.router.navigate(['/fleadh']);
     }
 
-    private next()
+    public next()
     {
         if( !this.parkingRequired )
             this.bkng$.parking = 0;

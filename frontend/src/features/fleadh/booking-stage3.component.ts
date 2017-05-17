@@ -23,7 +23,7 @@ export class BookingStage3Component {
     allOk: boolean = true;
 
     constructor( private lg$: LoggerService,
-                 private bkng$: BookingService,
+                 public bkng$: BookingService,
                  private err$: ErrorService, 
                  private router: Router,
                  fb: FormBuilder )
@@ -51,12 +51,12 @@ export class BookingStage3Component {
         this.lg$.log("ngOnInit()");
 	}
 
-    private back() {
+    public back() {
         this.lg$.log("-> back()");
 		this.router.navigate(['/booking-stage2']);
     }
 
-	private submit( value: any )
+	public submit( value: any )
 	{
 		if ( !this.checkName( value.firstname ) && !this.checkName( this.bkng$.firstname ) )
 		{
