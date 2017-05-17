@@ -40,7 +40,7 @@ import { CoachesAreaComponent } from './components/admin/adminCoachesArea.compon
 import { PhotosComponent } from './components/photos/photos.component';
 import { AdvertComponent } from './components/advert/advert.component';
 
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+//import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { SessionDataService } from './services/session-data.service';
 import { LoginService } from './services/login.service';

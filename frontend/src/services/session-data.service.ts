@@ -380,10 +380,13 @@ export class SessionDataService {
     {
     	var prefix: string = '';
 
-    	for ( var i = 0; i < (indent + 4); i++ )
-    	{
-    		prefix += ' ';
-    	}
+        if( indent > 0 )
+        {
+        	for ( var i = 0; i < (indent + 4); i++ )
+        	{
+        		prefix += ' ';
+        	}
+        }
         console.log(prefix + "|-->" + "loadCurrentTeamMembersByNameByObservable(" + teamName + ")");
 
         if ( this.teamMembersAreLoaded( teamName ) )
@@ -392,7 +395,9 @@ export class SessionDataService {
         }
        // Clear out the TeamMembers array first
         let teamId = this.convertTeamToInt( teamName );
-        this.dsTeamMembers[teamId].length = 0;
+
+        if( this.dsTeamMembers[teamId] !== undefined )
+            this.dsTeamMembers[teamId].length = 0;
         var url = this.com$.getHome();
 
        return this._http.get( url + '/teammembers/' + teamName )

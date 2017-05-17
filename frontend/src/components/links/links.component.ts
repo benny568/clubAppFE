@@ -15,8 +15,8 @@ import '../../assets/img/links/fai-crest.png';
 })
 
 export class LinksComponent {
-  public cdslImage = "../../assets/img/links/CDSL_Crest.jpg";
-  public csslImage = "../../assets/img/links/cssl.jpeg";
-  public faiImage = "../../assets/img/links/fai-crest.png";
+  public cdslImage = "src/assets/img/links/CDSL_Crest.jpg";
+  public csslImage = "src/assets/img/links/cssl.jpeg";
+  public faiImage = "src/assets/img/links/fai-crest.png";
 
 }

@@ -21,14 +21,15 @@ module.exports = function() {
                     exclude: /\.async\.(html|css)$/
                 },
                 {
-                    test: /\.(png|jpe?g|gif|ico)$/,
+                    test: /\.(png|jpe?g|gif|ico|doc)$/,
                     use: [{
-                        loader: /*'url-loader?limit=8192',*/ 'file-loader',
+                        loader: 'file-loader',
                         options: {
                             name: '[path][name].[ext]'
                         }
                     }]
                 },
+
                 /* Font files - used in PrimeNG */
                 { test: /\.svg$/, loader: 'url-loader?limit=65000&mimetype=image/svg+xml&name=public/fonts/[name].[ext]' },
                 { test: /\.woff$/, loader: 'url-loader?limit=65000&mimetype=application/font-woff&name=public/fonts/[name].[ext]' },

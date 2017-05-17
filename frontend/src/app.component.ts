@@ -58,6 +58,72 @@ export class AppComponent implements OnInit {
 
   }
 
+  goToTeamView(team)
+    {
+    	this.lg$.log("-> goToTeamView(" + team + ")");
+    	this.d$.loadTeamDetailsByNameByObservable(team, this.logdepth)
+    		.subscribe( data => this.getTeamMembers( data ),
+						error => this.lg$.log("ERROR: Reading team details from server, team: " + team),
+						() => this.lg$.log("<-- Team details read successfully for team: " + team)
+					  );
+    }
+    
+    getTeamMembers( data )
+    {
+    	this.lg$.log("-> getTeamMembers()");
+    	this.d$.dsCurrentTeam = data;
+    	this.lg$.log("  |-- Data returned, id: " + this.d$.dsCurrentTeam.id);
+    	this.lg$.log("  |-- Data returned, team name: " + this.d$.dsCurrentTeam.name);
+    	this.lg$.log("  |-- Data returned, lrcode: " + this.d$.dsCurrentTeam.lrcode);
+    	this.lg$.log("  |-- Data returned, lrFixturesCode: " + this.d$.dsCurrentTeam.lrFixturesCode);
+    	this.lg$.log("  |-- Data returned, lrResultsCode: " + this.d$.dsCurrentTeam.lrResultsCode);
+    	this.lg$.log("  |-- Data returned, noticeboard: " + this.d$.dsCurrentTeam.noticeboard);
+    	this.d$.loadCurrentTeamMembersByNameByObservable(this.d$.dsCurrentTeam.name, this.logdepth)
+	        .subscribe( data => this.changeToTeamPage( data ),
+						error => this.lg$.log("ERROR: Reading team members from server, team: " + this.d$.dsCurrentTeam.name),
+						() => this.lg$.log("<-- Team members read successfully for team: " + this.d$.dsCurrentTeam.name)
+					  );
+    }
+    
+    changeToTeamPage( data )
+    {
+    	this.lg$.log("-> changeToTeamPage()");
+    	this.d$.dsTeamMembers = data;
+    	
+    	for ( var i = 0; i < this.d$.dsTeamMembers.length; i++ )
+    	{
+    		this.lg$.log("  |-- Members returned, " + i + ": " + this.d$.dsTeamMembers[i].name);
+    	}
+    	
+
+    	this.router.navigate(['/viewTeam']);
+    }
+
+    
+    goToFarView(team)
+    {
+    	this.lg$.log("-> goToFarView(" + team + ")");
+    	this.d$.loadTeamDetailsByNameByObservable(team, this.logdepth)
+    		.subscribe( data => this.changeToFarPage( data ),
+						error => this.lg$.log("ERROR: Reading team details from server, team: " + team),
+						() => this.lg$.log("<-- Team details read successfully for team: " + team)
+					  );
+    }
+    
+    changeToFarPage( data )
+    {
+    	this.lg$.log("-> changeToFarPage()");
+ 
+    	this.d$.dsCurrentTeam = data;
+    	this.lg$.log("  |-- Data returned, id: " + this.d$.dsCurrentTeam.id);
+    	this.lg$.log("  |-- Data returned, team name: " + this.d$.dsCurrentTeam.name);
+    	this.lg$.log("  |-- Data returned, lrcode: " + this.d$.dsCurrentTeam.lrcode);
+    	this.lg$.log("  |-- Data returned, lrFixturesCode: " + this.d$.dsCurrentTeam.lrFixturesCode);
+    	this.lg$.log("  |-- Data returned, lrResultsCode: " + this.d$.dsCurrentTeam.lrResultsCode);
+    	this.lg$.log("  |-- Data returned, noticeboard: " + this.d$.dsCurrentTeam.noticeboard);
+    	this.router.navigate(['/farView']);
+    }
+
   logout()
   {
     this.login$.logout();
