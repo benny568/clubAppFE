@@ -6,8 +6,8 @@ import { RequestOptions } from '@angular/http';
 
 import { LoggerService }  from '../../services/logger.service';
 import { CommonService }  from '../../services/common.service';
-import { ServerMode }     from '../model/server-mode';
-import { Member }         from '../model/member';
+import { ServerMode }     from '../../model/server-mode';
+import { Member }         from '../../model/member';
 
 
 @Injectable()

@@ -16,15 +16,15 @@ import { ViewTeamComponent } from './components/viewTeam/viewTeam.component';
 import { FarViewComponent } from './components/farView/farView.component';
 import { PhotosComponent } from './components/photos/photos.component';
 import { adminRoutes } from './components/admin/admin.routes';
-import { fleadhRoutes } from './components/fleadh/fleadh.routes';
+import { fleadhRoutes } from './features/fleadh/fleadh.routes';
 
-import { AcademyHomeComponent }          from './components/academy/academyHome.component';
-import { AcademyOverviewComponent }      from './components/academy/academyOverview.component';
-import { AcademyCoachesComponent }       from './components/academy/academyCoaches.component';
-import { AcademyScheduleComponent }      from './components/academy/academySchedule.component';
-import { AcademyTandCComponent }         from './components/academy/academyTandC.component';
-import { AcademyRegistrationComponent }  from './components/academy/academyRegistration.component';
-import { AcademyMemberPaymentComponent } from './components/academy/academyMemberPayment.component';
+import { AcademyHomeComponent }          from './features/academy/academyHome.component';
+import { AcademyOverviewComponent }      from './features/academy/academyOverview.component';
+import { AcademyCoachesComponent }       from './features/academy/academyCoaches.component';
+import { AcademyScheduleComponent }      from './features/academy/academySchedule.component';
+import { AcademyTandCComponent }         from './features/academy/academyTandC.component';
+import { AcademyRegistrationComponent }  from './features/academy/academyRegistration.component';
+import { AcademyMemberPaymentComponent } from './features/academy/academyMemberPayment.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },

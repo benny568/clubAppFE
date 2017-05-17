@@ -53,8 +53,8 @@ import { MemberService } from './services/member.service';
 import { BookingService } from './services/booking.service';
 
 /* Feature Modules */
-import { AcademyModule } from './components/academy/academy.module';
-import { FleadhModule }  from './components/fleadh/fleadh.module';
+import { AcademyModule } from './features/academy/academy.module';
+import { FleadhModule }  from './features/fleadh/fleadh.module';
 
 
 /* Routing Module */
