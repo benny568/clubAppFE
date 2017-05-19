@@ -1,0 +1,280 @@
+<div class="panel">
+    <div class="panel-heading avenue-heading">
+        Edit Member
+    </div>
+    <div class="panel-body avenue-body">
+
+        <form>
+            <md-card style="padding:1%;">
+
+                <md-card-subtitle>Personal Details</md-card-subtitle>
+                <!--<md-divider></md-divider>-->
+
+                <!-- ROW 1 -->
+                <div class="flex-container">
+
+                    <!-- Column 1 -->
+                    <div class="flex-container">
+                        <div class="flex-colum-container-labels">
+                            <div class="flex-item">
+                                <label>Name:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Date of Birth:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>League Id:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Favorite Team:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Favorite Player:</label>
+                            </div>
+                        </div>
+
+                        <div class="flex-colum-container">
+                            <div class="flex-item">
+                                <input type="text" class="form-control namefield" id="name" required [(ngModel)]="member.name" name="name">
+                            </div>
+                            <div class="flex-item">
+                                <input type="text" class="form-control dobfield" id="dob" required [(ngModel)]="member.dob" name="dob">
+                            </div>
+                            <div class="flex-item">
+                                <input type="text" class="form-control lidfield" id="lid" required [(ngModel)]="member.lid" name="lid">
+                            </div>
+                            <div class="flex-item">
+                                <input type="text" class="form-control favteamfield" id="favteam" [(ngModel)]="member.favteam" name="favteam">
+                            </div>
+                            <div class="flex-item">
+                                <input type="text" class="form-control favplayerfield" id="favplayer" [(ngModel)]="member.favplayer" name="favplayer">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="flex-container">
+                        <div class="flex-colum-container-labels">
+                            <div class="flex-item">
+                                <label>Email:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Phone:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Phone 2:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Avatar:</label>
+                            </div>
+                        </div>
+
+                        <div class="flex-colum-container">
+                            <div class="flex-item">
+                                <input type="text" class="form-control emailfield" id="email" required [(ngModel)]="member.email" name="email">
+                            </div>
+                            <div class="flex-item">
+                                <input type="text" class="form-control phonefield" id="phone" required [(ngModel)]="member.phone" name="phone">
+                            </div>
+                            <div class="flex-item">
+                                <input type="text" class="form-control phonefield" id="phone2" required [(ngModel)]="member.phone2" name="phone2">
+                            </div>
+                            <div class="flex-item">
+                                <input type="text" class="form-control photofield" id="photo" [(ngModel)]="member.photo" name="photo">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- ROW 2 -->
+                <div class="flex-container" style="max-width: 90%">
+                    <div class="flex-colum-container">
+                        <div class="flex-item" style="vertical-align: middle;">
+                            <label>Achievements</label>
+                        </div>
+                    </div>
+
+                    <div class="flex-item" style="flex-basis: 400px;">
+                        <textarea class="form-control achievementsfield" id="achievements" [(ngModel)]="member.achievements" name="achievements"></textarea>
+                    </div>
+                </div>
+
+            </md-card>
+
+            <md-card style="padding:1%">
+
+                <md-card-subtitle>Season Details</md-card-subtitle>
+                <!--<md-divider></md-divider>-->
+
+                <!-- ROW 3 -->
+                <div class="flex-container">
+                    <!-- Column 1 -->
+                    <div class="flex-container">
+                        <div class="flex-colum-container-labels">
+                            <div class="flex-item">
+                                <label>Team 1:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Team 2:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Team 3:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-container">
+                        <div class="flex-colum-container">
+                            <div class="flex-colum-container-labels">
+                                <div class="flex-item">
+                                    <select class="form-control teamfield" [(ngModel)]="member.team" name="team" id="team">
+                                        <option *ngFor="let team of d$.dsTeams" value="{{team.id}}" [selected]="team.id === member.team">{{team.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="flex-item">
+                                    <select class="form-control teamfield" [(ngModel)]="member.team2" name="team2" id="team2">
+                                        <option *ngFor="let team of d$.dsTeams" value="{{team.id}}" [selected]="team.id === member.team2">{{team.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="flex-item">
+                                    <select class="form-control teamfield" [(ngModel)]="member.team3" name="team3" id="team3">
+                                        <option *ngFor="let team of d$.dsTeams" value="{{team.id}}" [selected]="team.id === member.team3">{{team.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="flex-container">
+                        <div class="flex-colum-container-labels">
+                            <div class="flex-item">
+                                <label>Position 1:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Position 2:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Position 3:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-container">
+                        <div class="flex-colum-container">
+                            <div class="flex-colum-container-labels">
+                                <div class="flex-item">
+                                    <select class="form-control positionfield" [(ngModel)]="member.position" name="position" id="position">
+                                        <option *ngFor="let pos of mem$.msPosition" value="{{pos.id}}" [selected]="pos.id === member.position">{{pos.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="flex-item">
+                                    <select class="form-control positionfield" [(ngModel)]="member.position2" name="position2" id="position2">
+                                        <option *ngFor="let pos of mem$.msPosition" value="{{pos.id}}" [selected]="pos.id === member.position2">{{pos.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="flex-item">
+                                    <select class="form-control positionfield" [(ngModel)]="member.position3" name="position3" id="position3">
+                                        <option *ngFor="let pos of mem$.msPosition" value="{{pos.id}}" [selected]="pos.id === member.position3">{{pos.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 3 -->
+                    <div class="flex-container">
+                        <div class="flex-colum-container-labels">
+                            <div class="flex-item">
+                                <label>Appearences:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Assists:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Goals:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-container">
+                        <div class="flex-colum-container">
+                            <div class="flex-colum-container-labels">
+                                <div class="flex-item">
+                                    <input type="text" class="form-control sappearsfield" id="sappears" [(ngModel)]="member.sappears" name="sappears">
+                                </div>
+                                <div class="flex-item">
+                                    <input type="text" class="form-control sassistsfield" id="sassists" [(ngModel)]="member.sassists" name="sassists">
+                                </div>
+                                <div class="flex-item">
+                                    <input type="text" class="form-control sgoalsfield" id="sgoals" [(ngModel)]="member.sgoals" name="sgoals">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </md-card>
+
+            <md-card style="padding:1%">
+
+
+                <md-card-subtitle>Account Information</md-card-subtitle>
+                <!--<md-divider></md-divider>-->
+
+                <!-- ROW 1 -->
+                <div class="flex-container">
+
+                    <!-- Column 1 -->
+                    <div class="flex-container">
+                        <div class="flex-colum-container-labels">
+                            <div class="flex-item">
+                                <label>Amount Paid:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Status:</label>
+                            </div>
+                        </div>
+
+                        <div class="flex-colum-container">
+                            <div class="flex-item">
+                                <input type="text" class="form-control amountfield" id="amount" [(ngModel)]="member.amount" name="amount">
+                            </div>
+                            <div class="flex-item">
+                                <input type="text" class="form-control statusfield" id="status" [(ngModel)]="member.status" name="status">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="flex-container">
+                        <div class="flex-colum-container-labels">
+                            <div class="flex-item">
+                                <label>Receipt Id:</label>
+                            </div>
+                            <div class="flex-item">
+                                <label>Academy Information:</label>
+                            </div>
+                        </div>
+
+                        <div class="flex-colum-container">
+                            <div class="flex-item">
+                                <input type="text" class="form-control receiptidfield" id="receiptid" [(ngModel)]="member.receiptid" name="receiptid">
+                            </div>
+                            <div class="flex-item">
+                                <textarea class="form-control academyinfofield" id="academyinfo" [(ngModel)]="member.academyinfo" name="academyinfo"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </md-card>
+
+            <!--<md-divider></md-divider>-->
+            <!--<md-divider></md-divider>-->
+            <br />
+
+            <!-- Buttons below here -->
+            <button md-raised-button color="primary" (click)="back()" md-tooltip="This is a tooltip!">Cancel</button>
+            <button md-raised-button color="primary" (click)="save()" class="pull-right" md-tooltip="This is a tooltip!">Save</button>
+        </form>
+    </div>
+</div>

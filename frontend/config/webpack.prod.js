@@ -5,6 +5,8 @@ const webpackMerge = require('webpack-merge');
 const ngToolsWebpack = require('@ngtools/webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var CompressionPlugin = require("compression-webpack-plugin");
 
 const rootDir = path.resolve(__dirname, '../dist/');
 const srcDir = path.resolve(__dirname, '../src/');
@@ -77,7 +79,17 @@ module.exports = function(env) {
                 /angular(\\|\/)core(\\|\/)@angular/,
                 path.resolve(__dirname, '../src'), // location of your src
                 {} // a map of your routes
-            )
+            ),
+
+            new CompressionPlugin({
+                asset: "[path].gz[query]",
+                algorithm: "gzip",
+                test: /\.js$|\.css$|\.html$/,
+                threshold: 10240,
+                minRatio: 0
+            })
+            /*,
+                        new BundleAnalyzerPlugin()*/
         ]
     });
 }

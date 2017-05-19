@@ -3,7 +3,7 @@ import { DomSanitizer }       from '@angular/platform-browser';
 import { Router }             from '@angular/router';
 import { Http, Headers, 
          RequestOptions }     from '@angular/http';
-import { MdIconRegistry }     from '@angular/material';
+//import { MdIconRegistry }     from '@angular/material';
 
 import { SessionDataService } from './services/session-data.service';
 import { LoggerService }      from './services/logger.service';

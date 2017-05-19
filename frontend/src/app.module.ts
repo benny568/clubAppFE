@@ -8,8 +8,8 @@ import { HashLocationStrategy,
          LocationStrategy } from '@angular/common';
 
 /* Angular Material modules */
-import { MdCheckboxModule } from '@angular/material';
-import { MdCardModule } from '@angular/material';
+/*import { MdCheckboxModule } from '@angular/material';
+import { MdCardModule } from '@angular/material';*/
 
 /* Application Components */
 import { AppComponent } from './app.component';
@@ -99,9 +99,9 @@ import { AppRoutingModule }   from './app-routing.module';
     ReactiveFormsModule,
     AcademyModule, // Note that feature modules must be imported before the routing module
     FleadhModule,
-    AppRoutingModule,
+    AppRoutingModule/*,
     MdCheckboxModule,
-    MdCardModule
+    MdCardModule*/
   ], // modules needed to run this module
   providers: [
     Title,
