@@ -19,7 +19,7 @@ import {Button} from 'primeng/primeng';
 								height="90%"
 								responsive="true" >
 
-							<h4>Fleadh Cheoil 2016, Camping at Avenue United FC</h4>
+							<h4>Fleadh Cheoil 2017, Camping at Avenue United FC</h4>
 							
 							
 							Roslevan, Tulla Road, Ennis <br />
@@ -28,7 +28,7 @@ import {Button} from 'primeng/primeng';
 							
 							<h5>INFORMATION & RULES</h5>
 														
-							Campsite Opens 1pm on Wed August 17th<br />
+							Campsite Opens 1pm on Wed August 16th<br />
 							Tents & Cars only.   NO caravans or campervans, sorry.<br />
 							
 							STRICTLY NO GLASS BOTTLES ALLOWED ON SITE.&nbsp;NO noise after Midnight<br />
@@ -47,11 +47,11 @@ import {Button} from 'primeng/primeng';
 							STRICTLY NO GLASS BOTTLES ALLOWED ON SITE.  This is our soccer pitch where our kids play matches. 
 							NO Glass means NO Glass. Plastic only. This WILL be enforced.<br />  
 							
-							You must be vacated by 5pm on Mon 22 Aug.<br />
+							You must be vacated by 5pm on Mon 21 Aug.<br />
 							
 							By booking you agree to the above conditions.<br /><br />
 							
-							
+							We are the ONLY Fleadh campsite located in Ennis.
 							We hope you enjoy your stay!
 
 				        <footer>

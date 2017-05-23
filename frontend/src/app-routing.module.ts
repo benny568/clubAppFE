@@ -19,7 +19,8 @@ import { adminRoutes } from './components/admin/admin.routes';
 import { fleadhRoutes } from './features/fleadh/fleadh.routes';
 
 import { AcademyModule } from './features/academy/academy.module';
-import { FleadhModule } from './features/fleadh/fleadh.module';
+import { FleadhModule }  from './features/fleadh/fleadh.module';
+import { GalleryModule } from './features/gallery/gallery.module'
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -41,7 +42,8 @@ export const routes: Routes = [
   { path: 'academySchedule', loadChildren: './features/academy/academy.module#AcademyModule' },
   { path: 'academyTandC', loadChildren: './features/academy/academy.module#AcademyModule' },
   { path: 'academyPayment', loadChildren: './features/academy/academy.module#AcademyModule' },
-  { path: 'fleadh', loadChildren: './features/fleadh/fleadh.module#FleadhModule' }
+  { path: 'fleadh', loadChildren: './features/fleadh/fleadh.module#FleadhModule' },
+  { path: 'gallery', loadChildren: './features/gallery/gallery.module#GalleryModule' }
 ];
 
 @NgModule({

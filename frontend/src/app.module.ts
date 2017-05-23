@@ -55,6 +55,7 @@ import { BookingService } from './services/booking.service';
 /* Feature Modules */
 import { AcademyModule } from './features/academy/academy.module';
 import { FleadhModule }  from './features/fleadh/fleadh.module';
+import { GalleryModule } from './features/gallery/gallery.module';
 
 
 /* Routing Module */
@@ -99,6 +100,7 @@ import { AppRoutingModule }   from './app-routing.module';
     ReactiveFormsModule,
     AcademyModule, // Note that feature modules must be imported before the routing module
     FleadhModule,
+    GalleryModule,
     AppRoutingModule/*,
     MdCheckboxModule,
     MdCardModule*/
