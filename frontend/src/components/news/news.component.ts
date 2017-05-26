@@ -3,9 +3,6 @@
  */
 import { Component }          from '@angular/core';
 
-import { Slide }              from '../slide/slide.component';
-import { Carousel }           from '../carousel/carousel.component';
-
 import { LoggerService }      from '../../services/logger.service';
 import { NewsService }        from '../../services/news.service';
 

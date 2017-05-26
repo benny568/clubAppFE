@@ -1,1 +1,16 @@
 <!--<p-galleria [images]="images" panelWidth="500" panelHeight="313" [showCaption]="true"></p-galleria>-->
+
+
+<div class="container">
+
+    <carousel style="float:left;width:100%;height:auto;">
+        <slide *ngFor="let photo of aAlbum">
+            <img src="{{photo.image}}" style="max-width:80%;" />
+        </slide>
+    </carousel>
+
+</div>
+<!-- end row -->
+<div class="photo-caption">
+    <!--     	{{photo.title}} -->
+</div>

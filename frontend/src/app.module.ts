@@ -23,8 +23,6 @@ import { ClubHistoryComponent } from './components/clubHistory/clubHistory.compo
 import { LoginComponent } from './components/login/login.component';
 import { ViewTeamComponent } from './components/viewTeam/viewTeam.component';
 import { SponsorsComponent } from './components/sponsors/sponsors.component';
-import { Slide } from './components/slide/slide.component';
-import { Carousel } from './components/carousel/carousel.component';
 import { NewsComponent } from './components/news/news.component';
 import { MerchandiseComponent } from './components/merchandise/merchandise.component';
 import { LeagueRepublicTable } from './components/lrTable/leagueRepublicTable.component';
@@ -39,8 +37,6 @@ import { EditMemberComponent } from './components/admin/member/editMember.compon
 import { CoachesAreaComponent } from './components/admin/adminCoachesArea.component';
 import { PhotosComponent } from './components/photos/photos.component';
 import { AdvertComponent } from './components/advert/advert.component';
-
-//import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { SessionDataService } from './services/session-data.service';
 import { LoginService } from './services/login.service';
@@ -57,6 +53,9 @@ import { AcademyModule } from './features/academy/academy.module';
 import { FleadhModule }  from './features/fleadh/fleadh.module';
 import { GalleryModule } from './features/gallery/gallery.module';
 
+/* Utility Modules */
+import { DisplayUtilitiesModule } from './shared/displayUtilities.module';
+
 
 /* Routing Module */
 import { AppRoutingModule }   from './app-routing.module';
@@ -68,8 +67,6 @@ import { AppRoutingModule }   from './app-routing.module';
     HomeComponent,
     SponsorsComponent,
     NewsComponent,
-    Slide,
-    Carousel,
     MerchandiseComponent,
     FindUsComponent,
     MessageUsComponent,
@@ -98,6 +95,7 @@ import { AppRoutingModule }   from './app-routing.module';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
+    DisplayUtilitiesModule,
     AcademyModule, // Note that feature modules must be imported before the routing module
     FleadhModule,
     GalleryModule,

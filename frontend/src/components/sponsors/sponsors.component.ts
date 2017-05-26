@@ -3,8 +3,6 @@
  */
 import {Component} from '@angular/core';
 
-import { Slide }              from '../slide/slide.component';
-import { Carousel }           from '../carousel/carousel.component';
 import { Sponsor }            from '../../model/sponsor';
 import { SessionDataService } from "../../services/session-data.service";
 import { LoggerService }      from '../../services/logger.service';

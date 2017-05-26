@@ -5,8 +5,6 @@ import { Router,
 	     Params          }      from '@angular/router';
 
 import { Media } 				from '../model/media';
-import { Slide } 	 			from '../slide/slide.component';
-import { Carousel }  			from '../carousel/carousel.component';
 import { SessionDataService }   from '../../services/session-data.service';
 import { LoggerService }        from '../../services/logger.service';
 import { CommonService }        from '../../services/common.service';
