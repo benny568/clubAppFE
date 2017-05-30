@@ -49,11 +49,13 @@ export class PhotosComponent implements OnInit
 		if ( cat3 !== "none" && cat3 !== '' )
 		{
 			url = this.com$.getHome() + '/photos/' + cat1 + '/' + cat2 + '/' + cat3;
-			this.path = 'resources/galleries/' + cat1 + '/' + cat2 + '/' + cat3 + '/';
+			this.path = '../galleries/' + cat1 + '/' + cat2 + '/' + cat3 + '/';
+			this.lg$.log("Path set to: " + this.path);
 		} else
 		{
 			url = this.com$.getHome() + '/photos/' + cat1 + '/' + cat2;
-			this.path = 'resources/galleries/' + cat1 + '/' + cat2 + '/';
+			this.path = '../galleries/' + cat1 + '/' + cat2 + '/';
+			this.lg$.log("Path set to: " + this.path);
 		}
 
 		this.d$.loadPhotoDetails(url)

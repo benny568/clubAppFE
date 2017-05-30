@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { LoggerService }        from '../../services/logger.service';
 
+/* PrimeNG */
+import {MenuModule,MenuItem} from 'primeng/primeng';
+
 /* Utility Modules */
 import { DisplayUtilitiesModule } from '../../shared/displayUtilities.module';
 
@@ -16,7 +19,8 @@ import { GalleryAcademyComponent } from './galleryAcademy.component';
     imports: [ CommonModule,
                FormsModule,
                DisplayUtilitiesModule,
-               GalleryRoutingModule
+               GalleryRoutingModule,
+               MenuModule
              ],
     declarations: [ GalleryHomeComponent,
                     GalleryAcademyComponent

@@ -6,8 +6,9 @@ import { GalleryAcademyComponent } from './galleryAcademy.component';
 
 
 const galleryRoutes: Routes = [
+        { path: 'gallery', component: GalleryHomeComponent },
         { path: 'galleryHome', component: GalleryHomeComponent },
-		{ path: 'galleryAcademy', component: GalleryAcademyComponent }
+		    { path: 'academyGallery', component: GalleryAcademyComponent }
 	];
 
 @NgModule({
