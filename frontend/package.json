@@ -12,7 +12,7 @@
     "cjson": "find ./src -name \"*.ngsummary.json\" -exec rm -f {} \\;",
     "caot": "find ./src -name \"*.ngfactory.ts\" -exec rm -f {} \\;",
     "cshim": "find ./src -name \"*.css.shim.ngstyle.ts\" -exec rm -f {} \\;",
-    "clean": "npm run rmaot && npm run rmwebapp && npm run cjs && npm run cmap && npm run cjson && npm run caot && npm run cshim",
+    "clean": "npm run rmaot && npm run rmwebapp",
     "build:dev": "npm run clean && webpack --config webpack.config.js --env=dev",
     "build:prod": "npm run clean && webpack --config webpack.config.js --env=prod",
     "serve": "webpack-dev-server --env=prod"
