@@ -17,17 +17,20 @@ import { CommonService }        from '../../services/common.service';
 export class PhotosComponent implements OnInit
 {
 	componentName : string = 'PhotosComponent';
-	aAlbum : Array<Media>;
 	path : string = '';
 	logdepth:number = 1;
+	paramsObservable:any;
+	display:boolean;
 
 	constructor( private lg$: LoggerService,
 	             private com$: CommonService,
-	             private d$: SessionDataService, 
+	             public d$: SessionDataService, 
 				 private route: ActivatedRoute ) {
 		this.lg$.setLogHdr(this.logdepth, this.componentName);
 
-    	this.lg$.log("constructor()");
+    	this.lg$.log("PhotosComponent - constructor()");
+
+		this.display = true;
 	}
 
 	ngOnInit()
@@ -36,35 +39,45 @@ export class PhotosComponent implements OnInit
 		let cat2 = ''; //this.routeParams.get('cat2'); // year
 		let cat3 = ''; //this.routeParams.get('cat3'); // event
 		var url = '';
-		this.aAlbum = new Array<Media>();
+		this.d$.aAlbum = new Array<Media>();
 
-		this.route.params.forEach((params: Params) => {
+		this.lg$.log("PhotosComponent - ngOnInit()")
+
+		this.paramsObservable = this.route.params.subscribe(params => 
+		{
 			cat1 = params['cat1'];
 			cat2 = params['cat2'];
 			cat3 = params['cat3'];
+			this.display = false;
+		
+
+			this.lg$.log("-> parm change (" + cat1 + "/" + cat2 + "/" + cat3 + "," + ")");
+	
+			if ( cat3 !== "none" && cat3 !== '' )
+			{
+				url = this.com$.getHome() + '/photos/' + cat1 + '/' + cat2 + '/' + cat3;
+				this.path = '../galleries/' + cat1 + '/' + cat2 + '/' + cat3 + '/';
+				this.lg$.log("Path set to: " + this.path);
+			} else
+			{
+				url = this.com$.getHome() + '/photos/' + cat1 + '/' + cat2;
+				this.path = '../galleries/' + cat1 + '/' + cat2 + '/';
+				this.lg$.log("Path set to: " + this.path);
+			}
+	
+			this.d$.loadPhotoDetails(url)
+				.subscribe(
+		            	data => this.processResponse(data, this.path, this.d$.aAlbum),
+		            	error => console.log("===> Error getting list of photos from server."),
+		            	() => console.log( "<-" + " loadPhotoDetails()")
+		            );
 		});
 
-		this.lg$.log("-> OnInit(" + cat1 + "/" + cat2 + "/" + cat3 + "," + ")");
+	}
 
-		if ( cat3 !== "none" && cat3 !== '' )
-		{
-			url = this.com$.getHome() + '/photos/' + cat1 + '/' + cat2 + '/' + cat3;
-			this.path = '../galleries/' + cat1 + '/' + cat2 + '/' + cat3 + '/';
-			this.lg$.log("Path set to: " + this.path);
-		} else
-		{
-			url = this.com$.getHome() + '/photos/' + cat1 + '/' + cat2;
-			this.path = '../galleries/' + cat1 + '/' + cat2 + '/';
-			this.lg$.log("Path set to: " + this.path);
-		}
-
-		this.d$.loadPhotoDetails(url)
-			.subscribe(
-	            	data => this.processResponse(data, this.path, this.aAlbum),
-	            	error => console.log("===> Error getting list of photos from server."),
-	            	() => console.log( "<-" + " loadPhotoDetails()")
-	            );
-
+	ngOnChanges()
+	{
+		this.lg$.log("PhotosComponent - ngOnChanges()");
 	}
 
 
@@ -76,6 +89,8 @@ export class PhotosComponent implements OnInit
 		this.lg$.log("     |- album:" + album);
 		var self = this;
 
+		this.com$.clearArray( album, this.lg$ );
+
 		data.forEach(function(row){
 			var photo : Media = new Media();
 			photo.image = path + row;
@@ -83,6 +98,15 @@ export class PhotosComponent implements OnInit
 			self.lg$.log("         |- added image: " + photo.image );
 		});
 
+		this.lg$.trace("## Album contains: ");
+		this.d$.printAlbum();
+
+		self.display = true;
 		this.lg$.log("<- processResponse()");
 	}
+
+	ngOnDestroy() 
+	{
+    	this.paramsObservable.unsubscribe();
+  	}
 }

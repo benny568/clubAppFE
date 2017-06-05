@@ -5,6 +5,7 @@ import { Http } from '@angular/http';
 import { Headers } from '@angular/http';
 import { RequestOptionsArgs,
          RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
 
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -18,6 +19,7 @@ import { Team } from '../model/team';
 import { Member } from '../model/member';
 import { NewsStory } from '../model/news-story';
 import { Sponsor } from "../model/sponsor";
+import { Media } from '../model/media';
 
 @Injectable()
 export class SessionDataService {
@@ -43,6 +45,7 @@ export class SessionDataService {
     serviceName = 'SessionDataService';
     displayMember = false;
     gAuthenticated = false;
+    aAlbum : Array<Media>;
 
      constructor ( private com$: CommonService, private lg$: LoggerService, private _http: Http ) {
      this.loghdr = this.setLogHdr(this.logdepth, this.serviceName);
@@ -71,6 +74,7 @@ export class SessionDataService {
         this.dsCurrentUser = new User();
         this.dsAllMembers = new Array<Member>();
         this.dsSponsors = new Array<Sponsor>();
+        this.aAlbum = new Array<Media>();
 
         for ( let i = 0; i < this.showTeamArray.length; i++ )
 		{
@@ -677,5 +681,54 @@ export class SessionDataService {
         console.error(errMsg); // log to console instead
         //return Observable.throw(errMsg);
       }
+
+    /**********************************************************
+     * Name:		processPhotosResponse()
+     * Description:	Adds the list of photos recieved from the
+     *              server to the album and redirects to the
+     *              photos component.
+     * Scope:		Internal
+     * Params in:   data: The data received from the server
+     *              path: The path to the photos on the server
+     *              album: The media album to put the photos in
+     * Return:      None
+     **********************************************************/
+      processPhotosResponse( data: [any], path: string, album: Array<Media>, router:Router )
+	{
+		this.lg$.log("-> processResponse()");
+		this.lg$.log("     |- data:" + data);
+		this.lg$.log("     |- path:" + path);
+		this.lg$.log("     |- album:" + album);
+		var self = this;
+
+		data.forEach(function(row){
+			var photo : Media = new Media();
+			photo.image = path + row;
+			album.push(photo);
+			self.lg$.log("         |- added image: " + photo.image );
+		});
+
+		this.lg$.log("<- processResponse()");
+
+        this.lg$.trace("Redirecting to /photos");
+        router.navigate(['/photos']);
+	}
+
+    /**********************************************************
+     * Name:		printAlbum()
+     * Description:	Logs the content of the albumn.
+     * Scope:		
+     * Params in:   data: The data received from the server
+     *              path: The path to the photos on the server
+     *              album: The media album to put the photos in
+     * Return:      None
+     **********************************************************/
+    public printAlbum()
+    {
+        for( let picture of this.aAlbum )
+        {
+            this.lg$.trace( picture.image );
+        }
+    }
 
 }

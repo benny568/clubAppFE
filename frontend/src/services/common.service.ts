@@ -1,7 +1,10 @@
 import { Component }      from '@angular/core';
 import { Injectable }     from '@angular/core';
 import { Inject }         from '@angular/core';
+
 import { ServerMode }     from '../model/server-mode';
+
+import { LoggerService }        from '../services/logger.service';
 
 
 @Injectable()
@@ -152,4 +155,21 @@ export class CommonService {
 		}
 	}
 
+	/**********************************************************
+     * Name:		clearArray()
+     * Description:	Clears the contents of the array passed in.
+     * Scope:		Externally accessible
+     * Params in:	The array to clear
+     * Return:		none
+     **********************************************************/
+	public clearArray( array, lg$: LoggerService )
+	{
+		lg$.trace("-> clearArray()");
+
+		while( array.length ) 
+		{
+			lg$.trace("....sending array value to trash");
+			array.pop();
+		}
+	}
 }
