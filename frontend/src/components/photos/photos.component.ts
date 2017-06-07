@@ -4,7 +4,7 @@ import { Router,
 	     ActivatedRoute,
 	     Params          }      from '@angular/router';
 
-import { Media } 				from '../model/media';
+import { Media } 				from '../../model/media';
 import { SessionDataService }   from '../../services/session-data.service';
 import { LoggerService }        from '../../services/logger.service';
 import { CommonService }        from '../../services/common.service';
@@ -51,7 +51,7 @@ export class PhotosComponent implements OnInit
 			this.display = false;
 		
 
-			this.lg$.log("-> parm change (" + cat1 + "/" + cat2 + "/" + cat3 + "," + ")");
+			this.lg$.log("-> parm change (" + cat1 + "/" + cat2 + "/" + cat3 + ")");
 	
 			if ( cat3 !== "none" && cat3 !== '' )
 			{

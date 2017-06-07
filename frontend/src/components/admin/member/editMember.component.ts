@@ -8,8 +8,8 @@ import { CommonService } from '../../../services/common.service';
 import { MemberService } from '../../../services/member.service';
 import { SessionDataService } from '../../../services/session-data.service';
 
-import { Member }        from '../../model/member';
-import { Position }      from '../../model/position';
+import { Member }        from '../../../model/member';
+import { Position }      from '../../../model/position';
 
 @Component({
     templateUrl: './editMember.component.html',

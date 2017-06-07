@@ -5,7 +5,7 @@ import { SessionDataService } from '../../services/session-data.service';
 import { LoggerService }      from '../../services/logger.service';
 import { MemberService }      from '../../services/member.service';
 
-import { Member }             from '../model/member';
+import { Member }             from '../../model/member';
 
 @Component({
 	template: `

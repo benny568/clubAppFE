@@ -13,7 +13,7 @@ import { CommonService }      from '../../services/common.service'
 
 // The following imports are to make webpack include the files
 // in the build/release.
-import '../../assets/img/gallery/academy/2017Graduation/group.jpg';
+/*import '../../assets/img/gallery/academy/2017Graduation/group.jpg';*/
 /*import '../../assets/img/gallery/academy/2017Graduation/JosephKelly.jpg';
 import '../../assets/img/gallery/academy/2017Graduation/JohnCarey.jpg'*/;
 

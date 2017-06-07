@@ -9,7 +9,7 @@ import { LoggerService }      from '../../services/logger.service';
 import { LoginService }       from '../../services/login.service';
 import { UserService }        from '../../services/user.service';
 
-import { User }               from '../model/site-user';
+import { User }               from '../../model/site-user';
 
 @Component({
   templateUrl: './login.component.html',
