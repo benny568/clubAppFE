@@ -18,7 +18,8 @@
         "rollup": "rollup -c rollup-config.js",
         "es5": "tsc --target es5 --allowJs dist/bundle.es2015.js --out dist/bundle.js",
         "minify": "uglifyjs dist/bundle.js --screw-ie8 --compress --mangle --output dist/bundle.min.js",
-        "build:prod": "npm run clean && npm run compile && npm run rollup",
+        "deploy": "mkdir -p ../src/main/webapp; cp -R dist/* ../src/main/webapp",
+        "build:prod": "npm run clean && npm run compile && npm run rollup && npm run deploy",
         "stage1": ""
     },
     "repository": {
@@ -31,12 +32,13 @@
         "Brendan O'Daly <odalybr@hotmail.com>"
     ],
     "dependencies": {
-        "@angular/animations": "^4.1.1",
+        "@angular/animations": "^4.4.5",
+        "@angular/cdk": "github:angular/cdk-builds",
         "@angular/common": "^4.1.1",
         "@angular/core": "^4.1.1",
         "@angular/forms": "^4.1.1",
         "@angular/http": "^4.1.1",
-        "@angular/material": "^2.0.0-beta.3",
+        "@angular/material": "github:angular/material2-builds",
         "@angular/platform-browser": "^4.1.1",
         "@angular/platform-browser-dynamic": "^4.1.1",
         "@angular/platform-server": "^4.1.1",
@@ -47,6 +49,7 @@
         "d3": "^4.8.0",
         "hammerjs": "^2.0.8",
         "highlight.js": "^9.11.0",
+        "lz4": "^0.5.3",
         "reflect-metadata": "^0.1.10",
         "rxjs": "^5.3.1",
         "rxjs-es": "^5.0.0-beta.12",
@@ -54,6 +57,7 @@
         "zone.js": "^0.8.10"
     },
     "devDependencies": {
+        "@angular/cli": "^1.4.7",
         "@angular/compiler": "^4.1.1",
         "@angular/compiler-cli": "^4.1.1",
         "@ngtools/webpack": "^1.3.1",
@@ -86,7 +90,7 @@
         "ts-loader": "^2.0.3",
         "ts-node": "^3.0.4",
         "tslint": "^5.2.0",
-        "typescript": "^2.3.2",
+        "typescript": "^2.3.4",
         "uglify-js": "github:mishoo/UglifyJS2#harmony",
         "uglify-js-harmony": "^2.7.5",
         "uglifyjs-webpack-plugin": "^0.4.3",

@@ -5,8 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 
 /* Angular Material modules */
-import { MdCheckboxModule } from '@angular/material';
-import { MdCardModule } from '@angular/material';
+import { MaterialModule } from './material.module';
 
 /* PrimeNG components */
 import { CheckboxModule } from 'primeng/primeng';
@@ -143,8 +142,7 @@ import { AppRoutingModule }   from './app-routing.module';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    MdCheckboxModule,
-    MdCardModule,
+    MaterialModule,
     CheckboxModule,
     ButtonModule,
     DialogModule,
