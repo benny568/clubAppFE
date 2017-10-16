@@ -1,0 +1,334 @@
+body,
+html {
+    background-image: none; /*url("/src/assets/img/stadium1.jpg");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    background-attachment: fixed;
+    height: 100%
+}
+
+.header {
+  background-image: url("/src/assets/img/banner.png");
+  background-size: cover;
+  min-height: 110px;
+  position: relative;
+  margin-top: 5px
+}
+
+.crest {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 110px
+}
+
+#footer {
+    height: 30px;
+    background-color: red;
+    vertical-align: middle
+}
+
+.sponsor img {
+  height: auto;
+  width: 100%;
+  max-height: 250px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.avenue-yellow-text { color: #fae900  }
+.a-orange-text { color: #fae900  }
+
+.pull-left {
+    float: left;
+    max-width: 300px;
+    height: 50px
+}
+
+.avenue-heading {
+    background-color: #d90404;
+    color: #fae900;
+    min-height: 40px
+}
+
+.avenue-body {
+    background-color: #303030;
+    color: #fff
+}
+
+.a-adminMenu {
+    position: fixed
+}
+
+.a-modal-row {
+    margin-top: 4px
+}
+
+.a-panel-heading {
+    background-color: #d90404;
+    color: #fae900
+}
+
+.a-panel-body {
+    background-color: #303030;
+    color: #fff;
+    height: 100%
+}
+
+.advert img {
+  height: auto;
+  width: 100%;
+  max-height: 100%
+}
+
+/* checking out Angular Material */
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+/* **************************** */
+
+/*
+.flex-container {
+    min-width: 300px;
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start
+}
+
+.column {
+    flex-flow: column nowrap
+}
+
+.flex-box {
+    height: auto;
+    background: #eee;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto
+}
+
+.loginbox {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    width: 400px
+}
+
+.loginbox .loginhead {
+    background: #d90404;
+    height: 40px;
+    outline: none;
+    color: #ff3;
+    min-height: 30px;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 20px
+}
+
+.loginbox .loginbody {
+    padding: 10px 0 0;
+    background: #2e2e2e;
+    padding: 37.5px 35px 30px;
+    color: #fff
+}
+
+.loginbox .loginbody input[type=text] {
+    background: no-repeat 10px 10px #3b3b3b;
+    margin: 0 0 15px;
+    height: auto
+}
+
+.loginbox .loginbody input[type=password],
+.loginbox .loginbody input[type=text] {
+    outline: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #7e7e7e;
+    padding: 12px 12px 12px 33px;
+    border: 1px solid #4b4a4a;
+    width: 100%;
+    -webkit-appearance: none
+}
+
+.loginbox .loginbody input[type=password] {
+    background: no-repeat 10px 11px #3f3f3f;
+    margin: 0 0 25px
+}
+
+.loginbox .loginbody input[type=submit] {
+    background: no-repeat 9px 8px #d90404;
+    color: #fae900;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 8px 19px 8px 30px;
+    width: 40%;
+    border: none;
+    display: inline-block;
+    outline: none;
+    cursor: pointer
+}
+
+.a-form input.ng-invalid.ng-touched {
+    background-color: #fa787e
+}
+
+.a-form input.ng-valid.ng-touched {
+    background-color: #78fa89
+}
+*/
+
+
+
+/*.merchandise-banner {
+    width: 100%;
+    height: 40px;
+    background-color: #fae900;
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center
+}
+
+.merchandise-background {
+    background-color: #fff;
+    min-height: 300px
+}
+
+.merchandise-image {
+    position: relative;
+    margin: 20px auto 0
+}*/
+
+/*.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.flex-colum-container,
+.flex-colum-container-labels {
+    display: flex;
+    flex-direction: column;
+    width: auto
+}
+
+.flex-item {
+    width: auto;
+    height: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: flex-start;
+    margin: 2px
+}
+
+.section-header {
+    color: blue;
+    font-weight: 700
+}
+
+.namefield {
+    width: 200px;
+    margin-right: 10px
+}
+
+.dobfield,
+.lidfield {
+    width: 100px;
+    margin-right: 10px
+}
+
+.amountfield,
+.emailfield,
+.favplayerfield,
+.favteamfield,
+.phonefield,
+.photofield,
+.positionfield,
+.receiptidfield,
+.sappearsfield,
+.sassistsfield,
+.sgoalsfield,
+.teamfield {
+    width: 200px
+}
+
+.achievementsfield {
+    width: 100%;
+    max-width: 100%
+}
+
+.academyinfofield,
+.statusfield {
+    width: 200px
+}
+
+.pull-left {
+    float: left
+}
+
+.photo-caption {
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+    padding: 10px;
+    margin: 0 auto;
+    width: 70%
+}
+
+p {
+    padding-left: 15px
+}*/
+
+/*.step1-flex-container {
+    padding-bottom: 20px
+}
+
+.md-card {
+    padding-left: 10px;
+    padding-right: 10px
+}
+
+.step {
+    background-color: #ff4500;
+    border: 1px solid #ff0;
+    border-bottom: none;
+    border-radius: .25em;
+    box-shadow: 0 0 2em rgba(0, 0, 0, .2)
+}
+
+#step-active,
+.step {
+    padding: 10px;
+    text-align: center
+}
+
+#step-active {
+    background-color: crimson;
+    color: #ff0;
+    font-weight: 700;
+    border: 2px solid #ff0;
+    border-bottom: none;
+    border-right: none;
+    border-radius: .25em;
+    box-shadow: inset .1em .1em .25em rgba(0, 0, 0, .2);
+    outline: 0
+}*/
+
+
+

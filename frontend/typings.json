@@ -1,9 +1,0 @@
-{
-  "name": "clubAppFE",
-  "dependencies": {},
-  "globalDependencies": {
-    "core-js": "registry:dt/core-js#0.9.0+20170324193834",
-    "jasmine": "registry:dt/jasmine#2.5.0+20170207112528",
-    "node": "registry:env/node#6.0.0+20170213133316"
-  }
-}
