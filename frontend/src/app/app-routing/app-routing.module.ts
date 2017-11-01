@@ -1,3 +1,4 @@
+import { AcademyModule } from './../academy/academy.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
@@ -23,7 +24,7 @@ export const routes: Routes = [
   { path: 'downloads', component: DownloadsComponent },
   { path: 'links', component: LinksComponent },
   { path: 'clubHistory', component: ClubHistoryComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent }  
 ];
 
 @NgModule({

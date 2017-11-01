@@ -1,0 +1,20 @@
+.academyflag {
+    background-image: url("../../../../src/assets/img/academy/flag.gif");
+    background-size: cover;
+    height: 226px;
+    width: 318px;
+    position: relative;
+    margin-top: 0px;
+    float: right;
+}
+
+.academyFlyer {
+    background-image: url("../../../../src/assets/img/academy/avenue-academy-15.1.jpg");
+    background-size: cover;
+    height: 226px;
+    width: 318px;
+    position: relative;
+    margin-top: 0px;
+    float: left;
+    margin-bottom: 10px;
+}

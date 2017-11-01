@@ -1,14 +1,15 @@
+import { AcademyModule } from './academy/academy.module';
 import { NewsService } from './services/news.service';
 import { UserService } from './services/user.service';
 import { LoginService } from './services/login.service';
 import { CommonService } from './services/common.service';
 import { SessionDataService } from './services/session-data.service';
 import { LoggerService } from './services/logger.service';
-import {NgModule} from '@angular/core';
-import {BrowserModule, Title} from '@angular/platform-browser';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpModule} from '@angular/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule, Title } from '@angular/platform-browser';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -22,11 +23,13 @@ import { LoginComponent } from './login/login.component';
 import { MerchandiseComponent } from './merchandise/merchandise.component';
 
 /* Routing Module */
-import {AppRoutingModule} from './app-routing/app-routing.module';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 import { NewsComponent } from './news/news.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
 import { Carousel } from './carousel/carousel.component';
 import { Slide } from './slide/slide.component';
+import { AcademyScheduleComponent } from './academy-schedule/academy-schedule.component';
+import { AcademyRegistrationComponent } from './academy-registration/academy-registration.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,9 @@ import { Slide } from './slide/slide.component';
     NewsComponent,
     SponsorsComponent,
     Carousel,
-    Slide
+    Slide,
+    AcademyScheduleComponent,
+    AcademyRegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +56,7 @@ import { Slide } from './slide/slide.component';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
+    AcademyModule,
     AppRoutingModule
   ],
   providers: [
