@@ -28,8 +28,6 @@ import { NewsComponent } from './news/news.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
 import { Carousel } from './carousel/carousel.component';
 import { Slide } from './slide/slide.component';
-import { AcademyScheduleComponent } from './academy-schedule/academy-schedule.component';
-import { AcademyRegistrationComponent } from './academy-registration/academy-registration.component';
 
 @NgModule({
   declarations: [
@@ -46,9 +44,7 @@ import { AcademyRegistrationComponent } from './academy-registration/academy-reg
     NewsComponent,
     SponsorsComponent,
     Carousel,
-    Slide,
-    AcademyScheduleComponent,
-    AcademyRegistrationComponent
+    Slide
   ],
   imports: [
     BrowserModule,
