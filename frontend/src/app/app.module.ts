@@ -1,4 +1,3 @@
-import { AcademyModule } from './academy/academy.module';
 import { NewsService } from './services/news.service';
 import { UserService } from './services/user.service';
 import { LoginService } from './services/login.service';
@@ -10,6 +9,9 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
+
+import { AcademyModule } from './academy/academy.module';
+import { TeamsModule } from './teams/teams.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -53,6 +55,7 @@ import { Slide } from './slide/slide.component';
     FormsModule,
     ReactiveFormsModule,
     AcademyModule,
+    TeamsModule,
     AppRoutingModule
   ],
   providers: [

@@ -1,7 +1,9 @@
-import { AcademyModule } from './../academy/academy.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+
+import { AcademyModule } from './../academy/academy.module';
+import { TeamsModule } from './../teams/teams.module';
 
 import { AppComponent } from '../app.component';
 import { HomeComponent } from '../home/home.component';
