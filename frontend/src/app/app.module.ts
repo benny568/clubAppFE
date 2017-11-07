@@ -1,3 +1,4 @@
+import { DisplayUtilitiesModule } from './display-utilities/display-utilities.module';
 import { NewsService } from './services/news.service';
 import { UserService } from './services/user.service';
 import { LoginService } from './services/login.service';
@@ -26,10 +27,11 @@ import { MerchandiseComponent } from './merchandise/merchandise.component';
 
 /* Routing Module */
 import { AppRoutingModule } from './app-routing/app-routing.module';
+
+/* Services and utilities */
 import { NewsComponent } from './news/news.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
-import { Carousel } from './carousel/carousel.component';
-import { Slide } from './slide/slide.component';
+import { PhotosComponent } from './photos/photos.component';
 
 @NgModule({
   declarations: [
@@ -45,8 +47,7 @@ import { Slide } from './slide/slide.component';
     MerchandiseComponent,
     NewsComponent,
     SponsorsComponent,
-    Carousel,
-    Slide
+    PhotosComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +57,7 @@ import { Slide } from './slide/slide.component';
     ReactiveFormsModule,
     AcademyModule,
     TeamsModule,
+    DisplayUtilitiesModule,
     AppRoutingModule
   ],
   providers: [

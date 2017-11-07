@@ -15,6 +15,7 @@ import { DownloadsComponent } from '../downloads/downloads.component';
 import { LinksComponent } from '../links/links.component';
 import { ClubHistoryComponent } from '../club-history/club-history.component';
 import { LoginComponent } from '../login/login.component';
+import { PhotosComponent } from '../photos/photos.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,7 +27,8 @@ export const routes: Routes = [
   { path: 'downloads', component: DownloadsComponent },
   { path: 'links', component: LinksComponent },
   { path: 'clubHistory', component: ClubHistoryComponent },
-  { path: 'login', component: LoginComponent }  
+  { path: 'login', component: LoginComponent },
+  { path: 'media/:cat1/:cat2/:cat3', component: PhotosComponent } 
 ];
 
 @NgModule({

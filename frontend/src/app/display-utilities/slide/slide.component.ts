@@ -29,3 +29,4 @@ export class Slide implements OnInit, OnDestroy {
         this.carousel.removeSlide(this);
     }
 }
+
