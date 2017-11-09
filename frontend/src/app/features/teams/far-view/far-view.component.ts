@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SessionDataService }     from '../../services/session-data.service';
-import { LoggerService }          from '../../services/logger.service';
+import { SessionDataService }     from '../../../services/session-data.service';
+import { LoggerService }          from '../../../services/logger.service';
 import { LeagueRepublicResults }  from '../lr-results/lr-results.component';
 
 @Component({
-  selector: 'app-far-view',
   templateUrl: './far-view.component.html',
   styleUrls: ['./far-view.component.css']
 })

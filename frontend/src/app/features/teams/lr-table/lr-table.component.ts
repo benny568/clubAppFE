@@ -1,27 +1,28 @@
 import { Component }            from '@angular/core';
 
-import { SessionDataService }   from '../../services/session-data.service';
-import { LoggerService }        from '../../services/logger.service';
-
+import { SessionDataService }   from '../../../services/session-data.service';
+import { LoggerService }        from '../../../services/logger.service';
 
 @Component({
-    selector: 'lr-results',
+    selector: 'lr-table',
     template: '<div id=\"lrep{{lrcode}}\"></div>'
 })
 
-export class LeagueRepublicResults {
+export class LeagueRepublicTable {
+	componentName:string = 'LeagueRepublicTable';
+	logdepth:number = 3;
+    lrcode:number;
 
-  lrcode:number;
-  componentName:string = 'LeagueRepublicResults';
-	logdepth:number = 2;
-
-    constructor(private d$: SessionDataService, private lg$: LoggerService ) { }
+    constructor(private lg$: LoggerService, public d$: SessionDataService)
+    {
+    	this.lg$.setLogHdr(this.logdepth, this.componentName);
+    }
 
     ngOnInit() {
-    	this.lg$.setLogHdr(this.logdepth, this.componentName);
 
-        this.lrcode = this.d$.dsCurrentTeam.lrResultsCode;
-        this.lg$.log("### " + this.componentName + "-" + "ngOnInit(): lrResultsCode is: " + this.lrcode);
+        this.lg$.log("--> ngOnInit()");
+        this.lrcode = this.d$.dsCurrentTeam.lrcode;
+        this.lg$.log("--- ngOnInit(): lrcode is: " + this.lrcode);
 
         if ( window[ "numCodeSnippets" ] === undefined )
         {
@@ -41,19 +42,20 @@ export class LeagueRepublicResults {
         };
     }
 
-    ngDoCheck()
-    {
+    ngDoCheck() {
         this.lg$.log("--> ngDoCheck()");
-        this.lrcode = this.d$.dsCurrentTeam.lrResultsCode;
-        this.lg$.log("--- ngDoCheck(): lrResultsCode is: " + this.lrcode);
+        this.lrcode = this.d$.dsCurrentTeam.lrcode;
+        this.lg$.log("--- ngDoCheck(): lrcode is: " + this.lrcode);
 
 
     	var code = this.lrcode;
     	this.lg$.log("--- Code is: " + code);
         var randno = Math[ "random" ]();
         var el = document[ "createElement" ]( "script" );
-        el["src"] = "http://api.leaguerepublic.com/l/js/cs1.html?cs=" + this.lrcode + "&random=" + randno;
+        el["src"] = "http://api.leaguerepublic.com/l/js/cs1.html?cs=" + code + "&random=" + randno;
         el["type"] = "text/javascript";
+        this.lg$.log("--- Element is: " + el);
         document["getElementsByTagName"]("head")[0]["appendChild"](el);
-	}
+    }
+
 }

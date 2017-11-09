@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SessionDataService }   from '../../services/session-data.service';
-import { LoggerService }        from '../../services/logger.service';
-import { NewsService }          from '../../services/news.service';
+import { SessionDataService }   from '../../../services/session-data.service';
+import { LoggerService }        from '../../../services/logger.service';
+import { NewsService }          from '../../../services/news.service';
 
-// The following imports are to make webpack include the files
-// in the build/release.
-import '../../../assets/img/academy/avenue-academy-15.1.jpg';
-import '../../../assets/img/academy/drilloftheweek.png';
-import '../../../assets/img/academy/flag.gif';
 
 @Component({
   selector: 'app-academy-news',

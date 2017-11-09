@@ -11,8 +11,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 
-import { AcademyModule } from './academy/academy.module';
-import { TeamsModule } from './teams/teams.module';
+import { AcademyModule } from './features/academy/academy.module';
+import { TeamsModule } from './features/teams/teams.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
