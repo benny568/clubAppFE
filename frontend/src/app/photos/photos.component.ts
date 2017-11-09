@@ -1,7 +1,7 @@
 import { Component, OnInit }   from '@angular/core';
 import { ActivatedRoute }      from '@angular/router';
 
-import { Media } 				        from '../model/media';
+import { Media } 				from '../model/media';
 import { SessionDataService }   from '../services/session-data.service';
 import { LoggerService }        from '../services/logger.service';
 import { CommonService }        from '../services/common.service';
