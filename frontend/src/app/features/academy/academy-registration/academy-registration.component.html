@@ -1,3 +1,44 @@
-<p>
-  academy-registration works!
-</p>
+
+<div class="panel">
+  <div class="panel-heading avenue-heading">
+    Step 2: Registration Form
+  </div>
+  <div class="panel-body">
+    <form class="reg-form" [formGroup]="regForm" (ngSubmit)="submit(regForm.value)" autocomplete="off" novalidate>
+      
+      <mat-form-field class="form-name-field">
+        <input matInput required [formControl]="regForm.controls['firstname']" placeholder="First name">
+      </mat-form-field>
+
+      <mat-form-field class="form-name-field">
+        <input matInput [formControl]="regForm.controls['lastname']" placeholder="Last Name">
+      </mat-form-field>
+
+      <mat-form-field class="form-dob-field">
+        <input matInput [formControl]="regForm.controls['dob']" [matDatepicker]="picker" placeholder="Date of Birth">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="form-full-width">
+        <textarea matInput [formControl]="regForm.controls['medication']" placeholder="Allergy information - please specify"></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="form-full-width">
+        <textarea matInput [formControl]="regForm.controls['notes']" placeholder="Additional notes"></textarea>
+      </mat-form-field>
+
+      <mat-checkbox [formControl]="regForm.controls['asthma']">
+        <div style="font-weight: normal">
+          My child has Asthma
+        </div>
+      </mat-checkbox>
+      <mat-checkbox [formControl]="regForm.controls['diabetes']">
+        <div style="font-weight: normal">
+          My child has Diabetes
+        </div>
+      </mat-checkbox>
+
+    </form>
+  </div>
+</div>

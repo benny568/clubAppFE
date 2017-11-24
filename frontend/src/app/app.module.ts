@@ -1,15 +1,10 @@
-import { DisplayUtilitiesModule } from './display-utilities/display-utilities.module';
-import { NewsService } from './services/news.service';
-import { UserService } from './services/user.service';
-import { LoginService } from './services/login.service';
-import { CommonService } from './services/common.service';
-import { SessionDataService } from './services/session-data.service';
-import { LoggerService } from './services/logger.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
+
+import 'hammerjs';
 
 import { AcademyModule } from './features/academy/academy.module';
 import { TeamsModule } from './features/teams/teams.module';
@@ -29,6 +24,16 @@ import { MerchandiseComponent } from './merchandise/merchandise.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
 /* Services and utilities */
+import { DisplayUtilitiesModule } from './display-utilities/display-utilities.module';
+import { NewsService } from './services/news.service';
+import { UserService } from './services/user.service';
+import { LoginService } from './services/login.service';
+import { CommonService } from './services/common.service';
+import { SessionDataService } from './services/session-data.service';
+import { LoggerService } from './services/logger.service';
+import { ErrorService } from './services/error.service';
+
+/* Components */
 import { NewsComponent } from './news/news.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
 import { PhotosComponent } from './photos/photos.component';
@@ -64,6 +69,7 @@ import { PhotosComponent } from './photos/photos.component';
     LoggerService,
     SessionDataService,
     CommonService,
+    ErrorService,
     LoginService,
     UserService,
     NewsService

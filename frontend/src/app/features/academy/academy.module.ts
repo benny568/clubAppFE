@@ -1,5 +1,10 @@
+import { MaterialModule } from './../../material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AcademyRegistrationService } from './academy-registration/academy-registration.service';
 
 import { AcademyRoutingModule } from './academy-routing.module';
 import { AcademyNewsComponent } from './academy-news/academy-news.component';
@@ -11,8 +16,21 @@ import { AcademyRegistrationComponent } from './academy-registration/academy-reg
 @NgModule({
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
     AcademyRoutingModule
   ],
-  declarations: [AcademyNewsComponent, AcademyOverviewComponent, AcademyCoachesComponent, AcademyScheduleComponent, AcademyRegistrationComponent]
+  providers: [
+    AcademyRegistrationService
+  ],
+  declarations: [
+    AcademyNewsComponent, 
+    AcademyOverviewComponent, 
+    AcademyCoachesComponent, 
+    AcademyScheduleComponent, 
+    AcademyRegistrationComponent
+  ]
 })
 export class AcademyModule { }
