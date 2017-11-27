@@ -12,6 +12,7 @@ import { AcademyOverviewComponent } from './academy-overview/academy-overview.co
 import { AcademyCoachesComponent } from './academy-coaches/academy-coaches.component';
 import { AcademyScheduleComponent } from './academy-schedule/academy-schedule.component';
 import { AcademyRegistrationComponent } from './academy-registration/academy-registration.component';
+import { AcademyRegistrationFormComponent } from './academy-registration/academy-registration-form/academy-registration-form.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import { AcademyRegistrationComponent } from './academy-registration/academy-reg
     AcademyOverviewComponent, 
     AcademyCoachesComponent, 
     AcademyScheduleComponent, 
-    AcademyRegistrationComponent
+    AcademyRegistrationComponent, AcademyRegistrationFormComponent
   ]
 })
 export class AcademyModule { }

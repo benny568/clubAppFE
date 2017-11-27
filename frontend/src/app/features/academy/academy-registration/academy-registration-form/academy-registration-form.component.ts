@@ -1,23 +1,23 @@
-import { Component }       from '@angular/core';
+import { Component,
+         OnInit }          from '@angular/core';
 import { Router }          from '@angular/router';
 import { FormGroup, 
-		 FormControl, 
-		 Validators, 
-		 FormBuilder }     from '@angular/forms';
+		     FormControl, 
+		     Validators, 
+		     FormBuilder }     from '@angular/forms';
 
-import { LoggerService }   from '../../../services/logger.service';
-import { CommonService }   from '../../../services/common.service';
-import { ErrorService }    from '../../../services/error.service';
-import { AcademyRegistrationService }  from './academy-registration.service';
-
+import { LoggerService }   from '../../../../services/logger.service';
+import { CommonService }   from '../../../../services/common.service';
+import { ErrorService }    from '../../../../services/error.service';
+import { AcademyRegistrationService }  from '../academy-registration.service';
 
 @Component({
-  templateUrl: './academy-registration-tna.html',
-  styleUrls: [ './academy-registration.component.css' ]
-
+  selector: 'app-academy-registration-form',
+  templateUrl: './academy-registration-form.component.html',
+  styleUrls: ['./academy-registration-form.component.css']
 })
 
-export class AcademyRegistrationComponent {
+export class AcademyRegistrationFormComponent implements OnInit {
 	componentName:string = 'AcademyRegistrationComponent';
 	logdepth:number = 4;
 	step1enabled: boolean = false;
@@ -33,11 +33,11 @@ export class AcademyRegistrationComponent {
 
 
 	constructor( private lg$: LoggerService,
-			     private com$: CommonService,
-				 private err$: ErrorService,
-			     private ar$: AcademyRegistrationService,
-			     private router: Router,
-				 fb: FormBuilder)
+			         private com$: CommonService,
+				       private err$: ErrorService,
+			         private ar$: AcademyRegistrationService,
+			         private router: Router,
+				       fb: FormBuilder )
 	{
 
 		this.regForm = fb.group({
@@ -85,13 +85,7 @@ export class AcademyRegistrationComponent {
 
 	ngOnInit() {
     	this.lg$.setLogHdr(this.logdepth, this.componentName);
-        this.lg$.log("ngOnInit()");
-	}
-
-	proceedToRegistration()
-	{
-		console.log("Button pressed..");
-		this.router.navigate(['/academyRegistrationForm']);
+      this.lg$.log("ngOnInit()");
 	}
 
 	submit(form: any)
@@ -250,4 +244,5 @@ export class AcademyRegistrationComponent {
 	}
 
 }
+
 

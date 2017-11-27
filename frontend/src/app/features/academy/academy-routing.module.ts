@@ -6,12 +6,15 @@ import { AcademyOverviewComponent } from './academy-overview/academy-overview.co
 import { AcademyCoachesComponent } from './academy-coaches/academy-coaches.component';
 import { AcademyScheduleComponent } from './academy-schedule/academy-schedule.component';
 import { AcademyRegistrationComponent } from './academy-registration/academy-registration.component';
+import { AcademyRegistrationFormComponent } from './academy-registration/academy-registration-form/academy-registration-form.component';
+
 const routes: Routes = [
   { path: 'academyNews', component: AcademyNewsComponent },
   { path: 'academyOverview', component: AcademyOverviewComponent },
   { path: 'academyCoaches', component: AcademyCoachesComponent},
   { path: 'academySchedule', component: AcademyScheduleComponent },
-  { path: 'academyRegistration', component: AcademyRegistrationComponent } 
+  { path: 'academyRegistration', component: AcademyRegistrationComponent },
+  { path: 'academyRegistrationForm', component: AcademyRegistrationFormComponent }
 ];
 
 @NgModule({
