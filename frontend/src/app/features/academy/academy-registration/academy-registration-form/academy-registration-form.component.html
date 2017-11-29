@@ -80,29 +80,35 @@
           </mat-form-field>
 
           <br>
-          <mat-checkbox [formControl]="regForm.controls['consent']">
-            <div style="font-weight: normal">
-              Consent
-            </div>
-          </mat-checkbox>
-          &nbsp; &nbsp;
-          <mat-checkbox [formControl]="regForm.controls['photoconsent']">
-            <div style="font-weight: normal">
-              photoconsent
-            </div>
-          </mat-checkbox>
-
-          <br>
           <mat-checkbox [formControl]="regForm.controls['singleTerm']">
             <div style="font-weight: normal">
-                singleTerm
+                Single Term
             </div>
           </mat-checkbox>
           &nbsp; &nbsp;
           <mat-checkbox [formControl]="regForm.controls['secondChild']">
             <div style="font-weight: normal">
-                secondChild
+                Second Child
             </div>
+          </mat-checkbox>
+
+          <div class="lightline"></div>
+
+          <div class="consent-text">
+            I, the child's parent/guardian, give my consent for him/her to participate in All Avenue United Soccer Academy’s Coaching sessions, Organised Events, Blitz & Competitions etc. In the unlikely event of an Accident I/We give our permission for my child
+            to be given immediate First Aid or taken to the nearest Hospital.
+          </div>
+          <mat-checkbox [formControl]="regForm.controls['consent']">
+            Check the box to show your consent
+          </mat-checkbox>
+          
+          <div class="lightline"></div>
+
+          <div class="consent-text">
+            I, the child's parent/guardian, give permission for the club to use our child's picture on their website.
+          </div>
+          <mat-checkbox [formControl]="regForm.controls['photoconsent']">
+            Check the box to show your consent
           </mat-checkbox>
 
           <div class="lightline"></div>

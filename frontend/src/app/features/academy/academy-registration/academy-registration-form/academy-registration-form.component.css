@@ -20,3 +20,13 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.consent-text {
+  font-weight: normal;
+  word-wrap: break-word;
+  float: right;
+}
+
+.left {
+  float: left;
+}

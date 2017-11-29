@@ -39,7 +39,14 @@
         <li>Training Tops must be worn</li>
         <li>Club merchandise is available via the avenue.ie website</li>
       </ul>
-      <button mat-raised-button color="warn" style="float: right" (click)="proceedToRegistration()">Proceed to register</button>
+
+      <br /><br /><br />
+      <mat-checkbox [(ngModel)]="tandc"></mat-checkbox>
+      <label class="ui-widget">I accept T&C's</label>
+      <br /><br />
+
+      <button mat-raised-button color="warn" style="float: left" (click)="back()">Back</button>
+      <button mat-raised-button color="warn" style="float: right" (click)="submit()">Proceed to register</button>
       <br>
     </mat-card>
 

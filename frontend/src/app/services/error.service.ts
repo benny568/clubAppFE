@@ -1,10 +1,15 @@
+import { Injectable }  from '@angular/core';
+import { MatSnackBar } from '@angular/material';
+
+@Injectable()
 export class ErrorService {
   
       logdepth = 3;
       loghdr = "";
       serviceName = 'ErrorService';
+      msgDuration = 3000; // 3 seconds
   
-       constructor (  ) {
+       constructor ( public snackBar: MatSnackBar ) {
   
        }
   
@@ -17,12 +22,8 @@ export class ErrorService {
         openAlert( msg: string ): void {
           console.log("########## INSIDE OPEN ALERT!!");
   
-          /*this.tddialog$.openAlert({
-                                      message: msg,
-                                      disableClose: true || false, // defaults to false
-                                      title: 'Error', //OPTIONAL, hides if not provided
-                                      closeButton: 'Close', //OPTIONAL, defaults to 'CLOSE'
-                                  });*/
+          this.snackBar.open( msg, 'Error', { duration: this.msgDuration } );
+
         }
   
   
