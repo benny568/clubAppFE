@@ -1,7 +1,5 @@
 .reg-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
+  background-color: #eee;
 }
 
 .form-full-width { width: 100%; }
@@ -18,7 +16,7 @@
 }
 
 .center {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -145,7 +145,7 @@ export class AcademyRegistrationFormComponent implements OnInit {
 		else
 		{
 			this.setServiceParameters(form);
-			this.router.navigate(['/academyPayment']);
+			this.router.navigate(['/academyRegistrationPayment']);
 		}
 	}
 
@@ -174,7 +174,7 @@ export class AcademyRegistrationFormComponent implements OnInit {
 	back()
 	{
 		this.lg$.log("-> back()");
-		this.router.navigate(['/academyTandC']);
+		this.router.navigate(['/academyRegistration']);
 	}
 
 	showConsenterror() {

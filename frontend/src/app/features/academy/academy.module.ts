@@ -13,6 +13,7 @@ import { AcademyCoachesComponent } from './academy-coaches/academy-coaches.compo
 import { AcademyScheduleComponent } from './academy-schedule/academy-schedule.component';
 import { AcademyRegistrationComponent } from './academy-registration/academy-registration.component';
 import { AcademyRegistrationFormComponent } from './academy-registration/academy-registration-form/academy-registration-form.component';
+import { AcademyRegistrationPaymentComponent } from './academy-registration/academy-registration-payment/academy-registration-payment.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,9 @@ import { AcademyRegistrationFormComponent } from './academy-registration/academy
     AcademyOverviewComponent, 
     AcademyCoachesComponent, 
     AcademyScheduleComponent, 
-    AcademyRegistrationComponent, AcademyRegistrationFormComponent
+    AcademyRegistrationComponent,
+    AcademyRegistrationFormComponent,
+    AcademyRegistrationPaymentComponent
   ]
 })
 export class AcademyModule { }

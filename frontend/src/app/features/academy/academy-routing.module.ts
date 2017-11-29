@@ -7,6 +7,7 @@ import { AcademyCoachesComponent } from './academy-coaches/academy-coaches.compo
 import { AcademyScheduleComponent } from './academy-schedule/academy-schedule.component';
 import { AcademyRegistrationComponent } from './academy-registration/academy-registration.component';
 import { AcademyRegistrationFormComponent } from './academy-registration/academy-registration-form/academy-registration-form.component';
+import { AcademyRegistrationPaymentComponent } from './academy-registration/academy-registration-payment/academy-registration-payment.component';
 
 const routes: Routes = [
   { path: 'academyNews', component: AcademyNewsComponent },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'academyCoaches', component: AcademyCoachesComponent},
   { path: 'academySchedule', component: AcademyScheduleComponent },
   { path: 'academyRegistration', component: AcademyRegistrationComponent },
-  { path: 'academyRegistrationForm', component: AcademyRegistrationFormComponent }
+  { path: 'academyRegistrationForm', component: AcademyRegistrationFormComponent },
+  { path: 'academyRegistrationPayment', component: AcademyRegistrationPaymentComponent }
 ];
 
 @NgModule({
