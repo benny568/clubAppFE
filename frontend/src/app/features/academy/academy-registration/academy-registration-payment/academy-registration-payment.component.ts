@@ -7,7 +7,8 @@ import { AcademyRegistrationService }  from '../academy-registration.service';
 @Component({
   selector: 'app-academy-registration-payment',
   templateUrl: './academy-registration-payment.component.html',
-  styleUrls: ['./academy-registration-payment.component.css']
+  styleUrls: ['./academy-registration-payment.component.css'],
+  providers: [ LoggerService ]
 })
 export class AcademyRegistrationPaymentComponent implements OnInit {
 	componentName:string = 'AcademyRegistrationPaymentComponent';
@@ -30,7 +31,7 @@ export class AcademyRegistrationPaymentComponent implements OnInit {
 	back()
 	{
 		this.lg$.log("-> back()");
-		this.router.navigate(['/academyRegistration']);
+		this.router.navigate(['/academyRegistrationForm']);
 	}
 	
 }

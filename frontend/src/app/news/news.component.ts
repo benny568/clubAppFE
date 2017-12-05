@@ -13,7 +13,8 @@ import '../../assets/img/news/regnight.jpg';
 @Component({
     selector: 'news',
     templateUrl: './news.component.html',
-    styleUrls: ['./news.component.css']
+    styleUrls: ['./news.component.css'],
+    providers: [ LoggerService ]
 })
 
 

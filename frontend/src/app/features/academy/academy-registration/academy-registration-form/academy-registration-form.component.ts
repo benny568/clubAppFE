@@ -14,7 +14,8 @@ import { AcademyRegistrationService }  from '../academy-registration.service';
 @Component({
   selector: 'app-academy-registration-form',
   templateUrl: './academy-registration-form.component.html',
-  styleUrls: ['./academy-registration-form.component.css']
+  styleUrls: ['./academy-registration-form.component.css'],
+  providers: [ LoggerService ]
 })
 
 export class AcademyRegistrationFormComponent implements OnInit {
@@ -33,11 +34,11 @@ export class AcademyRegistrationFormComponent implements OnInit {
 
 
 	constructor( private lg$: LoggerService,
-			         private com$: CommonService,
-				       private err$: ErrorService,
-			         private ar$: AcademyRegistrationService,
-			         private router: Router,
-				       fb: FormBuilder )
+			     private com$: CommonService,
+				 private err$: ErrorService,
+			     private ar$: AcademyRegistrationService,
+			     private router: Router,
+				 fb: FormBuilder )
 	{
 
 		this.regForm = fb.group({
@@ -84,8 +85,9 @@ export class AcademyRegistrationFormComponent implements OnInit {
 	}
 
 	ngOnInit() {
-    	this.lg$.setLogHdr(this.logdepth, this.componentName);
-      this.lg$.log("ngOnInit()");
+      this.lg$.setLogHdr(this.logdepth, this.componentName);
+	  this.lg$.log("ngOnInit()");
+	  this.ar$.setFieldValue('email', '');
 	}
 
 	submit(form: any)
@@ -169,6 +171,8 @@ export class AcademyRegistrationFormComponent implements OnInit {
 		this.ar$.setFieldValue('Consent to take pictures', form.photoconsent);
 		this.ar$.setFieldValue('Single Term', form.singleTerm);
 		this.ar$.setFieldValue('Second Child', form.secondChild);
+
+		this.printServiceParameters();
 	}
 
 	back()
@@ -241,6 +245,28 @@ export class AcademyRegistrationFormComponent implements OnInit {
 	{
 		this.lg$.log("----> showAddressError()");
 		this.err$.openAlert('Please povide a valid mailing address.');
+	}
+
+	printServiceParameters()
+	{
+		console.log(this.ar$.getFieldValue('General Consent')==null?'':this.ar$.getFieldValue('General Consent'));
+		console.log( this.ar$.getFieldValue('First name') );
+		console.log( this.ar$.getFieldValue('Last name'));
+		console.log( this.ar$.getFieldValue('Date of Birth'));
+		console.log( this.ar$.getFieldValue('email'));
+		console.log( this.ar$.getFieldValue('Allergy information'));
+		console.log( this.ar$.getFieldValue('Medication'));
+		console.log( this.ar$.getFieldValue('Notes'));
+		console.log( this.ar$.getFieldValue('Asthma'));
+		console.log( this.ar$.getFieldValue('Diabetes'));
+		console.log( this.ar$.getFieldValue('Father\'s name'));
+		console.log( this.ar$.getFieldValue('Mother\'s Name'));
+		console.log( this.ar$.getFieldValue('Address'));
+		console.log( this.ar$.getFieldValue('First contact number'));
+		console.log( this.ar$.getFieldValue('Second contact number'));
+		console.log( this.ar$.getFieldValue('Consent to take pictures'));
+		console.log( this.ar$.getFieldValue('Single Term'));
+		console.log( this.ar$.getFieldValue('Second Child'));
 	}
 
 }

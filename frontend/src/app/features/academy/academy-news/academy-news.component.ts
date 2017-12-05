@@ -8,7 +8,8 @@ import { NewsService }          from '../../../services/news.service';
 @Component({
   selector: 'app-academy-news',
   templateUrl: './academy-news.component.html',
-  styleUrls: ['./academy-news.component.css']
+  styleUrls: ['./academy-news.component.css'],
+  providers: [ LoggerService ]
 })
 
 export class AcademyNewsComponent {

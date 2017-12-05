@@ -13,7 +13,8 @@ import { User }               from '../model/site-user';
 
 @Component({
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [ LoggerService ]
 })
 
 export class LoginComponent {

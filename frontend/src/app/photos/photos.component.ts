@@ -9,7 +9,8 @@ import { CommonService }        from '../services/common.service';
 @Component({
   selector: 'app-photos',
   templateUrl: './photos.component.html',
-  styleUrls: ['./photos.component.css']
+  styleUrls: ['./photos.component.css'],
+  providers: [ LoggerService ]
 })
 export class PhotosComponent implements OnInit {
 	componentName : string = 'PhotosComponent';

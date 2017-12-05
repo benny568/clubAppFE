@@ -8,7 +8,8 @@ import { ErrorService }    from '../../../services/error.service';
 
 @Component({
   templateUrl: './academy-registration-tna.html',
-  styleUrls: [ './academy-registration.component.css' ]
+  styleUrls: [ './academy-registration.component.css' ],
+  providers: [ LoggerService ]
 
 })
 

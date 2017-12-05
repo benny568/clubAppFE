@@ -68,7 +68,10 @@ export class AcademyRegistrationService {
     loghdr = "";
     serviceName = 'AcademyRegistrationService';
 
-    constructor ( private lg$: LoggerService, private com$: CommonService, private _http: Http ) {}
+	constructor ( private lg$: LoggerService, private com$: CommonService, private _http: Http ) 
+	{
+		this.lg$.setLogHdr(this.logdepth, this.serviceName);
+	}
 
     sortingHat( dob: string )
     {

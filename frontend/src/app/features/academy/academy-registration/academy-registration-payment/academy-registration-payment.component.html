@@ -6,13 +6,13 @@
 
       <div *ngFor="let item of ar$.regData">
 
-          <div class="ui-grid-row" *ngIf="(item.type==='md-input')&&(item.display)" style="margin-bottom:5px;">
+          <div *ngIf="(item.type==='md-input')&&(item.display)" style="margin-bottom:5px;">
 
-              <div class="table-container">
-                  <div class="table-column">
+              <div>
+                  <div>
                       <strong>{{item.name}}:</strong>
                   </div>
-                  <div class="table-column">
+                  <div>
                       {{item.value}}
                   </div>
               </div>
@@ -23,27 +23,26 @@
       <!-- End of ngFor -->
 
       <!-- Leave a space -->
-      <div class="ui-grid-row">
+      <div>
           <br />
       </div>
 
       <!-- Add the total cost calculations -->
 
-      <div class="table-container">
-          <div class="table-column">
+      <div >
+          <div>
               <strong>TOTAL PAYMENT DUE:</strong>
           </div>
-          <div class="table-column">
+          <div>
               {{ar$.payment | currency:'EUR':true:'1.2-2'}}
           </div>
       </div>
 
-      <div class="ui-grid-row" style="padding-top:50px;">
-          <div class="ui-grid-col-12">
-              <button type="button" class="btn btn-warning" (click)="back()">Back</button>
+      <div style="padding-top:50px;">
+          <div>
+            <button mat-raised-button color="warn" style="float: left" (click)="back()">Back</button>
           </div>
-          <div class="ui-grid-col-12"></div>
-          <div class="ui-grid-col-7">
+          <div>
               <button type="button" (click)="ar$.payPal()" style="float:right;">
                   <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0">
               </button>
