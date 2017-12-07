@@ -8,69 +8,89 @@ import { LoggerService }  from '../../../services/logger.service';
 import { CommonService }  from '../../../services/common.service';
 import { ServerMode }     from '../../../model/server-mode';
 import { Member }         from '../../../model/member';
+import { Data } from '@angular/router/src/config';
+
+export class regDetails {
+	firstname: string;
+	lastname: string;
+	email: string;
+	dob: string;
+	address: string;
+	phone1: string;
+	phone2: string;
+	allergies: string;
+	asthma: boolean;
+	diabetes: boolean;
+	medication: string;
+	notes: string;	
+	regdate: string;
+	mothername: string;
+	fatername: string;
+	halfterm: boolean;
+	secondchild: boolean;
+	thirdchild: boolean;
+	generalconsent: boolean;
+	pictureconsent: boolean;
+	
+
+	getFirstname()      { return this.firstname; }
+	getLastname()       { return this.lastname; }
+	getEmail()          { return this.email; }
+	getDob()            { return this.dob; }
+	getAddress()        { return this.address; }
+	getPhone1()         { return this.phone1; }
+	getPhone2()         { return this.phone2; }
+	getAllergies()      { return this.allergies; }
+	getAsthma()         { return this.asthma; }
+	getDiabetes()       { return this.diabetes; }
+	getMedication()     { return this.medication; }
+	getNotes()          { return this.notes; }
+	getRegdate()        { return this.regdate; }
+	getMotherName()     { return this.mothername; }
+	getFatherName()     { return this.fatername; }
+	getHalfterm()       { return this.halfterm; }
+	getSecondchild()    { return this.secondchild; }
+	getThirdchild()     { return this.thirdchild; }
+	getGeneralconsent() { return this.generalconsent; }
+	getPictureconsent() { return this.pictureconsent; }
+
+	setFirstname( name: string )        { this.firstname = name; }
+	setLastname(name: string )          { this.lastname = name; }
+	setEmail( email: string )           { this.email = email; }
+	setDob( date: string )              { this.dob = date; }
+	setAddress( value: string )         { this.address = value; }
+	setPhone1( phone: string )          { this.phone1 = phone; }
+	setPhone2( phone: string )          { this.phone2 = phone; }
+	setAllergies( value: string )       { this.allergies = value; }
+	setAsthma( value: boolean )         { this.asthma = value; }
+	setDiabetes( value: boolean )       { this.diabetes = value; }
+	setMedication( value: string )      { this.medication = value; }
+	setNotes( value: string )           { this.notes = value; }
+	setRegdate( value: string )         { this.regdate = value; }
+	setMotherName( value: string )      { this.mothername = value; }
+	setFatherName( value: string )      { this.fatername = value; }
+	setHalfterm( value: boolean )       { this.halfterm = value; }
+	setSecondchild( value: boolean )    { this.secondchild = value; }
+	setThirdchild( value: boolean )     { this.thirdchild = value; }
+	setGeneralconsent( value: boolean ) { this.generalconsent = value; }
+	setPictureconsent( value: boolean ) { this.pictureconsent = value; }
+	
+}
 
 
 @Injectable()
 export class AcademyRegistrationService {
 	member = new Member();
 	payment: string;
-
-	regData = [
-	           { id: 0, name: 'First name', value: '', required: true, display: true, type: 'md-input',
-	        	 placeholder: "Childs first name"
-	           },
-	           { id: 1, name: 'Last name', value: '', required: true, display: true, type: 'md-input',
-	        	 placeholder: "Childs last name"
-	        	},
-	           { id: 2, name: 'email', value: 'email', required: true, display: true, type: 'md-input',
-		         placeholder: "Parent's email" },
-	           { id: 3, name: 'Date of Birth', value: '', required: true, display: true, type: 'md-input',
-			     placeholder: "Childs birth date" },
-	           { id: 4, name: 'First contact number', value: '', required: true, display: true, type: 'md-input',
-				 placeholder: "First Parent's number" },
-	           { id: 5, name: 'Second contact number', value: '', required: true, display: true, type: 'md-input',
-				 placeholder: "Second Parent's number" },
-	           { id: 6, name: 'Allergy information', value: '', required: true, display: true, type: 'md-input',
-				 placeholder: "Details on any allergies" },
-	           { id: 7, name: 'Asthma', value: '', required: true, display: true, type: 'md-input',
-				 placeholder: "Has the child asthma?" },
-	           { id: 8, name: 'Diabetes', value: '', required: true, display: true, type: 'md-input',
-				 placeholder: "Has the child diabetes?" },
-	           { id: 9, name: 'Medication', value: '', required: true, display: true, type: 'md-input',
-				 placeholder: "Is the child on any medication?" },
-	           { id: 10, name: 'Notes', value: '', required: false, display: true, type: 'md-input',
-				 placeholder: 'Additional notes' },
-	           { id: 11, name: 'Registration Date', value: '', required: true, display: false, type: 'md-input',
-	        	 placeholder: "Date of registration" },
-	           { id: 12, name: 'Mother\'s Name', value: '', required: true, display: true, type: 'md-input',
-		         placeholder: "Mother's name" },
-	           { id: 13, name: 'Father\'s name', value: '', required: true, display: true, type: 'md-input',
-			     placeholder: "Father's name" },
-	           { id: 14, name: 'Single Term', value: false, required: false, display: true, type: 'md-checkbox',
-				 placeholder: "Half term payment" },
-	           { id: 15, name: 'Second Child', value: false, required: false, display: true, type: 'md-checkbox',
-				 placeholder: "Discount for 2nd child" },
-	           { id: 16, name: 'Third Child', value: false, required: false, display: false, type: 'md-checkbox',
-				 placeholder: "Discount for 3rd child" },
-	           { id: 17, name: 'General Consent', value: false, required: true, display: true, type: 'md-checkbox',
-				 placeholder: "We the parents of the above named child give our consent for him/her to participate " +
-				 		"in All Avenue United Soccer Academy’s Coaching sessions, Organised Events, Blitz & Competitions etc." +
-				 		" In the unlikely event of an Accident I/We give our permission for our child to be given immediate " +
-				 		"First Aid or taken to the nearest Hospital." },
-	           { id: 18, name: 'Consent to take pictures', value: false, required: true, display: true, type: 'md-checkbox',
-				 placeholder: "I, the child's parent/guardian, give permission for the club to use our child's picture on their website." }
-	           ];
-
-	regData2 = { firstname:'', lastname:'', email:'', dob:'', phone1:'', phone2:'', allergies:'', asthma:'', diabetes:'', medication:'', notes:'',
-                 regdate:'', mothername:'', fatername:'', halfterm:'', secondchild:'', thirdchild:'', generalconsent:'', pictureconsent:'' }
-
     logdepth = 3;
     loghdr = "";
-    serviceName = 'AcademyRegistrationService';
+	serviceName = 'AcademyRegistrationService';
+	regData: regDetails;
 
 	constructor ( private lg$: LoggerService, private com$: CommonService, private _http: Http ) 
 	{
 		this.lg$.setLogHdr(this.logdepth, this.serviceName);
+		this.regData = new regDetails();
 	}
 
     sortingHat( dob: string )
@@ -108,49 +128,25 @@ export class AcademyRegistrationService {
 
     calculateTotalCost()
 	{
-    	console.log( "### Single Term: " + this.getFieldValue('Single Term') );
-		this.payment = this.getFieldValue('Single Term') ? '60' : '120';
+    	this.lg$.log( "### Single Term: " + this.regData.getHalfterm() );
+		this.payment = this.regData.getHalfterm() ? '60' : '120';
 	}
-
-    getFieldValue( field: string )
-    {
-    	let value = '';
-
-    	let thisField = this.regData.find( function(item) {
-    		return item.name === field;
-    	});
-    	if ( thisField !== undefined )
-    	{
-    		return thisField.value;
-    	}
-    }
-
-    setFieldValue( field: string, value: string )
-    {
-    	let thisField = this.regData.find( function(item) {
-    		return item.name === field;
-    	});
-    	if ( thisField !== undefined )
-    	{
-    		thisField.value = value;
-    	}
-    }
 
     payPal()
 	{
-		console.log("[AcademyRegistrationService]-> payPal()");
+		this.lg$.log("[AcademyRegistrationService]-> payPal()");
 		let body = JSON.stringify({amount:'110', currency_code: 'EUR'});
 	    let headers = new Headers({ 'Content-Type': 'application/json' });
 	    let options = new RequestOptions({ headers: headers });
 
-	    console.log("    |- Storing registration details to server..");
+	    this.lg$.log("    |- Storing registration details to server..");
 	    this.convertToMember();
 	    this.storeDetails( this.member );
 
-	    console.log("    |- Calling http post to PayPal..");
+	    this.lg$.log("    |- Calling http post to PayPal..");
 
 	    let loc = '';
-	    if ( this.regData[14].value === true ) /* Single Term */
+	    if ( this.regData.getHalfterm() === true ) /* Single Term */
 	    {
 	    	loc = 	'https://www.paypal.com/cgi-bin/webscr?' +
 	    			'cmd=_s-xclick&' +
@@ -169,31 +165,31 @@ export class AcademyRegistrationService {
 		this.logValues();
 
 		var url = this.com$.getHome();
-		console.log("-- home set to: " + url);
+		this.lg$.log("-- home set to: " + url);
 
 		let headers = new Headers();
 	    headers.append('Content-Type', 'application/json');
 	    let options = new RequestOptions({ headers: headers });
 
-	    console.log("-- posting registration to server..[" + url + '/academyregistration' + "]");
+	    this.lg$.log("-- posting registration to server..[" + url + '/academyregistration' + "]");
 		this._http.post(url + '/academyregistration',
 				data, {headers:headers})
 			.subscribe(
-	            	data => console.log("POST of academy registration successfull"),
-	            	error => this.handleError(error), //console.log("===> Error posting booking to server: " + error),
+	            	data => this.lg$.log("POST of academy registration successfull"),
+	            	error => this.handleError(error), //this.lg$.log("===> Error posting booking to server: " + error),
 	            	() => this.sendEmailConfirmation()
 	            );
 	}
 
 	convertToMember()
 	{
-		console.log("    |- ->convertToMember()");
+		this.lg$.log("    |- ->convertToMember()");
 		this.member.name 		= this.regData[0].value + " " + this.regData[1].value;
 		this.member.address		= "";
-		this.member.phone 		= String(this.regData[4].value);
-		this.member.phone2		= String(this.regData[5].value);
-		this.member.dob			= String(this.regData[3].value);
-		this.member.email		= String(this.regData[2].value);
+		this.member.phone 		= this.regData.getPhone1();
+		this.member.phone2		= this.regData.getPhone2();
+		this.member.dob			= this.regData.getDob();
+		this.member.email		= this.regData.getEmail();
 		this.member.amount		= this.payment;
 		this.member.receiptid	= ""; // TODO: generate this
 		this.member.team		= 0; // TODO: this.sortingHat();
@@ -211,30 +207,30 @@ export class AcademyRegistrationService {
 		this.member.photo		= 'resources/images/Players/default.png';
 		this.member.achievements = '';
 		this.member.status		= '';
-		this.member.academyinfo = this.regData[11].name  + ": " +  /* Registration Date */
-		                          this.regData[11].value + ", " +
-			                      this.regData[12].name  + ": " +  /* Mother's name */
-		  						  this.regData[12].value + ", " +
-		  						  this.regData[13].name  + ": " +  /* Father's name */
-								  this.regData[13].value + ", " +
-								  this.regData[6].name  + ": " +   /* Allergy information */
-								  this.regData[6].value + ", " +
-								  this.regData[7].name  + ": " +   /* Asthma */
-								  this.regData[7].value + ", " +
-								  this.regData[8].name  + ": " +   /* Diabetes */
-								  this.regData[8].value + ", " +
-								  this.regData[9].name  + ": " +   /* Medication */
-								  this.regData[9].value + ", " +
-								  this.regData[10].name  + ": " +  /* Notes */
-								  this.regData[10].value;
+		this.member.academyinfo = "Registration Date: " +  /* Registration Date */
+		                          this.regData.getRegdate() + ", " +
+			                      "Mother: " +  /* Mother's name */
+		  						  this.regData.getMotherName() + ", " +
+		  						  "Father: " +  /* Father's name */
+								  this.regData.getFatherName() + ", " +
+								  "Allergies: " +   /* Allergy information */
+								  this.regData.getAllergies() + ", " +
+								  "Asthma: " +   /* Asthma */
+								  this.regData.getAsthma() + ", " +
+								  "Diabetes: " +   /* Diabetes */
+								  this.regData.getDiabetes() + ", " +
+								  "Medication: " +   /* Medication */
+								  this.regData.getMedication() + ", " +
+								  "Notes: " +  /* Notes */
+								  this.regData.getNotes();
 
 		this.logMember();
-		console.log("    |- <-convertToMember()");
+		this.lg$.log("    |- <-convertToMember()");
 	}
 
 	sendEmailConfirmation()
 	{
-		console.log("[AcademyRegistrationService]-->sendEmailConfirmation()..");
+		this.lg$.log("[AcademyRegistrationService]-->sendEmailConfirmation()..");
 		var url = this.com$.getHome();
 
 		let headers = new Headers();
@@ -244,60 +240,70 @@ export class AcademyRegistrationService {
 		this._http.post(url + '/confirmregistration',
 				this.member, {headers:headers})
 			.subscribe(
-	            	data => console.log("Confirmation email sent successfull"),
-	            	error => console.log("===> Error sending confirmation email: " + error),
-	            	() => console.log(" <=== Confirmation email sent successfull <====")
+	            	data => this.lg$.log("Confirmation email sent successfull"),
+	            	error => this.lg$.log("===> Error sending confirmation email: " + error),
+	            	() => this.lg$.log(" <=== Confirmation email sent successfull <====")
 	            );
 	}
 
 	handleError(error: any)
 	{
-		console.log("===> Error posting academy registration to server: " + error);
+		this.lg$.log("===> Error posting academy registration to server: " + error);
 		this.logValues();
 	}
 
 	logValues()
 	{
-		var logStr = "ACADEMY REGISTRATION: [ ";
-		for ( var i = 0; i < this.regData.length; i++ )
-		{
-			logStr += this.regData[i].name + ": " + this.regData[i].value;
-			if ( i < this.regData.length )
-			{
-				logStr += ", ";
-			}
-		}
-		console.log(logStr);
+		this.lg$.log( "ACADEMY REGISTRATION: ");
+		this.lg$.log( 'First name: ' + this.regData.getFirstname() );
+		this.lg$.log( 'Last name: ' + this.regData.getLastname() );
+		this.lg$.log( 'Email: ' + this.regData.getEmail() );
+		this.lg$.log( 'Date of Birth: ' + this.regData.getDob() );
+		this.lg$.log( 'Phone1: ' + this.regData.getPhone1() );
+		this.lg$.log( 'Phone2: ' + this.regData.getPhone2() );
+		this.lg$.log( 'Allergies: ' + this.regData.getAllergies() );
+		this.lg$.log( 'Asthma: ' + this.regData.getAsthma() );
+		this.lg$.log( 'Diabetes: ' + this.regData.getDiabetes() );
+		this.lg$.log( 'Medication: ' + this.regData.getMedication() );
+		this.lg$.log( 'Notes: ' + this.regData.getNotes() );
+		this.lg$.log( 'Reg Date: ' + this.regData.getRegdate() );
+		this.lg$.log( 'Mother: ' + this.regData.getMotherName() );
+		this.lg$.log( 'Father: ' + this.regData.getFatherName() );
+		this.lg$.log( 'Half Term: ' + this.regData.getHalfterm() );
+		this.lg$.log( 'Second Child: ' + this.regData.getSecondchild() );
+		this.lg$.log( 'Third Child: ' + this.regData.getThirdchild() );
+		this.lg$.log( 'Gen Consent: ' + this.regData.getGeneralconsent() );
+		this.lg$.log( 'Pic Consent: ' + this.regData.getPictureconsent() );
 	}
 
 	logMember()
 	{
-		console.log("    |-    | ->logMember()");
-		console.log("    |-    | -- Name: " + this.member.name );
-		console.log("    |-    | -- Address: " + this.member.address );
-		console.log("    |-    | -- Phone: " + this.member.phone );
-		console.log("    |-    | -- Phone2: " + this.member.phone2 );
-		console.log("    |-    | -- dob: " + this.member.dob );
-		console.log("    |-    | -- email: " + this.member.email );
-		console.log("    |-    | -- Amount: " + this.member.amount );
-		console.log("    |-    | -- ReceiptId: " + this.member.receiptid );
-		console.log("    |-    | -- Team: " + this.member.team );
-		console.log("    |-    | -- Team2: " + this.member.team2 );
-		console.log("    |-    | -- Team3: " + this.member.team3 );
-		console.log("    |-    | -- Position: " + this.member.position );
-		console.log("    |-    | -- Position2: " + this.member.position2 );
-		console.log("    |-    | -- Position3: " + this.member.position3 );
-		console.log("    |-    | -- LeagueId: " + this.member.lid );
-		console.log("    |-    | -- Fav Team: " + this.member.favteam );
-		console.log("    |-    | -- Fav Player: " + this.member.favplayer );
-		console.log("    |-    | -- Appears: " + this.member.sappears );
-		console.log("    |-    | -- Assists: " + this.member.sassists );
-		console.log("    |-    | -- Goals: " + this.member.sgoals );
-		console.log("    |-    | -- Photo: " + this.member.photo );
-		console.log("    |-    | -- Achievements: " + this.member.achievements );
-		console.log("    |-    | -- Status: " + this.member.status );
-		console.log("    |-    | -- AcademyInfo: " + this.member.academyinfo );
-		console.log("    |-    | <-logMember()");
+		this.lg$.log("    |-    | ->logMember()");
+		this.lg$.log("    |-    | -- Name: " + this.member.name );
+		this.lg$.log("    |-    | -- Address: " + this.member.address );
+		this.lg$.log("    |-    | -- Phone: " + this.member.phone );
+		this.lg$.log("    |-    | -- Phone2: " + this.member.phone2 );
+		this.lg$.log("    |-    | -- dob: " + this.member.dob );
+		this.lg$.log("    |-    | -- email: " + this.member.email );
+		this.lg$.log("    |-    | -- Amount: " + this.member.amount );
+		this.lg$.log("    |-    | -- ReceiptId: " + this.member.receiptid );
+		this.lg$.log("    |-    | -- Team: " + this.member.team );
+		this.lg$.log("    |-    | -- Team2: " + this.member.team2 );
+		this.lg$.log("    |-    | -- Team3: " + this.member.team3 );
+		this.lg$.log("    |-    | -- Position: " + this.member.position );
+		this.lg$.log("    |-    | -- Position2: " + this.member.position2 );
+		this.lg$.log("    |-    | -- Position3: " + this.member.position3 );
+		this.lg$.log("    |-    | -- LeagueId: " + this.member.lid );
+		this.lg$.log("    |-    | -- Fav Team: " + this.member.favteam );
+		this.lg$.log("    |-    | -- Fav Player: " + this.member.favplayer );
+		this.lg$.log("    |-    | -- Appears: " + this.member.sappears );
+		this.lg$.log("    |-    | -- Assists: " + this.member.sassists );
+		this.lg$.log("    |-    | -- Goals: " + this.member.sgoals );
+		this.lg$.log("    |-    | -- Photo: " + this.member.photo );
+		this.lg$.log("    |-    | -- Achievements: " + this.member.achievements );
+		this.lg$.log("    |-    | -- Status: " + this.member.status );
+		this.lg$.log("    |-    | -- AcademyInfo: " + this.member.academyinfo );
+		this.lg$.log("    |-    | <-logMember()");
 	}
 
 }

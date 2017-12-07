@@ -4,23 +4,30 @@
   </div>
   <div class="panel-body avenue-body">
 
-      <div *ngFor="let item of ar$.regData">
+      <div>
 
-          <div *ngIf="(item.type==='md-input')&&(item.display)" style="margin-bottom:5px;">
-
-              <div>
-                  <div>
-                      <strong>{{item.name}}:</strong>
-                  </div>
-                  <div>
-                      {{item.value}}
-                  </div>
-              </div>
-
-          </div>
-
+        <strong>Details entered:</strong><br><br>
+        
+		First name: {{ar$.regData.getFirstname() }}<br>
+		Last name: {{ar$.regData.getLastname() }}<br>
+		Email: {{ar$.regData.getEmail() }}<br>
+		Date of Birth: {{ar$.regData.getDob() }}<br>
+		Phone1: {{ar$.regData.getPhone1() }}<br>
+		Phone2 {{ar$.regData.getPhone2() }}<br>
+		Allergies {{ar$.regData.getAllergies() }}<br>
+		Asthma: {{ar$.regData.getAsthma() }}<br>
+		Diabetes: {{ar$.regData.getDiabetes() }}<br>
+		Medication {{ar$.regData.getMedication() }}<br>
+		Notes: {{ar$.regData.getNotes() }}<br>
+		Reg Date: {{ar$.regData.getRegdate() }}<br>
+		Mother: {{ar$.regData.getMotherName() }}<br>
+		Father: {{ar$.regData.getFatherName() }}<br>
+		Half Term: {{ar$.regData.getHalfterm() }}<br>
+		Second Child: {{ar$.regData.getSecondchild() }}<br>
+		Third Child: {{ar$.regData.getThirdchild() }}<br>
+		Gen Consent: {{ar$.regData.getGeneralconsent() }}<br>
+		Pic Consent: {{ar$.regData.getPictureconsent() }}<br>
       </div>
-      <!-- End of ngFor -->
 
       <!-- Leave a space -->
       <div>
@@ -34,7 +41,7 @@
               <strong>TOTAL PAYMENT DUE:</strong>
           </div>
           <div>
-              {{ar$.payment | currency:'EUR':true:'1.2-2'}}
+              {{ar$.payment | currency:'EUR':'true':'1.2-2'}}
           </div>
       </div>
 

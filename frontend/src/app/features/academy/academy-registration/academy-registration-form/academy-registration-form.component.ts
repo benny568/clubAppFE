@@ -87,13 +87,13 @@ export class AcademyRegistrationFormComponent implements OnInit {
 	ngOnInit() {
       this.lg$.setLogHdr(this.logdepth, this.componentName);
 	  this.lg$.log("ngOnInit()");
-	  this.ar$.setFieldValue('email', '');
+	  this.ar$.regData.setEmail("");
 	}
 
 	submit(form: any)
 	{
 		var today = new Date();
-		this.ar$.setFieldValue( 'Registration Date', today.toDateString() );
+		this.ar$.regData.setRegdate( today.toDateString() );
 
 		// Fill in the service structure for further processing
 		if( !form.consent === true )
@@ -153,24 +153,24 @@ export class AcademyRegistrationFormComponent implements OnInit {
 
 	setServiceParameters( form: any )
 	{
-		this.ar$.setFieldValue('General Consent', form.consent);;
-		this.ar$.setFieldValue('First name', form.firstname );
-		this.ar$.setFieldValue('Last name', form.lastname);
-		this.ar$.setFieldValue('Date of Birth', form.dob);
-		this.ar$.setFieldValue('email', form.email);
-		this.ar$.setFieldValue('Allergy information', form.allergies);
-		this.ar$.setFieldValue('Medication', form.medication);
-		this.ar$.setFieldValue('Notes', form.notes);
-		this.ar$.setFieldValue('Asthma', form.asthma);
-		this.ar$.setFieldValue('Diabetes', form.diabetes);
-		this.ar$.setFieldValue('Father\'s name', form.fathername);
-		this.ar$.setFieldValue('Mother\'s Name', form.mothername);
-		this.ar$.setFieldValue('Address', form.address);
-		this.ar$.setFieldValue('First contact number', form.phone1) ;
-		this.ar$.setFieldValue('Second contact number', form.phone2);
-		this.ar$.setFieldValue('Consent to take pictures', form.photoconsent);
-		this.ar$.setFieldValue('Single Term', form.singleTerm);
-		this.ar$.setFieldValue('Second Child', form.secondChild);
+		this.ar$.regData.setGeneralconsent(form.consent);
+		this.ar$.regData.setFirstname(form.firstname );
+		this.ar$.regData.setLastname(form.lastname);
+		this.ar$.regData.setDob(form.dob);
+		this.ar$.regData.setEmail(form.email);
+		this.ar$.regData.setAllergies(form.allergies);
+		this.ar$.regData.setMedication(form.medication);
+		this.ar$.regData.setNotes(form.notes);
+		this.ar$.regData.setAsthma(form.asthma);
+		this.ar$.regData.setDiabetes(form.diabetes);
+		this.ar$.regData.setFatherName(form.fathername);
+		this.ar$.regData.setMotherName(form.mothername);
+		this.ar$.regData.setAddress(form.address);
+		this.ar$.regData.setPhone1(form.phone1) ;
+		this.ar$.regData.setPhone2(form.phone2);
+		this.ar$.regData.setPictureconsent(form.photoconsent);
+		this.ar$.regData.setHalfterm(form.singleTerm);
+		this.ar$.regData.setSecondchild(form.secondChild);
 
 		this.printServiceParameters();
 	}
@@ -249,7 +249,7 @@ export class AcademyRegistrationFormComponent implements OnInit {
 
 	printServiceParameters()
 	{
-		console.log(this.ar$.getFieldValue('General Consent')==null?'':this.ar$.getFieldValue('General Consent'));
+		/* console.log(this.ar$.getFieldValue('General Consent')==null?'':this.ar$.getFieldValue('General Consent'));
 		console.log( this.ar$.getFieldValue('First name') );
 		console.log( this.ar$.getFieldValue('Last name'));
 		console.log( this.ar$.getFieldValue('Date of Birth'));
@@ -266,7 +266,7 @@ export class AcademyRegistrationFormComponent implements OnInit {
 		console.log( this.ar$.getFieldValue('Second contact number'));
 		console.log( this.ar$.getFieldValue('Consent to take pictures'));
 		console.log( this.ar$.getFieldValue('Single Term'));
-		console.log( this.ar$.getFieldValue('Second Child'));
+		console.log( this.ar$.getFieldValue('Second Child')); */
 	}
 
 }
