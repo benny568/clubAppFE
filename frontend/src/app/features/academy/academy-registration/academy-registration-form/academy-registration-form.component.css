@@ -7,6 +7,7 @@
 .form-dob-field { width: 100px }
 .form-email-field { width: 200px }
 .form-phone-field { width: 150px }
+.form-address-field { width: 330px }
 
 .lightline { 
   min-height: 1px; 
@@ -27,6 +28,10 @@
   float: right;
 }
 
-.left {
-  float: left;
+.left { float: left; }
+.form-container { 
+  max-width: 500px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

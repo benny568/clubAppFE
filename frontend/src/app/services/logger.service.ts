@@ -26,7 +26,7 @@ export class LoggerService {
     let i = 0;
     const depth = logdepth * 4;
     const moduleSpace = 25;
-    let hdr = ' '; // +  moduleName;
+    let hdr = ' ' +  moduleName;
 
   // Make sure the field width is the standard, pad if necessary
   //		if ( hdr.length < moduleSpace )

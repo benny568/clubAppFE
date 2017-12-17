@@ -1,238 +1,273 @@
 
-<div class="panel center" style="max-width: 500px;">
+<div class="panel center"  style="max-width: 600px;">
     <div class="panel-heading avenue-heading">
-      Step 2: Registration Form
+        Step 2: Registration Form
     </div>
     <div class="panel-body">
-      <form class="reg-form" [formGroup]="regForm" (ngSubmit)="submit(regForm.value)" autocomplete="off" novalidate>
-        
-        <mat-card class="center">
-          <strong>Child's Information:</strong><br>
 
-          <!-- First Name -->
-          <mat-form-field class="form-name-field">
-            <input matInput 
-                   required 
-                   [formControl]="regForm.controls['firstname']" 
-                   placeholder="First name"
-                   *ngIf="ar$.regData.getFirstname() === undefined"
-                  >
-            <input matInput
-                   required 
-                   [formControl]="regForm.controls['firstname']" 
-                   [value]="ar$.regData.getFirstname()"
-                   *ngIf="ar$.regData.getFirstname() !== undefined">
-          </mat-form-field>
-
-          &nbsp; &nbsp;
+        <mat-card class="form-container">
+ 
+            <mat-card-title-group>
+                <mat-card-title>Step 2: Registration Form</mat-card-title>
+                <mat-card-subtitle>Fill in details in this form</mat-card-subtitle>
+                <img mat-card-avatar src="assets/img/user-male-icon.png">
+            </mat-card-title-group>
     
-          <!-- Last Name -->
-          <mat-form-field class="form-name-field">
-              <input matInput 
-                     required 
-                     [formControl]="regForm.controls['lastname']" 
-                     placeholder="Last name"
-                     *ngIf="ar$.regData.getLastname() === undefined"
-                    >
-              <input matInput
-                     *ngIf="ar$.regData.getLastname() !== undefined"
-                     required 
-                     [formControl]="regForm.controls['lastname']" 
-                     [value]="ar$.regData.getLastname()">
-            </mat-form-field>
+            <mat-card-content>
+                <form class="reg-form" [formGroup]="regForm" (ngSubmit)="submit(regForm.value)" autocomplete="off" novalidate>
+                    
+                    <mat-card class="center">
+                        <strong>Child's Information:</strong><br>
 
-          &nbsp; &nbsp;
-    
-          <!-- Date of Birth -->
-          <mat-form-field class="form-dob-field">
-            <input matInput [formControl]="regForm.controls['dob']" [matDatepicker]="picker" placeholder="Date of Birth" [value]="ar$.regData.getDob()">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
-          </mat-form-field>
-    
-          <!-- Address -->
-          <mat-form-field class="form-full-width">
-            <textarea matInput [formControl]="regForm.controls['address']" placeholder="Address"></textarea>
-          </mat-form-field>
+                        <!-- First Name -->
+                        <mat-form-field class="form-name-field">
+                            <input matInput 
+                                    required 
+                                    formControlName="firstname" 
+                                    placeholder="First name"
+                                    *ngIf="ar$.regData.getFirstname() === undefined">
+                            <input matInput
+                                    required 
+                                    formControlName="firstname"
+                                    [value]="ar$.regData.getFirstname()"
+                                    *ngIf="ar$.regData.getFirstname() !== undefined">
+                        </mat-form-field>
 
-          <!-- Allergy Information -->
-          <mat-form-field class="form-full-width">
-            <textarea matInput
-                      [formControl]="regForm.controls['allergies']" 
-                      placeholder="Allergy information - please specify"
-                      *ngIf="ar$.regData.getAllergies() === undefined"
-                      >
-            </textarea>
-            <textarea matInput
-                      [formControl]="regForm.controls['allergies']" 
-                      placeholder="Allergy information - please specify" 
-                      [value]="ar$.regData.getAllergies()"
-                      *ngIf="ar$.regData.getAllergies() !== undefined">
-          </textarea>
-          </mat-form-field>
-    
-          <!-- Medication -->
-          <mat-form-field class="form-full-width">
-            <textarea matInput
-                      [formControl]="regForm.controls['medication']" 
-                      placeholder="On Medication - please specify" 
-                      *ngIf="ar$.regData.getMedication() === undefined" >
-            </textarea>
-            <textarea matInput
-                      [formControl]="regForm.controls['medication']" 
-                      placeholder="On Medication - please specify" 
-                      [value]="ar$.regData.getMedication()"
-                      *ngIf="ar$.regData.getMedication() !== undefined" >
-            </textarea>
-          </mat-form-field>
-    
-          <!-- Notes -->
-          <mat-form-field class="form-full-width">
-            <textarea matInput 
-                      [formControl]="regForm.controls['notes']" 
-                      placeholder="Additional notes" 
-                      *ngIf="ar$.regData.getNotes() === undefined" >
-            </textarea>
-            <textarea matInput 
-                      [formControl]="regForm.controls['notes']" 
-                      placeholder="Additional notes" 
-                      [value]="ar$.regData.getNotes()"
-                      *ngIf="ar$.regData.getNotes() !== undefined" >
-            </textarea>
-          </mat-form-field>
+                        &nbsp; &nbsp;
+                    
+                        <!-- Last Name -->
+                        <mat-form-field class="form-name-field">
+                            <input matInput 
+                                    required 
+                                    formControlName="lastname"
+                                    placeholder="Last name"
+                                    *ngIf="ar$.regData.getLastname() === undefined" >
+                            <input matInput
+                                    *ngIf="ar$.regData.getLastname() !== undefined"
+                                    required 
+                                    formControlName="lastname" 
+                                    [value]="ar$.regData.getLastname()">
+                            </mat-form-field>
 
-          <!-- Asthma -->
-          <mat-checkbox color='warn' 
-                        [formControl]="regForm.controls['asthma']" 
-                        [checked]="ar$.regData.getAsthma()">
-            <div style="font-weight: normal">
-              My child has Asthma
-            </div>
-          </mat-checkbox>
-          &nbsp; &nbsp;
-          <mat-checkbox color='warn' [formControl]="regForm.controls['diabetes']" [checked]="ar$.regData.getDiabetes()">
-            <div style="font-weight: normal">
-              My child has Diabetes
-            </div>
-          </mat-checkbox>
-    
-          <br><br><strong>Parents Information:</strong><br>
+                        &nbsp; &nbsp;
+                
+                        <!-- Date of Birth -->
+                        <mat-form-field class="form-dob-field">
+                            <input matInput formControlName="dob" [matDatepicker]="picker" placeholder="Date of Birth" [value]="ar$.regData.getDob()">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                        </mat-form-field>
+                    
+                        <!-- Address -->
+                        <br>
+                        <mat-form-field class="form-address-field">
+                            <textarea matInput 
+                                    formControlName="address" 
+                                    placeholder="Address"
+                                    *ngIf="ar$.regData.getAddress() === undefined" >
+                            </textarea>
+                            <textarea matInput 
+                                    formControlName="address" 
+                                    [value]="ar$.regData.getAddress()"
+                                    *ngIf="ar$.regData.getAddress() !== undefined" >
+                            </textarea>
+                        </mat-form-field>
 
-          <!-- email -->
-          <mat-form-field class="form-email-field">
-            <input matInput 
-                   [formControl]="regForm.controls['email']" 
-                   placeholder="Parent email address" 
-                   *ngIf="ar$.regData.getEmail() === undefined" >
-            <input matInput 
-                   [formControl]="regForm.controls['email']" 
-                   placeholder="Parent email address" 
-                   [value]="ar$.regData.getEmail()"
-                   *ngIf="ar$.regData.getEmail() !== undefined" >
-          </mat-form-field>
-    
-          <br>
-          <!-- Fathers Name -->
-          <mat-form-field class="form-name-field">
-            <input matInput 
-                   [formControl]="regForm.controls['fathername']" 
-                   placeholder="Father's name" 
-                   *ngIf="ar$.regData.getFatherName() === undefined" >
-            <input matInput 
-                   [formControl]="regForm.controls['fathername']" 
-                   placeholder="Father's name" 
-                   [value]="ar$.regData.getFatherName()"
-                   *ngIf="ar$.regData.getFatherName() !== undefined" >
-          </mat-form-field>
-    
-          &nbsp; &nbsp;
-          <!-- Father's phone number -->
-          <mat-form-field class="form-phone-field">
-            <input matInput 
-                   [formControl]="regForm.controls['phone2']" 
-                   placeholder="Father's phone number" 
-                   *ngIf="ar$.regData.getPhone2() === undefined" >
-            <input matInput 
-                   [formControl]="regForm.controls['phone2']" 
-                   placeholder="Father's phone number" 
-                   [value]="ar$.regData.getPhone2()"
-                   *ngIf="ar$.regData.getPhone2() !== undefined" >
-          </mat-form-field>
-    
-          <br>
-          <!-- Mother's Name -->
-          <mat-form-field class="form-name-field">
-            <input matInput 
-                   [formControl]="regForm.controls['mothername']" 
-                   placeholder="Mother's name" 
-                   *ngIf="ar$.regData.getMotherName() === undefined" >
-            <input matInput 
-                   [formControl]="regForm.controls['mothername']" 
-                   placeholder="Mother's name" 
-                   [value]="ar$.regData.getMotherName()"
-                   *ngIf="ar$.regData.getMotherName() !== undefined" >
-          </mat-form-field>
-    
-          &nbsp; &nbsp;
-          <!-- Mother's Phone Number -->
-          <mat-form-field class="form-phone-field">
-            <input matInput 
-                   [formControl]="regForm.controls['phone1']" 
-                   placeholder="Mother's phone number"
-                   *ngIf="ar$.regData.getMotherName() === undefined" >
-            <input matInput 
-                   [formControl]="regForm.controls['phone2']" 
-                   placeholder="Mother's phone number"
-                   [value]="ar$.regData.getPhone1()"
-                   *ngIf="ar$.regData.getPhone1() !== undefined" >
-          </mat-form-field>
+                        <!-- Allergy Information -->
+                        <br>
+                        <mat-form-field class="form-address-field">
+                            <textarea matInput
+                                    formControlName="allergies" 
+                                    placeholder="Allergy information - please specify"
+                                    *ngIf="ar$.regData.getAllergies() === undefined"
+                                    >
+                            </textarea>
+                            <textarea matInput
+                                    formControlName="allergies" 
+                                    placeholder="Allergy information - please specify" 
+                                    [value]="ar$.regData.getAllergies()"
+                                    *ngIf="ar$.regData.getAllergies() !== undefined">
+                        </textarea>
+                        </mat-form-field>
+                    
+                        <!-- Medication -->
+                        <br>
+                        <mat-form-field class="form-address-field">
+                            <textarea matInput
+                                    formControlName="medication" 
+                                    placeholder="On Medication - please specify" 
+                                    *ngIf="ar$.regData.getMedication() === undefined" >
+                            </textarea>
+                            <textarea matInput
+                                    formControlName="medication" 
+                                    placeholder="On Medication - please specify" 
+                                    [value]="ar$.regData.getMedication()"
+                                    *ngIf="ar$.regData.getMedication() !== undefined" >
+                            </textarea>
+                        </mat-form-field>
+                    
+                        <!-- Notes -->
+                        <br>
+                        <mat-form-field class="form-address-field">
+                            <textarea matInput 
+                                    formControlName="notes" 
+                                    placeholder="Additional notes" 
+                                    *ngIf="ar$.regData.getNotes() === undefined" >
+                            </textarea>
+                            <textarea matInput 
+                                    formControlName="notes" 
+                                    placeholder="Additional notes" 
+                                    [value]="ar$.regData.getNotes()"
+                                    *ngIf="ar$.regData.getNotes() !== undefined" >
+                            </textarea>
+                        </mat-form-field>
 
-          <br>
-          <!-- Half/Full term -->
-          <mat-checkbox color='warn' [formControl]="regForm.controls['singleTerm']" [value]="ar$.regData.getHalfterm()">
-            <div style="font-weight: normal">
-                Single Term
-            </div>
-          </mat-checkbox>
+                        <!-- Asthma -->
+                        <br>
+                        <mat-checkbox color='warn' 
+                            formControlName="asthma" 
+                            [checked]="ar$.regData.getAsthma()">
+                            <div style="font-weight: normal">
+                                My child has Asthma
+                            </div>
+                        </mat-checkbox>
+                        &nbsp; &nbsp;
+                        <mat-checkbox color='warn' 
+                                    formControlName="diabetes" 
+                                    [checked]="ar$.regData.getDiabetes()">
+                            <div style="font-weight: normal">
+                                My child has Diabetes
+                            </div>
+                        </mat-checkbox>
+                    
+                        <br><br><strong>Parents Information:</strong><br>
 
-          &nbsp; &nbsp;
-          <!-- Second Child -->
-          <mat-checkbox color='warn' [formControl]="regForm.controls['secondChild']" [value]="ar$.regData.getSecondchild()">
-            <div style="font-weight: normal">
-                Second Child
-            </div>
-          </mat-checkbox>
+                        <!-- email -->
+                        <mat-form-field class="form-email-field">
+                            <input matInput 
+                                    formControlName="email" 
+                                    placeholder="Parent email address"
+                                    *ngIf="ar$.regData.getEmail() === undefined" >
+                            <input matInput 
+                                    formControlName="email" 
+                                    placeholder="Parent email address" 
+                                    [value]="ar$.regData.getEmail()"
+                                    *ngIf="ar$.regData.getEmail() !== undefined" >
+                        </mat-form-field>
+                    
+                        <br>
+                        <!-- Fathers Name -->
+                        <mat-form-field class="form-name-field">
+                            <input matInput 
+                                    formControlName="fathername" 
+                                    placeholder="Father's name" 
+                                    *ngIf="ar$.regData.getFatherName() === undefined" >
+                            <input matInput 
+                                    formControlName="fathername" 
+                                    placeholder="Father's name" 
+                                    [value]="ar$.regData.getFatherName()"
+                                    *ngIf="ar$.regData.getFatherName() !== undefined" >
+                        </mat-form-field>
+                    
+                        &nbsp; &nbsp;
+                        <!-- Father's phone number -->
+                        <mat-form-field class="form-phone-field">
+                            <input matInput 
+                                    formControlName="phone2" 
+                                    placeholder="Father's phone number" 
+                                    *ngIf="ar$.regData.getPhone2() === undefined" >
+                            <input matInput 
+                                    formControlName="phone2" 
+                                    placeholder="Father's phone number" 
+                                    [value]="ar$.regData.getPhone2()"
+                                    *ngIf="ar$.regData.getPhone2() !== undefined" >
+                        </mat-form-field>
+                    
+                        <br>
+                        <!-- Mother's Name -->
+                        <mat-form-field class="form-name-field">
+                            <input matInput 
+                                    formControlName="mothername" 
+                                    placeholder="Mother's name" 
+                                    *ngIf="ar$.regData.getMotherName() === undefined" >
+                            <input matInput 
+                                    formControlName="mothername" 
+                                    placeholder="Mother's name" 
+                                    [value]="ar$.regData.getMotherName()"
+                                    *ngIf="ar$.regData.getMotherName() !== undefined" >
+                        </mat-form-field>
+                    
+                        &nbsp; &nbsp;
+                        <!-- Mother's Phone Number -->
+                        <mat-form-field class="form-phone-field">
+                            <input matInput 
+                                    formControlName="phone1" 
+                                    placeholder="Mother's phone number"
+                                    *ngIf="ar$.regData.getMotherName() === undefined" >
+                            <input matInput 
+                                    formControlName="phone1" 
+                                    placeholder="Mother's phone number"
+                                    [value]="ar$.regData.getPhone1()"
+                                    *ngIf="ar$.regData.getPhone1() !== undefined" >
+                        </mat-form-field>
 
-          <div class="lightline"></div>
+                        <br>
+                        <!-- Half/Full term -->
+                        <mat-checkbox color='warn' 
+                                    formControlName="singleTerm" 
+                                    [checked]="ar$.regData.getHalfterm()">
+                                Single Term
+                        </mat-checkbox>
 
-          <!-- General Consent -->
-          <div class="consent-text">
-            I, the child's parent/guardian, give my consent for him/her to participate in All Avenue United Soccer Academy’s Coaching sessions, Organised Events, Blitz & Competitions etc. In the unlikely event of an Accident I/We give our permission for my child
-            to be given immediate First Aid or taken to the nearest Hospital.
-          </div>
-          <mat-checkbox color='warn' [formControl]="regForm.controls['consent']" [checked]="ar$.regData.getGeneralconsent()">
-            Check the box to show your consent
-          </mat-checkbox>
-          
-          <div class="lightline"></div>
+                        &nbsp; &nbsp;
+                        <!-- Second Child -->
+                        <mat-checkbox color='warn' 
+                                    formControlName="secondChild" 
+                                    [checked]="ar$.regData.getSecondchild()">
+                            <div style="font-weight: normal">
+                                Second Child
+                            </div>
+                        </mat-checkbox>
 
-          <!-- Consent to take pictures -->
-          <div class="consent-text">
-            I, the child's parent/guardian, give permission for the club to use our child's picture on their website.
-          </div>
-          <mat-checkbox color='warn' [formControl]="regForm.controls['photoconsent']" [checked]="ar$.regData.getPictureconsent()">
-            Check the box to show your consent
-          </mat-checkbox>
+                        <div class="lightline"></div>
 
-          <div class="lightline"></div>
+                        <!-- General Consent -->
+                        <div class="consent-text">
+                            I, the child's parent/guardian, give my consent for him/her to participate in All Avenue United Soccer Academy’s Coaching sessions, Organised Events, Blitz & Competitions etc. In the unlikely event of an Accident I/We give our permission for my child
+                            to be given immediate First Aid or taken to the nearest Hospital.
+                        </div>
+                        <mat-checkbox color='warn' 
+                                    formControlName="consent" 
+                                    [checked]="ar$.regData.getGeneralconsent()">
+                            Check the box to show your consent
+                        </mat-checkbox>
+                        
+                        <div class="lightline"></div>
 
-          <button mat-raised-button color="warn" style="float: left" (click)="back()">Back</button>
-          <button mat-raised-button color="warn" type="submit" style="float: right">Submit Form</button>
-          <br>
+                        <!-- Consent to take pictures -->
+                        <div class="consent-text">
+                            I, the child's parent/guardian, give permission for the club to use our child's picture on their website.
+                        </div>
+                        <mat-checkbox color='warn' 
+                                    formControlName="photoconsent" 
+                                    [checked]="ar$.regData.getPictureconsent()">
+                            Check the box to show your consent
+                        </mat-checkbox>
 
+                        <div class="lightline"></div>
+
+                        <button mat-raised-button color="warn" style="float: left" (click)="back()">Back</button>
+                        <button mat-raised-button color="warn" type="submit" style="float: right">Submit Form</button>
+                        <br>
+
+                    </mat-card>
+
+                </form>
+
+            </mat-card-content>
         </mat-card>
 
-      </form>
     </div>
-  </div>
+</div>
+    
   

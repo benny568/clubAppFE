@@ -5,10 +5,14 @@
   </div>
   <div class="panel-body">
 
-    <mat-card>
-      <mat-card-title>
-          Fees for this season
-      </mat-card-title>
+    <mat-card class="form-container">
+ 
+        <mat-card-title-group>
+            <mat-card-title>Step 1: Accept Terms & Conditions</mat-card-title>
+            <mat-card-subtitle>Fees for this season</mat-card-subtitle>
+        </mat-card-title-group>
+
+        <mat-card-content>
       <ul>
         <li>
           Term No. 1 … from 23rd Sept until Saturday December 16th  2017…   cost €70
@@ -20,10 +24,8 @@
       <div class="note">
           2nd and subsequent children from the same family €60 per term
       </div>
-    </mat-card>
 
-    <mat-card>
-      <mat-card-title>Please Note:</mat-card-title>
+      <mat-card-subtitle>Please Note:</mat-card-subtitle>
       <ul>
         <li>A Registration Form  <strong>must</strong>  be completed for each child attending</li>
         <li>Forms / Fees can be paid online or at Lees Road from 9.30 – 10.00 in car park</li>
@@ -44,6 +46,8 @@
       <mat-checkbox [(ngModel)]="tandc"></mat-checkbox>
       <label class="ui-widget">I accept T&C's</label>
       <br /><br />
+
+    </mat-card-content>
 
       <button mat-raised-button color="warn" style="float: left" (click)="back()">Back</button>
       <button mat-raised-button color="warn" style="float: right" (click)="submit()">Proceed to register</button>

@@ -1,3 +1,4 @@
+import { CovalentModule } from './../../covalent.module';
 import { MaterialModule } from './../../material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -22,6 +23,7 @@ import { AcademyRegistrationPaymentComponent } from './academy-registration/acad
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    CovalentModule,
     AcademyRoutingModule
   ],
   providers: [

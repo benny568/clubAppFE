@@ -15,7 +15,7 @@ export class AcademyRegistrationPaymentComponent implements OnInit {
 	logdepth:number = 4;
 	
   constructor( private lg$: LoggerService, 
-               private ar$: AcademyRegistrationService, 
+               public  ar$: AcademyRegistrationService, 
                private router: Router  
               ) {}
 	

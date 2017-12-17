@@ -86,11 +86,13 @@ export class AcademyRegistrationService {
     loghdr = "";
 	serviceName = 'AcademyRegistrationService';
 	regData: regDetails;
+	timeStamp = new Date().getMinutes();
 
 	constructor ( private lg$: LoggerService, private com$: CommonService, private _http: Http ) 
 	{
 		this.lg$.setLogHdr(this.logdepth, this.serviceName);
 		this.regData = new regDetails();
+		this.lg$.log("********** Academy Reg Service constuctor: " + this.timeStamp);
 	}
 
     sortingHat( dob: string )

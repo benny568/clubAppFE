@@ -32,62 +32,42 @@ export class AcademyRegistrationFormComponent implements OnInit {
 	startDate = this.today.getDate();
 	/* ************************************************* */
 
-
 	constructor( private lg$: LoggerService,
 			     private com$: CommonService,
 				 private err$: ErrorService,
-			     private ar$: AcademyRegistrationService,
+			     public  ar$: AcademyRegistrationService,
 			     private router: Router,
 				 fb: FormBuilder )
 	{
+		this.lg$.setLogHdr(this.logdepth, this.componentName);
+		this.lg$.log("** Reg Component constructor called.");
 
-		this.regForm = fb.group({
-			firstname: [''],
-			lastname: [''],
-			dob: [''],
-			allergies: [''],
-			medication: [''],
-			notes: [''],
-			asthma: [''],
-			diabetes: [''],
-			fathername: [''],
-			mothername: [''],
-			address: [''],
-			email: [''],
-			phone1: [''],
-			phone2: [''],
-			consent: [''],
-			photoconsent: [''],
-			singleTerm: [''],
-			secondChild: ['']
+		this.regForm = new FormGroup({
+			firstname: new FormControl(),
+			lastname: new FormControl(),
+			dob: new FormControl(),
+			allergies: new FormControl(),
+			medication: new FormControl(),
+			notes: new FormControl(),
+			asthma: new FormControl(),
+			diabetes: new FormControl(),
+			fathername: new FormControl(),
+			mothername: new FormControl(),
+			address: new FormControl(),
+			email: new FormControl(),
+			phone1: new FormControl(),
+			phone2: new FormControl(),
+			consent: new FormControl(),
+			photoconsent: new FormControl(),
+			singleTerm: new FormControl(),
+			secondChild: new FormControl()
 		});
-
-		/*this.regForm = fb.group({
-			firstname: ['John'],
-			lastname: ['Black'],
-			dob: ['11/09/99'],
-			allergies: ['No allergies'],
-			medication: ['Paracetomol'],
-			notes: ['There are no notes.'],
-			asthma: ['true'],
-			diabetes: ['false'],
-			fathername: ['Tom'],
-			mothername: ['Mary'],
-			address: ['23 Woodland Grove'],
-			email: ['tb@hotmail.com'],
-			phone1: ['12345678990'],
-			phone2: ['0987654322'],
-			consent: ['true'],
-			photoconsent: ['true']
-		});*/
 
 		this.error = false;
 	}
 
 	ngOnInit() {
-      this.lg$.setLogHdr(this.logdepth, this.componentName);
 	  this.lg$.log("ngOnInit()");
-	  this.ar$.regData.setEmail("");
 	}
 
 	submit(form: any)
@@ -146,6 +126,7 @@ export class AcademyRegistrationFormComponent implements OnInit {
 		}
 		else
 		{
+			this.lg$.log("Logging parmeters entered...");
 			this.setServiceParameters(form);
 			this.router.navigate(['/academyRegistrationPayment']);
 		}
@@ -249,24 +230,24 @@ export class AcademyRegistrationFormComponent implements OnInit {
 
 	printServiceParameters()
 	{
-		/* console.log(this.ar$.getFieldValue('General Consent')==null?'':this.ar$.getFieldValue('General Consent'));
-		console.log( this.ar$.getFieldValue('First name') );
-		console.log( this.ar$.getFieldValue('Last name'));
-		console.log( this.ar$.getFieldValue('Date of Birth'));
-		console.log( this.ar$.getFieldValue('email'));
-		console.log( this.ar$.getFieldValue('Allergy information'));
-		console.log( this.ar$.getFieldValue('Medication'));
-		console.log( this.ar$.getFieldValue('Notes'));
-		console.log( this.ar$.getFieldValue('Asthma'));
-		console.log( this.ar$.getFieldValue('Diabetes'));
-		console.log( this.ar$.getFieldValue('Father\'s name'));
-		console.log( this.ar$.getFieldValue('Mother\'s Name'));
-		console.log( this.ar$.getFieldValue('Address'));
-		console.log( this.ar$.getFieldValue('First contact number'));
-		console.log( this.ar$.getFieldValue('Second contact number'));
-		console.log( this.ar$.getFieldValue('Consent to take pictures'));
-		console.log( this.ar$.getFieldValue('Single Term'));
-		console.log( this.ar$.getFieldValue('Second Child')); */
+		this.lg$.log(this.ar$.regData.getGeneralconsent()==null?'':this.ar$.regData.getGeneralconsent());
+		this.lg$.log( this.ar$.regData.getFirstname());
+		this.lg$.log( this.ar$.regData.getLastname());
+		this.lg$.log( this.ar$.regData.getDob());
+		this.lg$.log( this.ar$.regData.getEmail());
+		this.lg$.log( this.ar$.regData.getAllergies());
+		this.lg$.log( this.ar$.regData.getMedication());
+		this.lg$.log( this.ar$.regData.getNotes());
+		this.lg$.log( this.ar$.regData.getAsthma());
+		this.lg$.log( this.ar$.regData.getDiabetes());
+		this.lg$.log( this.ar$.regData.getFatherName());
+		this.lg$.log( this.ar$.regData.getMotherName());
+		this.lg$.log( this.ar$.regData.getAddress());
+		this.lg$.log( this.ar$.regData.getPhone1());
+		this.lg$.log( this.ar$.regData.getPhone2());
+		this.lg$.log( this.ar$.regData.getPictureconsent());
+		this.lg$.log( this.ar$.regData.getHalfterm());
+		this.lg$.log( this.ar$.regData.getSecondchild());
 	}
 
 }
