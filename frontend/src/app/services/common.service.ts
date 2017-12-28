@@ -38,6 +38,28 @@ export class CommonService {
         }
 
         return _home;
+	}
+	
+	/**********************************************************
+     * Name:		getGalleryHome()
+     * Description:	Returns the _home URL so that it can be used
+     * 				as a local or remote app.
+     * Scope:		Externally accessible
+     * Params in:	none
+     * Return:		_home URL
+     **********************************************************/
+    getGalleryHome() : string {
+        var _home:string;
+
+        if ( this.CurrentServerMode === this.modes.LOCAL )
+        {
+        	 _home = 'http://localhost:8080/';
+        } else if ( this.CurrentServerMode === this.modes.REMOTE )
+        {
+            _home = 'http://www.avenueunited.ie/';
+        }
+
+        return _home;
     }
 
     /**********************************************************

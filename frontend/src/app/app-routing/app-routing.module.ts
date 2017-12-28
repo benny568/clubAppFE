@@ -16,6 +16,7 @@ import { LinksComponent } from '../links/links.component';
 import { ClubHistoryComponent } from '../club-history/club-history.component';
 import { LoginComponent } from '../login/login.component';
 import { PhotosComponent } from '../photos/photos.component';
+import { VideosComponent } from './../videos/videos.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,7 +29,8 @@ export const routes: Routes = [
   { path: 'links', component: LinksComponent },
   { path: 'clubHistory', component: ClubHistoryComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'media/:cat1/:cat2/:cat3', component: PhotosComponent } 
+  { path: 'media/:cat1/:cat2/:cat3', component: PhotosComponent },
+  { path: 'video/:cat1/:cat2/:cat3', component: VideosComponent } 
 ];
 
 @NgModule({

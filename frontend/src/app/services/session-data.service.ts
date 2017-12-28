@@ -506,7 +506,21 @@ export class SessionDataService {
     {
         console.log("-->" + "loadPhotoDetails(" + url + ")");
 
-        // ToDo: If we have already loaded the news just return
+        // Read the list of files from the server
+       return this._http.get( url )
+            .map(response => response.json());
+    }
+
+    /**********************************************************
+     * Name:		loadVideoDetails()
+     * Description:	Retrieves a list of videos from the server
+     * Scope:		Internal
+     * Params in:	None
+     * Return:		Sets
+     **********************************************************/
+    public loadVideoDetails( url: string )
+    {
+        console.log("-->" + "loadVideoDetails(" + url + ")");
 
         // Read the list of files from the server
        return this._http.get( url )

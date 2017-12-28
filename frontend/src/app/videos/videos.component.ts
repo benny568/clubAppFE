@@ -8,12 +8,12 @@ import { CommonService }        from '../services/common.service';
 
 @Component({
   selector: 'app-photos',
-  templateUrl: './photos.component.html',
-  styleUrls: ['./photos.component.css'],
+  templateUrl: './videos.component.html',
+  styleUrls: ['./videos.component.css'],
   providers: [ LoggerService ]
 })
-export class PhotosComponent implements OnInit {
-	componentName : string = 'PhotosComponent';
+export class VideosComponent implements OnInit {
+	componentName : string = 'VideosComponent';
 	path : string = '';
 	logdepth:number = 1;
 	paramsObservable:any;
@@ -25,7 +25,7 @@ export class PhotosComponent implements OnInit {
 				       private route: ActivatedRoute ) {
 		this.lg$.setLogHdr(this.logdepth, this.componentName);
 
-    	this.lg$.log("PhotosComponent - constructor()");
+    	this.lg$.log( this.componentName + " - constructor()");
 
 		this.display = true;
 	}
@@ -38,7 +38,7 @@ export class PhotosComponent implements OnInit {
 		var url = '';
 		this.d$.aAlbum = new Array<Media>();
 
-		this.lg$.log("PhotosComponent - ngOnInit()")
+		this.lg$.log( this.componentName + " - ngOnInit()")
 
 		this.paramsObservable = this.route.params.subscribe(params => 
 		{
@@ -52,21 +52,21 @@ export class PhotosComponent implements OnInit {
 	
 			if ( cat3 !== "none" && cat3 !== '' )
 			{
-				url = this.com$.getHome() + '/photos/' + cat1 + '/' + cat2 + '/' + cat3;
-				this.path = this.com$.getGalleryHome() + 'galleries/' + cat1 + '/' + cat2 + '/' + cat3 + '/';
+				url = this.com$.getHome() + '/videos/' + cat1 + '/' + cat2 + '/' + cat3;
+				this.path = this.com$.getGalleryHome() + 'videos/' + cat1 + '/' + cat2 + '/' + cat3 + '/';
 				this.lg$.log("Path set to: " + this.path);
 			} else
 			{
-				url = this.com$.getHome() + '/photos/' + cat1 + '/' + cat2;
-				this.path = this.com$.getGalleryHome() + 'galleries/' + cat1 + '/' + cat2 + '/';
+				url = this.com$.getHome() + '/videos/' + cat1 + '/' + cat2;
+				this.path = this.com$.getGalleryHome() + 'videos/' + cat1 + '/' + cat2 + '/';
 				this.lg$.log("Path set to: " + this.path);
 			}
 	
-			this.d$.loadPhotoDetails(url)
+			this.d$.loadVideoDetails(url)
 				.subscribe(
 		            	data => this.processResponse(data, this.path, this.d$.aAlbum),
-		            	error => console.log("===> Error getting list of photos from server."),
-		            	() => console.log( "<-" + " loadPhotoDetails()")
+		            	error => console.log("===> Error getting list of videos from server."),
+		            	() => console.log( "<-" + " loadVideoDetails()")
 		            );
 		});
 
@@ -74,7 +74,7 @@ export class PhotosComponent implements OnInit {
 
 	ngOnChanges()
 	{
-		this.lg$.log("PhotosComponent - ngOnChanges()");
+		this.lg$.log( this.componentName + " - ngOnChanges()");
 	}
 
 
@@ -85,7 +85,6 @@ export class PhotosComponent implements OnInit {
 		this.lg$.log("     |- path:" + path);
 		this.lg$.log("     |- album:" + album);
 		var self = this;
-		var file;
 
 		this.com$.clearArray( album, this.lg$ );
 
@@ -106,6 +105,7 @@ export class PhotosComponent implements OnInit {
 	ngOnDestroy() 
 	{
     	this.paramsObservable.unsubscribe();
-  	}
+	}
+
 }
 

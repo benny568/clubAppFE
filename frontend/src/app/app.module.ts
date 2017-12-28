@@ -37,6 +37,7 @@ import { ErrorService } from './services/error.service';
 import { NewsComponent } from './news/news.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
 import { PhotosComponent } from './photos/photos.component';
+import { VideosComponent } from './videos/videos.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { PhotosComponent } from './photos/photos.component';
     MerchandiseComponent,
     NewsComponent,
     SponsorsComponent,
-    PhotosComponent
+    PhotosComponent,
+    VideosComponent
   ],
   imports: [
     BrowserModule,

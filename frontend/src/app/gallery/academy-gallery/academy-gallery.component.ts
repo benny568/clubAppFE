@@ -16,7 +16,7 @@ import { CommonService }      from '../../services/common.service'
   styleUrls: ['./academy-gallery.component.css']
 })
 export class AcademyGalleryComponent implements OnInit {
-  componentName : string = 'PhotosComponent';
+  componentName : string = 'AcademyGalleryComponent';
 	aAlbum : Array<Media>;
 	path : string = '';
 	logdepth:number = 1;
