@@ -292,14 +292,14 @@ export class SessionDataService {
     {
         console.log("-->" + " dsGetTeams()..");
         var url = this.com$.getHome();
-        console.log("-->" + " dsGetTeams()..REAL VERSION - home is (" + url + ")");
+        console.log("-->" + " dsGetTeams() - home is (" + url + ")");
 
       /*this.dsTeams = [ {'id':0, 'name': "Junior A", 'lrcode':0, 'lrFixturesCode':0, 'lrResultsCode':0, 'noticeboard':"No info"},
                        {'id':0, 'name': "Junior B", 'lrcode':0, 'lrFixturesCode':0, 'lrResultsCode':0, 'noticeboard':"No info"},
                        {'id':0, 'name': "Youths", 'lrcode':0, 'lrFixturesCode':0, 'lrResultsCode':0, 'noticeboard':"No info"},
                      ];*/
 
-        return this._http.get( url + '/teams' )
+        return this._http.get( url + 'teams' )
 			.map(response => response.json())
 			.subscribe( data => this.dsSetTeams(data),
 						err  => console.error("DataService: ERROR reading teams from server!"),
@@ -534,7 +534,7 @@ export class SessionDataService {
      * Params in:
      * Return:
      **********************************************************/
-    public authenticate(username: string, password: string)
+/*     public authenticate(username: string, password: string)
     {
     	console.log("    --> authenticate(" + username + "," + password + ")");
 
@@ -546,7 +546,7 @@ export class SessionDataService {
 	    console.log("    Calling POST on /login")
 	    return this._http.post( this.com$.getHome() + 'login', body, options);
 //        return this._http.post( this.getHome() + '/login?' + creds, body, options);
-    }
+    } */
 
 /*    authenticate2( credentials: object, callback: string )
     {
