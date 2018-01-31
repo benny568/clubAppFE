@@ -1,8 +1,9 @@
+import { Headers } from '@angular/http';
 import { Component }          from '@angular/core';
 import { Router }             from '@angular/router';
 import { FormGroup,
-	       Validators,
-	       FormBuilder }        from '@angular/forms';
+	     Validators,
+		 FormBuilder }        from '@angular/forms';
 
 import { SessionDataService } from '../services/session-data.service';
 import { LoggerService }      from '../services/logger.service';
@@ -28,10 +29,10 @@ export class LoginComponent {
 	showMsg: boolean = false;
 
 	constructor( private lg$: LoggerService,
-				       private login$: LoginService,
-				       private user$: UserService,
-			         private _router: Router,
-			         private fb: FormBuilder )
+				 private login$: LoginService,
+				 private user$: UserService,
+				 private _router: Router,
+				 private fb: FormBuilder )
 	{
 		this.lg$.setLogHdr(this.logdepth, this.componentName);
 		this.loginDetails = { username: '', password: ''};
@@ -53,14 +54,22 @@ export class LoginComponent {
 	}
 
 	onSubmit(form: any): void {
-		this.lg$.log( "->onSubmit(): you submitted values:" + form.username);
+		this.lg$.log( "->onSubmit(): you submitted values:" + form.username + ":" + form.password);
 		this.user$.CurrentUser.username = form.username;
 
-		this.login$.authenticate( form.username, form.password )
+		this.login$.sendCredential( form.username, form.password )
 			.subscribe(
 				res => {
-							this.getUserDetails(this.user$.CurrentUser.username),
-							this.user$.setUserAsAuthenticated();
+							if( res.status === 200 )
+							{
+								this.lg$.log("SUCCESS !!!!!!!!!!!!!!!");
+								this.lg$.log("TOKEN: "+ res.headers.get('myheader') );
+								this.lg$.log("BODY: " + res.text() );
+								this.saveJwt(res.text());
+								this.user$.setUserAsAuthenticated();
+								this.lg$.log("Routing to home page");
+								this._router.navigate( ['adminhome', {}] );
+							}
 				},
 				err => {
 						this.lg$.error("ERROR: " + err);
@@ -70,8 +79,19 @@ export class LoginComponent {
 							this.message = 'Incorrect username and/or password!';
 							this.showMsg = true;
 						}
+						else if( err.status === 403 )
+						{
+							this.lg$.log("Wrong username/password: " + err.statusText);
+						}
 				}
 			);
+	}
+
+	private saveJwt(jwt) {
+		if(jwt) {
+		  localStorage.setItem('id_token', jwt);
+		  this.lg$.log("JWT: " + jwt );
+		}
 	}
 
 	private getUserDetails( username: string )

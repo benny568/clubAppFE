@@ -21,7 +21,7 @@ export class NewsService {
      **********************************************************/
     public loadNewsStories( type?: string )
     {
-        console.log('-->' + 'loadNewsStories( NEW 3 )..');
+        console.log('-->' + 'loadNewsStories()..');
         const url = this.com$.getHome();
 
         // If it's the Academy asking for news....
@@ -30,7 +30,7 @@ export class NewsService {
             .map(response => response.json());
         }
         // Else...
-        return this.http$.get( url + '/stories' )
+        return this.http$.get( url + 'stories' )
             			.map(response => response.json());
      }
 

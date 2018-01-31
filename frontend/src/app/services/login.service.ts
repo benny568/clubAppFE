@@ -17,8 +17,14 @@ export class LoginService {
 
     logdepth = 3;
     serviceName = 'LoginService';
+    public token: string;
 
-     constructor ( private lg$: LoggerService, private com$: CommonService, private http: Http ) {}
+     constructor ( private lg$: LoggerService, private com$: CommonService, private http: Http ) 
+     {
+         // set token if saved in local storage
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.token = currentUser && currentUser.token;
+     }
 
     /**********************************************************
      * Name:		authenticate()
@@ -40,11 +46,22 @@ export class LoginService {
          return this.http.post(url, params, {headers: headers, withCredentials : true});
      }
 
+     sendCredential(username: string, password: string) {
+        let url = "http://localhost:8080/backend/login";
+        let params = 'username='+username+'&password='+password;
+        let headers = new Headers(
+        {
+          'Content-Type': 'application/x-www-form-urlencoded'
+          // 'Access-Control-Allow-Credentials' : true
+        });
+        return this.http.post(url, params, {headers: headers, withCredentials : true});
+      }
+
      logout()
      {
     	 let url = "http://www.avenueunited.ie/logout";
     	 
     	 return this.http.get( url, { withCredentials: true } );
-     }
+     }         
 
 }
