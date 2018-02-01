@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { Http, Headers,
          RequestOptions } from '@angular/http';
 
-import { SessionDataService } from './services/session-data.service';
 import { LoggerService } from './services/logger.service';
 import { CommonService } from './services/common.service';
+import { SessionDataService } from './services/session-data.service';
 import { LoginService } from './services/login.service';
 import { UserService } from './services/user.service';
 
@@ -23,8 +23,8 @@ export class AppComponent implements OnInit {
   loggedIn = '';
 
   constructor( private lg$: LoggerService,
-               public d$: SessionDataService,
                private com$: CommonService,
+               public d$: SessionDataService,
                private login$: LoginService,
                public user$: UserService,
                private router: Router,

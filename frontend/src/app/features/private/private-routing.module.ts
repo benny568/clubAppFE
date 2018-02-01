@@ -1,3 +1,4 @@
+import { AdminOverviewComponent } from './admin-overview/admin-overview.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -6,7 +7,8 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 const routes: Routes = [
   { path: '', component: PrivateComponent },
-  { path: 'adminhome', component: AdminHomeComponent }
+  { path: 'adminhome', component: AdminHomeComponent },
+  { path: 'adminOverview', component: AdminOverviewComponent }
 ];
 
 @NgModule({
