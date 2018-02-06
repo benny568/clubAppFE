@@ -63,7 +63,6 @@ export class LoginComponent {
 							if( res.status === 200 )
 							{
 								this.lg$.log("SUCCESS !!!!!!!!!!!!!!!");
-								this.lg$.log("TOKEN: "+ res.headers.get('myheader') );
 								this.lg$.log("BODY: " + res.text() );
 								this.saveJwt(res.text());
 								this.user$.setUserAsAuthenticated();

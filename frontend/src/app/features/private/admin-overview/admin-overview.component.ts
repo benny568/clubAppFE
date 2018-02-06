@@ -1,30 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SessionDataService } from '../../../services/session-data.service';
 import { LoggerService } from '../../../services/logger.service';
 import { CommonService } from '../../../services/common.service';
+import { SessionDataService } from '../../../services/session-data.service';
 import { UserService }   from '../../../services/user.service';
 
 @Component({
-  selector: 'app-admin-home',
-  templateUrl: './admin-home.component.html',
-  styleUrls: ['./admin-home.component.css'],
-  providers: [ LoggerService ]
+  selector: 'app-admin-overview',
+  templateUrl: './admin-overview.component.html',
+  styleUrls: ['./admin-overview.component.css']
 })
-export class AdminHomeComponent implements OnInit 
+export class AdminOverviewComponent implements OnInit 
 {
-  componentName = 'AdminHomeComponent';
+  componentName = 'AdminOverviewComponent';
   logdepth = 0;
   loggedIn = '';
 
   constructor( private lg$: LoggerService,
                private com$: CommonService,
+               public d$: SessionDataService,
                private user$: UserService ) { }
 
   ngOnInit() 
   {
     this.lg$.setLogHdr(this.logdepth, this.componentName);
-    this.lg$.log("Username: " + this.user$.CurrentUser.username );
   }
 
 }

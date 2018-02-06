@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { PrivateRoutingModule } from './private-routing.module';
 import { PrivateComponent } from './private.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminOverviewComponent } from './admin-overview/admin-overview.component';
+import { AdminTutorialsComponent } from './admin-tutorials/admin-tutorials.component';
 
 @NgModule({
   imports: [
@@ -14,7 +16,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
   ],
   declarations: [
     PrivateComponent, 
-    AdminHomeComponent
+    AdminHomeComponent, AdminOverviewComponent, AdminTutorialsComponent
   ]
 })
 export class PrivateModule { }

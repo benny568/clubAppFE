@@ -8,6 +8,7 @@ import 'hammerjs';
 
 import { AcademyModule } from './features/academy/academy.module';
 import { TeamsModule } from './features/teams/teams.module';
+import { PrivateModule } from './features/private/private.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -65,7 +66,8 @@ import { VideosComponent } from './videos/videos.component';
     AcademyModule,
     TeamsModule,
     DisplayUtilitiesModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PrivateModule
   ],
   providers: [
     LoggerService,
