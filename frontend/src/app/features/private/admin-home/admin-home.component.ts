@@ -19,7 +19,7 @@ export class AdminHomeComponent implements OnInit
 
   constructor( private lg$: LoggerService,
                private com$: CommonService,
-               private user$: UserService ) { }
+               public user$: UserService ) { }
 
   ngOnInit() 
   {

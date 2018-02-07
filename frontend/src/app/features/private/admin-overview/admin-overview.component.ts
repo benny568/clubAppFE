@@ -20,7 +20,7 @@ export class AdminOverviewComponent implements OnInit
   constructor( private lg$: LoggerService,
                private com$: CommonService,
                public d$: SessionDataService,
-               private user$: UserService ) { }
+               public user$: UserService ) { }
 
   ngOnInit() 
   {
