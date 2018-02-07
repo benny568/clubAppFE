@@ -23,7 +23,10 @@ export class MemberService {
     msDisplayMember: boolean = false;
     msPosition: Array<Position>;
 
-    constructor( private lg$: LoggerService, private com$: CommonService, private http$: Http ) {
+    constructor( private lg$: LoggerService, 
+                 private com$: CommonService, 
+                 private http$: Http ) 
+    {
         this.lg$.setLogHdr(this.logdepth, this.serviceName);
 
         this.msCurrentMember = new Member();
@@ -59,13 +62,20 @@ export class MemberService {
         {
         	this.lg$.log("    |- Team already loaded..");
         	return; // Already loaded
-        } else {
+        } else 
+        {
+
+
+            let headers = this.setupHeaders();
+            let opts = new RequestOptions();
+            opts.headers = headers;
 
            this.lg$.log("-->" + "loadCurrentTeamMembersByTeamId(), loading team:" + team );
-           this.http$.get( url + '/admin/members/' + team )
+           this.http$.get( url + '/admin/team/' + team, opts )
                 .map(response => response.json())
-                .subscribe( data => { /*this.msTeamMembers[team] = data,*/ callback(data), this.logTeamMembersForTeamId(team) },
-	   					error => this.lg$.error("ERROR: Reading team members from server, team: " + team),
+                .subscribe( data => { this.msTeamMembers[team] = data, callback(team) , this.logTeamMembersForTeamId(team) },
+                           error => console.error("ERROR: Reading team members from server, team: " + team
+                                                    + ", Error: " + error ),
 	   					() => this.lg$.log("<-- Team members read successfully for team: " + team)
 	   				  );
         }
@@ -89,7 +99,8 @@ export class MemberService {
     	this.lg$.log("URL: " + memberUrl);
 
     	let body = JSON.stringify({ member });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        //let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = this.setupHeaders();
         let thisTeam = member.team;
 
         // TBD: Find out what teams the member is on so he can be removed once deleted
@@ -105,12 +116,12 @@ export class MemberService {
     	return this.http$.delete( memberUrl, options )
 			.map(response => response.json())
 			.subscribe( data => {
-									console.log("    |<- deleteMember("+data+")");
+                        this.lg$.log("    |<- deleteMember("+data+")");
 									//this.applyMemberDel(this.msAllMembers, data);
                                     this.applyMemberDelFromTeam(this.msTeamMembers[thisTeam], data.name);
 								},
-						err  => console.error("MemberService: ERROR deleting member from server!"),
-						()   => console.log("    |<- deleteMember() - finished")
+						err  => this.lg$.log("MemberService: ERROR deleting member from server! [" + err + "]"),
+						()   => this.lg$.log("    |<- deleteMember() - finished")
 					);
 	}
 
@@ -260,7 +271,7 @@ export class MemberService {
 		}
 
 		return index;
-	}
+    }
 
     private teamMembersAreLoaded( team: number )
     {
@@ -284,5 +295,14 @@ export class MemberService {
 		{
 			this.lg$.log("-- [" + i + "]: " + this.msTeamMembers[teamId][i].name);
 		}
+    }
+
+    private setupHeaders()
+    {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
+        this.lg$.log("Token read from storage: " + localStorage.getItem('id_token') );
+        return headers;
     }
 }

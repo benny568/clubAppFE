@@ -10,7 +10,7 @@ export class MerchandiseComponent {
     items: [{name: string, image: string, description: string, width: string, height: string}];
 
     ngOnInit() {
-        this.items = [
+        /* this.items = [
             {
                 name: "Shorts",
                 image: "../../assets/img/merchandise/shorts.png",
@@ -45,8 +45,8 @@ export class MerchandiseComponent {
                 description: "Kids 45E (YXS-XXS), Adult 55E (XS-S-M-L-XL)",
                 width: "700",
                 height: "300"
-            }
-        ];
+            } 
+        ];*/
     }
 
 }

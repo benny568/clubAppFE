@@ -6,6 +6,7 @@ import { PrivateComponent } from './private.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminOverviewComponent } from './admin-overview/admin-overview.component';
 import { AdminTutorialsComponent } from './admin-tutorials/admin-tutorials.component';
+import { AdminMembersComponent } from './admin-members/admin-members.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { AdminTutorialsComponent } from './admin-tutorials/admin-tutorials.compo
   ],
   declarations: [
     PrivateComponent, 
-    AdminHomeComponent, AdminOverviewComponent, AdminTutorialsComponent
+    AdminHomeComponent, AdminOverviewComponent, AdminTutorialsComponent, AdminMembersComponent
   ]
 })
 export class PrivateModule { }

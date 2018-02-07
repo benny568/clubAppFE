@@ -1,3 +1,4 @@
+import { MemberService } from './services/member.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -76,7 +77,8 @@ import { VideosComponent } from './videos/videos.component';
     ErrorService,
     LoginService,
     UserService,
-    NewsService
+    NewsService,
+    MemberService
   ],
   bootstrap: [AppComponent]
 })

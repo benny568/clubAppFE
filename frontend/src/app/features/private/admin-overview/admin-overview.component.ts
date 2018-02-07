@@ -8,7 +8,8 @@ import { UserService }   from '../../../services/user.service';
 @Component({
   selector: 'app-admin-overview',
   templateUrl: './admin-overview.component.html',
-  styleUrls: ['./admin-overview.component.css']
+  styleUrls: ['./admin-overview.component.css'],
+  providers: [ LoggerService ]
 })
 export class AdminOverviewComponent implements OnInit 
 {
