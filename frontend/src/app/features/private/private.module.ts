@@ -17,7 +17,10 @@ import { AdminMembersComponent } from './admin-members/admin-members.component';
   ],
   declarations: [
     PrivateComponent, 
-    AdminHomeComponent, AdminOverviewComponent, AdminTutorialsComponent, AdminMembersComponent
+    AdminHomeComponent, 
+    AdminOverviewComponent, 
+    AdminTutorialsComponent, 
+    AdminMembersComponent
   ]
 })
 export class PrivateModule { }

@@ -118,7 +118,7 @@ export class MemberService {
 			.subscribe( data => {
                         this.lg$.log("    |<- deleteMember("+data+")");
 									//this.applyMemberDel(this.msAllMembers, data);
-                                    this.applyMemberDelFromTeam(this.msTeamMembers[thisTeam], data.name);
+                                    this.applyMemberDelFromTeam(this.msTeamMembers[thisTeam], data);
 								},
 						err  => this.lg$.log("MemberService: ERROR deleting member from server! [" + err + "]"),
 						()   => this.lg$.log("    |<- deleteMember() - finished")
@@ -160,7 +160,7 @@ export class MemberService {
      * Params in:	None
      * Return:
      **********************************************************/
-    private applyMemberDelFromTeam( team: Array<string>, member: string )
+    private applyMemberDelFromTeam( team: Array<Member>, member: number )
 	{
         this.lg$.log("-> applyMemberDelFromTeam("+team+","+member+")");
 
@@ -246,9 +246,9 @@ export class MemberService {
      * Params in:	None
      * Return:		The index value
      **********************************************************/
-    private findMemberIndexFromTeam( members: Array<string>, member: string )
+    private findMemberIndexFromTeam( members: Array<Member>, memberId: number )
 	{
-        this.lg$.log("findMemberIndex - id: " + member);
+        this.lg$.log("findMemberIndex - id: " + memberId);
 		var index = -1;
 
         for(var c=0; c<members.length; c++)
@@ -260,7 +260,8 @@ export class MemberService {
 			{
                 if( members[i] !== undefined && members[i] !== null ) // If it's not empty
                 {
-                    if ( members[i] === member )
+                    let mem: Member = members[i];
+                    if ( mem.id === memberId )
                     {
                         this.lg$.log("....Found member to remove, index: " + i);
                         index = i;

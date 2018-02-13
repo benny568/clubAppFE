@@ -1,9 +1,10 @@
-import { CovalentModule } from './../../covalent.module';
-import { MaterialModule } from './../../material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { CovalentModule } from './../../covalent.module';
+import { MaterialModule } from './../../material.module';
 
 import { AcademyRegistrationService } from './academy-registration/academy-registration.service';
 

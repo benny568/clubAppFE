@@ -90,4 +90,21 @@ export class AdminMembersComponent implements OnInit {
 
     	this.lg$.log("URL: " + memberUrl);
     }
+
+    /**********************************************************
+     * Name:		deleteMember()
+     * Description:	Delete the current selected member
+     * Scope:		Internal
+     * Params in:	None
+     * Return:
+     **********************************************************/
+    deleteMember( member: Member )
+    {
+      //let result: number = -1;
+
+      this.lg$.log("    |-> deleteMember(" + member.name + ")");
+    	this.mbr$.deleteMember( member );
+
+    	//this.lg$.log("deleteMember returned: " + result);
+    }
 }

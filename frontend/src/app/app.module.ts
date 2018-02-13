@@ -64,11 +64,10 @@ import { VideosComponent } from './videos/videos.component';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    AcademyModule,
-    TeamsModule,
     DisplayUtilitiesModule,
     AppRoutingModule,
-    PrivateModule
+    PrivateModule,
+    AcademyModule
   ],
   providers: [
     LoggerService,
