@@ -1,0 +1,10 @@
+<h3 mat-dialog-title class="dialogTitle">Edit Member</h3>
+    <mat-dialog-content class="dialogContent">
+      <mat-form-field>
+        <input matInput placeholder="{{data.member.name}}">
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="onCloseConfirm()">Confirm</button>
+      <button mat-button (click)="onCloseCancel()">Cancel</button>
+    </mat-dialog-actions>

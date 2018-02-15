@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { LoggerService } from '../../../services/logger.service';
 import { CommonService } from './../../../services/common.service';
 import { SessionDataService } from '../../../services/session-data.service';
 import { MemberService } from '../../../services/member.service';
+
+import { EditMemberComponent } from '../edit-member/edit-member.component';
 
 import { Member } from './../../../model/member';
 
@@ -20,11 +24,14 @@ export class AdminMembersComponent implements OnInit {
   loggedIn = '';
   showArray: boolean[];
   date =  new Date();
+  thisMember: Member;
+  dialogRef: MatDialogRef<EditMemberComponent>;
 
   constructor( private lg$: LoggerService,
                private com$: CommonService,
                public d$: SessionDataService,
-               private mbr$: MemberService ) 
+               private mbr$: MemberService,
+               private dialog: MatDialog ) 
   { 
     this.lg$.setLogHdr(this.logdepth, this.componentName);
   }
@@ -85,10 +92,10 @@ export class AdminMembersComponent implements OnInit {
     editMember( member: Member )
     {
       this.lg$.log("    |-> editMember(" + member.name + ")");
-    	var home = this.com$.getHome();
-    	let memberUrl = home + '/admin/member/' + member.id;
+      this.thisMember = member;
+      
+      this.openDialog();
 
-    	this.lg$.log("URL: " + memberUrl);
     }
 
     /**********************************************************
@@ -107,4 +114,19 @@ export class AdminMembersComponent implements OnInit {
 
     	//this.lg$.log("deleteMember returned: " + result);
     }
+
+    openDialog(): void 
+    {
+      this.dialogRef = this.dialog.open(EditMemberComponent, {
+        width: '500px',
+        hasBackdrop: true,
+        data: { member: this.thisMember }
+      });
+  
+      this.dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        //this.animal = result;
+      });
+    }
+
 }
