@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 import { MaterialModule } from './../../material.module';
 import { PrivateRoutingModule } from './private-routing.module';
@@ -16,6 +17,7 @@ import { EditMemberComponent } from './edit-member/edit-member.component';
   imports: [
     BrowserAnimationsModule,
     CommonModule,
+    FormsModule,
     PrivateRoutingModule,
     MaterialModule
   ],

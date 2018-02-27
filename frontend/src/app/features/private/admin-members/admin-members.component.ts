@@ -118,8 +118,8 @@ export class AdminMembersComponent implements OnInit {
     openDialog(): void 
     {
       this.dialogRef = this.dialog.open(EditMemberComponent, {
-        width: '500px',
-        hasBackdrop: true,
+        //width: '500px',
+        //hasBackdrop: true,
         data: { member: this.thisMember }
       });
   

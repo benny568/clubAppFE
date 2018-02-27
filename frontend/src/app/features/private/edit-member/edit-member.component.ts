@@ -18,6 +18,7 @@ import { Member } from './../../../model/member';
 export class EditMemberComponent implements OnInit {
   componentName = 'EditMemberComponent';
   logdepth = 2;
+  startDate = new Date();
 
   constructor( private lg$: LoggerService,
                private com$: CommonService,
@@ -37,6 +38,12 @@ export class EditMemberComponent implements OnInit {
   }
 
   onCloseConfirm() {
+    this.lg$.log("Member name: " + this.data.member.name );
+    this.lg$.log("Address    : " + this.data.member.address );
+    this.lg$.log("Phone      : " + this.data.member.phone );
+    this.lg$.log("Phone2     : " + this.data.member.phone2 );
+    this.lg$.log("email      : " + this.data.member.email );
+    this.lg$.log("DOB        : " + this.data.member.dob );
     this.dialogRef.close('Confirm');
   }
   onCloseCancel() {

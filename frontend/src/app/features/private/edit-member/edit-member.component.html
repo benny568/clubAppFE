@@ -1,8 +1,66 @@
 <h3 mat-dialog-title class="dialogTitle">Edit Member</h3>
     <mat-dialog-content class="dialogContent">
-      <mat-form-field>
-        <input matInput placeholder="{{data.member.name}}">
-      </mat-form-field>
+
+      <form>
+
+        <mat-form-field class="form-name-field">
+          <mat-label>Name:</mat-label>
+          <input matInput 
+                 class="formfield" 
+                 name="name" 
+                 [value]="data.member.name" 
+                 [(ngModel)]="data.member.name">
+        </mat-form-field>
+        
+        <mat-form-field class="form-dob-field">
+          <mat-label>Date of Birth:</mat-label>
+          <input matInput 
+                 [matDatepicker]="picker"
+                 name="dob"
+                 [value]="data.member.dob" 
+                 [(ngModel)]="data.member.dob">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+        </mat-form-field>
+        
+        <mat-form-field class="form-full-width">
+          <mat-label>Address:</mat-label>
+          <textarea matInput 
+                    class="formfield" 
+                    name="address"
+                    [value]="data.member.address"
+                    [(ngModel)]="data.member.address">
+          </textarea>
+        </mat-form-field>
+  
+        <mat-form-field class="form-email-field">
+          <mat-label>Email:</mat-label>
+          <input matInput 
+                 name="email" 
+                 [value]="data.member.email" 
+                 [(ngModel)]="data.member.email">
+        </mat-form-field>
+  
+        &nbsp; &nbsp;
+        <mat-form-field class="form-phone-field">
+          <mat-label>Phone:</mat-label>
+          <input matInput 
+                 name="phone"
+                 [value]="data.member.phone"
+                 [(ngModel)]="data.member.phone">
+        </mat-form-field>
+  
+        &nbsp; &nbsp;
+        <mat-form-field class="form-phone-field">
+          <mat-label>Phone2:</mat-label>
+          <input matInput 
+                 name="phone2"
+                 [value]="data.member.phone2"
+                 [(ngModel)]="data.member.phone2">
+        </mat-form-field>
+
+      </form>
+
     </mat-dialog-content>
     <mat-dialog-actions>
       <button mat-button (click)="onCloseConfirm()">Confirm</button>
