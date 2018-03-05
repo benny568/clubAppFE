@@ -44,6 +44,7 @@ export class EditMemberComponent implements OnInit {
     this.lg$.log("Phone2     : " + this.data.member.phone2 );
     this.lg$.log("email      : " + this.data.member.email );
     this.lg$.log("DOB        : " + this.data.member.dob );
+    this.lg$.log("academyinfo: " + this.data.member.academyinfo );
     this.dialogRef.close('Confirm');
   }
   onCloseCancel() {
