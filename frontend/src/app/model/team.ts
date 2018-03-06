@@ -9,4 +9,9 @@ class Team {
 	lrResultsCode:number;
 	noticeboard:string;
 
+	getTeamName()
+	{
+		return this.name;
+	}
+
 }
