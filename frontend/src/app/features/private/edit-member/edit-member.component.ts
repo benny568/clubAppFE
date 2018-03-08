@@ -1,4 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -25,6 +26,8 @@ export class EditMemberComponent implements OnInit {
   team: string;
   team2: string;
   team3: string;
+  options: string[];
+  myControl: FormControl;
 
   constructor( private lg$: LoggerService,
                private com$: CommonService,
@@ -42,9 +45,23 @@ export class EditMemberComponent implements OnInit {
    * to be the same in the html for it to work.
    */
   ngOnInit() {
-    this.team = this.d$.dsTeams[this.data.member.team].name;
-    this.team2 = this.d$.dsTeams[this.data.member.team2].name;
-    this.team3 = this.d$.dsTeams[this.data.member.team3].name;
+    this.myControl = new FormControl();
+
+    // If value is 0 then this is no team so substute 'None'
+    this.team = this.data.member.team !== 0 ? this.d$.dsTeams[this.data.member.team].name : "None";
+    this.team2 = this.data.member.team2 !== 0 ? this.d$.dsTeams[this.data.member.team2].name : "None";
+    this.team3 = this.data.member.team3 !== 0 ? this.d$.dsTeams[this.data.member.team3].name : "None";
+
+    // setup up the drop-down to select a team
+    this.options = new Array<string>();
+    this.options.push("None"); // 1st option is no team
+    for( let team of this.d$.dsTeams )
+    {
+      this.lg$.trace("Pushing: " + team.name);
+      this.options.push( team.name );
+    }
+    this.lg$.trace("Options has [" + this.options.length + "] elements");
+
     this.lg$.log("Team value is: " + this.data.member.team );
     this.lg$.log("Team2 value is: " + this.data.member.team2 );
     this.lg$.log("Team3 value is: " + this.data.member.team3 );
@@ -80,11 +97,14 @@ export class EditMemberComponent implements OnInit {
 
   getTeamFromName( team: string )
   {
-    return (this.d$.dsTeams.find( this.xcheckName( team ) ).id - 1);
+    if( team === "None" )
+      return 0;
+    else
+      return (this.d$.dsTeams.find( this.checkName( team ) ).id - 1);
     
   }
 
-  xcheckName(txt)
+  checkName(txt)
   {
     return function( currentValue:Team )
     {
@@ -94,14 +114,6 @@ export class EditMemberComponent implements OnInit {
       else
         return false;
     }
-  }
-  
-  checkName( currentValue:Team, index:number, arr:Team[] )
-  {
-    if( currentValue.name === this.team )
-      return true;
-    else
-      return false;
   }
 
 }

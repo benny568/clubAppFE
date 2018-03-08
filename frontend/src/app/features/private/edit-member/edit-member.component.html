@@ -93,30 +93,27 @@
           <div class="item">
             <mat-form-field class="form-phone-field">
               <mat-label>Team 1:</mat-label>
-              <input matInput 
-                    name="team"
-                    [value]="team"
-                    [(ngModel)]="team">
+              <mat-select [(value)]="team">
+                <mat-option *ngFor="let option of options" value="{{option}}" >{{option}}</mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
 
           <div class="item">
             <mat-form-field class="form-phone-field">
               <mat-label>Team 2:</mat-label>
-              <input matInput 
-                    name="team2"
-                    [value]="team2"
-                    [(ngModel)]="team2">
+              <mat-select [(value)]="team2">
+                <mat-option *ngFor="let option of options" value="{{option}}" >{{option}}</mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
 
           <div class="item">
             <mat-form-field class="form-phone-field">
               <mat-label>Team 3:</mat-label>
-              <input matInput 
-                    name="team3"
-                    [value]="team3"
-                    [(ngModel)]="team3">
+              <mat-select [(value)]="team3">
+                <mat-option *ngFor="let option of options" value="{{option}}" >{{option}}</mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
 

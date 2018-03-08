@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from './../../material.module';
 import { PrivateRoutingModule } from './private-routing.module';
@@ -18,6 +19,7 @@ import { EditMemberComponent } from './edit-member/edit-member.component';
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     PrivateRoutingModule,
     MaterialModule
   ],
