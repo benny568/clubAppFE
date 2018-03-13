@@ -17,7 +17,7 @@
               <div class="col-md-10 teamHdr" *ngIf="!showArray[team.id]"><span class="glyphicon glyphicon-triangle-bottom" (click)="getMembers4team(team.id)" style="cursor:pointer;"></span> {{team.name}}</div>
               <div class="col-md-10 teamHdr" *ngIf="showArray[team.id]"><span class="glyphicon glyphicon-triangle-top" (click)="toggleView(team.id)" style="cursor:pointer;"></span> {{team.name}}</div>
               <div  style="float:right; align:bottom;">
-                <button type="button" class="btn btn-warning btn-xs" ng-click="addMember(team.id)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right">Add Member</button>
+                <button type="button" class="btn btn-warning btn-xs" (click)="addMember(team.id)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right">Add Member</button>
               </div>
             </div>
               <div class="panel-body avenue-body" style="height:100%;">

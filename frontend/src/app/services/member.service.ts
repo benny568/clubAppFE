@@ -98,9 +98,11 @@ export class MemberService {
 
     	this.lg$.log("URL: " + memberUrl);
 
-    	let body = JSON.stringify({ member });
-        //let headers = new Headers({ 'Content-Type': 'application/json' });
+    	//let body = JSON.stringify({ member });
+
+        // Set the headers, including the JWT
         let headers = this.setupHeaders();
+        // Save the team so we can update the internal memory if successful
         let thisTeam = member.team;
 
         // TBD: Find out what teams the member is on so he can be removed once deleted
@@ -123,6 +125,44 @@ export class MemberService {
 						err  => this.lg$.log("MemberService: ERROR deleting member from server! [" + err + "]"),
 						()   => this.lg$.log("    |<- deleteMember() - finished")
 					);
+    }
+    
+
+
+
+    public saveMember( member:Member )
+	{
+    	this.lg$.log("    |-> saveMember(" + member.name + ")");
+    	var home = this.com$.getHome();
+    	let memberUrl = home + '/admin/member/';
+
+    	this.lg$.log("URL: " + memberUrl);
+
+    	//let body = JSON.stringify({ member });
+
+        // Set the headers, including the JWT
+        let headers = this.setupHeaders();
+        // Save the team so we can update the internal memory if successful
+        let thisTeam = member.team;
+
+        // TBD: Find out what teams the member is on so he can be removed once deleted
+            
+
+        let options = new RequestOptions({
+    										method:'Put',
+    										headers:headers,
+    										body:member,
+    										url:memberUrl
+        								});
+
+    	return this.http$.put( memberUrl, options )
+			.map(response => response.json())
+			.subscribe( data => {
+                                    this.lg$.log("    |<- saveMember("+data+")");
+								},
+						err  => this.lg$.log("MemberService: ERROR saving member to server! [" + err + "]"),
+						()   => this.lg$.log("    |<- saveMember() - finished")
+					);
 	}
 
     /**********************************************************
@@ -132,12 +172,19 @@ export class MemberService {
      * Params in:	Member in question
      * Return:
      **********************************************************/
-    public saveMember( member: Member )
+    public XsaveMember( member: Member )
 	{
     	console.log("    |-> saveMember(" + member.name + ")");
 
-        let url = this.com$.getHome() + "admin/member";
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let url = this.com$.getHome() + "/admin/member";
+        //let headers = new Headers({ 'Content-Type': 'application/json' });
+        let body = JSON.stringify({ member });
+        //let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = this.setupHeaders();
+        let thisTeam = member.team;
+
+        // TBD: Find out what teams the member is on so he can be removed once deleted
+            
 
         let options = new RequestOptions({
     										method:'Put',

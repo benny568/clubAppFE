@@ -26,6 +26,9 @@ export class EditMemberComponent implements OnInit {
   team: string;
   team2: string;
   team3: string;
+  position: string;
+  position2: string;
+  position3: string;
   options: string[];
   myControl: FormControl;
 
@@ -52,6 +55,13 @@ export class EditMemberComponent implements OnInit {
     this.team2 = this.data.member.team2 !== 0 ? this.d$.dsTeams[this.data.member.team2].name : "None";
     this.team3 = this.data.member.team3 !== 0 ? this.d$.dsTeams[this.data.member.team3].name : "None";
 
+    this.position = this.d$.dsPosition[this.data.member.position];
+    this.lg$.log("position set to: " + this.position + ", " + this.data.member.position);
+    this.position2 = this.d$.dsPosition[this.data.member.position2];
+    this.lg$.log("position2 set to: " + this.position2 );
+    this.position3 = this.d$.dsPosition[this.data.member.position3];
+    this.lg$.log("position3 set to: " + this.position3 );
+
     // setup up the drop-down to select a team
     this.options = new Array<string>();
     this.options.push("None"); // 1st option is no team
@@ -65,6 +75,9 @@ export class EditMemberComponent implements OnInit {
     this.lg$.log("Team value is: " + this.data.member.team );
     this.lg$.log("Team2 value is: " + this.data.member.team2 );
     this.lg$.log("Team3 value is: " + this.data.member.team3 );
+    this.lg$.log("Position value is: " + this.data.member.position );
+    this.lg$.log("Position2 value is: " + this.data.member.position2 );
+    this.lg$.log("Position3 value is: " + this.data.member.position3 );
   }
 
   onNoClick(): void {
@@ -76,6 +89,9 @@ export class EditMemberComponent implements OnInit {
     this.data.member.team = this.getTeamFromName( this.team );
     this.data.member.team2 = this.getTeamFromName( this.team2 );
     this.data.member.team3 = this.getTeamFromName( this.team3 );
+    this.data.member.position = this.getPositionFromName(this.position);
+    this.data.member.position2 = this.getPositionFromName(this.position2);
+    this.data.member.position3 = this.getPositionFromName(this.position3);
     // TODO: save the updated member data
     this.mbr$.saveMember( this.data.member );
 
@@ -89,6 +105,9 @@ export class EditMemberComponent implements OnInit {
     this.lg$.log("team2      : " + this.data.member.team2);
     this.lg$.log("team3      : " + this.data.member.team3);
     this.lg$.log("academyinfo: " + this.data.member.academyinfo );
+    this.lg$.log("position   : " + this.data.member.position );
+    this.lg$.log("position2  : " + this.data.member.position2 );
+    this.lg$.log("position3  : " + this.data.member.position3 );
     this.dialogRef.close('Confirm');
   }
   onCloseCancel() {
@@ -102,6 +121,11 @@ export class EditMemberComponent implements OnInit {
     else
       return (this.d$.dsTeams.find( this.checkName( team ) ).id - 1);
     
+  }
+
+  getPositionFromName( pos: string )
+  {
+    return (this.d$.dsPosition.indexOf( pos ) );
   }
 
   checkName(txt)

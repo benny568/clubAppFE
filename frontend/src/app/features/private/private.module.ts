@@ -13,6 +13,7 @@ import { AdminOverviewComponent } from './admin-overview/admin-overview.componen
 import { AdminTutorialsComponent } from './admin-tutorials/admin-tutorials.component';
 import { AdminMembersComponent } from './admin-members/admin-members.component';
 import { EditMemberComponent } from './edit-member/edit-member.component';
+import { AddMemberComponent } from './add-member/add-member.component';
 
 @NgModule({
   imports: [
@@ -31,9 +32,11 @@ import { EditMemberComponent } from './edit-member/edit-member.component';
     AdminOverviewComponent, 
     AdminTutorialsComponent, 
     AdminMembersComponent,
-    EditMemberComponent
+    EditMemberComponent,
+    AddMemberComponent
   ],
   entryComponents: [
+    AddMemberComponent,
     EditMemberComponent
   ]
 })

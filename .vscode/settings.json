@@ -4,5 +4,6 @@
     "eslint.enable": false,
     "jshint.enable": false,
     "tslint.enable": false,
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "mocha.enabled": false
 }

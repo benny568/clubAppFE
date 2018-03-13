@@ -1,0 +1,27 @@
+.dialogTitle {
+    color: black;
+}
+
+.dialogContent {
+    color: white;
+}
+
+.formlabel { color: black }
+.formfield,
+.form-name-field,
+.form-phone-field,
+.form-email-field,
+.form-dob-field { color: black }
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+    width: 100px;  
+}
+
+.item {
+    flex: 1 1 auto;
+}
