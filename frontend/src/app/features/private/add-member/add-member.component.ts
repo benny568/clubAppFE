@@ -20,6 +20,11 @@ export class AddMemberComponent implements OnInit {
   componentName = 'AddMemberComponent';
   logdepth = 2;
   myControl: FormControl;
+  options: string[];
+  xdob: Date;
+  team: string;
+  team2: string;
+  team3: string;
 
   constructor( private lg$: LoggerService,
     private com$: CommonService,
@@ -33,6 +38,16 @@ export class AddMemberComponent implements OnInit {
 
   ngOnInit() {
     this.myControl = new FormControl();
+
+    // setup up the drop-down to select a team
+    this.options = new Array<string>();
+    this.options.push("None"); // 1st option is no team
+    for( let team of this.d$.dsTeams )
+    {
+      this.lg$.trace("Pushing: " + team.name);
+      this.options.push( team.name );
+    }
+    this.lg$.trace("Options has [" + this.options.length + "] elements");
   }
 
   onNoClick(): void {
@@ -40,15 +55,12 @@ export class AddMemberComponent implements OnInit {
   }
 
   onCloseConfirm() {
-    /* Restore the numeric value of the team from the name */
-    // this.data.member.team = this.getTeamFromName( this.team );
-    // this.data.member.team2 = this.getTeamFromName( this.team2 );
-    // this.data.member.team3 = this.getTeamFromName( this.team3 );
-    // this.data.member.position = this.getPositionFromName(this.position);
-    // this.data.member.position2 = this.getPositionFromName(this.position2);
-    // this.data.member.position3 = this.getPositionFromName(this.position3);
-    // TODO: save the updated member data
-    this.mbr$.saveMember( this.data.member );
+    this.data.member.dob =  this.convertDate( this.xdob );
+    this.data.member.team = this.convertTeam( this.team );
+    this.data.member.team2 = this.convertTeam( this.team2 );
+    this.data.member.team3 = this.convertTeam( this.team3 );
+    // Save the new member data
+    this.mbr$.addMember( this.data.member );
 
     this.lg$.log("Member name: " + this.data.member.name );
     this.lg$.log("Address    : " + this.data.member.address );
@@ -67,6 +79,48 @@ export class AddMemberComponent implements OnInit {
   }
   onCloseCancel() {
     this.dialogRef.close('Cancel');
+  }
+
+  convertDate( dob: Date )
+  {
+    let day:number = dob.getUTCDate()+1;
+    let month:number = dob.getUTCMonth()+1;
+    let year:number = dob.getUTCFullYear();
+
+    let birthday = (day < 10 ? ("0"+day) : day) + "/" + (month < 10 ? ("0"+month) : month ) + "/" +  year;
+    this.lg$.log("The date built is: " + birthday );
+    this.lg$.log("The day is: " + day );
+    this.lg$.log("The month is: " + month );
+
+    return birthday;
+  }
+
+  convertTeam( t: string )
+  {
+    for( let oTeam of this.d$.dsTeams )
+    {
+      if( oTeam.name === t )
+      {
+        this.lg$.trace("Team id is: " + oTeam.id);
+        return oTeam.id;
+      }
+      
+    }
+  }
+
+  convertPosition( p: string )
+  {
+    let i: number = 0;
+
+    for( let sPos of this.d$.dsPosition )
+    {
+      if( p === sPos )
+      {
+        this.lg$.trace("Position id is: " + i);
+        return i;
+      }
+      i++;
+    }
   }
 
 }

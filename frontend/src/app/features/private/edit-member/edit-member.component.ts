@@ -49,11 +49,18 @@ export class EditMemberComponent implements OnInit {
    */
   ngOnInit() {
     this.myControl = new FormControl();
+    this.buildTeamDropDown();
 
     // If value is 0 then this is no team so substute 'None'
-    this.team = this.data.member.team !== 0 ? this.d$.dsTeams[this.data.member.team].name : "None";
-    this.team2 = this.data.member.team2 !== 0 ? this.d$.dsTeams[this.data.member.team2].name : "None";
-    this.team3 = this.data.member.team3 !== 0 ? this.d$.dsTeams[this.data.member.team3].name : "None";
+    // this.team = this.data.member.team !== 0 ? this.d$.dsTeams[this.data.member.team].name : "None";
+    // this.team2 = this.data.member.team2 !== 0 ? this.d$.dsTeams[this.data.member.team2].name : "None";
+    // this.team3 = this.data.member.team3 !== 0 ? this.d$.dsTeams[this.data.member.team3].name : "None";
+    this.team = this.options[this.data.member.team];
+    this.lg$.log("ngOnInit()->team set to: " + this.team );
+    this.team2 = this.options[this.data.member.team2];
+    this.lg$.log("ngOnInit()->team2 set to: " + this.team2 );
+    this.team3 = this.options[this.data.member.team3];
+    this.lg$.log("ngOnInit()->team3 set to: " + this.team3 );
 
     this.position = this.d$.dsPosition[this.data.member.position];
     this.lg$.log("position set to: " + this.position + ", " + this.data.member.position);
@@ -61,16 +68,6 @@ export class EditMemberComponent implements OnInit {
     this.lg$.log("position2 set to: " + this.position2 );
     this.position3 = this.d$.dsPosition[this.data.member.position3];
     this.lg$.log("position3 set to: " + this.position3 );
-
-    // setup up the drop-down to select a team
-    this.options = new Array<string>();
-    this.options.push("None"); // 1st option is no team
-    for( let team of this.d$.dsTeams )
-    {
-      this.lg$.trace("Pushing: " + team.name);
-      this.options.push( team.name );
-    }
-    this.lg$.trace("Options has [" + this.options.length + "] elements");
 
     this.lg$.log("Team value is: " + this.data.member.team );
     this.lg$.log("Team2 value is: " + this.data.member.team2 );
@@ -119,7 +116,7 @@ export class EditMemberComponent implements OnInit {
     if( team === "None" )
       return 0;
     else
-      return (this.d$.dsTeams.find( this.checkName( team ) ).id - 1);
+      return (this.d$.dsTeams.find( this.checkName( team ) ).id);
     
   }
 
@@ -132,12 +129,25 @@ export class EditMemberComponent implements OnInit {
   {
     return function( currentValue:Team )
     {
-      //console.log("Converting team: " + txt + ", value: " + currentValue.name );
+      console.log("Converting team: " + txt + ", value: " + currentValue.name );
       if( currentValue.name === txt )
         return true;
       else
         return false;
     }
+  }
+
+  buildTeamDropDown()
+  {
+    // setup up the drop-down to select a team
+    this.options = new Array<string>();
+    this.options.push("None"); // 1st option is no team
+    for( let team of this.d$.dsTeams )
+    {
+      this.lg$.trace("Pushing: " + team.name);
+      this.options.push( team.name );
+    }
+    this.lg$.trace("Options has [" + this.options.length + "] elements");
   }
 
 }

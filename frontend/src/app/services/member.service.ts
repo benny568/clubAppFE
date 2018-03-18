@@ -3,6 +3,7 @@ import { Http,
          Headers,
          RequestOptions,
          RequestOptionsArgs } from '@angular/http';
+import { HttpHeaders } from '@angular/common/http';
 
 import { LoggerService } from '../services/logger.service';
 import { CommonService } from '../services/common.service';
@@ -84,6 +85,42 @@ export class MemberService {
     }
 
     /**********************************************************
+     * Name:		addMember()
+     * Description:	Save the member 
+     * Scope:		Externally accessable
+     * Params in:	Member in question
+     * Return:
+     **********************************************************/
+    public addMember( member: Member )
+	{
+        this.lg$.log("    |-> addMember(" + member.name + ")");
+    	var home = this.com$.getHome();
+        let memberUrl = home + '/admin/member/';
+        
+        this.lg$.log("URL: " + memberUrl);
+
+        // Set the headers, including the JWT
+        let headers = this.setupHeaders();
+        //let memb = JSON.stringify({ member });
+
+        let options = new RequestOptions({
+                method:'Post',
+                headers:headers,
+                body:member,
+                url:memberUrl
+            });
+
+        return this.http$.post( memberUrl, member, options )
+            .subscribe( data => {
+                this.lg$.log("    |<- addMember("+data+")");
+            },
+                err  => this.lg$.log("MemberService: ERROR adding member to server! [" + err + "]"),
+                ()   => this.lg$.log("    |<- addMember() - finished")
+            );
+
+    }
+
+    /**********************************************************
      * Name:		deleteMember()
      * Description:	Delete a member from the db
      * Scope:		Externally accessable
@@ -97,8 +134,6 @@ export class MemberService {
     	let memberUrl = home + '/admin/member/' + member.id;
 
     	this.lg$.log("URL: " + memberUrl);
-
-    	//let body = JSON.stringify({ member });
 
         // Set the headers, including the JWT
         let headers = this.setupHeaders();
@@ -118,8 +153,7 @@ export class MemberService {
     	return this.http$.delete( memberUrl, options )
 			.map(response => response.json())
 			.subscribe( data => {
-                        this.lg$.log("    |<- deleteMember("+data+")");
-									//this.applyMemberDel(this.msAllMembers, data);
+                                    this.lg$.log("    |<- deleteMember("+data+")");
                                     this.applyMemberDelFromTeam(this.msTeamMembers[thisTeam], data);
 								},
 						err  => this.lg$.log("MemberService: ERROR deleting member from server! [" + err + "]"),
@@ -138,25 +172,17 @@ export class MemberService {
 
     	this.lg$.log("URL: " + memberUrl);
 
-    	//let body = JSON.stringify({ member });
-
         // Set the headers, including the JWT
         let headers = this.setupHeaders();
-        // Save the team so we can update the internal memory if successful
-        let thisTeam = member.team;
 
-        // TBD: Find out what teams the member is on so he can be removed once deleted
-            
-
-        let options = new RequestOptions({
+         let options = new RequestOptions({
     										method:'Put',
     										headers:headers,
     										body:member,
     										url:memberUrl
         								});
 
-    	return this.http$.put( memberUrl, options )
-			.map(response => response.json())
+    	return this.http$.put( memberUrl, member, options )
 			.subscribe( data => {
                                     this.lg$.log("    |<- saveMember("+data+")");
 								},
