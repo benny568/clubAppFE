@@ -9,7 +9,7 @@ import { AdminMembersComponent } from './admin-members/admin-members.component';
 
 const routes: Routes = [
   { path: '', component: PrivateComponent },
-  { path: 'adminhome', component: AdminHomeComponent },
+  { path: 'adminHome', component: AdminHomeComponent },
   { path: 'adminOverview', component: AdminOverviewComponent },
   { path: 'adminTutorials', component: AdminTutorialsComponent },
   { path: 'adminMembers', component: AdminMembersComponent }

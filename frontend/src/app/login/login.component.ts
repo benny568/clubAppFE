@@ -67,7 +67,7 @@ export class LoginComponent {
 								this.saveJwt(res.text());
 								this.user$.setUserAsAuthenticated();
 								this.lg$.log("Routing to home page");
-								this._router.navigate( ['adminhome', {}] );
+								this._router.navigate( ['adminHome', {}] );
 							}
 				},
 				err => {
