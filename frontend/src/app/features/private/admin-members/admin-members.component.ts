@@ -9,6 +9,7 @@ import { MemberService } from '../../../services/member.service';
 
 import { AddMemberComponent } from './../add-member/add-member.component';
 import { EditMemberComponent } from '../edit-member/edit-member.component';
+import { DeleteMemberComponent } from './../delete-member/delete-member.component';
 
 import { Member } from './../../../model/member';
 
@@ -28,6 +29,7 @@ export class AdminMembersComponent implements OnInit {
   thisMember: Member;
   dialogRef: MatDialogRef<EditMemberComponent>;
   addDialogRef: MatDialogRef<AddMemberComponent>;
+  delDialogRef: MatDialogRef<DeleteMemberComponent>;
 
   constructor( private lg$: LoggerService,
                private com$: CommonService,
@@ -85,8 +87,8 @@ export class AdminMembersComponent implements OnInit {
   }
 
   /**********************************************************
-     * Name:		editMember()
-     * Description:	Edit the current selected member
+     * Name:		addMember()
+     * Description:	Present a form to add a new member
      * Scope:		Internal
      * Params in:	None
      * Return:
@@ -125,12 +127,24 @@ export class AdminMembersComponent implements OnInit {
      **********************************************************/
     deleteMember( member: Member )
     {
-      //let result: number = -1;
 
       this.lg$.log("    |-> deleteMember(" + member.name + ")");
-    	this.mbr$.deleteMember( member );
+      this.thisMember = member;
 
-    	//this.lg$.log("deleteMember returned: " + result);
+      this.openDelDialog();
+    }
+
+    openDelDialog(): void 
+    {
+      this.delDialogRef = this.dialog.open(DeleteMemberComponent, {
+        //width: '500px',
+        //hasBackdrop: true,
+        data: { member: this.thisMember }
+      });
+  
+      this.delDialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
     }
 
     openAddDialog(): void 

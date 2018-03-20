@@ -25,20 +25,25 @@ export class AddMemberComponent implements OnInit {
   team: string;
   team2: string;
   team3: string;
+  position: string;
+  position2: string;
+  position3: string;
+  startDate: Date;
 
   constructor( private lg$: LoggerService,
-    private com$: CommonService,
-    public d$: SessionDataService,
-    private mbr$: MemberService,
-    public dialogRef: MatDialogRef<AddMemberComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any ) 
+               private com$: CommonService,
+               public d$: SessionDataService,
+               private mbr$: MemberService,
+               public dialogRef: MatDialogRef<AddMemberComponent>,
+               @Inject(MAT_DIALOG_DATA) public data: any ) 
   { 
     this.lg$.setLogHdr(this.logdepth, this.componentName);
   }
 
   ngOnInit() {
     this.myControl = new FormControl();
-
+    this.startDate = new Date();
+    
     // setup up the drop-down to select a team
     this.options = new Array<string>();
     this.options.push("None"); // 1st option is no team
@@ -59,6 +64,9 @@ export class AddMemberComponent implements OnInit {
     this.data.member.team = this.convertTeam( this.team );
     this.data.member.team2 = this.convertTeam( this.team2 );
     this.data.member.team3 = this.convertTeam( this.team3 );
+    this.data.member.position = this.convertPosition( this.position );
+    this.data.member.position2 = this.convertPosition( this.position2 );
+    this.data.member.position3 = this.convertPosition( this.position3 );
     // Save the new member data
     this.mbr$.addMember( this.data.member );
 

@@ -188,6 +188,23 @@ export class CommonService {
 			lg$.trace("....sending array value to trash");
 			array.pop();
 		}
-	}
+    }
+    
+    /**********************************************************
+     * Name:		setupHeaders()
+     * Description:	Set the JWT in the header so we can access
+     *              secure content from the server.
+     * Scope:		Externally accessible
+     * Params in:	None
+     * Return:		The headers struct
+     **********************************************************/
+    public setupHeaders()
+    {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
+        console.log("Token read from storage: " + localStorage.getItem('id_token') );
+        return headers;
+    }
 }
 

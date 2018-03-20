@@ -1,9 +1,9 @@
-import { AdminOverviewComponent } from './admin-overview/admin-overview.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { PrivateComponent } from './private.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminOverviewComponent } from './admin-overview/admin-overview.component';
 import { AdminTutorialsComponent } from './admin-tutorials/admin-tutorials.component';
 import { AdminMembersComponent } from './admin-members/admin-members.component';
 

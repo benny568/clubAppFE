@@ -14,7 +14,8 @@ import '../../assets/img/adverts/CTS-logo.png';
 @Component({
     selector: 'sponsors',
     templateUrl: './sponsors.component.html',
-    styleUrls: ['./sponsors.component.css']
+    styleUrls: ['./sponsors.component.css'],
+    providers: [ LoggerService ]
 })
 
 export class SponsorsComponent {

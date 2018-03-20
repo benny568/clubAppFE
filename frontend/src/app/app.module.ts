@@ -67,7 +67,8 @@ import { VideosComponent } from './videos/videos.component';
     DisplayUtilitiesModule,
     AppRoutingModule,
     PrivateModule,
-    AcademyModule
+    AcademyModule,
+    TeamsModule
   ],
   providers: [
     LoggerService,

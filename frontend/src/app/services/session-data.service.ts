@@ -707,7 +707,7 @@ export class SessionDataService {
      *              album: The media album to put the photos in
      * Return:      None
      **********************************************************/
-      processPhotosResponse( data: [any], path: string, album: Array<Media>, router:Router )
+    processPhotosResponse( data: [any], path: string, album: Array<Media>, router:Router )
 	{
 		this.lg$.log("-> processResponse()");
 		this.lg$.log("     |- data:" + data);
