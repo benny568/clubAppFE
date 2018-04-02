@@ -7,6 +7,8 @@ import { HttpModule } from '@angular/http';
 
 import 'hammerjs';
 
+import { MaterialModule } from './material.module';
+
 import { AcademyModule } from './features/academy/academy.module';
 import { TeamsModule } from './features/teams/teams.module';
 import { PrivateModule } from './features/private/private.module';
@@ -66,6 +68,7 @@ import { VideosComponent } from './videos/videos.component';
     ReactiveFormsModule,
     DisplayUtilitiesModule,
     AppRoutingModule,
+    MaterialModule,
     PrivateModule,
     AcademyModule,
     TeamsModule

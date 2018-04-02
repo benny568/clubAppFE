@@ -35,7 +35,8 @@ export class LoginService {
      **********************************************************/
     authenticate( username: string, password: string )
      {
-    	 let url = "http://localhost:8080/backend/login"; // "http://www.avenueunited.ie/login";
+         let home = this.com$.getHome();
+    	 let url = home + "/login"; // "http://www.avenueunited.ie/login";
     	 let params = 'username='+username+'&password='+password;
          let headers = new Headers({
                  'Content-Type': 'application/x-www-form-urlencoded',
@@ -47,7 +48,8 @@ export class LoginService {
      }
 
      sendCredential(username: string, password: string) {
-        let url = "http://localhost:8080/backend/login";
+        let home = this.com$.getHome();
+    	let url = home + "/login";
         let params = 'username='+username+'&password='+password;
         let headers = new Headers(
         {

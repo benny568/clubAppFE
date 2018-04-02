@@ -1,42 +1,34 @@
-<div class="container">
-  <div class="loginbox">
-      <div class="loginhead"><i class="glyphicon glyphicon-user" style="align:right;margin-right:0px;"></i> Please Login
-          <div class="loginbody">
-              <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" autocomplete="off" novalidate>
+<div class="loginbox">
+    <div class="loginhead"><i class="glyphicon glyphicon-user" style="align:right;margin-right:0px;"></i> Please Login</div>
+    <div class="loginbody">
+ 
+            <div class="form-row">
+                <div class="form-graphic">
+                    Username:
+                </div>
+                <div class="form-input">
+                    <input type="text" [(ngModel)]="username">   
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-graphic">
+                    Password:
+                </div>
+                <div class="form-input">
+                    <input type="{{showPassword}}" [(ngModel)]="password">   
+                </div>
+            </div>
+            <div class="form-row">
+                <mat-checkbox (click)="toggleShowPassword()">
+                    <div style="font-weight: normal">
+                        Show Password
+                    </div>
+                </mat-checkbox>
+            </div>
+            <div class="form-row">
+                <button mat-raised-button (click)="login()">Login Now</button>
+            </div>
 
-                  <div layout="row" layout-margin>
-                      <i class="fa fa-user pull-left" aria-hidden="true"></i>
-                      <input class="form-control pull-left" type="text" [formControl]="form.controls['username']" placeholder="Username">
-                  </div>
-                  <div style="clear:both"></div>
-                  <div layout="row" layout-margin>
-                      <i class="fa fa-user-secret pull-left" aria-hidden="true"></i>
-                      <input class="form-control pull-left" type="{{showPassword}}" [formControl]="form.controls['password']" placeholder="Password">
-                  </div>
-
-                  <div layout="row" layout-wrap layout-padding>
-                      <div flex="50">
-                          <!--<md-checkbox (click)="toggleShowPassword()">
-                              <div style="font-weight: normal">
-                                  Show Password
-                              </div>
-                          </md-checkbox>-->
-                      </div>
-                      <div flex="50">
-                          <!--<md-checkbox>
-                              <div style="font-weight: normal">
-                                  Remember me
-                              </div>
-                          </md-checkbox>-->
-                      </div>
-                  </div>
-
-                  <input type="submit" value="Login Now">
-              </form>
-              <span *ngIf="showMsg">{{message}}</span>
-          </div>
-          <!-- end loginbody -->
-      </div>
-      <!-- end loginbox -->
-  </div>
+    </div> 
 </div>

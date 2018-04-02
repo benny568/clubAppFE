@@ -27,6 +27,8 @@ export class LoginComponent {
 	showPassword: string = 'password';
 	message: string = '';
 	showMsg: boolean = false;
+	username: string;
+	password: string;
 
 	constructor( private lg$: LoggerService,
 				 private login$: LoginService,
@@ -53,11 +55,11 @@ export class LoginComponent {
 		}
 	}
 
-	onSubmit(form: any): void {
-		this.lg$.log( "->onSubmit(): you submitted values:" + form.username + ":" + form.password);
-		this.user$.CurrentUser.username = form.username;
+	login(): void {
+		this.lg$.log( "->onSubmit(): you submitted values:" + this.username + ":" + this.password);
+		this.user$.CurrentUser.username = this.username;
 
-		this.login$.sendCredential( form.username, form.password )
+		this.login$.sendCredential( this.username, this.password )
 			.subscribe(
 				res => {
 							if( res.status === 200 )
