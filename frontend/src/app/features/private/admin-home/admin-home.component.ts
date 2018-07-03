@@ -11,7 +11,7 @@ import { UserService }   from '../../../services/user.service';
   styleUrls: ['./admin-home.component.css'],
   providers: [ LoggerService ]
 })
-export class AdminHomeComponent implements OnInit 
+export class AdminHomeComponent implements OnInit
 {
   componentName = 'AdminHomeComponent';
   logdepth = 0;
@@ -21,10 +21,10 @@ export class AdminHomeComponent implements OnInit
                private com$: CommonService,
                public user$: UserService ) { }
 
-  ngOnInit() 
+  ngOnInit()
   {
     this.lg$.setLogHdr(this.logdepth, this.componentName);
-    this.lg$.log("Username: " + this.user$.CurrentUser.username );
+    this.lg$.log("Username: " + this.user$.CurrentUser.name );
   }
 
 }

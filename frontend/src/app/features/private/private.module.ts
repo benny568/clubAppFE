@@ -15,6 +15,10 @@ import { AdminMembersComponent } from './admin-members/admin-members.component';
 import { EditMemberComponent } from './edit-member/edit-member.component';
 import { AddMemberComponent } from './add-member/add-member.component';
 import { DeleteMemberComponent } from './delete-member/delete-member.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { UserDeleteComponent } from './user-delete/user-delete.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
   imports: [
@@ -28,19 +32,24 @@ import { DeleteMemberComponent } from './delete-member/delete-member.component';
   providers: [
   ],
   declarations: [
-    PrivateComponent, 
-    AdminHomeComponent, 
-    AdminOverviewComponent, 
-    AdminTutorialsComponent, 
+    PrivateComponent,
+    AdminHomeComponent,
+    AdminOverviewComponent,
+    AdminTutorialsComponent,
     AdminMembersComponent,
     EditMemberComponent,
     AddMemberComponent,
-    DeleteMemberComponent
+    DeleteMemberComponent,
+    AdminUsersComponent,
+    AddUserComponent,
+    UserDeleteComponent,
+    UserEditComponent
   ],
   entryComponents: [
     AddMemberComponent,
     EditMemberComponent,
-    DeleteMemberComponent
+    DeleteMemberComponent,
+    AddUserComponent
   ]
 })
 export class PrivateModule { }

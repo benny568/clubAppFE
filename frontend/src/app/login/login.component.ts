@@ -14,37 +14,37 @@ import { User }               from '../model/site-user';
 
 @Component({
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers: [ LoggerService ]
+  styleUrls  : ['./login.component.css'],
+  providers  : [ LoggerService ]
 })
 
 export class LoginComponent {
 
 	componentName = 'LoginComponent';
-	logdepth = 2;
-	form: FormGroup;
+	logdepth      = 2;
+	form        : FormGroup;
 	loginDetails: { username: string, password: string};
 	showPassword: string = 'password';
-	message: string = '';
-	showMsg: boolean = false;
-	username: string;
-	password: string;
+	message     : string = '';
+	showMsg     : boolean = false;
+	username    : string;
+	password    : string;
 
 	constructor( private lg$: LoggerService,
-				 private login$: LoginService,
-				 private user$: UserService,
+				 private login$ : LoginService,
+				 private user$  : UserService,
 				 private _router: Router,
-				 private fb: FormBuilder )
+				 private fb     : FormBuilder )
 	{
 		this.lg$.setLogHdr(this.logdepth, this.componentName);
 		this.loginDetails = { username: '', password: ''};
-		this.showMsg = false;
+		this.showMsg      = false;
 
 		this.form = fb.group({
-            "username":["", Validators.required],
-            "password":["", Validators.required]
+            "username": ["", Validators.required],
+            "password": ["", Validators.required]
         });
-		
+
 		if( localStorage.getItem('AdminHasLoggedIn') === '' || localStorage.getItem('AdminHasLoggedIn') === null )
 		{
 			this.user$.usLoggedIn = false;
@@ -57,14 +57,14 @@ export class LoginComponent {
 
 	login(): void {
 		this.lg$.log( "->onSubmit(): you submitted values:" + this.username + ":" + this.password);
-		this.user$.CurrentUser.username = this.username;
+		this.user$.CurrentUser.name = this.username;
 
 		this.login$.sendCredential( this.username, this.password )
 			.subscribe(
 				res => {
 							if( res.status === 200 )
 							{
-								this.lg$.log("SUCCESS !!!!!!!!!!!!!!!");
+                this.lg$.log("SUCCESS !!!!!!!!!!!!!!!");
 								this.lg$.log("BODY: " + res.text() );
 								this.saveJwt(res.text());
 								this.user$.setUserAsAuthenticated();
@@ -74,7 +74,7 @@ export class LoginComponent {
 				},
 				err => {
 						this.lg$.error("ERROR: " + err);
-						
+
 						if( err.status === 401 )
 						{
 							this.message = 'Incorrect username and/or password!';
@@ -101,7 +101,7 @@ export class LoginComponent {
 		this.user$.getUserDetails( username )
 			.subscribe(
 				data => this.setUserDetails(data.json()),
-				err => console.log("ERROR: Cannot retrieve user details from server!")
+				err  => console.log("ERROR: Cannot retrieve user details from server!")
 			);
 	}
 

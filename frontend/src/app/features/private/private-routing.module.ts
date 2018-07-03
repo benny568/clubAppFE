@@ -6,13 +6,15 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminOverviewComponent } from './admin-overview/admin-overview.component';
 import { AdminTutorialsComponent } from './admin-tutorials/admin-tutorials.component';
 import { AdminMembersComponent } from './admin-members/admin-members.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 
 const routes: Routes = [
   { path: '', component: PrivateComponent },
   { path: 'adminHome', component: AdminHomeComponent },
   { path: 'adminOverview', component: AdminOverviewComponent },
   { path: 'adminTutorials', component: AdminTutorialsComponent },
-  { path: 'adminMembers', component: AdminMembersComponent }
+  { path: 'adminMembers', component: AdminMembersComponent },
+  { path: 'adminUsers', component: AdminUsersComponent }
 ];
 
 @NgModule({

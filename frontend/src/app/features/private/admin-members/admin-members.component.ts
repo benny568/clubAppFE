@@ -34,9 +34,9 @@ export class AdminMembersComponent implements OnInit {
   constructor( private lg$: LoggerService,
                private com$: CommonService,
                public d$: SessionDataService,
-               private mbr$: MemberService,
-               private dialog: MatDialog ) 
-  { 
+               public mbr$: MemberService,
+               private dialog: MatDialog )
+  {
     this.lg$.setLogHdr(this.logdepth, this.componentName);
   }
 
@@ -97,7 +97,7 @@ export class AdminMembersComponent implements OnInit {
     {
       this.lg$.log("    |-> addMember(" + team + ")");
       this.thisMember = new Member();
-      
+
       this.openAddDialog();
 
     }
@@ -113,7 +113,7 @@ export class AdminMembersComponent implements OnInit {
     {
       this.lg$.log("    |-> editMember(" + member.name + ")");
       this.thisMember = member;
-      
+
       this.openDialog();
 
     }
@@ -134,40 +134,40 @@ export class AdminMembersComponent implements OnInit {
       this.openDelDialog();
     }
 
-    openDelDialog(): void 
+    openDelDialog(): void
     {
       this.delDialogRef = this.dialog.open(DeleteMemberComponent, {
         //width: '500px',
         //hasBackdrop: true,
         data: { member: this.thisMember }
       });
-  
+
       this.delDialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
       });
     }
 
-    openAddDialog(): void 
+    openAddDialog(): void
     {
       this.addDialogRef = this.dialog.open(AddMemberComponent, {
         //width: '500px',
         //hasBackdrop: true,
         data: { member: this.thisMember }
       });
-  
+
       this.addDialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
       });
     }
 
-    openDialog(): void 
+    openDialog(): void
     {
       this.dialogRef = this.dialog.open(EditMemberComponent, {
         //width: '500px',
         //hasBackdrop: true,
         data: { member: this.thisMember }
       });
-  
+
       this.dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
         //this.animal = result;

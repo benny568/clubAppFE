@@ -16,24 +16,24 @@ import { Position } from '../model/position';
 @Injectable()
 export class MemberService {
     serviceName: string = "MemberService";
-    logdepth: number = 3;
+    logdepth   : number = 3;
 
-    msTeamMembers: Array<any>;
-    msCurrentMember:Member;
-    msAllMembers : Array<Member>;
+    msTeamMembers  : Array<any>;
+    msCurrentMember: Member;
+    msAllMembers   : Array<Member>;
     msDisplayMember: boolean = false;
-    msPosition: Array<Position>;
+    msPosition     : Array<Position>;
 
-    constructor( private lg$: LoggerService, 
-                 private com$: CommonService, 
-                 private http$: Http ) 
+    constructor( private lg$: LoggerService,
+                 private com$ : CommonService,
+                 private http$: Http )
     {
         this.lg$.setLogHdr(this.logdepth, this.serviceName);
 
         this.msCurrentMember = new Member();
-        this.msTeamMembers = new Array(50);
-        this.msAllMembers = new Array<Member>();
-        this.msPosition = [
+        this.msTeamMembers   = new Array(50);
+        this.msAllMembers    = new Array<Member>();
+        this.msPosition      = [
                         { id: 0, name: 'Undefined'},
                         { id: 1, name: 'Goalkeeper'},
                         { id: 2, name: 'RightFull'},
@@ -50,7 +50,7 @@ export class MemberService {
                         { id: 13, name: 'Treasurer'},
                         { id: 14, name: 'Committee'}
                     ];
-        
+
      }
 
     public loadCurrentTeamMembersByTeamId( team: number, callback: any )
@@ -63,13 +63,13 @@ export class MemberService {
         {
         	this.lg$.log("    |- Team already loaded..");
         	return; // Already loaded
-        } else 
+        } else
         {
 
 
-            let headers = this.setupHeaders();
-            let opts = new RequestOptions();
-            opts.headers = headers;
+            let headers      = this.setupHeaders();
+            let opts         = new RequestOptions();
+                opts.headers = headers;
 
            this.lg$.log("-->" + "loadCurrentTeamMembersByTeamId(), loading team:" + team );
            this.http$.get( url + '/admin/team/' + team, opts )
@@ -81,22 +81,22 @@ export class MemberService {
 	   				  );
         }
 
-        
+
     }
 
     /**********************************************************
-     * Name:		addMember()
-     * Description:	Save the member 
-     * Scope:		Externally accessable
-     * Params in:	Member in question
-     * Return:
+     * Name       : addMember()
+     * Description: Save the member
+     * Scope      : Externally accessable
+     * Params in  : Member in question
+     * Return     :
      **********************************************************/
     public addMember( member: Member )
 	{
         this.lg$.log("    |-> addMember(" + member.name + ")");
-    	var home = this.com$.getHome();
-        let memberUrl = home + '/admin/member/';
-        
+    	var home      = this.com$.getHome();
+    	let memberUrl = home + '/admin/member/';
+
         this.lg$.log("URL: " + memberUrl);
 
         // Set the headers, including the JWT
@@ -104,33 +104,33 @@ export class MemberService {
         //let memb = JSON.stringify({ member });
 
         let options = new RequestOptions({
-                method:'Post',
-                headers:headers,
-                body:member,
-                url:memberUrl
+                method : 'Post',
+                headers: headers,
+                body   : member,
+                url    : memberUrl
             });
 
         return this.http$.post( memberUrl, member, options )
             .subscribe( data => {
                 this.lg$.log("    |<- addMember("+data+")");
             },
-                err  => this.lg$.log("MemberService: ERROR adding member to server! [" + err + "]"),
-                ()   => this.lg$.log("    |<- addMember() - finished")
+                err => this.lg$.log("MemberService: ERROR adding member to server! [" + err + "]"),
+                ()  => this.lg$.log("    |<- addMember() - finished")
             );
 
     }
 
     /**********************************************************
-     * Name:		deleteMember()
-     * Description:	Delete a member from the db
-     * Scope:		Externally accessable
-     * Params in:	None
-     * Return:
+     * Name       : deleteMember()
+     * Description: Delete a member from the db
+     * Scope      : Externally accessable
+     * Params in  : None
+     * Return     :
      **********************************************************/
     public deleteMember( member:Member )
 	{
     	this.lg$.log("    |-> deleteMember(" + member.name + ")");
-    	var home = this.com$.getHome();
+    	var home      = this.com$.getHome();
     	let memberUrl = home + '/admin/member/' + member.id;
 
     	this.lg$.log("URL: " + memberUrl);
@@ -141,13 +141,13 @@ export class MemberService {
         let thisTeam = member.team;
 
         // TBD: Find out what teams the member is on so he can be removed once deleted
-            
+
 
         let options = new RequestOptions({
-    										method:'Delete',
-    										headers:headers,
-    										body:member,
-    										url:memberUrl
+    										method : 'Delete',
+    										headers: headers,
+    										body   : member,
+    										url    : memberUrl
         								});
 
     	return this.http$.delete( memberUrl, options )
@@ -156,18 +156,18 @@ export class MemberService {
                                     this.lg$.log("    |<- deleteMember("+data+")");
                                     this.applyMemberDelFromTeam(this.msTeamMembers[thisTeam], data);
 								},
-						err  => this.lg$.log("MemberService: ERROR deleting member from server! [" + err + "]"),
-						()   => this.lg$.log("    |<- deleteMember() - finished")
+						err => this.lg$.log("MemberService: ERROR deleting member from server! [" + err + "]"),
+						()  => this.lg$.log("    |<- deleteMember() - finished")
 					);
     }
-    
+
 
 
 
     public saveMember( member:Member )
 	{
     	this.lg$.log("    |-> saveMember(" + member.name + ")");
-    	var home = this.com$.getHome();
+    	var home      = this.com$.getHome();
     	let memberUrl = home + '/admin/member/';
 
     	this.lg$.log("URL: " + memberUrl);
@@ -176,113 +176,113 @@ export class MemberService {
         let headers = this.setupHeaders();
 
          let options = new RequestOptions({
-    										method:'Put',
-    										headers:headers,
-    										body:member,
-    										url:memberUrl
+    										method : 'Put',
+    										headers: headers,
+    										body   : member,
+    										url    : memberUrl
         								});
 
     	return this.http$.put( memberUrl, member, options )
 			.subscribe( data => {
                                     this.lg$.log("    |<- saveMember("+data+")");
 								},
-						err  => this.lg$.log("MemberService: ERROR saving member to server! [" + err + "]"),
-						()   => this.lg$.log("    |<- saveMember() - finished")
+						err => this.lg$.log("MemberService: ERROR saving member to server! [" + err + "]"),
+						()  => this.lg$.log("    |<- saveMember() - finished")
 					);
 	}
 
     /**********************************************************
-     * Name:		saveMember()
-     * Description:	Save the member 
-     * Scope:		Externally accessable
-     * Params in:	Member in question
-     * Return:
+     * Name       : saveMember()
+     * Description: Save the member
+     * Scope      : Externally accessable
+     * Params in  : Member in question
+     * Return     :
      **********************************************************/
     public XsaveMember( member: Member )
-	{
+	  {
     	console.log("    |-> saveMember(" + member.name + ")");
 
         let url = this.com$.getHome() + "/admin/member";
         //let headers = new Headers({ 'Content-Type': 'application/json' });
         let body = JSON.stringify({ member });
         //let headers = new Headers({ 'Content-Type': 'application/json' });
-        let headers = this.setupHeaders();
+        let headers  = this.setupHeaders();
         let thisTeam = member.team;
 
         // TBD: Find out what teams the member is on so he can be removed once deleted
-            
+
 
         let options = new RequestOptions({
-    										method:'Put',
-    										headers:headers,
-    										body:member,
-    										url:url
+    										method : 'Put',
+    										headers: headers,
+    										body   : member,
+    										url    : url
         								});
 
         return this.http$.put( url, options )
             .subscribe( data => console.log("MemberService: Member updated successfully"),
-                        err  => console.error("MemberService: ERROR updating member on server!") 
+                        err => console.error("MemberService: ERROR updating member on server!")
                         );
-	}
+	  }
 
     /**********************************************************
-     * Name:		applyMemberDel()
-     * Description:	Applies a change to the local data so the
+     * Name       : applyMemberDel()
+     * Description: Applies a change to the local data so the
      *              user sees the change on the view.
-     * Scope:		Internal
-     * Params in:	None
-     * Return:
+     * Scope    : Internal
+     * Params in: None
+     * Return   :
      **********************************************************/
     private applyMemberDelFromTeam( team: Array<Member>, member: number )
-	{
-        this.lg$.log("-> applyMemberDelFromTeam("+team+","+member+")");
+	  {
+      this.lg$.log("-> applyMemberDelFromTeam("+team+","+member+")");
 
-		var index:number = this.findMemberIndexFromTeam( team, member );
+  		var index:number = this.findMemberIndexFromTeam( team, member );
 
-		if ( index === -1 )
-		{
-			return;
-		} else if ( index > -1 )
-		{   // Delete the member at index
-            this.lg$.log("Removing member from team..");
-		    team.splice( index, 1 );
-		}
-	}
+  		if ( index === -1 )
+  		{
+  			return;
+  		} else if ( index > -1 )
+  		{   // Delete the member at index
+              this.lg$.log("Removing member from team..");
+  		    team.splice( index, 1 );
+  		}
+	  }
 
     /**********************************************************
-     * Name:		applyMemberAdd()
-     * Description:	Applies a change to the local data so the
+     * Name       : applyMemberAdd()
+     * Description: Applies a change to the local data so the
      *              user sees the change on the view.
-     * Scope:		Internal
-     * Params in:	None
-     * Return:
+     * Scope    : Internal
+     * Params in: None
+     * Return   :
      **********************************************************/
     applyMemberAdd(members: Array<any>, member: Member )
-	{
+	  {
 
-		if ( this.msTeamMembers[member.team] === undefined )
-		{
-			//getMembers4team(member.team);
-		}
+  		if ( this.msTeamMembers[member.team] === undefined )
+  		{
+  			//getMembers4team(member.team);
+  		}
 
-		var index = this.findMemberIndex( this.msTeamMembers[member.team], member.id );
+  		var index = this.findMemberIndex( this.msTeamMembers[member.team], member.id );
 
-		if ( index === -1 )
-		{// Add the member if it doesn't exits
-		    members[member.team].push( member );
-		} else if ( index > -1 )
-		{
-			//log.debug(loghdr + "###### ERROR: applyMemberAdd - member not found!");
-		}
-	}
+  		if ( index === -1 )
+  		{// Add the member if it doesn't exits
+  		    members[member.team].push( member );
+  		} else if ( index > -1 )
+  		{
+  			//log.debug(loghdr + "###### ERROR: applyMemberAdd - member not found!");
+  		}
+	  }
 
     /**********************************************************
-     * Name:		findMemberIndex()
-     * Description:	Find a members index/position in the array
+     * Name       : findMemberIndex()
+     * Description: Find a members index/position in the array
      *              of members
-     * Scope:		Internal
-     * Params in:	None
-     * Return:		The index value
+     * Scope    : Internal
+     * Params in: None
+     * Return   : The index value
      **********************************************************/
     private findMemberIndex( members: Array<Member>, memberId: number )
 	{
@@ -312,39 +312,39 @@ export class MemberService {
 	}
 
     /**********************************************************
-     * Name:		findMemberIndex()
-     * Description:	Find a members index/position in the array
+     * Name       : findMemberIndex()
+     * Description: Find a members index/position in the array
      *              of members
-     * Scope:		Internal
-     * Params in:	None
-     * Return:		The index value
+     * Scope    : Internal
+     * Params in: None
+     * Return   : The index value
      **********************************************************/
     private findMemberIndexFromTeam( members: Array<Member>, memberId: number )
-	{
-        this.lg$.log("findMemberIndex - id: " + memberId);
-		var index = -1;
+	  {
+      this.lg$.log("findMemberIndex - id: " + memberId);
+		  var index = -1;
 
-        for(var c=0; c<members.length; c++)
+      for(var c=0; c<members.length; c++)
             this.lg$.log("---- "+c+": "+members[c] + ", "+ c);
 
-		if ( typeof members !== undefined )
-		{
-			for ( var i = 0; i < members.length; i++ )
-			{
-                if( members[i] !== undefined && members[i] !== null ) // If it's not empty
-                {
-                    let mem: Member = members[i];
-                    if ( mem.id === memberId )
-                    {
-                        this.lg$.log("....Found member to remove, index: " + i);
-                        index = i;
-                        break;
-                    }
-                }
-			}
-		}
+  		if ( typeof members !== undefined )
+  		{
+  			for ( var i = 0; i < members.length; i++ )
+  			{
+                  if( members[i] !== undefined && members[i] !== null ) // If it's not empty
+                  {
+                      let mem: Member = members[i];
+                      if ( mem.id === memberId )
+                      {
+                          this.lg$.log("....Found member to remove, index: " + i);
+                          index = i;
+                          break;
+                      }
+                  }
+  			}
+  		}
 
-		return index;
+  		return index;
     }
 
     private teamMembersAreLoaded( team: number )

@@ -1,0 +1,30 @@
+<div class="container" style="width: 90%">
+    <div class="panel">
+        <div class="panel-heading avenue-heading">
+          <strong>User Administration</strong>
+          <div  style="float:right; align:bottom;">
+            <button type="button" class="btn btn-warning btn-xs" (click)="addUser()" style="cursor:pointer;" data-toggle="tooltip" data-placement="right">Add Member</button>
+          </div>
+        </div>
+        <div class="panel-body avenue-body">
+          <div class="row">
+              <div class="col-md-2 tblHdr">Username</div>
+              <div class="col-md-4 tblHdr">Address</div>
+              <div class="col-md-2 tblHdr">email</div>
+              <div class="col-md-2 tblHdr">Phone</div>
+              <div class="col-md-2 tblHdr">Operations</div>
+          </div> <!-- end of row -->
+          <div *ngFor="let user of usr$.allUsers">
+            <div class="row">
+                <div class="col-md-2 tblHdr">{{user.name}}</div>
+                <div class="col-md-4 tblHdr">{{user.address}}</div>
+                <div class="col-md-2 tblHdr">{{user.email}}</div>
+                <div class="col-md-2 tblHdr">{{user.phone}}</div>
+                <div class="col-md-2">
+                    <i (click)="usr$.editUser(user)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Edit" class="glyphicon glyphicon-pencil" style="float:left;padding-left:10px;"> </i>&nbsp;
+                    <i (click)="usr$.deleteUser(user, usr$.applyUserDelete )" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Delete" class="glyphicon glyphicon-trash" style="float:left;padding-left:10px;"></i>
+                  </div>
+              </div>
+            </div> <!-- end of row -->
+        </div>
+</div>
