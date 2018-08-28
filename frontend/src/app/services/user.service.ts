@@ -1,12 +1,14 @@
 import { Injectable }    from '@angular/core';
-import { Http,
-         Headers,
-         RequestOptions } from '@angular/http';
+import { HttpClient,
+         HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 import { User }          from '../model/site-user';
 import { LoggerService } from '../services/logger.service';
 import { CommonService } from '../services/common.service';
-import { SessionDataService } from '../services/session-data.service';
 
 @Injectable()
 export class UserService {
@@ -20,8 +22,7 @@ export class UserService {
 
     constructor ( private lg$: LoggerService,
                   private com$ : CommonService,
-                  private d$   : SessionDataService,
-                  private http$: Http )
+                  private http$: HttpClient )
     {
         this.lg$.setLogHdr(this.logdepth, this.componentName);
         this.CurrentUser = new User();
@@ -69,16 +70,14 @@ export class UserService {
 
       let url = this.com$.getHome();
 
-      let headers      = this.setupHeaders();
-      let opts         = new RequestOptions();
-          opts.headers = headers;
+      let options = this.setupHeaders();
 
       this.lg$.log("-->" + "getAllUsers(), loading users from: " + url + '/admin/users/' );
-            this.http$.get( url + '/admin/users/', opts )
-                .map(response => response.json())
-                .subscribe( data => { this.allUsers = data, this.logUsers(this.allUsers) },
-                           error => console.error("ERROR: Reading users from server, Error: " + error )
-	   				  );
+            // this.http$.get( url + '/admin/users/', options )
+            //     .map(response => response.json())
+            //     .subscribe( data => { this.allUsers = data, this.logUsers(this.allUsers) },
+            //                error => console.error("ERROR: Reading users from server, Error: " + error )
+	   				//   );
     }
 
     /**********************************************************
@@ -127,17 +126,19 @@ export class UserService {
     	this.lg$.log("URL: " + userUrl);
 
         // Set the headers, including the JWT
-        let headers = this.setupHeaders();
+        // let headers = this.setupHeaders();
 
-        let options = new RequestOptions({
-    										method : 'Delete',
-    										headers: headers,
-    										body   : user,
-    										url    : userUrl
-        								});
+        // let options = new RequestOptions({
+    		// 								method : 'Delete',
+    		// 								headers: headers,
+    		// 								body   : user,
+    		// 								url    : userUrl
+        // 								});
+
+      let options = this.setupHeaders();
 
     	return this.http$.delete( userUrl, options )
-			.map(response => response.json())
+			//.map(response => response.json())
 			.subscribe( data => {
                                     this.lg$.log("    |<- deleteUser("+data+")");
                                     callback(user);
@@ -171,7 +172,7 @@ export class UserService {
      * Params in  : The user object
      * Return     : None
      **********************************************************/
-    public addUser( user: User, callback: any )
+    public addUser( user: User, callback: any )//: Observable<User>
     {
       this.lg$.log("addUser(" + user.name + ")");
 
@@ -180,135 +181,42 @@ export class UserService {
 
     	this.lg$.log("URL: " + userUrl);
 
-        // Set the headers, including the JWT
-        let headers = this.setupHeaders();
+      // Set the headers, including the JWT
+      let options = this.setupHeaders();
 
-        let options = new RequestOptions({
-    										method : 'Post',
-    										headers: headers,
-    										body   : user,
-    										url    : userUrl
-        								});
-
-    	return this.http$.post( userUrl, user, options )
-			.map(response => response.json())
-			.subscribe( data => {
-                            this.lg$.log("    |<- addMember("+data+")");
-                          },
-                  err => this.lg$.log("UserService: ERROR adding user to server! [" + err + "]"),
-                  ()  => this.lg$.log("    |<- addUser() - finished")
-                 );
+    	// return this.http$.post( userUrl, user, options )
+  		// 	.pipe(
+      //     catchError(handleError())
+      //   );
     }
 
-    /**********************************************************
-     * Name       : hasPermission()
-     * Description: Check the user's permission to perform the
-     * 				given action
-     * Scope    : Externally accessible
-     * Params in: action: the action being requested
-     * Return   : true or false depending on the permissions
-     **********************************************************/
-    // public hasPermission(action: any, params: any)
+    // public addUser( user: User, callback: any )
     // {
-    //     var team  = '';
-    //     var allow = false;
-    //     var index = 0;
+    //   this.lg$.log("addUser(" + user.name + ")");
 
-    //     console.log("-->" + "hasPermission(" + action + "," + params + ")");
+    //   var home    = this.com$.getHome();
+    //   let userUrl = home + '/admin/user/';
 
-    //     if ( typeof action === undefined || params === undefined )
-    //     {
-    //       console.log("No action or params, returning false!")
-    //       return false;
-    //     }
+    // 	this.lg$.log("URL: " + userUrl);
 
-    //     for ( var r = 0; r < this.CurrentUser.authorities.length; r++ )
-    //     {
-    //         if ( this.CurrentUser.authorities[r] === "ROLE_SUPER" )
-    //         {
-    //           // Super user has permissions to do anything
-    //           //log.trace(loghdr + " -> hasPermission("+action+"): YES");
-    //         	console.log(" -> hasPermission(" + action + "): YES");
-    //           return true;
-    //         }
-    //     }
-    //     switch ( action )
-    //     {
-    //         case 'MANAGE_TEAM':
-    //             team = params;
-    //             // Check if the user is a manager of this team
-    //             for ( var i = 0; i < this.CurrentUser.permissions.teams.length; i++ )
-    //             {
-    //                 for ( var t = 0; t < this.d$.dsTeams.length; t++ )
-    //                 {
-    //                     if (  this.d$.dsTeams[t].id === this.CurrentUser.permissions.teams[i] )
-    //                     {
-    //                         index = t;
-    //                         break;
-    //                     }
-    //                 }
+    //     // Set the headers, including the JWT
+    //     let headers = this.setupHeaders();
 
-    //                 if ( this.d$.dsTeams[index].name === team )
-    //                 {
-    //                     if ( this.CurrentUser.permissions.positions[i] === 0 )
-    //                     {
-    //                         allow = true;
-    //                         break;
-    //                     }
-    //                 }
-    //             }
-    //             break;
+    //     let options = new RequestOptions({
+    // 										method : 'Post',
+    // 										headers: headers,
+    // 										body   : user,
+    // 										url    : userUrl
+    //     								});
 
-    //         case 'ADD_TEAM' :
-    //         case 'EDIT_TEAM':
-    //             for ( var r = 0; r < this.CurrentUser.authorities.length; r++ )
-    //             {
-    //                 if ( this.CurrentUser.authorities[r] === "ROLE_SUPER" )
-    //                 {
-    //                     // Super user has permissions to do anything
-    //                     allow = true;
-    //                     break;
-    //                 } else if ( this.CurrentUser.authorities[r] === "ROLE_EDIT_TEAM" )
-    //                 {
-    //                     allow = true;
-    //                     break;
-    //                 }
-    //             }
-    //             break;
-    //         case 'DEL_TEAM':
-    //             for ( var r = 0; r < this.CurrentUser.authorities.length; r++ )
-    //             {
-    //                 if ( this.CurrentUser.authorities[r] === "ROLE_SUPER" )
-    //                 {
-    //                     // Super user has permissions to do anything
-    //                     allow = true;
-    //                     break;
-    //                 } else if ( this.CurrentUser.authorities[r] === "ROLE_DEL_TEAM" )
-    //                 {
-    //                     allow = true;
-    //                     break;
-    //                 }
-    //             }
-    //             break;
-
-    //         case 'ADD_USER'   :
-    //         case 'EDIT_USER'  :
-    //         case 'DELETE_USER':
-    //         case 'VIEW_USERS' :
-    //           console.log("Checking permission for user admin..");
-    //           for ( var r = 0; r < this.CurrentUser.authorities.length; r++ )
-    //           {
-    //                 if ( this.CurrentUser.authorities[r] === "ROLE_ADMIN" )
-    //               {
-    //                   // Super user has permissions to do anything
-    //                   allow = true;
-    //                   break;
-    //               }
-    //           }
-    //           break;
-    //     }
-
-    //     return allow;
+    // 	return this.http$.post( userUrl, user, options )
+		// 	.map(response => response.json())
+		// 	.subscribe( data => {
+    //                         this.lg$.log("    |<- addMember("+data+")");
+    //                       },
+    //               err => this.lg$.log("UserService: ERROR adding user to server! [" + err + "]"),
+    //               ()  => this.lg$.log("    |<- addUser() - finished")
+    //              );
     // }
 
   private setUserDetails( user: User )
@@ -323,15 +231,29 @@ export class UserService {
 
     private setupHeaders()
     {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
-        this.lg$.log("Token read from storage: " + localStorage.getItem('id_token') );
-        return headers;
+      let httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type' : 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('id_token')
+        })
+      };
+      this.lg$.log("Token read from storage: " + localStorage.getItem('id_token') );
+      return httpOptions;
     }
 
-    private handleError()
-    {
-
-    }
+    private handleError(error: HttpErrorResponse) {
+      if (error.error instanceof ErrorEvent) {
+        // A client-side or network error occurred. Handle it accordingly.
+        console.error('An error occurred:', error.error.message);
+      } else {
+        // The backend returned an unsuccessful response code.
+        // The response body may contain clues as to what went wrong,
+        console.error(
+          `Backend returned code ${error.status}, ` +
+          `body was: ${error.error}`);
+      }
+      // return an observable with a user-facing error message
+      return throwError(
+        'Something bad happened; please try again later.');
+    };
 }

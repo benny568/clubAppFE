@@ -3,7 +3,7 @@ export /**
  */
 class ServerMode {
     modes = { LOCAL:0, REMOTE:1};
-    currentMode:number;
+    currentMode: number;
 
     constructor() {
         /*if( process.env.NODE_ENV === 'development' )

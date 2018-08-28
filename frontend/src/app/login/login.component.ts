@@ -2,8 +2,8 @@ import { Headers } from '@angular/http';
 import { Component }          from '@angular/core';
 import { Router }             from '@angular/router';
 import { FormGroup,
-	     Validators,
-		 FormBuilder }        from '@angular/forms';
+	       Validators,
+		     FormBuilder }        from '@angular/forms';
 
 import { SessionDataService } from '../services/session-data.service';
 import { LoggerService }      from '../services/logger.service';
@@ -30,11 +30,11 @@ export class LoginComponent {
 	username    : string;
 	password    : string;
 
-	constructor( private lg$: LoggerService,
-				 private login$ : LoginService,
-				 private user$  : UserService,
-				 private _router: Router,
-				 private fb     : FormBuilder )
+	constructor( private lg$    : LoggerService,
+				       private login$ : LoginService,
+				       private user$  : UserService,
+				       private _router: Router,
+				       private fb     : FormBuilder )
 	{
 		this.lg$.setLogHdr(this.logdepth, this.componentName);
 		this.loginDetails = { username: '', password: ''};
@@ -98,11 +98,11 @@ export class LoginComponent {
 	private getUserDetails( username: string )
 	{
 
-		this.user$.getUserDetails( username )
-			.subscribe(
-				data => this.setUserDetails(data.json()),
-				err  => console.log("ERROR: Cannot retrieve user details from server!")
-			);
+		// this.user$.getUserDetails( username )
+		// 	.subscribe(
+		// 		data => this.setUserDetails(data.json()),
+		// 		err  => console.log("ERROR: Cannot retrieve user details from server!")
+		// 	);
 	}
 
 	private setUserDetails( user: User )

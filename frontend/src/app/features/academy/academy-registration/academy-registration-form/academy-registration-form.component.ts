@@ -1,9 +1,9 @@
 import { Component,
          OnInit }          from '@angular/core';
 import { Router }          from '@angular/router';
-import { FormGroup, 
-		     FormControl, 
-		     Validators, 
+import { FormGroup,
+		     FormControl,
+		     Validators,
 		     FormBuilder }     from '@angular/forms';
 
 import { LoggerService }   from '../../../../services/logger.service';
@@ -12,55 +12,55 @@ import { ErrorService }    from '../../../../services/error.service';
 import { AcademyRegistrationService }  from '../academy-registration.service';
 
 @Component({
-  selector: 'app-academy-registration-form',
+  selector   : 'app-academy-registration-form',
   templateUrl: './academy-registration-form.component.html',
-  styleUrls: ['./academy-registration-form.component.css'],
-  providers: [ LoggerService ]
+  styleUrls  : ['./academy-registration-form.component.css'],
+  providers  : [ LoggerService ]
 })
 
 export class AcademyRegistrationFormComponent implements OnInit {
-	componentName:string = 'AcademyRegistrationComponent';
-	logdepth:number = 4;
-	step1enabled: boolean = false;
-	step2enabled: boolean = true;
-	step3enabled: boolean = false;
-	regForm: any;
-	error: boolean;
+	componentName: string = 'AcademyRegistrationComponent';
+	logdepth     : number = 4;
+	step1enabled : boolean = false;
+	step2enabled : boolean = true;
+	step3enabled : boolean = false;
+	regForm      : any;
+	error        : boolean;
 	/* Set the initial date for the date picker calander */
-	year = "2017";
-	today = new Date();
+	year      = "2008";
+	today     = new Date();
 	startDate = this.today.getDate();
 	/* ************************************************* */
 
-	constructor( private lg$: LoggerService,
-			     private com$: CommonService,
-				 private err$: ErrorService,
-			     public  ar$: AcademyRegistrationService,
-			     private router: Router,
-				 fb: FormBuilder )
+	constructor( private lg$   : LoggerService,
+			         private com$  : CommonService,
+			         private err$  : ErrorService,
+			         public  ar$   : AcademyRegistrationService,
+			         private router: Router,
+			                 fb    : FormBuilder )
 	{
 		this.lg$.setLogHdr(this.logdepth, this.componentName);
 		this.lg$.log("** Reg Component constructor called.");
 
 		this.regForm = new FormGroup({
-			firstname: new FormControl(),
-			lastname: new FormControl(),
-			dob: new FormControl(),
-			allergies: new FormControl(),
-			medication: new FormControl(),
-			notes: new FormControl(),
-			asthma: new FormControl(),
-			diabetes: new FormControl(),
-			fathername: new FormControl(),
-			mothername: new FormControl(),
-			address: new FormControl(),
-			email: new FormControl(),
-			phone1: new FormControl(),
-			phone2: new FormControl(),
-			consent: new FormControl(),
+			firstname   : new FormControl(),
+			lastname    : new FormControl(),
+			dob         : new FormControl(),
+			allergies   : new FormControl(),
+			medication  : new FormControl(),
+			notes       : new FormControl(),
+			asthma      : new FormControl(),
+			diabetes    : new FormControl(),
+			fathername  : new FormControl(),
+			mothername  : new FormControl(),
+			address     : new FormControl(),
+			email       : new FormControl(),
+			phone1      : new FormControl(),
+			phone2      : new FormControl(),
+			consent     : new FormControl(),
 			photoconsent: new FormControl(),
-			singleTerm: new FormControl(),
-			secondChild: new FormControl()
+			singleTerm  : new FormControl(),
+			secondChild : new FormControl()
 		});
 
 		this.error = false;
@@ -230,24 +230,27 @@ export class AcademyRegistrationFormComponent implements OnInit {
 
 	printServiceParameters()
 	{
-		this.lg$.log(this.ar$.regData.getGeneralconsent()==null?'':this.ar$.regData.getGeneralconsent());
-		this.lg$.log( this.ar$.regData.getFirstname());
-		this.lg$.log( this.ar$.regData.getLastname());
-		this.lg$.log( this.ar$.regData.getDob());
-		this.lg$.log( this.ar$.regData.getEmail());
-		this.lg$.log( this.ar$.regData.getAllergies());
-		this.lg$.log( this.ar$.regData.getMedication());
-		this.lg$.log( this.ar$.regData.getNotes());
-		this.lg$.log( this.ar$.regData.getAsthma());
-		this.lg$.log( this.ar$.regData.getDiabetes());
-		this.lg$.log( this.ar$.regData.getFatherName());
-		this.lg$.log( this.ar$.regData.getMotherName());
-		this.lg$.log( this.ar$.regData.getAddress());
-		this.lg$.log( this.ar$.regData.getPhone1());
-		this.lg$.log( this.ar$.regData.getPhone2());
-		this.lg$.log( this.ar$.regData.getPictureconsent());
-		this.lg$.log( this.ar$.regData.getHalfterm());
-		this.lg$.log( this.ar$.regData.getSecondchild());
+    this.lg$.trace("->printServiceParameters()");
+		this.lg$.trace(this.ar$.regData.getGeneralconsent()==null?'':this.ar$.regData.getGeneralconsent());
+		this.lg$.trace( this.ar$.regData.getFirstname());
+    this.lg$.trace( this.ar$.regData.getLastname());
+    this.lg$.trace( this.ar$.regData.getAddress());
+		this.lg$.trace( this.ar$.regData.getDob());
+		this.lg$.trace( this.ar$.regData.getEmail());
+		this.lg$.trace( this.ar$.regData.getAllergies());
+		this.lg$.trace( this.ar$.regData.getMedication());
+		this.lg$.trace( this.ar$.regData.getNotes());
+		this.lg$.trace( this.ar$.regData.getAsthma());
+		this.lg$.trace( this.ar$.regData.getDiabetes());
+		this.lg$.trace( this.ar$.regData.getFatherName());
+		this.lg$.trace( this.ar$.regData.getMotherName());
+		this.lg$.trace( this.ar$.regData.getAddress());
+		this.lg$.trace( this.ar$.regData.getPhone1());
+		this.lg$.trace( this.ar$.regData.getPhone2());
+		this.lg$.trace( this.ar$.regData.getPictureconsent());
+		this.lg$.trace( this.ar$.regData.getHalfterm());
+    this.lg$.trace( this.ar$.regData.getSecondchild());
+    this.lg$.trace("<-printServiceParameters()");
 	}
 
 }

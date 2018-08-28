@@ -44,7 +44,7 @@ export class AddUserComponent implements OnInit {
   }
 
   onCloseConfirm() {
-    this.usr$.addUser( this.data.user, null );
+    //this.usr$.addUser( this.data.user, null ).subscribe();
     this.dialogRef.close('Confirm');
   }
   onCloseCancel() {

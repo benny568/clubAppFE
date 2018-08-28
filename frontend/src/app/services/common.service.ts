@@ -39,7 +39,7 @@ export class CommonService {
 
         return _home;
 	}
-	
+
 	/**********************************************************
      * Name:		getGalleryHome()
      * Description:	Returns the _home URL so that it can be used
@@ -70,18 +70,18 @@ export class CommonService {
      * Return:		true or false
      **********************************************************/
     isValidName( name: string ) : boolean
-	{
-		//this.lg$.log("----> checkName(" + name + ")");
+  	{
+  		//this.lg$.log("----> checkName(" + name + ")");
 
-		if ( ( name !== undefined ) && ( name !== '' ) )
-		{
-			return /^\w+/.test(name);
-		} else
-		{
-			//this.lg$.log("----> checkName(" + name + ") undefined or blank!");
-			return false;
-		}
-	}
+  		if ( ( name !== undefined ) && ( name !== '' ) )
+  		{
+  			return /^\w+/.test(name);
+  		} else
+  		{
+  			//this.lg$.log("----> checkName(" + name + ") undefined or blank!");
+  			return false;
+  		}
+  	}
 
     /**********************************************************
      * Name:		isValidEmail()
@@ -90,20 +90,20 @@ export class CommonService {
      * Params in:	The email entered
      * Return:		true or false
      **********************************************************/
-	isValidEmail( email: string ) : boolean
-	{
-		//this.lg$.log("----> checkEmail(" + email + ")");
-		console.log("----> checkEmail(" + email + ")");
+  	isValidEmail( email: string ) : boolean
+  	{
+  		//this.lg$.log("----> checkEmail(" + email + ")");
+  		console.log("----> checkEmail(" + email + ")");
 
-		if ( ( email !== undefined ) && ( email !== '' ) )
-		{
-			return /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i.test(email);
-		} else
-		{
-			console.log("----> checkEmail(" + email + ") undefined or blank!");
-			return false;
-		}
-	}
+  		if ( ( email !== undefined ) && ( email !== '' ) )
+  		{
+  			return /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i.test(email);
+  		} else
+  		{
+  			console.log("----> checkEmail(" + email + ") undefined or blank!");
+  			return false;
+  		}
+  	}
 
 	/**********************************************************
      * Name:		isValidPhone()
@@ -142,18 +142,18 @@ export class CommonService {
      * Return:		true or false
      **********************************************************/
     isValidDob( name: string ) : boolean
-	{
-		//this.lg$.log("----> checkName(" + name + ")");
+  	{
+  		//this.lg$.log("----> checkName(" + name + ")");
 
-		if ( ( name !== undefined ) && ( name !== '' ) )
-		{
-			return /^\w+/.test(name);
-		} else
-		{
-			//this.lg$.log("----> checkName(" + name + ") undefined or blank!");
-			return false;
-		}
-	}
+  		if ( ( name !== undefined ) && ( name !== '' ) )
+  		{
+  			return /^\w+/.test(name);
+  		} else
+  		{
+  			//this.lg$.log("----> checkName(" + name + ") undefined or blank!");
+  			return false;
+  		}
+  	}
 
     /**********************************************************
      * Name:		isEmpty()
@@ -162,15 +162,15 @@ export class CommonService {
      * Return:		true or false
      **********************************************************/
     isEmpty( field: string ) : boolean
-	{
-		if ( ( field === undefined ) || ( field === '' ) )
-		{
-			return false;
-		} else
-		{
-			return true;
-		}
-	}
+  	{
+  		if ( ( field === undefined ) || ( field === '' ) )
+  		{
+  			return false;
+  		} else
+  		{
+  			return true;
+  		}
+  	}
 
 	/**********************************************************
      * Name:		clearArray()
@@ -179,17 +179,17 @@ export class CommonService {
      * Params in:	The array to clear
      * Return:		none
      **********************************************************/
-	public clearArray( array, lg$: LoggerService )
-	{
-		lg$.trace("-> clearArray()");
+  	public clearArray( array, lg$: LoggerService )
+  	{
+  		lg$.trace("-> clearArray()");
 
-		while( array.length )
-		{
-			lg$.trace("....sending array value to trash");
-			array.pop();
-		}
+  		while( array.length )
+  		{
+  			lg$.trace("....sending array value to trash");
+  			array.pop();
+  		}
     }
-    
+
     /**********************************************************
      * Name:		setupHeaders()
      * Description:	Set the JWT in the header so we can access
