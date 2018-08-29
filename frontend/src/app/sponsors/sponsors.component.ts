@@ -13,8 +13,8 @@ import { LoggerService }      from '../services/logger.service';
 
 export class SponsorsComponent {
   Sponsors: Array<Sponsor>;
-                             componentName = 'SponsorsComponent';
-                    logdepth:number        = 2;
+                                                        componentName = 'SponsorsComponent';
+                                               logdepth:number        = 2;
 
     constructor( private d$: SessionDataService, private lg$: LoggerService ) { }
 
@@ -36,7 +36,8 @@ export class SponsorsComponent {
         console.log('-->' + 'loadCurrentSponsors()');
 
         this.Sponsors = [ {name:"Rochford's Pharmacy", image: "./assets/img/adverts/main-sponsor.png"},
-                          {name:"RehabWorks, Harmony Row, Ennis", image: "./assets/img/adverts/rehabworks.png"}
+                          {name:"RehabWorks, Harmony Row, Ennis", image: "./assets/img/adverts/rehabworks.png"},
+                          {name:"Lets Bounce, Ruan, Ennis", image: "./assets/img/adverts/LetsBounce.png"}
                         ];
 
         return this.Sponsors;
