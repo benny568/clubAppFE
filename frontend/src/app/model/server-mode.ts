@@ -12,7 +12,7 @@ class ServerMode {
         }
         else
         {*/
-            this.currentMode = this.modes.REMOTE;
+            this.currentMode = this.modes.LOCAL;
         /*}*/
     }
 

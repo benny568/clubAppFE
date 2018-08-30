@@ -206,5 +206,28 @@ export class CommonService {
         console.log("Token read from storage: " + localStorage.getItem('id_token') );
         return headers;
     }
+
+    /**********************************************************
+     * Name:		calculateCurrentSeason()
+     * Description:	Depending on the current month, this returns
+     *              the current season. Used by UI pages.
+     * Scope:		Externally accessible
+     * Params in:	None
+     * Return:		The current season, e.g. "2018/2019"
+     **********************************************************/
+    public calculateCurrentSeason(): String
+    {
+      var season = "";
+      let date   = new Date();
+      let year   = date.getFullYear();
+      let month  = date.getMonth();     // Remember this is 0 for Jan etc.
+
+      if( month > 6 && month <= 11 ) // First period
+        season = year + "/" + (year+1);
+      else
+        season = (year-1) + "/" + year;  // Second term
+
+      return season;
+    }
 }
 
