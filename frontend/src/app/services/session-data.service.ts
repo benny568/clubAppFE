@@ -47,8 +47,9 @@ export class SessionDataService {
     gAuthenticated = false;
     aAlbum : Array<Media>;
 
-     constructor ( private com$: CommonService, private lg$: LoggerService, private _http: Http ) {
-     this.loghdr = this.setLogHdr(this.logdepth, this.serviceName);
+     constructor ( private com$: CommonService, private lg$: LoggerService, private _http: Http )
+     {
+        this.loghdr = this.setLogHdr(this.logdepth, this.serviceName);
 
         var svr = new ServerMode();
         this.CurrentServerMode = svr.getServerMode();
@@ -77,9 +78,9 @@ export class SessionDataService {
         this.aAlbum = new Array<Media>();
 
         for ( let i = 0; i < this.showTeamArray.length; i++ )
-		{
-			this.showTeamArray[i] = false;
-		}
+    		{
+    			this.showTeamArray[i] = false;
+    		}
 
     }
 
@@ -118,7 +119,7 @@ export class SessionDataService {
         return diff;
     }
 
-    
+
     /**********************************************************
      * Name:		applyMemberChange()
      * Description:	Applies a change to the local data so the
@@ -280,7 +281,7 @@ export class SessionDataService {
     }
 
 
-   
+
     /**********************************************************
      * Name:		dsGetTeams()
      * Description:	Retrieves a list of teams from the server
@@ -731,7 +732,7 @@ export class SessionDataService {
     /**********************************************************
      * Name:		printAlbum()
      * Description:	Logs the content of the albumn.
-     * Scope:		
+     * Scope:
      * Params in:   data: The data received from the server
      *              path: The path to the photos on the server
      *              album: The media album to put the photos in
@@ -744,5 +745,22 @@ export class SessionDataService {
             this.lg$.trace( picture.image );
         }
     }
+
+    /**********************************************************
+     * Name:		getClubOfficers()
+     * Description:	Retrievs the current club officers from db.
+     * Scope:
+     * Params in:   None
+     * Return:      Arrah of officers
+     **********************************************************/
+    public getClubOfficers()
+    {
+        console.log("-->" + " getClubOfficers()..");
+        var url = this.com$.getHome();
+        console.log("-->" + " getClubOfficers() - home is (" + url + ")");
+
+        return this._http.get( url + 'public/officers' )
+      			.map(response => response.json());
+     }
 
 }

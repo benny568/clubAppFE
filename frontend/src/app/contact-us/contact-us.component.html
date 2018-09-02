@@ -19,113 +19,11 @@
                   </tr>
               </thead>
               <tbody class="avenue-body">
-                  <tr>
-                      <th scope="row">Hon. President</th>
-                      <td>Gerard 'Paddlers' O'Grady</td>
-                      <td></td>
-                      <td></td>
-                  </tr>
-                  <tr>
-                      <th scope="row">Chairman</th>
-                      <td>Geroid Mannion</td>
-                      <td>886 8120055</td>
-                      <td>gm@gmail.com</td>
-                  </tr>
-                  <tr>
-                      <th scope="row">Vice Chairman</th>
-                      <td>Bazil Whelan</td>
-                      <td></td>
-                      <td></td>
-                  </tr>
-                  <tr>
-                      <th scope="row">Secretary</th>
-                      <td></td>
-                      <td>087 2873996</td>
-                      <td>avenueunited@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Junior Secretary</th>
-                    <td>Decky Eyan</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">CSSL Secretary (U13-U16)</th>
-                    <td>John O'Malley</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                      <th scope="row">Treasurer</th>
-                      <td>Eamon O'Reilly</td>
-                      <td></td>
-                      <td></td>
-                  </tr>
-                  <tr>
-                      <th scope="row">Academy Director</th>
-                      <td>Helene Griffith</td>
-                      <td>087 8134592</td>
-                      <td>academy@avenueunited.ie</td>
-                  </tr>
-                  <tr>
-                      <th scope="row">Junior League Delegate</th>
-                      <td>Tommy Molloy</td>
-                      <td>000000</td>
-                      <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">CSSL Delegate</th>
-                    <td>Nole Purtill</td>
-                    <td>000000</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                      <th scope="row">PRO/Social Media</th>
-                      <td>Rhys Philips & Dylan Casey</td>
-                      <td>000000</td>
-                      <td></td>
-                  </tr>
-                  <tr>
-                      <th scope="row">Child Welfare Officer</th>
-                      <td>John O'Malley</td>
-                      <td></td>
-                      <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Club Development Officer</th>
-                    <td>Enda Meaney</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                  <tr>
-                      <th scope="row">Webmaster</th>
-                      <td>Brendan O'Daly</td>
-                      <td>087 6470883</td>
-                      <td>odalybr@hotmail.com</td>
-                  </tr>
-                  <tr>
-                      <th scope="row">Comittee Member</th>
-                      <td>John Roche</td>
-                      <td></td>
-                      <td></td>
-                  </tr>
-                  <tr>
-                      <th scope="row">Junior A Manager</th>
-                      <td>Darryl Eade, David Russell, Gearoid Mannion</td>
-                      <td>0, 00000</td>
-                      <td></td>
-                  </tr>
-                  <tr>
-                      <th scope="row">Junior B Manager</th>
-                      <td>Rhys Phillips, David Phillips</td>
-                      <td>00</td>
-                      <td></td>
-                  </tr>
-                  <tr>
-                      <th scope="row">U18 Manager</th>
-                      <td>Wayne Burke, Alfonso D'Auria, Davie Kerin</td>
-                      <td>087 2873996</td>
-                      <td>avenueunited@gmail.com</td>
+                  <tr *ngFor="let office of officers">
+                      <th scope="row">{{office.office}}</th>
+                      <td>{{office.name}}</td>
+                      <td>{{office.phone}}</td>
+                      <td>{{office.email}}</td>
                   </tr>
               </tbody>
           </table>
