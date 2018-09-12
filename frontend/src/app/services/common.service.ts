@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import {ServerMode} from '../model/server-mode';
 
 import {LoggerService} from '../services/logger.service';
@@ -6,30 +7,30 @@ import {LoggerService} from '../services/logger.service';
 export class CommonService {
 
     modes = { LOCAL:0, REMOTE:1};
-    CurrentServerMode:number;
+    CurrentServerMode: number;
 
-    logdepth = 3;
-    loghdr = "";
+    logdepth    = 3;
+    loghdr      = "";
     serviceName = 'CommonService';
 
      constructor () {
 
-        var svr = new ServerMode();
-        this.CurrentServerMode = svr.getServerMode();
+        var svr                    = new ServerMode();
+            this.CurrentServerMode = svr.getServerMode();
      }
 
     /**********************************************************
-     * Name:		getHome()
-     * Description:	Returns the _home URL so that it can be used
+     * Name       : getHome()
+     * Description: Returns the _home URL so that it can be used
      * 				as a local or remote app.
-     * Scope:		Externally accessible
-     * Params in:	none
-     * Return:		_home URL
+     * Scope    : Externally accessible
+     * Params in: none
+     * Return   : _home URL
      **********************************************************/
     getHome() : string {
-        var _home:string;
+        var _home: string;
 
-        if ( this.CurrentServerMode === this.modes.LOCAL )
+        if ( environment.production === false )
         {
         	 _home = 'http://localhost:8080/backend/';
         } else if ( this.CurrentServerMode === this.modes.REMOTE )
@@ -38,23 +39,23 @@ export class CommonService {
         }
 
         return _home;
-	}
+  }
 
 	/**********************************************************
-     * Name:		getGalleryHome()
-     * Description:	Returns the _home URL so that it can be used
+     * Name       : getGalleryHome()
+     * Description: Returns the _home URL so that it can be used
      * 				as a local or remote app.
-     * Scope:		Externally accessible
-     * Params in:	none
-     * Return:		_home URL
+     * Scope    : Externally accessible
+     * Params in: none
+     * Return   : _home URL
      **********************************************************/
     getGalleryHome() : string {
-        var _home:string;
+        var _home: string;
 
-        if ( this.CurrentServerMode === this.modes.LOCAL )
+        if ( environment.production === false )
         {
         	 _home = 'http://localhost:8080/';
-        } else if ( this.CurrentServerMode === this.modes.REMOTE )
+        } else
         {
             _home = 'http://www.avenueunited.ie/';
         }
@@ -63,13 +64,13 @@ export class CommonService {
     }
 
     /**********************************************************
-     * Name:		isValidName()
-     * Description:	Checks that there are one or more words in
+     * Name       : isValidName()
+     * Description: Checks that there are one or more words in
      * 				the name
-     * Params in:	The name entered
-     * Return:		true or false
+     * Params in: The name entered
+     * Return   : true or false
      **********************************************************/
-    isValidName( name: string ) : boolean
+    isValidName( name: string ): boolean
   	{
   		//this.lg$.log("----> checkName(" + name + ")");
 
@@ -84,13 +85,13 @@ export class CommonService {
   	}
 
     /**********************************************************
-     * Name:		isValidEmail()
-     * Description:	Checks that the entered text matches the
+     * Name       : isValidEmail()
+     * Description: Checks that the entered text matches the
      * 				basic rules to be an email address.
-     * Params in:	The email entered
-     * Return:		true or false
+     * Params in: The email entered
+     * Return   : true or false
      **********************************************************/
-  	isValidEmail( email: string ) : boolean
+  	isValidEmail( email: string ): boolean
   	{
   		//this.lg$.log("----> checkEmail(" + email + ")");
   		console.log("----> checkEmail(" + email + ")");
@@ -106,13 +107,13 @@ export class CommonService {
   	}
 
 	/**********************************************************
-     * Name:		isValidPhone()
-     * Description:	Checks that the entered text matches the
+     * Name       : isValidPhone()
+     * Description: Checks that the entered text matches the
      * 				basic rules to be an Irish phone number.
-     * Params in:	The email entered
-     * Return:		true or false
+     * Params in: The email entered
+     * Return   : true or false
      **********************************************************/
-	isValidPhone( phone: string ) : boolean
+	isValidPhone( phone: string ): boolean
 	{
 		console.log("----> checkPh(" + phone + ")");
 		console.log("== " + /^\d{10}$/.test(phone) );
@@ -136,12 +137,12 @@ export class CommonService {
 	}
 
 	/**********************************************************
-     * Name:		isValidDob()
-     * Description:	Checks that the dob is not empty
-     * Params in:	The name entered
-     * Return:		true or false
+     * Name       : isValidDob()
+     * Description: Checks that the dob is not empty
+     * Params in  : The name entered
+     * Return     : true or false
      **********************************************************/
-    isValidDob( name: string ) : boolean
+    isValidDob( name: string ): boolean
   	{
   		//this.lg$.log("----> checkName(" + name + ")");
 
@@ -156,12 +157,12 @@ export class CommonService {
   	}
 
     /**********************************************************
-     * Name:		isEmpty()
-     * Description:	Checks if a field is empty empty
-     * Params in:	The field entered
-     * Return:		true or false
+     * Name       : isEmpty()
+     * Description: Checks if a field is empty empty
+     * Params in  : The field entered
+     * Return     : true or false
      **********************************************************/
-    isEmpty( field: string ) : boolean
+    isEmpty( field: string ): boolean
   	{
   		if ( ( field === undefined ) || ( field === '' ) )
   		{
@@ -173,11 +174,11 @@ export class CommonService {
   	}
 
 	/**********************************************************
-     * Name:		clearArray()
-     * Description:	Clears the contents of the array passed in.
-     * Scope:		Externally accessible
-     * Params in:	The array to clear
-     * Return:		none
+     * Name       : clearArray()
+     * Description: Clears the contents of the array passed in.
+     * Scope      : Externally accessible
+     * Params in  : The array to clear
+     * Return     : none
      **********************************************************/
   	public clearArray( array, lg$: LoggerService )
   	{
@@ -191,12 +192,12 @@ export class CommonService {
     }
 
     /**********************************************************
-     * Name:		setupHeaders()
-     * Description:	Set the JWT in the header so we can access
+     * Name       : setupHeaders()
+     * Description: Set the JWT in the header so we can access
      *              secure content from the server.
-     * Scope:		Externally accessible
-     * Params in:	None
-     * Return:		The headers struct
+     * Scope    : Externally accessible
+     * Params in: None
+     * Return   : The headers struct
      **********************************************************/
     public setupHeaders()
     {
@@ -208,12 +209,12 @@ export class CommonService {
     }
 
     /**********************************************************
-     * Name:		calculateCurrentSeason()
-     * Description:	Depending on the current month, this returns
+     * Name       : calculateCurrentSeason()
+     * Description: Depending on the current month, this returns
      *              the current season. Used by UI pages.
-     * Scope:		Externally accessible
-     * Params in:	None
-     * Return:		The current season, e.g. "2018/2019"
+     * Scope    : Externally accessible
+     * Params in: None
+     * Return   : The current season, e.g. "2018/2019"
      **********************************************************/
     public calculateCurrentSeason(): String
     {
@@ -229,5 +230,6 @@ export class CommonService {
 
       return season;
     }
+
 }
 

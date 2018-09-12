@@ -120,7 +120,7 @@ export class AcademyRegistrationService {
 	    	case 8      : team = 'U9';  break;
 	    	case 7      : team = 'U8';  break;
 	    	case 6      : team = 'U7';  break;
-	    	case 5      :
+	    	case 5      : 
 	    	case 4      : team = 'U6';  break;
 	    	     default: team = 'Unknown'; break;
     	}
@@ -143,7 +143,7 @@ export class AcademyRegistrationService {
 		this.lg$.log("[AcademyRegistrationService]-> payPal()");
 		let body    = JSON.stringify({amount:'110', currency_code: 'EUR'});
 		let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+		let options = new RequestOptions({ headers: headers });
 
     // (1) Convert the array of values to a Mmeber object
     this.convertToMember();
@@ -152,7 +152,10 @@ export class AcademyRegistrationService {
     //     confirmation email to the user when we return from PayPal
     this.saveMemberCookie(this.member);
 
-    // (3) Calculate the cost and redirec to PayPal for payment
+    // (3) Store the new member in the db
+    this.storeDetails( this.member );
+
+    // (4) Calculate the cost and redirec to PayPal for payment
     this.lg$.log("    |- Calling http post to PayPal..");
 
     let loc = '';
@@ -195,13 +198,16 @@ export class AcademyRegistrationService {
 
     window.location.href = loc;
 
+    // (5) Send the confirmation email to the person
+    this.sendEmailConfirmation( this.member );
+
     this.lg$.log("********* BACK IN PAYPAL METHOD *********")
 	}
 
 	storeDetails( data: Member )
 	{
     this.lg$.log("-> storeDetails()")
-		this.logValues();
+		this.logRegValues( data );
 
 		var url = this.com$.getHome();
 		this.lg$.log("  |- home set to: " + url);
@@ -210,8 +216,8 @@ export class AcademyRegistrationService {
 	  headers.append('Content-Type', 'application/json');
 	  let options = new RequestOptions({ headers: headers });
 
-	  this.lg$.log("  |- posting registration to server..[" + url + '/academyregistration' + "]");
-		this._http.post(  url + '/academyregistration',
+	  this.lg$.log("  |- posting registration to server..[" + url + 'academyregistration' + "]");
+		this._http.post(  url + 'academyregistration',
 				              data, options )
               			.subscribe(
                 	            	data  => this.lg$.log("  POST of academy registration successfull"),
@@ -279,7 +285,7 @@ export class AcademyRegistrationService {
     let options = new RequestOptions({ headers: headers });
 
     // Send the confirmation email
-		return this._http.post(url + '/confirmregistration',
+		return this._http.post(url + 'confirmregistration',
 				currMember, options )
     			.subscribe(
     	            	data  => this.lg$.log("Confirmation email sent successfull"),
@@ -293,6 +299,20 @@ export class AcademyRegistrationService {
 		this.lg$.log("===> Error posting academy registration to server: " + error);
 		this.logValues();
 	}
+
+  logRegValues(member: Member)
+	{
+    this.lg$.log( "->logRegValues()");
+		this.lg$.log( "  |- ACADEMY REGISTRATION: ");
+		this.lg$.log( '  |- Name: ' + member.name );
+    this.lg$.log( '  |- Address: ' + member.address );
+		this.lg$.log( '  |- Email: ' + member.email );
+		this.lg$.log( '  |- Date of Birth: ' + member.dob );
+		this.lg$.log( '  |- Phone1: ' + member.phone );
+		this.lg$.log( '  |- Phone2: ' + member.phone2 );
+		this.lg$.log( '  |- Academy Info: ' + member.academyinfo );
+    this.lg$.log( "<-logRegValues()");
+  }
 
 	logValues()
 	{
@@ -352,12 +372,12 @@ export class AcademyRegistrationService {
     this.lg$.log( "<-logMember()");
   }
 
-  tst_payPal()
+  tst2_payPal()
 	{
     this.lg$.log("[AcademyRegistrationService]-> tst_payPal()");
     this.convertToMember();
     this.saveMemberCookie(this.member);
-    window.location.href = 'http://localhost:4200/success';
+    window.location.href = 'http://localhost:4200/#/success';
     return;
 
 		let body    = JSON.stringify({amount:'110', currency_code: 'EUR'});
@@ -382,6 +402,71 @@ export class AcademyRegistrationService {
       this.lg$.log("******** BACK FROM PAYPAL in tst_payPal() !! *********");
       console.log("******** BACK FROM PAYPAL in tst_payPal() !! *********");
   }
+
+  tst_payPal()
+	{
+		this.lg$.log("[AcademyRegistrationService]-> tst_payPal()");
+		let body    = JSON.stringify({amount:'110', currency_code: 'EUR'});
+		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let options = new RequestOptions({ headers: headers });
+
+    // (1) Convert the array of values to a Mmeber object
+    this.convertToMember();
+
+    // (2) Store the Member object as a cookie so we can use it to send the
+    //     confirmation email to the user when we return from PayPal
+    this.saveMemberCookie(this.member);
+
+    // (3) Calculate the cost and redirec to PayPal for payment
+    this.lg$.log("    |- Calling http post to PayPal..");
+
+    let loc = '';
+    if ( this.regData.getHalfterm() === true ) /* Single Term */
+    {
+      if ( this.regData.getSecondchild() === true ) /* Second child */
+      {
+        this.lg$.log("Transferring to PayPal to pay €60...");
+        loc = 'https://www.paypal.com/cgi-bin/webscr?' +
+            'cmd=_s-xclick&' +
+            'hosted_button_id=9CQB2K78DC5DJ'; // €60
+      }
+      else
+      {
+        this.lg$.log("Transferring to PayPal to pay €70...");
+        loc = 'https://www.paypal.com/cgi-bin/webscr?' +
+            'cmd=_s-xclick&' +
+            'hosted_button_id=9CQB2K78DC5DJ'; // €70
+      }
+
+    } else
+    {
+
+      if ( this.regData.getSecondchild() === true ) /* Second child */
+      {
+        this.lg$.log("Transferring to PayPal to pay €120...");
+        loc = 'https://www.paypal.com/cgi-bin/webscr?' +
+            'cmd=_s-xclick&' +
+            'hosted_button_id=9CQB2K78DC5DJ'; // €120
+      }
+      else
+      {
+        this.lg$.log("Transferring to PayPal to pay €140...");
+        loc = 'https://www.paypal.com/cgi-bin/webscr?' +
+            'cmd=_s-xclick&' +
+            'hosted_button_id=9CQB2K78DC5DJ'; // €140
+      }
+
+    }
+    window.location.href = loc;
+
+    // (2) Store the new member in the db
+    this.storeDetails( this.member );
+
+    // (3) Send the confirmation email to the person
+    this.sendEmailConfirmation( this.member );
+
+    this.lg$.log("********* BACK IN PAYPAL METHOD *********")
+	}
 
   private saveMemberCookie(member : Member)
   {

@@ -30,7 +30,7 @@ export class AcademyRegistrationSuccessComponent implements OnInit {
     // (1) Get current member details from the stored cookie
     let currMember :Member = this.ar$.getMemberCookie();
         this.destEmail     = currMember.email;
-    this.lg$.log("[-->sendEmailConfirmation()..to [" + currMember.email + "]");
+    this.lg$.log("-->sendEmailConfirmation()..to [" + currMember.email + "]");
 
     // (2) Store the new member in the db
     this.ar$.storeDetails( currMember );

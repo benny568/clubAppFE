@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Http, Headers,
          RequestOptions } from '@angular/http';
@@ -9,26 +8,28 @@ import { CommonService } from './services/common.service';
 import { SessionDataService } from './services/session-data.service';
 import { LoginService } from './services/login.service';
 import { UserService } from './services/user.service';
+import { CookieService } from './services/cookie.service';
 
 @Component({
-  selector: 'app-root',
+  selector   : 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [ LoggerService ]
+  styleUrls  : ['./app.component.css'],
+  providers  : [ LoggerService ]
 })
 export class AppComponent implements OnInit {
 
   componentName = 'AppComponent';
-  logdepth = 0;
-  loggedIn = '';
+  logdepth      = 0;
+  loggedIn      = '';
 
   constructor( private lg$: LoggerService,
-               private com$: CommonService,
-               public d$: SessionDataService,
-               private login$: LoginService,
-               public user$: UserService,
-               private router: Router,
-               private _http: Http )
+               private com$   : CommonService,
+               public  d$     : SessionDataService,
+               private login$ : LoginService,
+               public  user$  : UserService,
+               public  cookie$: CookieService,
+               private router : Router,
+               private _http  : Http )
   {
     this.lg$.setLogHdr(this.logdepth, this.componentName);
 
@@ -37,7 +38,16 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
-
+    if( this.cookie$.isVisitorCookiePresent() )
+    {
+      this.lg$.log("Visitor cookie detected, not incrementing visitor count.");
+    }
+    else
+    {
+      this.lg$.log("Visitor cookie NOT detected, incrementing visitor count on server.");
+      this.cookie$.saveVisitorCookie();
+      this.updateVisitorCount();
+    }
   }
 
   public media(year:string, team:string, category:string)
@@ -50,7 +60,7 @@ export class AppComponent implements OnInit {
     this.d$.loadTeamDetailsByNameByObservable(team, this.logdepth)
     		.subscribe( data => this.getTeamMembers( data ),
 						error => this.lg$.log('ERROR: Reading team details from server, team: ' + team),
-						() => this.lg$.log('<-- Team details read successfully for team: ' + team)
+						()    => this.lg$.log('<-- Team details read successfully for team: ' + team)
 					  );
     }
 
@@ -67,7 +77,7 @@ export class AppComponent implements OnInit {
     	this.d$.loadCurrentTeamMembersByNameByObservable(this.d$.dsCurrentTeam.name, this.logdepth)
 	        .subscribe( data => this.changeToTeamPage( data ),
 						error => this.lg$.log("ERROR: Reading team members from server, team: " + this.d$.dsCurrentTeam.name),
-						() => this.lg$.log("<-- Team members read successfully for team: " + this.d$.dsCurrentTeam.name)
+						()    => this.lg$.log("<-- Team members read successfully for team: " + this.d$.dsCurrentTeam.name)
 					  );
     }
 
@@ -92,7 +102,7 @@ export class AppComponent implements OnInit {
     	this.d$.loadTeamDetailsByNameByObservable(team, this.logdepth)
     		.subscribe( data => this.changeToFarPage( data ),
 						error => this.lg$.log("ERROR: Reading team details from server, team: " + team),
-						() => this.lg$.log("<-- Team details read successfully for team: " + team)
+						()    => this.lg$.log("<-- Team details read successfully for team: " + team)
 					  );
     }
 
@@ -117,8 +127,32 @@ export class AppComponent implements OnInit {
     this.d$.dsAuthenticated = false;
     this.lg$.log('User login status: ' + this.d$.dsAuthenticated );
 		this.lg$.log("USER LOGGED OUT!!");
-    window.location.href="/";
+    window.location.href = "/";
 		//this.router.navigate( ['home', {}] );
+  }
+
+  private saveVisitorCookie()
+  {
+    let expires = new Date(Date.now() + 86400);
+
+    document.cookie = "visitor=1;expires=" + expires + ";path=/;";
+    this.lg$.log("-> saveVisitorCookie() : Cookies: " + document.cookie );
+  }
+
+  getVisitorCookie(): string
+  {
+    let visitor = document.cookie;
+    this.lg$.log("-> getVisitorCookie() : Retrieved visitor cookie: " + visitor);
+    return visitor;
+  }
+
+  updateVisitorCount(): void
+  {
+    this.lg$.log("-> updateVisitorCount()");
+
+    this.d$.incrementVisitorCount();
+
+    this.lg$.log("<- updateVisitorCount");
   }
 
 }

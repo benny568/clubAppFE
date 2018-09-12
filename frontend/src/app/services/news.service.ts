@@ -13,11 +13,11 @@ export class NewsService {
     }
 
     /**********************************************************
-     * Name:		loadNewsStories()
-     * Description:	Retrieves a list of Newws from the server
-     * Scope:		Externally accessible
-     * Params in:	None
-     * Return:		Observable
+     * Name       : loadNewsStories()
+     * Description: Retrieves a list of Newws from the server
+     * Scope      : Externally accessible
+     * Params in  : None
+     * Return     : Observable
      **********************************************************/
     public loadNewsStories( type?: string )
     {
@@ -26,20 +26,20 @@ export class NewsService {
 
         // If it's the Academy asking for news....
         if( type === 'A'){
-          return this.http$.get( url + '/stories/A' )
+          return this.http$.get( url + 'public/stories/A' )
             .map(response => response.json());
         }
         // Else...
-        return this.http$.get( url + 'stories' )
+        return this.http$.get( url + 'public/stories' )
             			.map(response => response.json());
      }
 
     /**********************************************************
-     * Name:		setNews()
-     * Description:	Setter for array of news stories
-     * Scope:		Externally accessible
-     * Params in:	Array of news stories
-     * Return:		None
+     * Name       : setNews()
+     * Description: Setter for array of news stories
+     * Scope      : Externally accessible
+     * Params in  : Array of news stories
+     * Return     : None
      **********************************************************/
      public setNews( data: [NewsStory] )
     {

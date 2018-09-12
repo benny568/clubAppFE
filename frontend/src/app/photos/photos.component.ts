@@ -21,7 +21,7 @@ export class PhotosComponent implements OnInit {
 
 	constructor( private lg$: LoggerService,
 	             private com$: CommonService,
-	             public d$: SessionDataService, 
+	             public d$: SessionDataService,
 				       private route: ActivatedRoute ) {
 		this.lg$.setLogHdr(this.logdepth, this.componentName);
 
@@ -40,28 +40,28 @@ export class PhotosComponent implements OnInit {
 
 		this.lg$.log("PhotosComponent - ngOnInit()")
 
-		this.paramsObservable = this.route.params.subscribe(params => 
+		this.paramsObservable = this.route.params.subscribe(params =>
 		{
 			cat1 = params['cat1'];
 			cat2 = params['cat2'];
 			cat3 = params['cat3'];
 			this.display = false;
-		
+
 
 			this.lg$.log("-> parm change (" + cat1 + "/" + cat2 + "/" + cat3 + ")");
-	
+
 			if ( cat3 !== "none" && cat3 !== '' )
 			{
-				url = this.com$.getHome() + '/photos/' + cat1 + '/' + cat2 + '/' + cat3;
+				url = this.com$.getHome() + 'public/photos/' + cat1 + '/' + cat2 + '/' + cat3;
 				this.path = this.com$.getGalleryHome() + 'galleries/' + cat1 + '/' + cat2 + '/' + cat3 + '/';
 				this.lg$.log("Path set to: " + this.path);
 			} else
 			{
-				url = this.com$.getHome() + '/photos/' + cat1 + '/' + cat2;
+				url = this.com$.getHome() + 'public/photos/' + cat1 + '/' + cat2;
 				this.path = this.com$.getGalleryHome() + 'galleries/' + cat1 + '/' + cat2 + '/';
 				this.lg$.log("Path set to: " + this.path);
 			}
-	
+
 			this.d$.loadPhotoDetails(url)
 				.subscribe(
 		            	data => this.processResponse(data, this.path, this.d$.aAlbum),
@@ -103,7 +103,7 @@ export class PhotosComponent implements OnInit {
 		this.lg$.log("<- processResponse()");
 	}
 
-	ngOnDestroy() 
+	ngOnDestroy()
 	{
     	this.paramsObservable.unsubscribe();
   	}

@@ -24,37 +24,38 @@ import { Media } from '../model/media';
 @Injectable()
 export class SessionDataService {
 
-    dsAuthenticated:boolean;
+    dsAuthenticated: boolean;
     modes = { LOCAL:0, REMOTE:1};
-    CurrentServerMode:number;
-    dsTeams : Array<Team>;
-    dsTeamMembers: any = [];
-    dsCurrentTeam:Team;
-    dsCurrentMember:Member;
-    dsCurrentUser:User;
+    CurrentServerMode: number;
+    dsTeams          : Array<Team>;
+    dsTeamMembers    : any = [];
+    dsCurrentTeam    : Team;
+    dsCurrentMember  : Member;
+    dsCurrentUser    : User;
     // dsSessionPlans = [];
     // dsTrainingRecords = [];
     // dsTrainingPerMember = [];
-    dsAllMembers : Array<Member>;
-    dsPosition : Array<string>;
-    dsSponsors : Array<Sponsor>;
-    showTeamArray: any = [];
+    dsAllMembers  : Array<Member>;
+    dsPosition    : Array<string>;
+    dsSponsors    : Array<Sponsor>;
+    showTeamArray : any = [];
+    dsVisitorCount: number = 0;
 
-    logdepth = 3;
-    loghdr = "";
-    serviceName = 'SessionDataService';
-    displayMember = false;
+    logdepth       = 3;
+    loghdr         = "";
+    serviceName    = 'SessionDataService';
+    displayMember  = false;
     gAuthenticated = false;
-    aAlbum : Array<Media>;
+    aAlbum: Array<Media>;
 
      constructor ( private com$: CommonService, private lg$: LoggerService, private _http: Http )
      {
         this.loghdr = this.setLogHdr(this.logdepth, this.serviceName);
 
-        var svr = new ServerMode();
-        this.CurrentServerMode = svr.getServerMode();
-        this.dsAuthenticated = false;
-        this.dsPosition = [ 'Manager',
+        var svr                    = new ServerMode();
+            this.CurrentServerMode = svr.getServerMode();
+            this.dsAuthenticated   = false;
+            this.dsPosition        = [ 'Manager',
                             'Goalkeeper',
                             'Full Back',
                             'Center Half',
@@ -67,15 +68,15 @@ export class SessionDataService {
                             'Treasurer',
                             'PRO',
                             'Committee'];
-        this.dsCurrentUser = new User();
-        this.dsCurrentTeam = new Team();
+        this.dsCurrentUser   = new User();
+        this.dsCurrentTeam   = new Team();
         this.dsCurrentMember = new Member();
-        this.dsTeams = new Array<Team>();
+        this.dsTeams         = new Array<Team>();
         //this.dsTeamMembers = new Array(500);
         this.dsCurrentUser = new User();
-        this.dsAllMembers = new Array<Member>();
-        this.dsSponsors = new Array<Sponsor>();
-        this.aAlbum = new Array<Media>();
+        this.dsAllMembers  = new Array<Member>();
+        this.dsSponsors    = new Array<Sponsor>();
+        this.aAlbum        = new Array<Media>();
 
         for ( let i = 0; i < this.showTeamArray.length; i++ )
     		{
@@ -85,26 +86,26 @@ export class SessionDataService {
     }
 
     /**********************************************************
-     * Name:		setCurrentMember()
-     * Description:	Set the current member to the one passed in
-     * Scope:		Externally accessible
-     * Params in:	member: the member in question
-     * Return:
+     * Name       : setCurrentMember()
+     * Description: Set the current member to the one passed in
+     * Scope      : Externally accessible
+     * Params in  : member: the member in question
+     * Return     :
      **********************************************************/
      public setCurrentMember( member:Member )
      {
          console.log("-->" + "setCurrentMember()");
          this.dsCurrentMember = member;
-         this.displayMember = true;
+         this.displayMember   = true;
      }
 
     /**********************************************************
-     * Name:		difference()
-     * Description:	Checeks to see if there is a difference
+     * Name       : difference()
+     * Description: Checeks to see if there is a difference
      *              between two objects
-     * Scope:		Internal
-     * Params in:	None
-     * Return:
+     * Scope    : Internal
+     * Params in: None
+     * Return   :
      **********************************************************/
     difference(m1: any, m2: any)
     {
@@ -121,48 +122,48 @@ export class SessionDataService {
 
 
     /**********************************************************
-     * Name:		applyMemberChange()
-     * Description:	Applies a change to the local data so the
+     * Name       : applyMemberChange()
+     * Description: Applies a change to the local data so the
      *              user sees the change on the view.
-     * Scope:		Internal
-     * Params in:	None
-     * Return:
+     * Scope    : Internal
+     * Params in: None
+     * Return   :
      **********************************************************/
     applyMemberChange(members: [Member], member: Member)
-	{
-		var index:number = SessionDataService.findMemberIndex( members, member );
+  	{
+  		var index:number = SessionDataService.findMemberIndex( members, member );
 
-		if ( index === -1 )
-		{
-			return;
-		}
+  		if ( index === -1 )
+  		{
+  			return;
+  		}
 
-		members[index].name = member.name;
-		members[index].address = member.address;
-		members[index].phone = member.phone;
-		members[index].dob = member.dob;
-		members[index].email = member.email;
-		members[index].amount = member.amount;
-		members[index].team = member.team;
-		members[index].position = member.position;
-		members[index].lid = member.lid;
-		members[index].favteam = member.favteam;
-		members[index].favplayer = member.favplayer;
-		members[index].sappears = member.sappears;
-		members[index].sassists = member.sassists;
-		members[index].sgoals = member.sgoals;
-		members[index].photo = member.photo;
-		members[index].achievements = member.achievements;
-	}
+  		members[index].name         = member.name;
+  		members[index].address      = member.address;
+  		members[index].phone        = member.phone;
+  		members[index].dob          = member.dob;
+  		members[index].email        = member.email;
+  		members[index].amount       = member.amount;
+  		members[index].team         = member.team;
+  		members[index].position     = member.position;
+  		members[index].lid          = member.lid;
+  		members[index].favteam      = member.favteam;
+  		members[index].favplayer    = member.favplayer;
+  		members[index].sappears     = member.sappears;
+  		members[index].sassists     = member.sassists;
+  		members[index].sgoals       = member.sgoals;
+  		members[index].photo        = member.photo;
+  		members[index].achievements = member.achievements;
+  	}
 
 
     /**********************************************************
-     * Name:		applyTeamChange()
-     * Description:	Applies a change to the local data so the
+     * Name       : applyTeamChange()
+     * Description: Applies a change to the local data so the
      *              user sees the change on the view.
-     * Scope:		Internal
-     * Params in:	None
-     * Return:
+     * Scope    : Internal
+     * Params in: None
+     * Return   :
      **********************************************************/
     applyTeamChange( teams: [Team], thisTeam: Team )
     {
@@ -194,70 +195,70 @@ export class SessionDataService {
     }
 
     /**********************************************************
-     * Name:		findMemberIndex()
-     * Description:	Find a members index/position in the array
+     * Name       : findMemberIndex()
+     * Description: Find a members index/position in the array
      *              of members
-     * Scope:		Internal
-     * Params in:	None
-     * Return:		The index value
+     * Scope    : Internal
+     * Params in: None
+     * Return   : The index value
      **********************************************************/
     static findMemberIndex( members: [Member], member: Member )
-	{
-		var index = -1;
+  	{
+  		var index = -1;
 
-		if ( typeof members !== undefined )
-		{
-			for ( var i = 0; i < members.length; i++ )
-			{
-				if ( members[i].id === member.id )
-				{
-					index = i;
-					break;
-				}
-			}
-		}
+  		if ( typeof members !== undefined )
+  		{
+  			for ( var i = 0; i < members.length; i++ )
+  			{
+  				if ( members[i].id === member.id )
+  				{
+  					index = i;
+  					break;
+  				}
+  			}
+  		}
 
-		return index;
-	}
+  		return index;
+  	}
 
     /**********************************************************
-     * Name:		convertPosToInt()
-     * Description:	Converts the position name to the integer
+     * Name       : convertPosToInt()
+     * Description: Converts the position name to the integer
      *              value
-     * Scope:		Internal
-     * Params in:	None
-     * Return:		The position integer value
+     * Scope    : Internal
+     * Params in: None
+     * Return   : The position integer value
      **********************************************************/
     convertPosToInt( sPos: string )
-	{
-		return this.dsPosition.indexOf(sPos);
-	}
+  	{
+  		return this.dsPosition.indexOf(sPos);
+  	}
 
     /**********************************************************
-     * Name:		convertTeamToInt()
-     * Description:	Converts the team name to the integer value
-     * Scope:		Internal
-     * Params in:	None
-     * Return:		The team integer value
+     * Name       : convertTeamToInt()
+     * Description: Converts the team name to the integer value
+     * Scope      : Internal
+     * Params in  : None
+     * Return     : The team integer value
      **********************************************************/
     convertTeamToInt( sTeam:string )
-	{
-		for ( var i = 0; i < this.dsTeams.length; i++ )
-		{
-			if ( this.dsTeams[i].name === sTeam )
-			{
-				return this.dsTeams[i].id;
-			}
-		}
-		return 0;
-	}
+  	{
+  		for ( var i = 0; i < this.dsTeams.length; i++ )
+  		{
+  			if ( this.dsTeams[i].name === sTeam )
+  			{
+  				return this.dsTeams[i].id;
+  			}
+  		}
+  		return 0;
+  	}
 
     /**********************************************************
-     * Name:		setCurrentTeamByName()
-     * Description:	Set the current team in memory
-     * Scope:		Internal
-     * Params in:	Team name as a string
-     * Return:		None
+     * Name       : setCurrentTeamByName()
+     * Description: Set the current team in memory
+     * Scope      : Internal
+     * Params in  : Team name as a string
+     * Return     : None
      **********************************************************/
     setCurrentTeamByName( teamName: string)
     {
@@ -280,14 +281,12 @@ export class SessionDataService {
         }
     }
 
-
-
     /**********************************************************
-     * Name:		dsGetTeams()
-     * Description:	Retrieves a list of teams from the server
-     * Scope:		Internal
-     * Params in:	None
-     * Return:		Sets dsNewsStories
+     * Name       : dsGetTeams()
+     * Description: Retrieves a list of teams from the server
+     * Scope      : Internal
+     * Params in  : None
+     * Return     : Sets dsNewsStories
      **********************************************************/
     public dsGetTeams()
     {
@@ -300,20 +299,20 @@ export class SessionDataService {
                        {'id':0, 'name': "Youths", 'lrcode':0, 'lrFixturesCode':0, 'lrResultsCode':0, 'noticeboard':"No info"},
                      ];*/
 
-        return this._http.get( url + 'teams' )
+        return this._http.get( url + 'public/teams' )
 			.map(response => response.json())
 			.subscribe( data => this.dsSetTeams(data),
-						err  => console.error("DataService: ERROR reading teams from server!"),
-						()   => console.log(" <== Teams received from server <==")
+						err => console.error("DataService: ERROR reading teams from server!"),
+						()  => console.log(" <== Teams received from server <==")
 					);
      }
 
     /**********************************************************
-     * Name:		dsSetTeams()
-     * Description:	Set the current member to the one passed in
-     * Scope:		Externally accessible
-     * Params in:	member: the member in question
-     * Return:
+     * Name       : dsSetTeams()
+     * Description: Set the current member to the one passed in
+     * Scope      : Externally accessible
+     * Params in  : member: the member in question
+     * Return     :
      **********************************************************/
     public dsSetTeams( data: [Team] )
      {
@@ -322,11 +321,11 @@ export class SessionDataService {
      }
 
     /**********************************************************
-     * Name:		loadTeamDetailsByName()
-     * Description:	Load the current team's details
-     * Scope:		Externally accessible
-     * Params in:	teamName: the name of the team in question
-     * Return:
+     * Name       : loadTeamDetailsByName()
+     * Description: Load the current team's details
+     * Scope    : Externally accessible
+     * Params in: teamName: the name of the team in question
+     * Return   :
      **********************************************************/
     public loadTeamDetailsByName( teamName:string )
     {
@@ -334,25 +333,25 @@ export class SessionDataService {
 
 
         // Clear out the TeamMembers array first
-        this.dsCurrentTeam = null;
-        var url = this.com$.getHome();
+                this.dsCurrentTeam = null;
+            var url                = this.com$.getHome();
 
-        this._http.get( url + '/team/' + teamName )
+        this._http.get( url + 'public/team/' + teamName )
              .map(response => response.json())
              .subscribe( data => this.dsCurrentTeam = data,
    					error => console.log("ERROR: Reading team details from server, team: " + teamName),
-   					() => console.log("Team details read successfully for team: " + teamName)
+   					()    => console.log("Team details read successfully for team: " + teamName)
    				  );
 
     }
 
     /**********************************************************
-     * Name:		loadTeamDetailsByNameByObservable()
-     * Description:	Load the current team's details, return an
+     * Name       : loadTeamDetailsByNameByObservable()
+     * Description: Load the current team's details, return an
      * 				observable to the caller
-     * Scope:		Externally accessible
-     * Params in:	teamName: the name of the team in question
-     * Return:		An observable
+     * Scope    : Externally accessible
+     * Params in: teamName: the name of the team in question
+     * Return   : An observable
      **********************************************************/
     public loadTeamDetailsByNameByObservable( teamName:string, indent: number )
     {
@@ -369,17 +368,17 @@ export class SessionDataService {
         //this.dsCurrentTeam = null;
         var url = this.com$.getHome();
 
-        return this._http.get( url + '/team/' + teamName )
+        return this._http.get( url + 'public/team/' + teamName )
              		.map(response => response.json());
 
     }
 
     /**********************************************************
-     * Name:		loadCurrentTeamMembersByNameByObservable()
-     * Description:	Load the current team's members
-     * Scope:		Externally accessible
-     * Params in:	teamName: the name of the team in question
-     * Return:		Observable
+     * Name       : loadCurrentTeamMembersByNameByObservable()
+     * Description: Load the current team's members
+     * Scope    : Externally accessible
+     * Params in: teamName: the name of the team in question
+     * Return   : Observable
      **********************************************************/
     public loadCurrentTeamMembersByNameByObservable( teamName: string, indent: number )
     {
@@ -403,19 +402,19 @@ export class SessionDataService {
 
         if( this.dsTeamMembers[teamId] !== undefined )
             this.dsTeamMembers[teamId].length = 0;
-        var url = this.com$.getHome();
+            var                url            = this.com$.getHome();
 
-       return this._http.get( url + '/teammembers/' + teamName )
+       return this._http.get( url + 'public/teammembers/' + teamName )
             	.map(response => response.json());
     }
 
     /**********************************************************
-     * Name:		teamMembersAreLoaded()
-     * Description:	Check to see if we've already loaded the
+     * Name       : teamMembersAreLoaded()
+     * Description: Check to see if we've already loaded the
      * 				team members
-     * Scope:		Internally accessible
-     * Params in:	teamName: the name of the team in question
-     * Return:		true/false
+     * Scope    : Internally accessible
+     * Params in: teamName: the name of the team in question
+     * Return   : true/false
      **********************************************************/
     private teamMembersAreLoaded(teamName: string): boolean
     {
@@ -438,11 +437,11 @@ export class SessionDataService {
     }
 
     /**********************************************************
-     * Name:		loadCurrentTeamMembersByName()
-     * Description:	Load the current team's details and members
-     * Scope:		Externally accessible
-     * Params in:	teamName: the name of the team in question
-     * Return:
+     * Name       : loadCurrentTeamMembersByName()
+     * Description: Load the current team's details and members
+     * Scope    : Externally accessible
+     * Params in: teamName: the name of the team in question
+     * Return   :
      **********************************************************/
     public loadCurrentTeamMembersByName( teamName:string, callback: string )
     {
@@ -457,27 +456,27 @@ export class SessionDataService {
         } else {
            // Clear out the TeamMembers array first
         	let teamId = this.convertTeamToInt( teamName );
-            var url = this.com$.getHome();
+        	var url    = this.com$.getHome();
 
            console.log("-->" + "loadCurrentTeamByName(), loading team:" + teamName );
-           this._http.get( url + '/teammembers/' + teamName )
+           this._http.get( url + 'public/teammembers/' + teamName )
                 .map(response => response.json())
                 .subscribe( data => this.dsTeamMembers[teamId] = data, //callback(data),
 	   					error => console.log("ERROR: Reading team members from server, team: " + teamName),
-	   					() => console.log("<-- Team members read successfully for team: " + teamName)
+	   					()    => console.log("<-- Team members read successfully for team: " + teamName)
 	   				  );
         }
     }
 
     private showTeamLoaded(teamId: number)
-	{
-		console.log("showTeamLoaded()");
+  	{
+  		console.log("showTeamLoaded()");
 
-		for ( let i = 0; i < this.dsTeamMembers[teamId].length; i++ )
-		{
-			console.log("-- [" + i + "]: " + this.dsTeamMembers[teamId][i].name);
-		}
-	}
+  		for ( let i = 0; i < this.dsTeamMembers[teamId].length; i++ )
+  		{
+  			console.log("-- [" + i + "]: " + this.dsTeamMembers[teamId][i].name);
+  		}
+  	}
 
     /// TEMP FUNCTION TO SIM REST CALL TO SERVER
     getTeamDetailsSim( teamName:string ) : Team {
@@ -485,11 +484,11 @@ export class SessionDataService {
     }
 
     /**********************************************************
-     * Name:		clearCurrentMember()
-     * Description:	Clear out the dsCurrentMember
-     * Scope:		Externally accessible
-     * Params in:	None
-     * Return:      None
+     * Name       : clearCurrentMember()
+     * Description: Clear out the dsCurrentMember
+     * Scope      : Externally accessible
+     * Params in  : None
+     * Return     : None
      **********************************************************/
     public clearCurrentMember()
     {
@@ -497,11 +496,11 @@ export class SessionDataService {
     }
 
     /**********************************************************
-     * Name:		loadPhotoDetails()
-     * Description:	Retrieves a list of photos from the server
-     * Scope:		Internal
-     * Params in:	None
-     * Return:		Sets
+     * Name       : loadPhotoDetails()
+     * Description: Retrieves a list of photos from the server
+     * Scope      : Internal
+     * Params in  : None
+     * Return     : Sets
      **********************************************************/
     public loadPhotoDetails( url: string )
     {
@@ -513,11 +512,11 @@ export class SessionDataService {
     }
 
     /**********************************************************
-     * Name:		loadVideoDetails()
-     * Description:	Retrieves a list of videos from the server
-     * Scope:		Internal
-     * Params in:	None
-     * Return:		Sets
+     * Name       : loadVideoDetails()
+     * Description: Retrieves a list of videos from the server
+     * Scope      : Internal
+     * Params in  : None
+     * Return     : Sets
      **********************************************************/
     public loadVideoDetails( url: string )
     {
@@ -528,54 +527,6 @@ export class SessionDataService {
             .map(response => response.json());
     }
 
-    /**********************************************************
-     * Name:		authenticate()
-     * Description:	Authenticates the user with the server
-     * Scope:		Internal
-     * Params in:
-     * Return:
-     **********************************************************/
-/*     public authenticate(username: string, password: string)
-    {
-    	console.log("    --> authenticate(" + username + "," + password + ")");
-
-    	var creds = "username=" + username + "&password=" + password;
-		let body = JSON.stringify({ creds  });
-	    let headers = new Headers({ 'Content-Type': 'application/json' });
-	    let options = new RequestOptions({ headers: headers });
-
-	    console.log("    Calling POST on /login")
-	    return this._http.post( this.com$.getHome() + 'login', body, options);
-//        return this._http.post( this.getHome() + '/login?' + creds, body, options);
-    } */
-
-/*    authenticate2( credentials: object, callback: string )
-    {
-    	console.log("-->" + "authenticate2(" + credentials.username + "," + credentials.password + ")");
-
-    	let headers = new Headers( credentials
-                                   ? {authorization : "Basic " + btoa(credentials.username + ":" + credentials.password)}
-    	                           : {} );
-
-        this._http.get(this.getHome() + '/user', {headers : headers})
-        	.subscribe(
-        				resp => {
-
-	        			        	console.log("## User authenticated [" + credentials.username + "]");
-	        			            this.dsAuthenticated = true;
-        			                callback && callback();
-        			            },
-        			    error => {
-        			    	        this.dsAuthenticated = false;
-        			    	        console.log("## Unable to get user from server [" + credentials.username + "]");
-        			             },
-        			    () => console.log("## Retrieved user from server [" + credentials.username + "]")
-
-        			);
-
-      }*/
-
-
     public getUser(username: string)
     {
     	console.log("-->" + "getUser(" + username + ")");
@@ -584,11 +535,11 @@ export class SessionDataService {
 
 
     /**********************************************************
-     * Name:		dsGetAllMembers()
-     * Description:	Get all members from the server
-     * Scope:		Internal
-     * Params in:
-     * Return:
+     * Name       : dsGetAllMembers()
+     * Description: Get all members from the server
+     * Scope      : Internal
+     * Params in  :
+     * Return     :
      **********************************************************/
     public dsGetAllMembers()
     {
@@ -599,22 +550,22 @@ export class SessionDataService {
     		.map(response => response.json())
     		.subscribe(
     					data => this.dsAllMembers = data,
-    					err => console.log("ERROR getting members from server!"),
-    					() => console.log("<== Finished getting all members from server <==")
+    					err  => console.log("ERROR getting members from server!"),
+    					()   => console.log("<== Finished getting all members from server <==")
     					);
     }
 
     /**********************************************************
-	 * Name:		getTeamNameFrmId()
-	 * Description:	Convert a team name to it's id
-	 * Scope:		Externally accessible via the service
-	 * Params in:	scope: The parents scope
+	 * Name       : getTeamNameFrmId()
+	 * Description: Convert a team name to it's id
+	 * Scope    : Externally accessible via the service
+	 * Params in: scope: The parents scope
 	 *
-	 * Return:		The team id
+	 * Return: The team id
 	 **********************************************************/
     public getTeamNameFrmId(iTeam: number, indent: number)
     {
-    	let sIndent = ''; // Initialise the logging indent
+    	let sIndent = '';  // Initialise the logging indent
     	for ( let i = 0; i < indent; i++ )
     	{
     		sIndent += ' ';
@@ -642,101 +593,101 @@ export class SessionDataService {
 
 
 
-	saveJwt(jwt: string) {
-	  if ( jwt ) {
-	    localStorage.setItem('id_token', jwt);
-	  }
-	}
+  	saveJwt(jwt: string) {
+  	  if ( jwt ) {
+  	    localStorage.setItem('id_token', jwt);
+  	  }
+  	}
 
 
-	/**********************************************************
-     * Name:		setLogHdr()
-     * Description:	Sets up the correct indentation and header
+  	/**********************************************************
+     * Name       : setLogHdr()
+     * Description: Sets up the correct indentation and header
      * 				information for the log messages.
-     * Scope:		Internal
+     * Scope    : Internal
      * Params in:
-     * Return:
+     * Return   :
      **********************************************************/
-	private setLogHdr(logdepth: number, moduleName: string)
-	{
-		console.log("** [Logger Service] Setting log header for [" + moduleName + "]");
-		let i = 0;
-		let depth = logdepth * 4;
-		let moduleSpace = 25;
-		let hdr:string = "## " +  moduleName;
+  	private setLogHdr(logdepth: number, moduleName: string)
+  	{
+  		console.log("** [Logger Service] Setting log header for [" + moduleName + "]");
+  		let i           = 0;
+  		let depth       = logdepth * 4;
+  		let moduleSpace = 25;
+  		let hdr:string  = "## " +  moduleName;
 
-		// Make sure the field width is the standard, pad if necessary
-		if ( hdr.length < moduleSpace )
-		{
-			let diff = moduleSpace - hdr.length;
-			let i = 0;
-			for ( i = 0; i < diff; i++ )
-			{
-				hdr += ' ';
-			}
-		}
+  		// Make sure the field width is the standard, pad if necessary
+  		if ( hdr.length < moduleSpace )
+  		{
+  			let diff = moduleSpace - hdr.length;
+  			let i    = 0;
+  			for ( i = 0; i < diff; i++ )
+  			{
+  				hdr += ' ';
+  			}
+  		}
 
-		// (1) Set the indentation according to the depth
-		for ( i = 0; i < depth; i++ )
-		{
-			hdr += " ";
-		}
+  		// (1) Set the indentation according to the depth
+  		for ( i = 0; i < depth; i++ )
+  		{
+  			hdr += " ";
+  		}
 
-		// (2) Add on call stack indicator
-		hdr += "|-";
+  		// (2) Add on call stack indicator
+  		hdr += "|-";
 
-		return hdr;
-	}
+  		return hdr;
+  	}
 
      private handleError( error: any ) {
         // In a real world app, we might use a remote logging infrastructure
         // We'd also dig deeper into the error to get a better message
-        let errMsg = ( error.message ) ? error.message :
-          error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+        let          errMsg = ( error.message ) ? error.message:
+        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.error(errMsg); // log to console instead
         //return Observable.throw(errMsg);
       }
 
     /**********************************************************
-     * Name:		processPhotosResponse()
-     * Description:	Adds the list of photos recieved from the
+     * Name       : processPhotosResponse()
+     * Description: Adds the list of photos recieved from the
      *              server to the album and redirects to the
      *              photos component.
-     * Scope:		Internal
-     * Params in:   data: The data received from the server
-     *              path: The path to the photos on the server
-     *              album: The media album to put the photos in
-     * Return:      None
+     * Scope    : Internal
+     * Params in: data: The data received from the server
+     * path     : The path to the photos on the server
+     * album    : The media album to put the photos in
+     * Return   : None
      **********************************************************/
     processPhotosResponse( data: [any], path: string, album: Array<Media>, router:Router )
-	{
-		this.lg$.log("-> processResponse()");
-		this.lg$.log("     |- data:" + data);
-		this.lg$.log("     |- path:" + path);
-		this.lg$.log("     |- album:" + album);
-		var self = this;
+  	{
+  		this.lg$.log("-> processResponse()");
+  		this.lg$.log("     |- data:" + data);
+  		this.lg$.log("     |- path:" + path);
+  		this.lg$.log("     |- album:" + album);
+  		var self = this;
 
-		data.forEach(function(row){
-			var photo : Media = new Media();
-			photo.image = path + row;
-			album.push(photo);
-			self.lg$.log("         |- added image: " + photo.image );
-		});
+  		data.forEach(function(row){
+  			var photo : Media = new Media();
+  			    photo.image   = path + row;
+  			album.push(photo);
+  			self.lg$.log("         |- added image: " + photo.image );
+  		});
 
-		this.lg$.log("<- processResponse()");
+  		this.lg$.log("<- processResponse()");
 
-        this.lg$.trace("Redirecting to /photos");
-        router.navigate(['/photos']);
-	}
+          this.lg$.trace("Redirecting to /photos");
+          router.navigate(['/photos']);
+  	}
 
     /**********************************************************
-     * Name:		printAlbum()
-     * Description:	Logs the content of the albumn.
-     * Scope:
-     * Params in:   data: The data received from the server
-     *              path: The path to the photos on the server
-     *              album: The media album to put the photos in
-     * Return:      None
+     * Name       : printAlbum()
+     * Description: Logs the content of the albumn.
+     * Scope      :
+     * Params in  : data: The data received from the server
+     * path       : The path to the photos on the server
+     * album      : The media album to put the photos in
+     * Return     : None
      **********************************************************/
     public printAlbum()
     {
@@ -747,11 +698,11 @@ export class SessionDataService {
     }
 
     /**********************************************************
-     * Name:		getClubOfficers()
-     * Description:	Retrievs the current club officers from db.
-     * Scope:
-     * Params in:   None
-     * Return:      Arrah of officers
+     * Name       : getClubOfficers()
+     * Description: Retrievs the current club officers from db.
+     * Scope      :
+     * Params in  : None
+     * Return     : Arrah of officers
      **********************************************************/
     public getClubOfficers()
     {
@@ -763,4 +714,43 @@ export class SessionDataService {
       			.map(response => response.json());
      }
 
+     /**********************************************************
+     * Name       : getVisitorCount()
+     * Description: Get the current visitor count fromt the
+     *              server.
+     * Scope    : Externally accessible
+     * Params in: None
+     * Return   : The current count
+     **********************************************************/
+    public getVisitorCount(): void
+    {
+      let url = this.com$.getHome();
+
+      this._http.get( url + 'public/vcount' )
+            .map(response => response.json())
+            .subscribe( data => this.dsCurrentTeam = data,
+          error => console.log("ERROR: Reading visitor count from server"),
+          ()    => console.log("Visitor count read successfully")
+          );
+    }
+
+    /**********************************************************
+     * Name       : incrementVisitorCount()
+     * Description: Increment the count on the server and return
+     *              the new value.
+     * Scope    : Externally accessible
+     * Params in: None
+     * Return   : None, it sets the dsVisitorCount variable.
+     **********************************************************/
+    public incrementVisitorCount(): void
+    {
+      let url = this.com$.getHome();
+
+      this._http.get( url + 'public/ivcount' )
+            .map(response => response.json())
+            .subscribe( data => this.dsVisitorCount = data,
+          error => console.log("ERROR: Incrementing visitor count on server"),
+          ()    => console.log("Visitor count updated successfully")
+          );
+    }
 }

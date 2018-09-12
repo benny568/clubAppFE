@@ -1,3 +1,4 @@
+import { CookieService } from './services/cookie.service';
 import { MemberService } from './services/member.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
@@ -81,7 +82,8 @@ import { VideosComponent } from './videos/videos.component';
     LoginService,
     UserService,
     NewsService,
-    MemberService
+    MemberService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

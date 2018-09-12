@@ -80,43 +80,43 @@ export class AcademyRegistrationFormComponent implements OnInit {
 		{
 			this.showConsenterror();
 		}
-		else if( form.firstname === '')
+		else if( form.firstname === '' || form.firstname === null )
 		{
 			this.showFNError();
 		}
-		else if( form.lastname === '' )
+		else if( form.lastname === '' || form.lastname === null )
 		{
 			this.showsSNError();
 		}
-		else if( form.dob === '' )
+		else if( form.dob === '' || form.dob === null )
 		{
 			this.showDOBError();
 		}
-		else if( form.email === '' )
+		else if( form.email === '' || form.email === null )
 		{
 			this.showEmailError();
 		}
-		else if (form.medication === '' )
+		else if (form.medication === '' || form.medication === null )
 		{
 			this.showMedicationError();
 		}
-		else if( form.fathername === '' )
+		else if( form.fathername === '' || form.fathername === null )
 		{
 			this.showDadError();
 		}
-		else if( form.mothername === '' )
+		else if( form.mothername === '' || form.mothername === null )
 		{
 			this.showMomError();
 		}
-		else if( form.address === '' )
+		else if( form.address === '' || form.address === null )
 		{
 			this.showAddressError();
 		}
-		else if( form.phone1 === '' )
+		else if( form.phone1 === '' || form.phone1 === null )
 		{
 			this.showPhError();
 		}
-		else if( form.phone2 === '' )
+		else if( form.phone2 === '' || form.phone2 === null )
 		{
 			this.showPhError();
 		}
