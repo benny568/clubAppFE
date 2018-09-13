@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SessionDataService }   from '../../../services/session-data.service';
 import { LoggerService }        from '../../../services/logger.service';
 import { NewsService }          from '../../../services/news.service';
+import { NewsStory }            from '../../../model/news-story';
 
 
 @Component({
-  selector: 'app-academy-news',
+  selector   : 'app-academy-news',
   templateUrl: './academy-news.component.html',
-  styleUrls: ['./academy-news.component.css'],
-  providers: [ LoggerService ]
+  styleUrls  : ['./academy-news.component.css'],
+  providers  : [ LoggerService ]
 })
 
 export class AcademyNewsComponent {
 	componentName:string = 'AcademyNewsComponent';
-	logdepth:number = 1;
+	logdepth     :number = 1;
 
     constructor( public news$: NewsService, private lg$: LoggerService ) {}
 
@@ -22,9 +22,9 @@ export class AcademyNewsComponent {
         this.lg$.setLogHdr(this.logdepth, this.componentName);
         this.news$.loadNewsStories('A' )
           .subscribe(
-		            	data => this.news$.setNews(data),
-		            	error => this.lg$.error("===> Error getting news from server: " + error),
-		            	() => this.lg$.log(" <=== Received news from server. <====")
+		            	(data: [NewsStory]) => this.news$.setNews(data),
+		            	error               => this.lg$.error("===> Error getting news from server: " + error),
+		            	()                  => this.lg$.log(" <=== Received news from server. <====")
 		            );
     }
 
