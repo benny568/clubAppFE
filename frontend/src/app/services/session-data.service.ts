@@ -1,13 +1,9 @@
-import { Component } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Inject } from '@angular/core';
-import { Http } from '@angular/http';
-import { Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { RequestOptionsArgs,
          RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 
-import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
 import { LoggerService } from './logger.service';
@@ -17,7 +13,6 @@ import { User } from '../model/site-user';
 import { ServerMode } from '../model/server-mode';
 import { Team } from '../model/team';
 import { Member } from '../model/member';
-import { NewsStory } from '../model/news-story';
 import { Sponsor } from "../model/sponsor";
 import { Media } from '../model/media';
 
@@ -48,7 +43,7 @@ export class SessionDataService {
     gAuthenticated = false;
     aAlbum: Array<Media>;
 
-     constructor ( private com$: CommonService, private lg$: LoggerService, private _http: Http )
+     constructor ( private com$: CommonService, private lg$: LoggerService, private http$: HttpClient )
      {
         this.loghdr = this.setLogHdr(this.logdepth, this.serviceName);
 
@@ -90,7 +85,7 @@ export class SessionDataService {
      * Description: Set the current member to the one passed in
      * Scope      : Externally accessible
      * Params in  : member: the member in question
-     * Return     :
+     * Return     : 
      **********************************************************/
      public setCurrentMember( member:Member )
      {
@@ -105,7 +100,7 @@ export class SessionDataService {
      *              between two objects
      * Scope    : Internal
      * Params in: None
-     * Return   :
+     * Return   : 
      **********************************************************/
     difference(m1: any, m2: any)
     {
@@ -127,7 +122,7 @@ export class SessionDataService {
      *              user sees the change on the view.
      * Scope    : Internal
      * Params in: None
-     * Return   :
+     * Return   : 
      **********************************************************/
     applyMemberChange(members: [Member], member: Member)
   	{
@@ -163,7 +158,7 @@ export class SessionDataService {
      *              user sees the change on the view.
      * Scope    : Internal
      * Params in: None
-     * Return   :
+     * Return   : 
      **********************************************************/
     applyTeamChange( teams: [Team], thisTeam: Team )
     {
@@ -299,12 +294,11 @@ export class SessionDataService {
                        {'id':0, 'name': "Youths", 'lrcode':0, 'lrFixturesCode':0, 'lrResultsCode':0, 'noticeboard':"No info"},
                      ];*/
 
-        return this._http.get( url + 'public/teams' )
-			.map(response => response.json())
-			.subscribe( data => this.dsSetTeams(data),
-						err => console.error("DataService: ERROR reading teams from server!"),
-						()  => console.log(" <== Teams received from server <==")
-					);
+        return this.http$.get( url + 'public/teams' )
+    			.subscribe( (data: [Team]) => this.dsSetTeams(data),
+    						err => console.error("DataService: ERROR reading teams from server!"),
+    						()  => console.log(" <== Teams received from server <==")
+    					);
      }
 
     /**********************************************************
@@ -312,7 +306,7 @@ export class SessionDataService {
      * Description: Set the current member to the one passed in
      * Scope      : Externally accessible
      * Params in  : member: the member in question
-     * Return     :
+     * Return     : 
      **********************************************************/
     public dsSetTeams( data: [Team] )
      {
@@ -325,7 +319,7 @@ export class SessionDataService {
      * Description: Load the current team's details
      * Scope    : Externally accessible
      * Params in: teamName: the name of the team in question
-     * Return   :
+     * Return   : 
      **********************************************************/
     public loadTeamDetailsByName( teamName:string )
     {
@@ -333,15 +327,14 @@ export class SessionDataService {
 
 
         // Clear out the TeamMembers array first
-                this.dsCurrentTeam = null;
-            var url                = this.com$.getHome();
+                                this.dsCurrentTeam = null;
+                            var url                = this.com$.getHome();
 
-        this._http.get( url + 'public/team/' + teamName )
-             .map(response => response.json())
-             .subscribe( data => this.dsCurrentTeam = data,
-   					error => console.log("ERROR: Reading team details from server, team: " + teamName),
-   					()    => console.log("Team details read successfully for team: " + teamName)
-   				  );
+        this.http$.get( url + 'public/team/' + teamName )
+             .subscribe( (data: Team) => this.dsCurrentTeam = data,
+                 					error => console.log("ERROR: Reading team details from server, team: " + teamName),
+                 					()    => console.log("Team details read successfully for team: " + teamName)
+                 				  );
 
     }
 
@@ -368,8 +361,7 @@ export class SessionDataService {
         //this.dsCurrentTeam = null;
         var url = this.com$.getHome();
 
-        return this._http.get( url + 'public/team/' + teamName )
-             		.map(response => response.json());
+        return this.http$.get( url + 'public/team/' + teamName );
 
     }
 
@@ -404,8 +396,7 @@ export class SessionDataService {
             this.dsTeamMembers[teamId].length = 0;
             var                url            = this.com$.getHome();
 
-       return this._http.get( url + 'public/teammembers/' + teamName )
-            	.map(response => response.json());
+       return this.http$.get( url + 'public/teammembers/' + teamName );
     }
 
     /**********************************************************
@@ -441,7 +432,7 @@ export class SessionDataService {
      * Description: Load the current team's details and members
      * Scope    : Externally accessible
      * Params in: teamName: the name of the team in question
-     * Return   :
+     * Return   : 
      **********************************************************/
     public loadCurrentTeamMembersByName( teamName:string, callback: string )
     {
@@ -459,12 +450,11 @@ export class SessionDataService {
         	var url    = this.com$.getHome();
 
            console.log("-->" + "loadCurrentTeamByName(), loading team:" + teamName );
-           this._http.get( url + 'public/teammembers/' + teamName )
-                .map(response => response.json())
+           this.http$.get( url + 'public/teammembers/' + teamName )
                 .subscribe( data => this.dsTeamMembers[teamId] = data, //callback(data),
-	   					error => console.log("ERROR: Reading team members from server, team: " + teamName),
-	   					()    => console.log("<-- Team members read successfully for team: " + teamName)
-	   				  );
+              	   					error => console.log("ERROR: Reading team members from server, team: " + teamName),
+              	   					()    => console.log("<-- Team members read successfully for team: " + teamName)
+              	   				  );
         }
     }
 
@@ -507,8 +497,7 @@ export class SessionDataService {
         console.log("-->" + "loadPhotoDetails(" + url + ")");
 
         // Read the list of files from the server
-       return this._http.get( url )
-            .map(response => response.json());
+       return this.http$.get( url );
     }
 
     /**********************************************************
@@ -523,14 +512,13 @@ export class SessionDataService {
         console.log("-->" + "loadVideoDetails(" + url + ")");
 
         // Read the list of files from the server
-       return this._http.get( url )
-            .map(response => response.json());
+       return this.http$.get( url );
     }
 
     public getUser(username: string)
     {
     	console.log("-->" + "getUser(" + username + ")");
-    	return this._http.get(this.com$.getHome() + '/admin/user').map(response => response.json());
+    	return this.http$.get(this.com$.getHome() + '/admin/user');
     }
 
 
@@ -538,20 +526,19 @@ export class SessionDataService {
      * Name       : dsGetAllMembers()
      * Description: Get all members from the server
      * Scope      : Internal
-     * Params in  :
-     * Return     :
+     * Params in  : 
+     * Return     : 
      **********************************************************/
     public dsGetAllMembers()
     {
     	console.log("-->" + "dsGetAllMembers()");
     	var url = this.com$.getHome();
 
-    	return this._http.get(url + "/admin/members")
-    		.map(response => response.json())
+    	return this.http$.get(url + "/admin/members")
     		.subscribe(
-    					data => this.dsAllMembers = data,
-    					err  => console.log("ERROR getting members from server!"),
-    					()   => console.log("<== Finished getting all members from server <==")
+    					(data: [Member]) => this.dsAllMembers = data,
+    					err              => console.log("ERROR getting members from server!"),
+    					()               => console.log("<== Finished getting all members from server <==")
     					);
     }
 
@@ -605,8 +592,8 @@ export class SessionDataService {
      * Description: Sets up the correct indentation and header
      * 				information for the log messages.
      * Scope    : Internal
-     * Params in:
-     * Return   :
+     * Params in: 
+     * Return   : 
      **********************************************************/
   	private setLogHdr(logdepth: number, moduleName: string)
   	{
@@ -642,7 +629,7 @@ export class SessionDataService {
      private handleError( error: any ) {
         // In a real world app, we might use a remote logging infrastructure
         // We'd also dig deeper into the error to get a better message
-        let          errMsg = ( error.message ) ? error.message:
+        let          errMsg = ( error.message ) ? error.message: 
         error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.error(errMsg); // log to console instead
         //return Observable.throw(errMsg);
@@ -683,7 +670,7 @@ export class SessionDataService {
     /**********************************************************
      * Name       : printAlbum()
      * Description: Logs the content of the albumn.
-     * Scope      :
+     * Scope      : 
      * Params in  : data: The data received from the server
      * path       : The path to the photos on the server
      * album      : The media album to put the photos in
@@ -700,7 +687,7 @@ export class SessionDataService {
     /**********************************************************
      * Name       : getClubOfficers()
      * Description: Retrievs the current club officers from db.
-     * Scope      :
+     * Scope      : 
      * Params in  : None
      * Return     : Arrah of officers
      **********************************************************/
@@ -710,8 +697,7 @@ export class SessionDataService {
         var url = this.com$.getHome();
         console.log("-->" + " getClubOfficers() - home is (" + url + ")");
 
-        return this._http.get( url + 'public/officers' )
-      			.map(response => response.json());
+        return this.http$.get( url + 'public/officers' );
      }
 
      /**********************************************************
@@ -726,12 +712,11 @@ export class SessionDataService {
     {
       let url = this.com$.getHome();
 
-      this._http.get( url + 'public/vcount' )
-            .map(response => response.json())
-            .subscribe( data => this.dsCurrentTeam = data,
-          error => console.log("ERROR: Reading visitor count from server"),
-          ()    => console.log("Visitor count read successfully")
-          );
+      this.http$.get( url + 'public/vcount' )
+            .subscribe( (data: Team) => this.dsCurrentTeam = data,
+                        error => console.log("ERROR: Reading visitor count from server"),
+                        ()    => console.log("Visitor count read successfully")
+                      );
     }
 
     /**********************************************************
@@ -746,11 +731,10 @@ export class SessionDataService {
     {
       let url = this.com$.getHome();
 
-      this._http.get( url + 'public/ivcount' )
-            .map(response => response.json())
-            .subscribe( data => this.dsVisitorCount = data,
-          error => console.log("ERROR: Incrementing visitor count on server"),
-          ()    => console.log("Visitor count updated successfully")
-          );
+      this.http$.get( url + 'public/ivcount' )
+            .subscribe( (data: number) => this.dsVisitorCount = data,
+                        error => console.log("ERROR: Incrementing visitor count on server"),
+                        ()    => console.log("Visitor count updated successfully")
+                      );
     }
 }

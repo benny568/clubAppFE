@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { CommonService } from './common.service';
 import { NewsStory } from '../model/news-story';
@@ -8,7 +8,7 @@ import { NewsStory } from '../model/news-story';
 export class NewsService {
     NewsStories: Array<NewsStory>;
 
-    constructor( private com$: CommonService, private http$: Http ) {
+    constructor( private com$: CommonService, private http$: HttpClient ) {
         this.NewsStories = new Array<NewsStory>();
     }
 
@@ -26,12 +26,10 @@ export class NewsService {
 
         // If it's the Academy asking for news....
         if( type === 'A'){
-          return this.http$.get( url + 'public/stories/A' )
-            .map(response => response.json());
+          return this.http$.get( url + 'public/stories/A' );
         }
         // Else...
-        return this.http$.get( url + 'public/stories' )
-            			.map(response => response.json());
+        return this.http$.get( url + 'public/stories' );
      }
 
     /**********************************************************
@@ -43,20 +41,8 @@ export class NewsService {
      **********************************************************/
      public setNews( data: [NewsStory] )
     {
-    	console.log('->' + 'setNews()...recieved news stories: ' + data);
+    	console.log('->' + 'setNews()...recieved news stories');
     	this.NewsStories = data;
-
-        /*if( process.env.NODE_ENV === 'development')
-        {
-            for( let i=0; i<this.NewsStories.length; i++ )
-            {
-                console.log("Image " + i + ": " + this.NewsStories[i].image);
-            }
-        }*/
-
-        /*if (process.env.DEBUG) {
-          console.log('Debugging output set');
-        }*/
     }
 
 }

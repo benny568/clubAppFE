@@ -24,7 +24,7 @@ export class ContactUsComponent implements OnInit {
   ngOnInit() {
     this.lg$.setLogHdr(this.logdepth, this.componentName);
     this.d$.getClubOfficers()
-        .subscribe( data => this.officers = data,
+        .subscribe( (data: [Officer]) => this.officers = data,
                     err => console.error("DataService: ERROR reading officers from server!"),
                     ()  => console.log(" <== Officers received from server <==")
                   );

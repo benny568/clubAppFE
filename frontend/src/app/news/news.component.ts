@@ -2,19 +2,20 @@ import { Component } from '@angular/core';
 
 import { LoggerService } from '../services/logger.service';
 import { NewsService } from '../services/news.service';
+import { NewsStory } from '../model/news-story';
 
 @Component({
-    selector: 'news',
+    selector   : 'news',
     templateUrl: './news.component.html',
-    styleUrls: ['./news.component.css'],
-    providers: [ LoggerService ]
+    styleUrls  : ['./news.component.css'],
+    providers  : [ LoggerService ]
 })
 
 
 export class NewsComponent {
 
     componentName = 'NewsComponent';
-    logdepth = 2;
+    logdepth      = 2;
 
     constructor( private lg$: LoggerService,
                  public news$: NewsService ) { }
@@ -24,9 +25,9 @@ export class NewsComponent {
         this.lg$.log("-> ngOnInit()");
         var subscriber = this.news$.loadNewsStories();
         subscriber.subscribe(
-				            	data => this.news$.setNews(data),
-				            	error => this.lg$.error("===> Error getting news from server: " + error),
-				            	() => this.lg$.log(" <=== Received news from server. <====")
+				            	(data: [NewsStory]) => this.news$.setNews(data),
+				            	error               => this.lg$.error("===> Error getting news from server: " + error),
+				            	()                  => this.lg$.log(" <=== Received news from server. <====")
 				            );
     }
 }

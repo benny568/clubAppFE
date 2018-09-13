@@ -21,7 +21,7 @@ export class VideosComponent implements OnInit {
 
 	constructor( private lg$: LoggerService,
 	             private com$: CommonService,
-	             public d$: SessionDataService, 
+	             public d$: SessionDataService,
 				       private route: ActivatedRoute ) {
 		this.lg$.setLogHdr(this.logdepth, this.componentName);
 
@@ -40,16 +40,16 @@ export class VideosComponent implements OnInit {
 
 		this.lg$.log( this.componentName + " - ngOnInit()")
 
-		this.paramsObservable = this.route.params.subscribe(params => 
+		this.paramsObservable = this.route.params.subscribe(params =>
 		{
 			cat1 = params['cat1'];
 			cat2 = params['cat2'];
 			cat3 = params['cat3'];
 			this.display = false;
-		
+
 
 			this.lg$.log("-> parm change (" + cat1 + "/" + cat2 + "/" + cat3 + ")");
-	
+
 			if ( cat3 !== "none" && cat3 !== '' )
 			{
 				url = this.com$.getHome() + '/videos/' + cat1 + '/' + cat2 + '/' + cat3;
@@ -61,10 +61,10 @@ export class VideosComponent implements OnInit {
 				this.path = this.com$.getGalleryHome() + 'videos/' + cat1 + '/' + cat2 + '/';
 				this.lg$.log("Path set to: " + this.path);
 			}
-	
+
 			this.d$.loadVideoDetails(url)
 				.subscribe(
-		            	data => this.processResponse(data, this.path, this.d$.aAlbum),
+		            	(data: [any]) => this.processResponse(data, this.path, this.d$.aAlbum),
 		            	error => console.log("===> Error getting list of videos from server."),
 		            	() => console.log( "<-" + " loadVideoDetails()")
 		            );
@@ -102,7 +102,7 @@ export class VideosComponent implements OnInit {
 		this.lg$.log("<- processResponse()");
 	}
 
-	ngOnDestroy() 
+	ngOnDestroy()
 	{
     	this.paramsObservable.unsubscribe();
 	}

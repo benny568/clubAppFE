@@ -7,22 +7,22 @@ import { LoggerService }        from '../services/logger.service';
 import { CommonService }        from '../services/common.service';
 
 @Component({
-  selector: 'app-photos',
+  selector   : 'app-photos',
   templateUrl: './photos.component.html',
-  styleUrls: ['./photos.component.css'],
-  providers: [ LoggerService ]
+  styleUrls  : ['./photos.component.css'],
+  providers  : [ LoggerService ]
 })
 export class PhotosComponent implements OnInit {
-	componentName : string = 'PhotosComponent';
-	path : string = '';
-	logdepth:number = 1;
-	paramsObservable:any;
-	display:boolean;
+	componentName   : string = 'PhotosComponent';
+	path            : string = '';
+	logdepth        : number = 1;
+	paramsObservable: any;
+	display         : boolean;
 
 	constructor( private lg$: LoggerService,
-	             private com$: CommonService,
-	             public d$: SessionDataService,
-				       private route: ActivatedRoute ) {
+	             private com$ : CommonService,
+	             public  d$   : SessionDataService,
+	             private route: ActivatedRoute ) {
 		this.lg$.setLogHdr(this.logdepth, this.componentName);
 
     	this.lg$.log("PhotosComponent - constructor()");
@@ -32,19 +32,19 @@ export class PhotosComponent implements OnInit {
 
 	ngOnInit()
 	{
-		let cat1 = ''; //this.routeParams.get('cat1'); // team
-		let cat2 = ''; //this.routeParams.get('cat2'); // year
-		let cat3 = ''; //this.routeParams.get('cat3'); // event
-		var url = '';
-		this.d$.aAlbum = new Array<Media>();
+		let cat1           = '';                  //this.routeParams.get('cat1'); // team
+		let cat2           = '';                  //this.routeParams.get('cat2'); // year
+		let cat3           = '';                  //this.routeParams.get('cat3'); // event
+		var url            = '';
+		    this.d$.aAlbum = new Array<Media>();
 
 		this.lg$.log("PhotosComponent - ngOnInit()")
 
 		this.paramsObservable = this.route.params.subscribe(params =>
 		{
-			cat1 = params['cat1'];
-			cat2 = params['cat2'];
-			cat3 = params['cat3'];
+			cat1         = params['cat1'];
+			cat2         = params['cat2'];
+			cat3         = params['cat3'];
 			this.display = false;
 
 
@@ -52,21 +52,21 @@ export class PhotosComponent implements OnInit {
 
 			if ( cat3 !== "none" && cat3 !== '' )
 			{
-				url = this.com$.getHome() + 'public/photos/' + cat1 + '/' + cat2 + '/' + cat3;
+				url       = this.com$.getHome() + 'public/photos/' + cat1 + '/' + cat2 + '/' + cat3;
 				this.path = this.com$.getGalleryHome() + 'galleries/' + cat1 + '/' + cat2 + '/' + cat3 + '/';
 				this.lg$.log("Path set to: " + this.path);
 			} else
 			{
-				url = this.com$.getHome() + 'public/photos/' + cat1 + '/' + cat2;
+				url       = this.com$.getHome() + 'public/photos/' + cat1 + '/' + cat2;
 				this.path = this.com$.getGalleryHome() + 'galleries/' + cat1 + '/' + cat2 + '/';
 				this.lg$.log("Path set to: " + this.path);
 			}
 
 			this.d$.loadPhotoDetails(url)
 				.subscribe(
-		            	data => this.processResponse(data, this.path, this.d$.aAlbum),
-		            	error => console.log("===> Error getting list of photos from server."),
-		            	() => console.log( "<-" + " loadPhotoDetails()")
+		            	(data: [any]) => this.processResponse(data, this.path, this.d$.aAlbum),
+		            	error         => console.log("===> Error getting list of photos from server."),
+		            	()            => console.log( "<-" + " loadPhotoDetails()")
 		            );
 		});
 
@@ -91,7 +91,7 @@ export class PhotosComponent implements OnInit {
 
 		data.forEach(function(row){
 			var photo : Media = new Media();
-			photo.image = path + row;
+			    photo.image   = path + row;
 			album.push(photo);
 			self.lg$.log("         |- added image: " + photo.image );
 		});
