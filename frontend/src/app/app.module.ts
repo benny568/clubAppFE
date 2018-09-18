@@ -24,6 +24,7 @@ import { LinksComponent } from './links/links.component';
 import { ClubHistoryComponent } from './club-history/club-history.component';
 import { LoginComponent } from './login/login.component';
 import { MerchandiseComponent } from './merchandise/merchandise.component';
+import { VisitorCountComponent } from './visitor-count/visitor-count.component';
 
 /* Routing Module */
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -59,7 +60,8 @@ import { VideosComponent } from './videos/videos.component';
     NewsComponent,
     SponsorsComponent,
     PhotosComponent,
-    VideosComponent
+    VideosComponent,
+    VisitorCountComponent
   ],
   imports: [
     BrowserModule,

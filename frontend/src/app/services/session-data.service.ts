@@ -15,6 +15,7 @@ import { Team } from '../model/team';
 import { Member } from '../model/member';
 import { Sponsor } from "../model/sponsor";
 import { Media } from '../model/media';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class SessionDataService {
@@ -85,7 +86,7 @@ export class SessionDataService {
      * Description: Set the current member to the one passed in
      * Scope      : Externally accessible
      * Params in  : member: the member in question
-     * Return     : 
+     * Return     :
      **********************************************************/
      public setCurrentMember( member:Member )
      {
@@ -100,7 +101,7 @@ export class SessionDataService {
      *              between two objects
      * Scope    : Internal
      * Params in: None
-     * Return   : 
+     * Return   :
      **********************************************************/
     difference(m1: any, m2: any)
     {
@@ -122,7 +123,7 @@ export class SessionDataService {
      *              user sees the change on the view.
      * Scope    : Internal
      * Params in: None
-     * Return   : 
+     * Return   :
      **********************************************************/
     applyMemberChange(members: [Member], member: Member)
   	{
@@ -158,7 +159,7 @@ export class SessionDataService {
      *              user sees the change on the view.
      * Scope    : Internal
      * Params in: None
-     * Return   : 
+     * Return   :
      **********************************************************/
     applyTeamChange( teams: [Team], thisTeam: Team )
     {
@@ -306,7 +307,7 @@ export class SessionDataService {
      * Description: Set the current member to the one passed in
      * Scope      : Externally accessible
      * Params in  : member: the member in question
-     * Return     : 
+     * Return     :
      **********************************************************/
     public dsSetTeams( data: [Team] )
      {
@@ -319,7 +320,7 @@ export class SessionDataService {
      * Description: Load the current team's details
      * Scope    : Externally accessible
      * Params in: teamName: the name of the team in question
-     * Return   : 
+     * Return   :
      **********************************************************/
     public loadTeamDetailsByName( teamName:string )
     {
@@ -327,8 +328,8 @@ export class SessionDataService {
 
 
         // Clear out the TeamMembers array first
-                                this.dsCurrentTeam = null;
-                            var url                = this.com$.getHome();
+                                        this.dsCurrentTeam = null;
+                                    var url                = this.com$.getHome();
 
         this.http$.get( url + 'public/team/' + teamName )
              .subscribe( (data: Team) => this.dsCurrentTeam = data,
@@ -432,7 +433,7 @@ export class SessionDataService {
      * Description: Load the current team's details and members
      * Scope    : Externally accessible
      * Params in: teamName: the name of the team in question
-     * Return   : 
+     * Return   :
      **********************************************************/
     public loadCurrentTeamMembersByName( teamName:string, callback: string )
     {
@@ -526,8 +527,8 @@ export class SessionDataService {
      * Name       : dsGetAllMembers()
      * Description: Get all members from the server
      * Scope      : Internal
-     * Params in  : 
-     * Return     : 
+     * Params in  :
+     * Return     :
      **********************************************************/
     public dsGetAllMembers()
     {
@@ -592,8 +593,8 @@ export class SessionDataService {
      * Description: Sets up the correct indentation and header
      * 				information for the log messages.
      * Scope    : Internal
-     * Params in: 
-     * Return   : 
+     * Params in:
+     * Return   :
      **********************************************************/
   	private setLogHdr(logdepth: number, moduleName: string)
   	{
@@ -629,7 +630,7 @@ export class SessionDataService {
      private handleError( error: any ) {
         // In a real world app, we might use a remote logging infrastructure
         // We'd also dig deeper into the error to get a better message
-        let          errMsg = ( error.message ) ? error.message: 
+        let          errMsg = ( error.message ) ? error.message:
         error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.error(errMsg); // log to console instead
         //return Observable.throw(errMsg);
@@ -670,7 +671,7 @@ export class SessionDataService {
     /**********************************************************
      * Name       : printAlbum()
      * Description: Logs the content of the albumn.
-     * Scope      : 
+     * Scope      :
      * Params in  : data: The data received from the server
      * path       : The path to the photos on the server
      * album      : The media album to put the photos in
@@ -687,7 +688,7 @@ export class SessionDataService {
     /**********************************************************
      * Name       : getClubOfficers()
      * Description: Retrievs the current club officers from db.
-     * Scope      : 
+     * Scope      :
      * Params in  : None
      * Return     : Arrah of officers
      **********************************************************/
@@ -708,15 +709,11 @@ export class SessionDataService {
      * Params in: None
      * Return   : The current count
      **********************************************************/
-    public getVisitorCount(): void
+    public getVisitorCount(): any
     {
       let url = this.com$.getHome();
 
-      this.http$.get( url + 'public/vcount' )
-            .subscribe( (data: Team) => this.dsCurrentTeam = data,
-                        error => console.log("ERROR: Reading visitor count from server"),
-                        ()    => console.log("Visitor count read successfully")
-                      );
+      return this.http$.get( url + 'public/vcount' );
     }
 
     /**********************************************************
