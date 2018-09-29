@@ -38,16 +38,16 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
-    if( this.cookie$.isVisitorCookiePresent() )
-    {
-      this.lg$.log("Visitor cookie detected, not incrementing visitor count.");
-    }
-    else
-    {
-      this.lg$.log("Visitor cookie NOT detected, incrementing visitor count on server.");
-      this.cookie$.saveVisitorCookie();
-      this.updateVisitorCount();
-    }
+    // if( this.cookie$.isVisitorCookiePresent() )
+    // {
+    //   this.lg$.log("Visitor cookie detected, not incrementing visitor count.");
+    // }
+    // else
+    // {
+    //   this.lg$.log("Visitor cookie NOT detected, incrementing visitor count on server.");
+    //   this.cookie$.saveVisitorCookie();
+    //   this.updateVisitorCount();
+    // }
   }
 
   public media(year:string, team:string, category:string)

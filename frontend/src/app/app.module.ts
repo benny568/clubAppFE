@@ -25,6 +25,7 @@ import { ClubHistoryComponent } from './club-history/club-history.component';
 import { LoginComponent } from './login/login.component';
 import { MerchandiseComponent } from './merchandise/merchandise.component';
 import { VisitorCountComponent } from './visitor-count/visitor-count.component';
+import { CookieConsentComponent } from './cookie-consent/cookie-consent.component';
 
 /* Routing Module */
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -61,9 +62,11 @@ import { VideosComponent } from './videos/videos.component';
     SponsorsComponent,
     PhotosComponent,
     VideosComponent,
-    VisitorCountComponent
+    VisitorCountComponent,
+    CookieConsentComponent
   ],
-  imports: [
+  entryComponents: [CookieConsentComponent],
+  imports        : [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

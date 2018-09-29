@@ -1,0 +1,35 @@
+<!-- <h1 matDialogTitle>This website uses cookies</h1>
+
+<mat-dialog-content>
+    We use a cookie to track visitors to our site.
+      The cookie is only used to check if the same person visits more than once during a day not to
+      increment the count. By GDPR law, you can decide not to allow us to do this by selecting the choice below.
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button matDialogClose>No, do not store the cookie</button>
+    <button mat-button matDialogClose>It's OK</button>
+
+</mat-dialog-actions> -->
+
+
+
+  <mat-card>
+    <mat-card-title>
+        This website uses cookies
+    </mat-card-title>
+    <mat-card-content>
+        We use a cookie to track visitors to our site.
+        The cookie is only used to check if the same person visits more than once during a day not to
+        increment the count. By GDPR law, you can decide not to allow us to do this by selecting the choice below.
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button color="primary" (click)="noCookies()" class="no-button">
+          No, do not store the cookie
+        </button>
+        <button mat-button (click)="cookiesOk()" color="accent" class="ok-button">
+          It's OK
+        </button>
+    </mat-card-actions>
+  </mat-card>
+

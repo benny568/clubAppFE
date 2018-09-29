@@ -36,6 +36,7 @@ export class SessionDataService {
     dsSponsors    : Array<Sponsor>;
     showTeamArray : any = [];
     dsVisitorCount: number = 0;
+    public dsCookiesUserChoice: boolean = false;
 
     logdepth       = 3;
     loghdr         = "";
@@ -51,19 +52,19 @@ export class SessionDataService {
         var svr                    = new ServerMode();
             this.CurrentServerMode = svr.getServerMode();
             this.dsAuthenticated   = false;
-            this.dsPosition        = [ 'Manager',
-                            'Goalkeeper',
-                            'Full Back',
-                            'Center Half',
-                            'Mid Field',
-                            'CAM',
-                            'Winger',
-                            'Striker',
-                            'Chairman',
-                            'Secretary',
-                            'Treasurer',
-                            'PRO',
-                            'Committee'];
+            this.dsPosition        = [  'Manager',
+                                        'Goalkeeper',
+                                        'Full Back',
+                                        'Center Half',
+                                        'Mid Field',
+                                        'CAM',
+                                        'Winger',
+                                        'Striker',
+                                        'Chairman',
+                                        'Secretary',
+                                        'Treasurer',
+                                        'PRO',
+                                        'Committee'];
         this.dsCurrentUser   = new User();
         this.dsCurrentTeam   = new Team();
         this.dsCurrentMember = new Member();
@@ -328,8 +329,8 @@ export class SessionDataService {
 
 
         // Clear out the TeamMembers array first
-                                        this.dsCurrentTeam = null;
-                                    var url                = this.com$.getHome();
+                                            this.dsCurrentTeam = null;
+                                        var url                = this.com$.getHome();
 
         this.http$.get( url + 'public/team/' + teamName )
              .subscribe( (data: Team) => this.dsCurrentTeam = data,

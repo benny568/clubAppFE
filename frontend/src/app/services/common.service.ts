@@ -1,8 +1,7 @@
 import { environment } from './../../environments/environment';
-import {ServerMode} from '../model/server-mode';
+import { ServerMode } from '../model/server-mode';
 
-import {LoggerService} from '../services/logger.service';
-
+import { LoggerService } from '../services/logger.service';
 
 export class CommonService {
 

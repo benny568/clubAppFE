@@ -17,12 +17,12 @@ export class LoggerService {
      * Description: Sets up the correct indentation and header
      * 				information for the log messages.
      * Scope    : Internal
-     * Params in: 
-     * Return   : 
+     * Params in:
+     * Return   :
      **********************************************************/
   setLogHdr(logdepth: number, moduleName: string) {
     const indent = this.generateIndent( logdepth );
-    console.log(indent + '** [Logger Service] Setting log header for [' + moduleName + ']');
+    console.log(indent + '--> Setting log header for [' + moduleName + ']');
     let   i           = 0;
     const depth       = logdepth * 4;
     const moduleSpace = 25;

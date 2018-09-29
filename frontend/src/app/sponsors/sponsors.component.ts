@@ -12,15 +12,14 @@ import { LoggerService }      from '../services/logger.service';
 })
 
 export class SponsorsComponent {
-  Sponsors: Array<Sponsor>;
-                                                        componentName = 'SponsorsComponent';
-                                               logdepth:number        = 2;
+  Sponsors     : Array<Sponsor>;
+  componentName: string = 'SponsorsComponent';
+  logdepth     : number = 2;
 
     constructor( private d$: SessionDataService, private lg$: LoggerService ) { }
 
     ngOnInit() {
-    	this.lg$.setLogHdr(this.logdepth, this.componentName);
-      this.lg$.log(" ngOnInit()");
+      this.lg$.setLogHdr(this.logdepth, this.componentName);
       this.loadCurrentSponsors();
     }
 

@@ -11,16 +11,15 @@ import { LoggerService }      from '../services/logger.service';
 })
 
 export class VisitorCountComponent {
-                                                                                                                                                                                      componentName = 'VisitorCountComponent';
-                                                                                                                                                                       logdepth       :number       = 2;
-                                                                                                                                                                       numberOfDigits: number       = 0;
-                                                                                                                                                                       vcountDigits   : string[]    = new Array();
+  componentName  : string   = 'VisitorCountComponent';
+  logdepth       : number   = 2;
+  numberOfDigits : number   = 0;
+  vcountDigits   : string[] = new Array();
 
     constructor( public d$: SessionDataService, private lg$: LoggerService ) { }
 
     ngOnInit() {
     	this.lg$.setLogHdr(this.logdepth, this.componentName);
-      this.lg$.log(" ngOnInit()");
       this.getVisitorCount();
     }
 
@@ -48,13 +47,13 @@ export class VisitorCountComponent {
      *              displaying a graphical representation.
      * Scope    : Internally accessible
      * Params in: None
-     * Return   : 
+     * Return   :
      **********************************************************/
     private breakdownVisitorCount(): void
     {
         this.lg$.log('-->' + ' breakdownVisitorCount()');
 
-        this.numberOfDigits = 2;  //this.d$.dsVisitorCount.toString().length;
+        this.numberOfDigits = this.d$.dsVisitorCount.toString().length;
         this.lg$.log("    |- d$.dsVisitorCount set to [" + this.d$.dsVisitorCount + "]");
         this.lg$.log("    |- d$.dsVisitorCount.toString [" + this.d$.dsVisitorCount.toString() + "]");
         this.lg$.log("    |- numberOfDigits set to [" + this.d$.dsVisitorCount.toString().length + "]");
@@ -68,35 +67,6 @@ export class VisitorCountComponent {
         }
 
         this.lg$.log("    |- vcountDigits are: " + this.vcountDigits);
-        return;
-    }
-
-    /**********************************************************
-     * Name       : convertVisitorCountToImage()
-     * Description: Create the image to display
-     * Scope      : Internally accessible
-     * Params in  : None
-     * Return     : 
-     **********************************************************/
-    private convertVisitorCountToImage(): void
-    {
-        console.log('-->' + ' convertVisitorCountToImage(): '+ this.d$.dsVisitorCount);
-
-        this.numberOfDigits = 2;  //this.d$.dsVisitorCount.toString().length;
-
-        let x: number = 0;
-
-        for( x=0; x<this.numberOfDigits; x++ )
-        {
-          console.log("#######:: " + x );
-        }
-
-        // for( let i=0; i<this.numberOfDigits; i++ )
-        // {
-        //   console.log("#######")
-        //   this.vcountDigits[i] = this.d$.dsVisitorCount.toString().substr(i,i+1);
-        //   console.log("    |- Adding [" + this.vcountDigits[i] + "]");
-        // }
         return;
     }
 }
