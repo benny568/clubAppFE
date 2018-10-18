@@ -18,6 +18,7 @@ export class UserService {
     allUsers       : Array<User>;
     componentName = 'UserService';
     logdepth      = 1;
+    roles: string[];
 
 
     constructor ( private lg$: LoggerService,
@@ -27,6 +28,8 @@ export class UserService {
         this.lg$.setLogHdr(this.logdepth, this.componentName);
         this.CurrentUser = new User();
         this.allUsers    = new Array<User>();
+        // TODO: read the roles from the db
+        this.roles = ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_SECRETARY', 'ROLE_ADMIN'];
     }
 
     public setCurrentUser( user: User )
@@ -70,14 +73,13 @@ export class UserService {
 
       let url = this.com$.getHome();
 
-      let options = this.setupHeaders();
+      let headers: HttpHeaders = this.com$.setupHeaders();
 
       this.lg$.log("-->" + "getAllUsers(), loading users from: " + url + '/admin/users/' );
-            // this.http$.get( url + '/admin/users/', options )
-            //     .map(response => response.json())
-            //     .subscribe( data => { this.allUsers = data, this.logUsers(this.allUsers) },
-            //                error => console.error("ERROR: Reading users from server, Error: " + error )
-	   				//   );
+      this.http$.get( url + 'admin/users/', {headers} )
+        .subscribe( (data: User[]) => { this.allUsers = data, this.logUsers(this.allUsers) },
+                    error => console.error("ERROR: Reading users from server, Error: " + error )
+	   				      );
     }
 
     /**********************************************************
@@ -93,8 +95,33 @@ export class UserService {
       for( let user of allUsers )
       {
         let u:User = user;
-        this.lg$.log("User[" + i++ + "]: " + u.name);
+        this.lg$.log("User[" + i++ + "]: " + u.name + " , uId: " + u.userId);
       }
+    }
+
+    /**********************************************************
+     * Name       : logUser()
+     * Description: Log the user details
+     * Scope      : Externally accessible
+     * Params in  : None
+     * Return     : None
+     **********************************************************/
+    public logUser(user: User): void
+    {
+      if( user !== null )
+      {
+        this.lg$.log(" User id: " + user.userId);
+        this.lg$.log(" User name: " + user.name);
+        this.lg$.log(" User address: " + user.address);
+        this.lg$.log(" User DOB: " + user.dob);
+        this.lg$.log(" User email: " + user.email);
+        this.lg$.log(" User phone: " + user.phone);
+        this.lg$.log(" User status: " + user.enabled);
+        this.lg$.log(" User role: " + user.role);
+      }
+      else
+        this.lg$.log("==> Null user passed to logUser!");
+      return;
     }
 
     /**********************************************************
@@ -118,46 +145,39 @@ export class UserService {
      **********************************************************/
     public deleteUser( user: User, callback: any )
     {
-      this.lg$.log("deleteUser(" + user.name + ")");
+      this.lg$.log("    |-> deleteUser(" + user.name + ")");
 
       var home    = this.com$.getHome();
-      let userUrl = home + '/admin/user/';
+      let userUrl = home + 'admin/user/';
+      // Add the id of the user to delete
+      userUrl += user.userId;
 
     	this.lg$.log("URL: " + userUrl);
 
-        // Set the headers, including the JWT
-        // let headers = this.setupHeaders();
+      let headers: HttpHeaders = this.com$.setupHeaders();  //this.setupHeaders();
+      this.lg$.trace("Auth Hdr: " + headers.get('Authorization'));
 
-        // let options = new RequestOptions({
-    		// 								method : 'Delete',
-    		// 								headers: headers,
-    		// 								body   : user,
-    		// 								url    : userUrl
-        // 								});
-
-      let options = this.setupHeaders();
-
-    	return this.http$.delete( userUrl, options )
-			//.map(response => response.json())
-			.subscribe( data => {
-                                    this.lg$.log("    |<- deleteUser("+data+")");
-                                    callback(user);
-								},
-						err => this.lg$.log("UserService: ERROR deleting user from server! [" + err + "]"),
-						()  => this.lg$.log("    |<- deleteUser() - finished")
-					);
+    	return this.http$.delete( userUrl, {headers} )
+  			.subscribe( data => {
+                              this.lg$.log("    |<- deleteUser("+data+")");
+                              callback(user, this.allUsers);
+  								          },
+        						err => this.com$.handleHttpError(err),                  //this.lg$.log("UserService: ERROR deleting user from server! [" + err + "]"),
+        						()  => this.lg$.log("    |<- deleteUser() - finished")
+        					);
     }
 
-    public applyUserDelete( user )
+    public applyUserDelete( user, allUsers )
     {
-      console.log("applyUserDelete(" + user.name + ")");
+      console.log("** applyUserDelete(" + user.name + ")");
 
       let i = 0;
-      for( let u of this.allUsers )
+      for( let u of allUsers )
       {
-        if( user.id === u.id )
+        console.log("** Checking user: " + u.name + ", user.id: " + user.userId + ", u.userId: "+ u.userId);
+        if( user.userId === u.userId )
         {
-          this.allUsers.splice(i, 1);
+          allUsers.splice(i, 1);
           console.log("User deleted.");
         }
 
@@ -174,7 +194,7 @@ export class UserService {
      **********************************************************/
     public addUser( user: User, callback: any )//: Observable<User>
     {
-      this.lg$.log("addUser(" + user.name + ")");
+      this.lg$.log("|-> addUser(" + user.name + ")");
 
       var home    = this.com$.getHome();
       let userUrl = home + '/admin/user/';
@@ -182,78 +202,61 @@ export class UserService {
     	this.lg$.log("URL: " + userUrl);
 
       // Set the headers, including the JWT
-      let options = this.setupHeaders();
+      let headers: HttpHeaders = this.com$.setupHeaders();
 
-    	// return this.http$.post( userUrl, user, options )
-  		// 	.pipe(
-      //     catchError(handleError())
-      //   );
+    	return this.http$.post( userUrl, user, {headers} )
+            .subscribe( data => {
+                                  this.lg$.log("|<- addUser("+data+")");
+                                  callback(user, this.allUsers);
+                                },
+                        err => this.lg$.log("UserService: ERROR adding user to server! [" + err + "]"),
+                        ()  => this.lg$.log("|<- addUser() - finished")
+            );
     }
 
-    // public addUser( user: User, callback: any )
-    // {
-    //   this.lg$.log("addUser(" + user.name + ")");
-
-    //   var home    = this.com$.getHome();
-    //   let userUrl = home + '/admin/user/';
-
-    // 	this.lg$.log("URL: " + userUrl);
-
-    //     // Set the headers, including the JWT
-    //     let headers = this.setupHeaders();
-
-    //     let options = new RequestOptions({
-    // 										method : 'Post',
-    // 										headers: headers,
-    // 										body   : user,
-    // 										url    : userUrl
-    //     								});
-
-    // 	return this.http$.post( userUrl, user, options )
-		// 	.map(response => response.json())
-		// 	.subscribe( data => {
-    //                         this.lg$.log("    |<- addMember("+data+")");
-    //                       },
-    //               err => this.lg$.log("UserService: ERROR adding user to server! [" + err + "]"),
-    //               ()  => this.lg$.log("    |<- addUser() - finished")
-    //              );
-    // }
-
-  private setUserDetails( user: User )
-	{
-		this.lg$.log("-> setUserDetails()");
-		this.CurrentUser = user;
-		this.usLoggedIn  = true;
-		localStorage.setItem('AdminHasLoggedIn', 'true');
-		this.isAuthenticated = true;
-		this.lg$.log('User login status: ' + this.isAuthenticated );
-    }
-
-    private setupHeaders()
+    public applyUserAdd( user: User, allUsers: User[] ): void
     {
-      let httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type' : 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('id_token')
-        })
-      };
-      this.lg$.log("Token read from storage: " + localStorage.getItem('id_token') );
-      return httpOptions;
+      console.log("** applyUserAdd(" + user.name + ")");
+
+      allUsers.push(user);
     }
 
-    private handleError(error: HttpErrorResponse) {
-      if (error.error instanceof ErrorEvent) {
-        // A client-side or network error occurred. Handle it accordingly.
-        console.error('An error occurred:', error.error.message);
-      } else {
-        // The backend returned an unsuccessful response code.
-        // The response body may contain clues as to what went wrong,
-        console.error(
-          `Backend returned code ${error.status}, ` +
-          `body was: ${error.error}`);
-      }
-      // return an observable with a user-facing error message
-      return throwError(
-        'Something bad happened; please try again later.');
-    };
+    /**********************************************************
+     * Name       : updateUser()
+     * Description: Updatethe given user
+     * Scope      : Externally accessible
+     * Params in  : The user object
+     * Return     : None
+     **********************************************************/
+    public updateUser( user: User, callback: any )//: Observable<User>
+    {
+      this.lg$.log("|-> updateUser(" + user.name + ")");
+
+      var home    = this.com$.getHome();
+      let userUrl = home + '/admin/user/';
+
+    	this.lg$.log("URL: " + userUrl);
+
+      // Set the headers, including the JWT
+      let headers: HttpHeaders = this.com$.setupHeaders();
+
+    	return this.http$.put( userUrl, user, {headers} )
+            .subscribe( data => {
+                                  this.lg$.log("|<- updateUser("+data+")");
+                                },
+                        err => this.com$.handleHttpError(err),              // this.lg$.log("UserService: ERROR updating user on server! [" + err + "]"),
+                        ()  => this.lg$.log("|<- updateUser() - finished")
+                      );
+    }
+
+    private setUserDetails( user: User )
+  	{
+  		this.lg$.log("-> setUserDetails()");
+  		this.CurrentUser = user;
+  		this.usLoggedIn  = true;
+  		localStorage.setItem('AdminHasLoggedIn', 'true');
+  		this.isAuthenticated = true;
+  		this.lg$.log('User login status: ' + this.isAuthenticated );
+    }
+
 }

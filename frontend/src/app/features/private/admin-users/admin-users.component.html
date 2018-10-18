@@ -3,7 +3,7 @@
         <div class="panel-heading avenue-heading">
           <strong>User Administration</strong>
           <div  style="float:right; align:bottom;">
-            <button type="button" class="btn btn-warning btn-xs" (click)="addUser()" style="cursor:pointer;" data-toggle="tooltip" data-placement="right">Add Member</button>
+            <button type="button" class="btn btn-warning btn-xs" (click)="addUser()" style="cursor:pointer;" data-toggle="tooltip" data-placement="right">Add User</button>
           </div>
         </div>
         <div class="panel-body avenue-body">
@@ -21,8 +21,8 @@
                 <div class="col-md-2 tblHdr">{{user.email}}</div>
                 <div class="col-md-2 tblHdr">{{user.phone}}</div>
                 <div class="col-md-2">
-                    <i (click)="usr$.editUser(user)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Edit" class="glyphicon glyphicon-pencil" style="float:left;padding-left:10px;"> </i>&nbsp;
-                    <i (click)="usr$.deleteUser(user, usr$.applyUserDelete )" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Delete" class="glyphicon glyphicon-trash" style="float:left;padding-left:10px;"></i>
+                    <i (click)="editUser(user)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Edit" class="glyphicon glyphicon-pencil" style="float:left;padding-left:10px;"> </i>&nbsp;
+                    <i (click)="deleteUser(user)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Delete" class="glyphicon glyphicon-trash" style="float:left;padding-left:10px;"></i>
                   </div>
               </div>
             </div> <!-- end of row -->

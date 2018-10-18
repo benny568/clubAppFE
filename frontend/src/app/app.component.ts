@@ -124,6 +124,7 @@ export class AppComponent implements OnInit {
   {
     this.login$.logout();
     localStorage.setItem('AdminHasLoggedIn', 'false');
+    localStorage.removeItem('id_token');
     this.d$.dsAuthenticated = false;
     this.lg$.log('User login status: ' + this.d$.dsAuthenticated );
 		this.lg$.log("USER LOGGED OUT!!");

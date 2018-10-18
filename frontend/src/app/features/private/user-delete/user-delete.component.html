@@ -1,3 +1,11 @@
-<p>
-  user-delete works!
-</p>
+
+  Are you sure you want to permanently delete {{data.user.name}}?
+
+  <div style="padding:5%;">
+    <div style="float:left">
+        <button mat-raised-button color="accent" (click)="onCloseCancel()">Cancel</button>
+    </div>
+    <div style="float: right;">
+      <button mat-raised-button color="warn" (click)="onCloseConfirm()">Delete</button>
+    </div>
+  </div>

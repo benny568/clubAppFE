@@ -49,7 +49,7 @@ export class CookieService {
    **********************************************************/
   public savePermissionCookie()
   {
-    let expires = new Date(Date.now() + this.CookieExpiry*30);  // 30 days
+    let expires = new Date(Date.now() + (86400*100));  // 100 days
 
     document.cookie = this.PermissionCookie + "=" + this.d$.dsCookiesUserChoice + ";expires=" + expires + ";path=/;";
     this.lg$.trace("-> savePermissionCookie() : Cookies: " + document.cookie );

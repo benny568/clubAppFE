@@ -50,6 +50,8 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     AddMemberComponent,
     EditMemberComponent,
     DeleteMemberComponent,
+    UserEditComponent,
+    UserDeleteComponent,
     AddUserComponent
   ]
 })

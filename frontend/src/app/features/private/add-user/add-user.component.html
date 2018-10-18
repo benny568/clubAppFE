@@ -25,17 +25,17 @@
           </div>
 
           <div class="item">
-            <mat-form-field class="form-dob-field">
-              <mat-label>Date of Birth:</mat-label>
-              <input matInput
-                    [matDatepicker]="picker"
-                    name="dob"
-                    [value]="xdob"
-                    [(ngModel)]="xdob">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
-            </mat-form-field>
-          </div>
+              <mat-form-field class="form-dob-field">
+                <mat-label>Date of Birth:</mat-label>
+                <input matInput
+                      [matDatepicker]="picker"
+                      name="dob"
+                      [value]="xdob"
+                      [(ngModel)]="xdob">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+              </mat-form-field>
+            </div>
 
           <div class="item">
             <mat-form-field class="form-full-width">
@@ -81,24 +81,22 @@
           </div>
 
           <div class="item">
-            <mat-form-field class="form-phone-field">
-              <mat-label>Role:</mat-label>
-              <input matInput
-                    name="role"
-                    [value]="data.user.role"
-                    [(ngModel)]="data.user.role">
-            </mat-form-field>
-          </div>
+              <mat-form-field class="form-phone-field">
+                <mat-label>Role:</mat-label>
+                <mat-select [(value)]="data.user.role">
+                  <mat-option *ngFor="let option of options" value="{{option}}" >{{option}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
 
-          <div class="item">
-            <mat-form-field class="form-phone-field">
-              <mat-label>Account Status:</mat-label>
-              <input matInput
-                    name="Enabled"
-                    [value]="data.user.enabled"
-                    [(ngModel)]="data.user.enabled">
-            </mat-form-field>
-          </div>
+            <div class="item">
+                <mat-form-field class="form-phone-field">
+                  <mat-label>Account Status:</mat-label>
+                  <mat-select [(value)]="accStatus">
+                    <mat-option *ngFor="let option of Statuses" value="{{option}}" >{{option}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </div>
 
         </div>
       </form>

@@ -15,7 +15,8 @@ import { User } from '../../../model/site-user';
 @Component({
   selector   : 'app-admin-users',
   templateUrl: './admin-users.component.html',
-  styleUrls  : ['./admin-users.component.css']
+  styleUrls  : ['./admin-users.component.css'],
+  providers  : [ LoggerService ]
 })
 
 export class AdminUsersComponent implements OnInit {
@@ -45,11 +46,12 @@ export class AdminUsersComponent implements OnInit {
    * Description: Present a form to add a new user
    * Scope      : Internal
    * Params in  : None
-   * Return     : 
+   * Return     :
    **********************************************************/
   public addUser()
   {
     this.lg$.log("addUser()");
+    this.user = new User();
     this.openAddDialog();
   }
 
@@ -58,12 +60,14 @@ export class AdminUsersComponent implements OnInit {
      * Description: Edit the current selected member
      * Scope      : Internal
      * Params in  : None
-     * Return     : 
+     * Return     :
      **********************************************************/
     editUser( user: User )
     {
       this.lg$.log("    |-> editUser(" + user.name + ")");
       this.user = user;
+
+      console.log("calling openEditDialog()...");
 
       this.openEditDialog();
 
@@ -74,9 +78,9 @@ export class AdminUsersComponent implements OnInit {
      * Description: Delete the current selected member
      * Scope      : Internal
      * Params in  : None
-     * Return     : 
+     * Return     :
      **********************************************************/
-    deleteMember( user: User )
+    deleteUser( user: User )
     {
 
       this.lg$.log("    |-> deleteMember(" + user.name + ")");
@@ -87,6 +91,7 @@ export class AdminUsersComponent implements OnInit {
 
     openEditDialog(): void
     {
+      console.log("In open dialog....")
       this.dialogRef = this.dialog.open(UserEditComponent, {
         //width: '500px',
         //hasBackdrop: true,

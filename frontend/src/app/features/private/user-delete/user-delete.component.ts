@@ -16,10 +16,9 @@ import { User } from '../../../model';
 })
 export class UserDeleteComponent implements OnInit {
 
-  componentName = 'AddMemberComponent';
+  componentName = 'UserDeleteComponent';
   logdepth      = 2;
   myControl: FormControl;
-  user     : User;
 
   constructor( private lg$: LoggerService,
                private com$                        : CommonService,
@@ -41,7 +40,8 @@ export class UserDeleteComponent implements OnInit {
   }
 
   onCloseConfirm() {
-    this.usr$.deleteUser( this.user, null );
+    this.lg$.trace("-> onCloseConfirm() - delete user [" + this.data.user.userId + "]");
+    this.usr$.deleteUser( this.data.user, this.usr$.applyUserDelete );
     this.dialogRef.close('Confirm');
   }
   onCloseCancel() {

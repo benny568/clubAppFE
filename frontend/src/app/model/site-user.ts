@@ -4,7 +4,7 @@ export /**
  * name
  */
 class User {
-    id      : number;
+    userId  : number;
     name    : string;
     password: string;
     address : string;
@@ -12,19 +12,21 @@ class User {
     email   : string;
     dob     : string;
     avatar  : string;
+    role    : string;
     enabled : boolean;
     //roles   : ArrayLike<string>;
     // authorities:ArrayLike<string>;
     // permissions:MyTeams;
 
     constructor() {
-        this.id       = 0;
+        this.userId   = 0;
         this.name     = '';
         this.password = '';
         this.address  = '';
         this.email    = '';
         this.phone    = '';
         this.dob      = '';
+        this.role     = '';
         this.avatar   = '';
         this.enabled  = false;
         //this.roles    = [];

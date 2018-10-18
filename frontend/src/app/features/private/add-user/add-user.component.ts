@@ -8,8 +8,6 @@ import { CommonService } from './../../../services/common.service';
 import { SessionDataService } from '../../../services/session-data.service';
 import { UserService } from '../../../services/user.service';
 
-import { User } from '../../../model/site-user';
-
 @Component({
   selector   : 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -22,6 +20,8 @@ export class AddUserComponent implements OnInit {
   options  : string[];
   startDate: Date;
   xdob     : Date;
+  Statuses : string[];
+  accStatus: string;
 
 
   constructor( private lg$: LoggerService,
@@ -37,6 +37,20 @@ export class AddUserComponent implements OnInit {
   ngOnInit() {
     this.myControl = new FormControl();
     this.startDate = new Date();
+
+     // setup up the drop-down to select a role
+     this.options = new Array<string>();
+     this.options.push("None"); // 1st option is no role
+     for( let role of this.usr$.roles )
+     {
+       this.lg$.trace("Pushing: " + role);
+       this.options.push( role );
+     }
+     this.lg$.trace("Options has [" + this.options.length + "] elements");
+
+     this.Statuses = new Array<string>();
+     this.Statuses.push("Disabled");
+     this.Statuses.push("Enabled");
   }
 
   onNoClick(): void {
@@ -44,7 +58,11 @@ export class AddUserComponent implements OnInit {
   }
 
   onCloseConfirm() {
-    //this.usr$.addUser( this.data.user, null ).subscribe();
+    this.data.user.dob = this.com$.convertDateToString( this.xdob );
+    this.lg$.trace("onCloseConfirm - this.accStatus=" + this.accStatus);
+    this.data.user.enabled = this.accStatus === 'Enabled' ? true : false;
+    this.usr$.logUser( this.data.user );
+    this.usr$.addUser( this.data.user, this.usr$.applyUserAdd );
     this.dialogRef.close('Confirm');
   }
   onCloseCancel() {

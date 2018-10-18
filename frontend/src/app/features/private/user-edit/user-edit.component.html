@@ -1,3 +1,98 @@
-<p>
-  user-edit works!
-</p>
+<h3 mat-dialog-title class="dialogTitle">Edit User</h3>
+<img src="{{data.user.avatar}}" class="center">
+    <mat-dialog-content class="dialogContent">
+      <form>
+        <div class="container">
+          <div class="item">
+            <mat-form-field class="form-name-field">
+              <mat-label>Name:</mat-label>
+              <input matInput
+                    class="formfield"
+                    name="name"
+                    [value]="data.user.name"
+                    [(ngModel)]="data.user.name">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+              <mat-form-field class="form-dob-field">
+                <mat-label>Date of Birth:</mat-label>
+                <input matInput
+                      [matDatepicker]="picker"
+                      name="dob"
+                      [value]="xdob"
+                      [(ngModel)]="xdob">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+          <div class="item">
+            <mat-form-field class="form-full-width">
+              <mat-label>Address:</mat-label>
+              <textarea matInput
+                        class="formfield"
+                        rows="1"
+                        name="address"
+                        [value]="data.user.address"
+                        [(ngModel)]="data.user.address">
+              </textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-email-field">
+              <mat-label>Email:</mat-label>
+              <input matInput
+                    name="email"
+                    [value]="data.user.email"
+                    [(ngModel)]="data.user.email">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Phone:</mat-label>
+              <input matInput
+                    name="phone"
+                    [value]="data.user.phone"
+                    [(ngModel)]="data.user.phone">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Photo:</mat-label>
+              <input matInput
+                    name="photo"
+                    [value]="data.user.avatar"
+                    [(ngModel)]="data.user.avatar">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+              <mat-form-field class="form-phone-field">
+                <mat-label>Role:</mat-label>
+                <mat-select [(value)]="data.user.role">
+                  <mat-option *ngFor="let option of options" value="{{option}}" >{{option}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="item">
+                <mat-form-field class="form-phone-field">
+                  <mat-label>Account Status:</mat-label>
+                  <mat-select [(value)]="accStatus">
+                    <mat-option *ngFor="let option of Statuses" value="{{option}}" >{{option}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </div>
+
+        </div>
+      </form>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="onCloseConfirm()">Confirm</button>
+      <button mat-button (click)="onCloseCancel()">Cancel</button>
+    </mat-dialog-actions>

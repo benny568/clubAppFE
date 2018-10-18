@@ -1,3 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+import { throwError } from 'rxjs';
+
 import { environment } from './../../environments/environment';
 import { ServerMode } from '../model/server-mode';
 
@@ -198,12 +202,13 @@ export class CommonService {
      * Params in: None
      * Return   : The headers struct
      **********************************************************/
-    public setupHeaders()
+    public setupHeaders(): HttpHeaders
     {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
-        console.log("Token read from storage: " + localStorage.getItem('id_token') );
+        let headers = new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
+        // this.lg$.log("Token read from storage: " + localStorage.getItem('id_token') );
+        // this.lg$.log("Auth Hdr: " + headers.get('Authorization'));
         return headers;
     }
 
@@ -229,6 +234,71 @@ export class CommonService {
 
       return season;
     }
+
+    /**********************************************************
+     * Name       : getLogDepth()
+     * Description: Convert a number to that number of spaces.
+     * Scope      : Externally accessible
+     * Params in  : None
+     * Return     : The log depth as spaces.
+     **********************************************************/
+    public getLogDepth( depth: number ): string
+    {
+      let prefix: string = '';
+
+      for( let i:number=0; i<depth; i++ )
+      {
+        prefix.concat(' ');
+      }
+
+      return prefix;
+    }
+
+    /**********************************************************
+     * Name       : convertDate()
+     * Description: Convert a Date type to the string value of
+     *              dd-mm-yy as this is what the server expects
+     * Scope    : Externally accessible
+     * Params in: Date
+     * Return   : The string format of the date.
+     **********************************************************/
+    public convertDateToString( dob: Date ): string
+    {
+      let day:number   = dob.getUTCDate()+1;
+      let month:number = dob.getUTCMonth()+1;
+      let year:number  = dob.getUTCFullYear();
+
+      let birthday = (day < 10 ? ("0"+day) : day) + "-" + (month < 10 ? ("0"+month) : month ) + "-" +  year;
+      // this.lg$.log("The date built is: " + birthday );
+      // this.lg$.log("The day is: " + day );
+      // this.lg$.log("The month is: " + month );
+
+      return birthday;
+    }
+
+    /**********************************************************
+     * Name       : handleHttpError()
+     * Description: Called when there's an error on a http call
+     * Scope    : Externally accessible
+     * Params in: Date
+     * Return   : None.
+     **********************************************************/
+    public handleHttpError(error: HttpErrorResponse)
+    {
+      if (error.error instanceof ErrorEvent) {
+        // A client-side or network error occurred. Handle it accordingly.
+        console.error('An error occurred:', error.error.message);
+      } else {
+        // The backend returned an unsuccessful response code.
+        // The response body may contain clues as to what went wrong,
+        console.error(
+          `Backend returned code ${error.status}, ` +
+          `body was: ${error.error}`);
+      }
+      // return an observable with a user-facing error message
+      return throwError(
+        'Something bad happened; please try again later.');
+    };
 
 }
 

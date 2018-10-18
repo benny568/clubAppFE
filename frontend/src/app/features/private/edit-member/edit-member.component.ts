@@ -12,33 +12,34 @@ import { Member } from './../../../model/member';
 import { Team } from '../../../model';
 
 @Component({
-  selector: 'app-edit-member',
+  selector   : 'app-edit-member',
   templateUrl: './edit-member.component.html',
-  styleUrls: ['./edit-member.component.css'],
-  providers: [ LoggerService ]
+  styleUrls  : ['./edit-member.component.css'],
+  providers  : [ LoggerService ]
 })
 export class EditMemberComponent implements OnInit {
-  componentName = 'EditMemberComponent';
-  logdepth = 2;
-  startDate = new Date();
-  teams: Array<Team>;
-  member: Member;
-  team: string;
-  team2: string;
-  team3: string;
-  position: string;
-  position2: string;
-  position3: string;
-  options: string[];
-  myControl: FormControl;
+  componentName: string   = 'EditMemberComponent';
+  logdepth     : number   = 2;
+  logPrefix    : string   = '';
+  startDate    : Date = new Date();
+  teams        : Array<Team>;
+  member       : Member;
+  team         : string;
+  team2        : string;
+  team3        : string;
+  position     : string;
+  position2    : string;
+  position3    : string;
+  options      : string[];
+  myControl    : FormControl;
 
-  constructor( private lg$: LoggerService,
-               private com$: CommonService,
-               public d$: SessionDataService,
-               private mbr$: MemberService,
-               public dialogRef: MatDialogRef<EditMemberComponent>,
-               @Inject(MAT_DIALOG_DATA) public data: any ) 
-  { 
+  constructor( private lg$                         : LoggerService,
+               private com$                        : CommonService,
+               public  d$                          : SessionDataService,
+               private mbr$                        : MemberService,
+               public  dialogRef                   : MatDialogRef<EditMemberComponent>,
+               @Inject(MAT_DIALOG_DATA) public data: any )
+  {
     this.lg$.setLogHdr(this.logdepth, this.componentName);
   }
 
@@ -82,30 +83,35 @@ export class EditMemberComponent implements OnInit {
   }
 
   onCloseConfirm() {
+    this.lg$.trace("-> onCloseConfirm()");
+    this.logdepth  += 2;
+    this.logPrefix  = this.com$.getLogDepth(this.logdepth);
     /* Restore the numeric value of the team from the name */
-    this.data.member.team = this.getTeamFromName( this.team );
-    this.data.member.team2 = this.getTeamFromName( this.team2 );
-    this.data.member.team3 = this.getTeamFromName( this.team3 );
-    this.data.member.position = this.getPositionFromName(this.position);
+    this.data.member.team      = this.getTeamFromName( this.team );
+    this.data.member.team2     = this.getTeamFromName( this.team2 );
+    this.data.member.team3     = this.getTeamFromName( this.team3 );
+    this.data.member.position  = this.getPositionFromName(this.position);
     this.data.member.position2 = this.getPositionFromName(this.position2);
     this.data.member.position3 = this.getPositionFromName(this.position3);
     // TODO: save the updated member data
     this.mbr$.saveMember( this.data.member );
 
-    this.lg$.log("Member name: " + this.data.member.name );
-    this.lg$.log("Address    : " + this.data.member.address );
-    this.lg$.log("Phone      : " + this.data.member.phone );
-    this.lg$.log("Phone2     : " + this.data.member.phone2 );
-    this.lg$.log("email      : " + this.data.member.email );
-    this.lg$.log("DOB        : " + this.data.member.dob );
-    this.lg$.log("team       : " + this.data.member.team);
-    this.lg$.log("team2      : " + this.data.member.team2);
-    this.lg$.log("team3      : " + this.data.member.team3);
-    this.lg$.log("academyinfo: " + this.data.member.academyinfo );
-    this.lg$.log("position   : " + this.data.member.position );
-    this.lg$.log("position2  : " + this.data.member.position2 );
-    this.lg$.log("position3  : " + this.data.member.position3 );
+    this.lg$.log(this.logPrefix + "Member name: " + this.data.member.name );
+    this.lg$.log(this.logPrefix + "Address    : " + this.data.member.address );
+    this.lg$.log(this.logPrefix + "Phone      : " + this.data.member.phone );
+    this.lg$.log(this.logPrefix + "Phone2     : " + this.data.member.phone2 );
+    this.lg$.log(this.logPrefix + "email      : " + this.data.member.email );
+    this.lg$.log(this.logPrefix + "DOB        : " + this.data.member.dob );
+    this.lg$.log(this.logPrefix + "team       : " + this.data.member.team);
+    this.lg$.log(this.logPrefix + "team2      : " + this.data.member.team2);
+    this.lg$.log(this.logPrefix + "team3      : " + this.data.member.team3);
+    this.lg$.log(this.logPrefix + "academyinfo: " + this.data.member.academyinfo );
+    this.lg$.log(this.logPrefix + "position   : " + this.data.member.position );
+    this.lg$.log(this.logPrefix + "position2  : " + this.data.member.position2 );
+    this.lg$.log(this.logPrefix + "position3  : " + this.data.member.position3 );
     this.dialogRef.close('Confirm');
+    this.logdepth -= 2;
+    this.lg$.trace("<- onCloseConfirm()");
   }
   onCloseCancel() {
     this.dialogRef.close('Cancel');
@@ -117,7 +123,7 @@ export class EditMemberComponent implements OnInit {
       return 0;
     else
       return (this.d$.dsTeams.find( this.checkName( team ) ).id);
-    
+
   }
 
   getPositionFromName( pos: string )
@@ -139,6 +145,9 @@ export class EditMemberComponent implements OnInit {
 
   buildTeamDropDown()
   {
+    this.logdepth  += 2;
+    this.logPrefix  = this.com$.getLogDepth(this.logdepth);
+    this.lg$.trace("-> buildTeamDropDown()");
     // setup up the drop-down to select a team
     this.options = new Array<string>();
     this.options.push("None"); // 1st option is no team
@@ -148,6 +157,8 @@ export class EditMemberComponent implements OnInit {
       this.options.push( team.name );
     }
     this.lg$.trace("Options has [" + this.options.length + "] elements");
+    this.lg$.trace("<- buildTeamDropDown()");
+    this.logdepth -= 2;
   }
 
 }
