@@ -7,6 +7,7 @@ import { AdminOverviewComponent } from './admin-overview/admin-overview.componen
 import { AdminTutorialsComponent } from './admin-tutorials/admin-tutorials.component';
 import { AdminMembersComponent } from './admin-members/admin-members.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminAllMembersComponent } from './admin-all-members/admin-all-members.component';
 
 const routes: Routes = [
   { path: '', component: PrivateComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'adminOverview', component: AdminOverviewComponent },
   { path: 'adminTutorials', component: AdminTutorialsComponent },
   { path: 'adminMembers', component: AdminMembersComponent },
+  { path: 'adminAllMembers', component: AdminAllMembersComponent },
   { path: 'adminUsers', component: AdminUsersComponent }
 ];
 

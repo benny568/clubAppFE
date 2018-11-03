@@ -49,7 +49,7 @@ export class LoginService {
 
      sendCredential(username: string, password: string) {
         let home = this.com$.getHome();
-    	let url = home + "/login";
+    	let url = home + "login";
         let params = 'username='+username+'&password='+password;
         let headers = new Headers(
         {

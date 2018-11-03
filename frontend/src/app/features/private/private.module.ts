@@ -19,6 +19,7 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { AdminAllMembersComponent } from './admin-all-members/admin-all-members.component';
 
 @NgModule({
   imports: [
@@ -44,7 +45,8 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     AdminUsersComponent,
     AddUserComponent,
     UserDeleteComponent,
-    UserEditComponent
+    UserEditComponent,
+    AdminAllMembersComponent
   ],
   entryComponents: [
     AddMemberComponent,

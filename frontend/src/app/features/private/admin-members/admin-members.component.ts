@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { LoggerService } from '../../../services/logger.service';
@@ -35,6 +35,7 @@ export class AdminMembersComponent implements OnInit {
                private com$: CommonService,
                public d$: SessionDataService,
                public mbr$: MemberService,
+               private router : Router,
                private dialog: MatDialog )
   {
     this.lg$.setLogHdr(this.logdepth, this.componentName);
@@ -55,6 +56,7 @@ export class AdminMembersComponent implements OnInit {
   allMembersAdmin()
   {
     this.lg$.log("-> allMembersAdmin()");
+    this.router.navigate(['/adminAllMembers']);
   }
 
   getMembers4team( team: number )
@@ -62,7 +64,6 @@ export class AdminMembersComponent implements OnInit {
       this.lg$.log("    --> getMembers4team(" + team + ")");
       this.mbr$.loadCurrentTeamMembersByTeamId( team, this.gotTeamMembers(this.lg$, this.showArray) );
   }
-
 
   /**********************************************************
    * Name:		gotTeamMembers()

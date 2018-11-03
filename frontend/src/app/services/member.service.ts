@@ -53,6 +53,48 @@ export class MemberService {
 
      }
 
+     /**********************************************************
+     * Name       : getAllMembers()
+     * Description: Load all members from the database
+     * Scope      : Externally accessable
+     * Params in  : A call back to call ehen done
+     * Return     : Members
+     **********************************************************/
+    public getAllMembers( callback: any )
+    {
+        this.lg$.log("getAllMembers()");
+
+        let url = this.com$.getHome();
+
+        if ( this.membersAreLoaded() )
+        {
+        	this.lg$.log("    |- Members already loaded..");
+        	return; // Already loaded
+        }
+        else
+        {
+            let headers: HttpHeaders = this.setupHeaders();
+            this.lg$.log("Headers set are: " + headers.keys() );
+
+            this.lg$.log("-->" + "getAllMembers()" );
+            this.http$.get( url + 'admin/members/', {headers} )
+                .subscribe( (data:Array<Member>) => { this.msAllMembers = data, callback() },
+                            error => console.error("ERROR: Reading members from server"
+                                                    + ", Error: " + error ),
+	   					              () => this.lg$.log("<-- Members read successfully")
+	   				  );
+        }
+
+
+    }
+
+    /**********************************************************
+     * Name       : loadCurrentTeamMembersByTeamId()
+     * Description: Load the members for a particular team
+     * Scope      : Externally accessable
+     * Params in  : The team id and a call back to call ehen done
+     * Return     : Members in the team
+     **********************************************************/
     public loadCurrentTeamMembersByTeamId( team: number, callback: any )
     {
         this.lg$.log("loadCurrentTeamMembersByTeamId()");
@@ -145,9 +187,15 @@ export class MemberService {
 
 
 
-
+    /**********************************************************
+     * Name       : saveMember()
+     * Description: Save the member
+     * Scope      : Externally accessable
+     * Params in  : Member in question
+     * Return     : 
+     **********************************************************/
     public saveMember( member:Member )
-	  {
+	{
     	this.lg$.log("    |-> saveMember(" + member.name + ")");
     	var home      = this.com$.getHome();
     	let memberUrl = home + 'admin/member/';
@@ -159,38 +207,12 @@ export class MemberService {
 
     	return this.http$.put( memberUrl, member, {headers} )
   			.subscribe( data => {
-                              this.lg$.log("    |<- saveMember("+data+")");
-  								          },
+                                    this.lg$.log("    |<- saveMember("+data+")");
+  								},
   						err => this.lg$.log("MemberService: ERROR saving member to server! [" + err + "]"),
   						()  => this.lg$.log("    |<- saveMember() - finished")
   					);
 	}
-
-    /**********************************************************
-     * Name       : saveMember()
-     * Description: Save the member
-     * Scope      : Externally accessable
-     * Params in  : Member in question
-     * Return     : 
-     **********************************************************/
-    public XsaveMember( member: Member )
-	  {
-    	console.log("    |-> saveMember(" + member.name + ")");
-
-        let url = this.com$.getHome() + "/admin/member";
-        //let headers = new Headers({ 'Content-Type': 'application/json' });
-        let body = JSON.stringify({ member });
-        //let headers = new Headers({ 'Content-Type': 'application/json' });
-        let headers: HttpHeaders = this.setupHeaders();
-        let thisTeam             = member.team;
-
-        // TBD: Find out what teams the member is on so he can be removed once deleted
-
-        return this.http$.put( url, {headers} )
-            .subscribe( data => console.log("MemberService: Member updated successfully"),
-                        err => console.error("MemberService: ERROR updating member on server!")
-                        );
-	  }
 
     /**********************************************************
      * Name       : applyMemberDel()
@@ -201,8 +223,8 @@ export class MemberService {
      * Return   : 
      **********************************************************/
     public applyMemberDelFromTeam( team: Array<Member>, member: number )
-	  {
-      this.lg$.log("-> applyMemberDelFromTeam("+team+","+member+")");
+	{
+        this.lg$.log("-> applyMemberDelFromTeam("+team+","+member+")");
 
   		var index:number = this.findMemberIndexFromTeam( team, member );
 
@@ -214,7 +236,7 @@ export class MemberService {
               this.lg$.log("Removing member from team..");
   		    team.splice( index, 1 );
   		}
-	  }
+	}
 
     /**********************************************************
      * Name       : applyMemberAdd()
@@ -225,7 +247,7 @@ export class MemberService {
      * Return   : 
      **********************************************************/
     applyMemberAdd(members: Array<any>, member: Member )
-	  {
+	{
 
   		if ( this.msTeamMembers[member.team] === undefined )
   		{
@@ -241,7 +263,7 @@ export class MemberService {
   		{
   			//log.debug(loghdr + "###### ERROR: applyMemberAdd - member not found!");
   		}
-	  }
+	}
 
     /**********************************************************
      * Name       : findMemberIndex()
@@ -287,7 +309,7 @@ export class MemberService {
      * Return   : The index value
      **********************************************************/
     public findMemberIndexFromTeam( members: Array<Member>, memberId: number )
-	  {
+	{
       this.lg$.log("findMemberIndex - id: " + memberId);
 		  var index = -1;
 
@@ -312,6 +334,20 @@ export class MemberService {
   		}
 
   		return index;
+    }
+
+    private membersAreLoaded()
+    {
+        this.lg$.log("    |--> membersAreLoaded()");
+        let loaded: boolean = false;
+
+        if( this.msAllMembers.length > 0 )
+        {
+            loaded = true;
+        }
+
+        this.lg$.log("    |- <-- membersAreLoaded("+loaded+")");
+        return loaded;
     }
 
     private teamMembersAreLoaded( team: number )

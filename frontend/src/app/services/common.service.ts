@@ -16,10 +16,10 @@ export class CommonService {
     loghdr      = "";
     serviceName = 'CommonService';
 
-     constructor () {
-
+     constructor () 
+     {
         var svr                    = new ServerMode();
-            this.CurrentServerMode = svr.getServerMode();
+        this.CurrentServerMode = svr.getServerMode();
      }
 
     /**********************************************************
@@ -223,7 +223,7 @@ export class CommonService {
     public calculateCurrentSeason(): String
     {
       var season = "";
-      let date   = new Date();
+      const date: Date   = new Date();
       let year   = date.getFullYear();
       let month  = date.getMonth();     // Remember this is 0 for Jan etc.
 
