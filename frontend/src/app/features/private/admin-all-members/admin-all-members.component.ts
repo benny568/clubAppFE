@@ -1,30 +1,44 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { LoggerService } from '../../../services/logger.service';
 import { CommonService } from './../../../services/common.service';
 import { SessionDataService } from '../../../services/session-data.service';
 import { MemberService } from '../../../services/member.service';
 
+import { AddMemberComponent } from './../add-member/add-member.component';
+import { EditMemberComponent } from '../edit-member/edit-member.component';
+import { DeleteMemberComponent } from './../delete-member/delete-member.component';
+
+import { Member } from './../../../model/member';
+
 @Component({
   selector: 'app-admin-all-members',
   templateUrl: './admin-all-members.component.html',
-  styleUrls: ['./admin-all-members.component.css']
+  styleUrls: ['./admin-all-members.component.css'],
+  providers: [ LoggerService ]
 })
 export class AdminAllMembersComponent implements OnInit {
   season: String;
+  componentName = 'AdminAllMembersComponent';
+  logdepth = 0;
+  loggedIn = '';
+  thisMember: Member;
+  dialogRef: MatDialogRef<EditMemberComponent>;
+  addDialogRef: MatDialogRef<AddMemberComponent>;
+  delDialogRef: MatDialogRef<DeleteMemberComponent>;
 
   constructor(  private lg$: LoggerService,
                 private com$: CommonService,
                 public d$: SessionDataService,
-                public mbr$: MemberService )
+                public mbr$: MemberService,
+                private dialog: MatDialog )
     {
-      //this.season = this.com$.calculateCurrentSeason();
+      this.lg$.setLogHdr(this.logdepth, this.componentName);
     }
 
   ngOnInit() {
-    console.log("###### Calling calculateCurrentSeason() from component Init..");
     this.season = this.com$.calculateCurrentSeason();
-    console.log("Back from calculateCurrentSeason() and the season is: " + this.season );
     this.mbr$.getAllMembers( this.gotMembers( this.lg$, this.mbr$ ) );
   }
 
@@ -48,5 +62,76 @@ export class AdminAllMembersComponent implements OnInit {
       logger.log("<-----|");
     }
   }
+
+  /**********************************************************
+   * Name:		editMember()
+   * Description:	Edit the current selected member
+   * Scope:		Internal
+   * Params in:	None
+   * Return:
+   **********************************************************/
+  editMember( member: Member )
+  {
+    this.lg$.log("    |-> editMember(" + member.name + ")");
+    this.thisMember = member;
+
+    this.openDialog();
+
+  }
+
+  /**********************************************************
+   * Name:		deleteMember()
+   * Description:	Delete the current selected member
+   * Scope:		Internal
+   * Params in:	None
+   * Return:
+   **********************************************************/
+  deleteMember( member: Member )
+  {
+
+    this.lg$.log("    |-> deleteMember(" + member.name + ")");
+    this.thisMember = member;
+
+    this.openDelDialog();
+  }
+
+  openDelDialog(): void
+    {
+      this.delDialogRef = this.dialog.open(DeleteMemberComponent, {
+        //width: '500px',
+        //hasBackdrop: true,
+        data: { member: this.thisMember }
+      });
+
+      this.delDialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    }
+
+    openAddDialog(): void
+    {
+      this.addDialogRef = this.dialog.open(AddMemberComponent, {
+        //width: '500px',
+        //hasBackdrop: true,
+        data: { member: this.thisMember }
+      });
+
+      this.addDialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    }
+
+    openDialog(): void
+    {
+      this.dialogRef = this.dialog.open(EditMemberComponent, {
+        //width: '500px',
+        //hasBackdrop: true,
+        data: { member: this.thisMember }
+      });
+
+      this.dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    }
 
 }

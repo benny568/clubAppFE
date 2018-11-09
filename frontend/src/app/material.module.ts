@@ -6,9 +6,13 @@ import {    MatAutocompleteModule,
             MatCheckboxModule,
             MatChipsModule,
             MatDatepickerModule,
+            DateAdapter,
+            MAT_DATE_LOCALE,
+            MAT_DATE_FORMATS,
             MatDialogModule,
             MatDividerModule,
             MatExpansionModule,
+            MatFormFieldModule,
             MatGridListModule,
             MatIconModule,
             MatInputModule,
@@ -31,6 +35,7 @@ import {    MatAutocompleteModule,
             MatTabsModule,
             MatToolbarModule,
             MatTooltipModule } from '@angular/material';
+import { AppDateAdapter, APP_DATE_FORMATS } from './date-adapter/date-adapter.component';
 
 @NgModule({
     imports: [
@@ -44,6 +49,7 @@ import {    MatAutocompleteModule,
         MatDialogModule,
         MatDividerModule,
         MatExpansionModule,
+        MatFormFieldModule,
         MatGridListModule,
         MatIconModule,
         MatInputModule,
@@ -78,6 +84,7 @@ import {    MatAutocompleteModule,
         MatDialogModule,
         MatDividerModule,
         MatExpansionModule,
+        MatFormFieldModule,
         MatGridListModule,
         MatIconModule,
         MatInputModule,
@@ -100,7 +107,17 @@ import {    MatAutocompleteModule,
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule
-    ]
+    ],
+    providers: [
+        {
+          provide: DateAdapter,
+          useClass: AppDateAdapter
+        },
+        { 
+            provide: MAT_DATE_FORMATS, 
+            useValue: APP_DATE_FORMATS 
+        }
+      ]
 })
 
 export class MaterialModule { }

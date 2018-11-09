@@ -104,12 +104,12 @@ export class AdminMembersComponent implements OnInit {
     }
 
   /**********************************************************
-     * Name:		editMember()
-     * Description:	Edit the current selected member
-     * Scope:		Internal
-     * Params in:	None
-     * Return:
-     **********************************************************/
+   * Name:		editMember()
+   * Description:	Edit the current selected member
+   * Scope:		Internal
+   * Params in:	None
+   * Return:
+   **********************************************************/
     editMember( member: Member )
     {
       this.lg$.log("    |-> editMember(" + member.name + ")");

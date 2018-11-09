@@ -109,42 +109,42 @@ export class CommonService {
   		}
   	}
 
-	/**********************************************************
+    /**********************************************************
      * Name       : isValidPhone()
      * Description: Checks that the entered text matches the
      * 				basic rules to be an Irish phone number.
      * Params in: The email entered
      * Return   : true or false
      **********************************************************/
-	isValidPhone( phone: string ): boolean
-	{
-		console.log("----> checkPh(" + phone + ")");
-		console.log("== " + /^\d{10}$/.test(phone) );
-		console.log("== " + /^\+\d{12}$/.test(phone) );
+    isValidPhone( phone: string ): boolean
+    {
+      console.log("----> checkPh(" + phone + ")");
+      console.log("== " + /^\d{10}$/.test(phone) );
+      console.log("== " + /^\+\d{12}$/.test(phone) );
 
-		if ( ( phone !== undefined ) && ( phone !== '' ) )
-		{
-			if ( (/^\d{10}$/.test(phone)) || (/^\+\d{12}$/.test(phone)) )
-			{
-				return true;
-			} else
-			{
-				return false;
-			}
+      if ( ( phone !== undefined ) && ( phone !== '' ) )
+      {
+        if ( (/^\d{10}$/.test(phone)) || (/^\+\d{12}$/.test(phone)) )
+        {
+          return true;
+        } else
+        {
+          return false;
+        }
 
-		} else
-		{
-			//this.lg$.log("----> checkPh(" + phone + ") undefined or blank!");
-			return false;
-		}
-	}
+      } else
+      {
+        //this.lg$.log("----> checkPh(" + phone + ") undefined or blank!");
+        return false;
+      }
+    }
 
 	/**********************************************************
-     * Name       : isValidDob()
-     * Description: Checks that the dob is not empty
-     * Params in  : The name entered
-     * Return     : true or false
-     **********************************************************/
+   * Name       : isValidDob()
+   * Description: Checks that the dob is not empty
+   * Params in  : The name entered
+   * Return     : true or false
+   **********************************************************/
     isValidDob( name: string ): boolean
   	{
   		//this.lg$.log("----> checkName(" + name + ")");
@@ -275,6 +275,69 @@ export class CommonService {
 
       return birthday;
     }
+
+    /**********************************************************
+     * Name       : convertStringToDate()
+     * Description: Convert a string type to a Date
+     * Scope    : Externally accessible
+     * Params in: Date
+     * Return   : The Date representation of the string.
+     **********************************************************/
+    public convertStringToDate( dob: string, format: string ): Date
+    {
+      console.log("commonService --> convertStringToDate()")
+      let format_parts: String[] = format.split("%", 3);
+      let dateParts: String[] = dob.split("/", 3);
+      let day: number = 0;
+      let month: number = 0;
+      let year: number = 0;
+      let i: number = 0;
+      let date:Date = null;
+
+      for( let part of format_parts )
+      {
+        if( part === "dd" )
+          day = i+1;
+        else if( part === "mm" )
+          month = i+1;
+        else if( part === "yyyy" )
+          year = i+1;
+        i++;
+      }
+
+      console.log("Format of ("+format+") is: day["+day+"], month["+month+"], year["+year+"]");
+
+      date.setDate( Number(day) );
+      date.setMonth( Number(month) );
+      date.setFullYear( Number(year) );
+
+      console.log("Returning date of: " + date );
+
+      return date;
+    }
+
+    /**********************************************************
+     * Name       : convertDateToSlashDelimitedString()
+     * Description: Convert a Date type to the string value of
+     *              dd-mm-yy as this is what the server expects
+     * Scope    : Externally accessible
+     * Params in: Date
+     * Return   : The string format of the date.
+     **********************************************************/
+    public convertDateToSlashDelimitedString( dob: Date ): string
+    {
+      let day:number   = dob.getUTCDate()+1;
+      let month:number = dob.getUTCMonth()+1;
+      let year:number  = dob.getUTCFullYear();
+
+      let sDate = (day < 10 ? ("0"+day) : day) + "/" + (month < 10 ? ("0"+month) : month ) + "/" +  year;
+      // this.lg$.log("The date built is: " + birthday );
+      // this.lg$.log("The day is: " + day );
+      // this.lg$.log("The month is: " + month );
+
+      return sDate;
+    }
+
 
     /**********************************************************
      * Name       : handleHttpError()

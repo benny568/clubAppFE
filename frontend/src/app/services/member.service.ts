@@ -133,7 +133,7 @@ export class MemberService {
      * Return     : 
      **********************************************************/
     public addMember( member: Member )
-	  {
+	{
       this.lg$.log("    |-> addMember(" + member.name + ")");
     	var home      = this.com$.getHome();
     	let memberUrl = home + '/admin/member/';
@@ -161,7 +161,7 @@ export class MemberService {
      * Return     : 
      **********************************************************/
     public deleteMember( member:Member )
-	  {
+	{
     	this.lg$.log("    |-> deleteMember(" + member.name + ")");
     	var home      = this.com$.getHome();
     	let memberUrl = home + '/admin/member/' + member.id;
@@ -371,7 +371,8 @@ export class MemberService {
         this.lg$.log("Number of members: " + this.msTeamMembers[teamId].length);
         for ( let i = 0; i < this.msTeamMembers[teamId].length; i++ )
     		{
-    			this.lg$.log("-- [" + i + "]: " + this.msTeamMembers[teamId][i].name);
+                this.lg$.log("-- [" + i + "]: " + this.msTeamMembers[teamId][i].name);
+                this.lg$.log("-- [" + i + "]: " + this.msTeamMembers[teamId][i].dob);
     		}
     }
 
