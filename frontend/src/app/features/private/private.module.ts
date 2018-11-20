@@ -21,6 +21,8 @@ import { UserDeleteComponent } from './user-delete/user-delete.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { AdminAllMembersComponent } from './admin-all-members/admin-all-members.component';
 
+import { FilterMembersPipe } from '../../pipes/filter.pipe';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -46,7 +48,8 @@ import { AdminAllMembersComponent } from './admin-all-members/admin-all-members.
     AddUserComponent,
     UserDeleteComponent,
     UserEditComponent,
-    AdminAllMembersComponent
+    AdminAllMembersComponent,
+    FilterMembersPipe
   ],
   entryComponents: [
     AddMemberComponent,

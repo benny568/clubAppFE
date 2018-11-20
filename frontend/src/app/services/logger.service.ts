@@ -13,13 +13,13 @@ export class LoggerService {
   warn(msg: any)  { console.warn(this.loghdr + msg); }
 
   /**********************************************************
-     * Name       : setLogHdr()
-     * Description: Sets up the correct indentation and header
-     * 				information for the log messages.
-     * Scope    : Internal
-     * Params in:
-     * Return   :
-     **********************************************************/
+   * Name       : setLogHdr()
+   * Description: Sets up the correct indentation and header
+   * 				information for the log messages.
+   * Scope    : Internal
+   * Params in:
+   * Return   :
+   **********************************************************/
   setLogHdr(logdepth: number, moduleName: string) {
     const indent = this.generateIndent( logdepth );
     console.log(indent + '--> Setting log header for [' + moduleName + ']');

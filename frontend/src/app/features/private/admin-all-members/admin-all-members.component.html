@@ -1,8 +1,12 @@
 <div class="container">
   <div style="margin-left:auto;margin-right:auto;width:80%;">
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-8">
           <h3 style="color:white">Club Register {{season}} Season</h3>
+        </div>
+        <div class="col-md-4">
+          <input [(ngModel)]="searchText" type="text" placeholder="Search.." name="searchText">
+          <button type="submit"><i class="fa fa-search"></i></button>
         </div>
       </div>
 
@@ -18,7 +22,7 @@
                   <div class="col-md-2 tblHdr">Phone</div>
                   <div class="col-md-2 tblHdr">Operations</div>
               </div> <!-- end of row -->
-              <div *ngFor="let member of mbr$.msAllMembers; index as i" class="row light-line">
+              <div *ngFor="let member of mbr$.msAllMembers| filterMembers:searchText; index as i" class="row light-line">
                 <div class="col-md-1">{{i+1}}</div>						    
                 <div class="col-md-3">{{member.name}}</div>
                 <div class="col-md-4">{{member.address}}</div>

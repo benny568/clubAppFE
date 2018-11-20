@@ -1,5 +1,3 @@
-import { CookieService } from './services/cookie.service';
-import { MemberService } from './services/member.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -39,6 +37,11 @@ import { CommonService } from './services/common.service';
 import { SessionDataService } from './services/session-data.service';
 import { LoggerService } from './services/logger.service';
 import { ErrorService } from './services/error.service';
+import { CookieService } from './services/cookie.service';
+import { MemberService } from './services/member.service';
+import { DateUtilsService } from './services/date-utils.service';
+
+/* Pipes */
 
 /* Components */
 import { NewsComponent } from './news/news.component';
@@ -88,7 +91,8 @@ import { VideosComponent } from './videos/videos.component';
     UserService,
     NewsService,
     MemberService,
-    CookieService
+    CookieService,
+    DateUtilsService
   ],
   bootstrap: [AppComponent]
 })

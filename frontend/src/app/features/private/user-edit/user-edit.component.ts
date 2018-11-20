@@ -6,6 +6,7 @@ import { LoggerService } from '../../../services/logger.service';
 import { CommonService } from './../../../services/common.service';
 import { SessionDataService } from '../../../services/session-data.service';
 import { UserService } from '../../../services/user.service';
+import { DateUtilsService } from '../../../services/date-utils.service';
 
 import { User } from '../../../model/site-user';
 
@@ -30,6 +31,7 @@ export class UserEditComponent implements OnInit {
                private com$                        : CommonService,
                public  d$                          : SessionDataService,
                private usr$                        : UserService,
+               private date$                       : DateUtilsService,
                public  dialogRef                   : MatDialogRef<UserEditComponent>,
                @Inject(MAT_DIALOG_DATA) public data: any )
   {
@@ -72,7 +74,7 @@ export class UserEditComponent implements OnInit {
   }
 
   onCloseConfirm() {
-    this.data.user.dob = this.com$.convertDateToString( this.xdob );
+    this.data.user.dob = this.date$.convertDateToString( this.xdob );
     this.lg$.trace("onCloseConfirm - this.data.user.dob=" + this.data.user.dob);
     this.data.user.enabled = this.accStatus === 'Enabled' ? true : false;
     this.usr$.logUser( this.data.user );

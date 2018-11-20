@@ -7,6 +7,7 @@ import { LoggerService } from '../../../services/logger.service';
 import { CommonService } from './../../../services/common.service';
 import { SessionDataService } from '../../../services/session-data.service';
 import { MemberService } from '../../../services/member.service';
+import { DateUtilsService } from '../../../services/date-utils.service';
 
 import { Member } from './../../../model/member';
 import { Team } from '../../../model';
@@ -32,11 +33,13 @@ export class EditMemberComponent implements OnInit {
   position3    : string;
   options      : string[];
   myControl    : FormControl;
+  dateOfBirth  : Date;
 
   constructor( private lg$                         : LoggerService,
                private com$                        : CommonService,
                public  d$                          : SessionDataService,
                private mbr$                        : MemberService,
+               public date$                        : DateUtilsService,
                public  dialogRef                   : MatDialogRef<EditMemberComponent>,
                @Inject(MAT_DIALOG_DATA) public data: any )
   {
@@ -76,6 +79,10 @@ export class EditMemberComponent implements OnInit {
     this.lg$.log("Position value is: " + this.data.member.position );
     this.lg$.log("Position2 value is: " + this.data.member.position2 );
     this.lg$.log("Position3 value is: " + this.data.member.position3 );
+    this.lg$.log("Date of birth: " + this.data.member.dob )
+    //this.dateOfBirth = this.com$.convertStringToDate(this.data.member.dob, "dd%mm%yyyy", "/");
+    this.dateOfBirth = this.date$.convertStringToDate(this.data.member.dob, "dd/mm/yyyy", "-");
+    this.lg$.log("Converted date is: " + this.dateOfBirth );
   }
 
   onNoClick(): void {
@@ -93,6 +100,8 @@ export class EditMemberComponent implements OnInit {
     this.data.member.position  = this.getPositionFromName(this.position);
     this.data.member.position2 = this.getPositionFromName(this.position2);
     this.data.member.position3 = this.getPositionFromName(this.position3);
+    this.data.member.dob = this.date$.convertDateToDashDelimitedString( this.dateOfBirth );
+    //this.data.member.dob = this.com$.convertDateToString(this.dateOfBirth);
     // TODO: save the updated member data
     this.mbr$.saveMember( this.data.member );
 

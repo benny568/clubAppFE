@@ -45,13 +45,13 @@ export class CommonService {
   }
 
 	/**********************************************************
-     * Name       : getGalleryHome()
-     * Description: Returns the _home URL so that it can be used
-     * 				as a local or remote app.
-     * Scope    : Externally accessible
-     * Params in: none
-     * Return   : _home URL
-     **********************************************************/
+   * Name       : getGalleryHome()
+   * Description: Returns the _home URL so that it can be used
+   * 				as a local or remote app.
+   * Scope    : Externally accessible
+   * Params in: none
+   * Return   : _home URL
+   **********************************************************/
     getGalleryHome() : string {
         var _home: string;
 
@@ -252,90 +252,6 @@ export class CommonService {
       }
 
       return prefix;
-    }
-
-    /**********************************************************
-     * Name       : convertDate()
-     * Description: Convert a Date type to the string value of
-     *              dd-mm-yy as this is what the server expects
-     * Scope    : Externally accessible
-     * Params in: Date
-     * Return   : The string format of the date.
-     **********************************************************/
-    public convertDateToString( dob: Date ): string
-    {
-      let day:number   = dob.getUTCDate()+1;
-      let month:number = dob.getUTCMonth()+1;
-      let year:number  = dob.getUTCFullYear();
-
-      let birthday = (day < 10 ? ("0"+day) : day) + "-" + (month < 10 ? ("0"+month) : month ) + "-" +  year;
-      // this.lg$.log("The date built is: " + birthday );
-      // this.lg$.log("The day is: " + day );
-      // this.lg$.log("The month is: " + month );
-
-      return birthday;
-    }
-
-    /**********************************************************
-     * Name       : convertStringToDate()
-     * Description: Convert a string type to a Date
-     * Scope    : Externally accessible
-     * Params in: Date
-     * Return   : The Date representation of the string.
-     **********************************************************/
-    public convertStringToDate( dob: string, format: string ): Date
-    {
-      console.log("commonService --> convertStringToDate()")
-      let format_parts: String[] = format.split("%", 3);
-      let dateParts: String[] = dob.split("/", 3);
-      let day: number = 0;
-      let month: number = 0;
-      let year: number = 0;
-      let i: number = 0;
-      let date:Date = null;
-
-      for( let part of format_parts )
-      {
-        if( part === "dd" )
-          day = i+1;
-        else if( part === "mm" )
-          month = i+1;
-        else if( part === "yyyy" )
-          year = i+1;
-        i++;
-      }
-
-      console.log("Format of ("+format+") is: day["+day+"], month["+month+"], year["+year+"]");
-
-      date.setDate( Number(day) );
-      date.setMonth( Number(month) );
-      date.setFullYear( Number(year) );
-
-      console.log("Returning date of: " + date );
-
-      return date;
-    }
-
-    /**********************************************************
-     * Name       : convertDateToSlashDelimitedString()
-     * Description: Convert a Date type to the string value of
-     *              dd-mm-yy as this is what the server expects
-     * Scope    : Externally accessible
-     * Params in: Date
-     * Return   : The string format of the date.
-     **********************************************************/
-    public convertDateToSlashDelimitedString( dob: Date ): string
-    {
-      let day:number   = dob.getUTCDate()+1;
-      let month:number = dob.getUTCMonth()+1;
-      let year:number  = dob.getUTCFullYear();
-
-      let sDate = (day < 10 ? ("0"+day) : day) + "/" + (month < 10 ? ("0"+month) : month ) + "/" +  year;
-      // this.lg$.log("The date built is: " + birthday );
-      // this.lg$.log("The day is: " + day );
-      // this.lg$.log("The month is: " + month );
-
-      return sDate;
     }
 
 
