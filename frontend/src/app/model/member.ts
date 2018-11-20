@@ -9,6 +9,7 @@ export class Member {
     email:string;
     dob:string;
     amount:string;
+    paydate:string;
     receiptid:string;
     team:number;
     team2:number;
@@ -36,6 +37,7 @@ export class Member {
         this.email = '';
         this.dob = '';
         this.amount = '0';
+        this.paydate = '';
         this.receiptid = '';
         this.team = 0;
         this.team2 = 0;

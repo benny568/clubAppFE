@@ -80,6 +80,16 @@
           </div>
 
           <div class="item">
+              <mat-form-field class="form-phone-field">
+                <mat-label>Last Payment date:</mat-label>
+                <input matInput 
+                      name="paydate"
+                      [value]="data.member.paydate"
+                      [(ngModel)]="data.member.paydate">
+              </mat-form-field>
+            </div>
+
+          <div class="item">
             <mat-form-field class="form-phone-field">
               <mat-label>Receipt Id:</mat-label>
               <input matInput 
