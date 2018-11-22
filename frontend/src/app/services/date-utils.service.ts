@@ -1,10 +1,69 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
+
+enum DateStrBrand { }
+
+export type DateStr = string & DateStrBrand;
+
 
 @Injectable()
 export class DateUtilsService {
 
   constructor() { }
 
+  /**********************************************************
+   * Name       : checkValidDateStr()
+   * Description: Check if the string is in the correct format
+   * Scope    : Externally accessible
+   * Params in: Date
+   * Return   : The string format of the date.
+   **********************************************************/
+  checkValidDateStr(str: string): str is DateStr {
+    return str.match(/^\d{4}-\d{2}-\d{2}$/) !== null;
+  }
+
+  /**********************************************************
+   * Name       : toDateStr()
+   * Description: Convert a Date type to the string value of
+   *              dd-mm-yy as this is what the server expects
+   * Scope    : Externally accessible
+   * Params in: Date
+   * Return   : The string format of the date.
+   **********************************************************/
+  toDateStr(date: Date | moment.Moment | string): DateStr {
+    if (typeof date === 'string') {
+      if (this.checkValidDateStr(date)) {
+        return date;
+      } else {
+        throw new Error(`Invalid date string: ${date}`);
+      }
+    } else {
+      const dateString = moment(date).format('YYYY-MM-DD');
+      if (this.checkValidDateStr(dateString)) {
+        return dateString;
+      }
+    }
+    throw new Error(`Shouldn't get here (invalid toDateStr provided): ${date}`);
+  }
+  
+
+  // Examples
+
+  // const today = toDateStr(new Date());
+
+  // const fourthOfJuly = toDateStr('2017-07-04');
+
+  // fourthOfJuly === '2017-07-04'; // true
+
+  // function formatDate(date: DateStr) {
+  //   return moment(date).format('MM/DD/YY');
+  // }
+
+  // formatDate('foo'); // compile error
+
+  // formatDate(toDateStr('foo')); // runtime error
+
+  // formatDate(toDateStr('2017-07-04')); // 07/04/17
  
   /**********************************************************
    * Name       : convertDate()

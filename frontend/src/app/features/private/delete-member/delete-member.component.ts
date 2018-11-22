@@ -44,11 +44,64 @@ export class DeleteMemberComponent implements OnInit {
   }
 
   onCloseConfirm() {
-    this.mbr$.deleteMember( this.data.member );
+    this.mbr$.deleteMember( this.data.member, this.applyMemberDel );
     this.dialogRef.close('Confirm');
   }
   onCloseCancel() {
     this.dialogRef.close('Cancel');
+  }
+
+  /**********************************************************
+   * Name       : applyMemberDel()
+   * Description: Applies a change to the local data so the
+   *              user sees the change on the view.
+   * Scope    : Internal
+   * Params in: None
+   * Return   : 
+   **********************************************************/
+  public applyMemberDel( allMembers: Array<Member>, member: Member, teams: Array<any>, lg$: LoggerService, mbr$: MemberService )
+	{
+      lg$.log("-> applyMemberDel("+member+")");
+
+  		var index:number = mbr$.findMemberIndexFromTeam( allMembers, member.id );
+
+  		if ( index === -1 )
+  		{
+  			return;
+  		} else if ( index > -1 )
+  		{   // Delete the member at index
+          lg$.log("Removing member from list..");
+          allMembers.splice( index, 1 );
+
+          if( member.team > 0 )
+          {
+            index = mbr$.findMemberIndexFromTeam( teams[member.team], member.id );
+            if ( index > -1 )
+            {
+              lg$.log("Team index found: " + index);
+              teams[member.team].splice( index, 1 );
+            }              
+          }
+          if( member.team2 > 0 )
+          {
+            index = mbr$.findMemberIndexFromTeam( teams[member.team], member.id );
+            if ( index > -1 )
+            {
+              lg$.log("Team2 index found: " + index);
+              teams[member.team2].splice( index, 1 );
+            }              
+          }
+          if( member.team3 > 0 )
+          {
+            index = mbr$.findMemberIndexFromTeam( teams[member.team], member.id );
+            if ( index > -1 )
+            {
+              lg$.log("Team3 index found: " + index);
+              teams[member.team3].splice( index, 1 );
+            }              
+          }
+          
+  		}
   }
 
 }

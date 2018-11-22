@@ -132,7 +132,7 @@ export class MemberService {
      * Params in  : Member in question
      * Return     : 
      **********************************************************/
-    public addMember( member: Member )
+    public addMember( member: Member, callback )
 	{
       this.lg$.log("    |-> addMember(" + member.name + ")");
     	var home      = this.com$.getHome();
@@ -146,6 +146,7 @@ export class MemberService {
         return this.http$.post( memberUrl, member, {headers} )
             .subscribe( data => {
                                   this.lg$.log("    |<- addMember("+data+")");
+                                  callback(this.msAllMembers, member, this.msTeamMembers, this.lg$, this);
                                 },
                         err => this.lg$.log("MemberService: ERROR adding member to server! [" + err + "]"),
                         ()  => this.lg$.log("    |<- addMember() - finished")
@@ -160,7 +161,7 @@ export class MemberService {
      * Params in  : None
      * Return     : 
      **********************************************************/
-    public deleteMember( member:Member )
+    public deleteMember( member:Member, callback )
 	{
     	this.lg$.log("    |-> deleteMember(" + member.name + ")");
     	var home      = this.com$.getHome();
@@ -178,7 +179,7 @@ export class MemberService {
     	return this.http$.delete( memberUrl, {headers} )
   			.subscribe( (data: number) => {
                               this.lg$.log("    |<- deleteMember("+data+")");
-                              this.applyMemberDelFromTeam(this.msTeamMembers[thisTeam], data);
+                              callback(this.msAllMembers, member, this.msTeamMembers, this.lg$, this);
   								          },
   						err => this.lg$.log("MemberService: ERROR deleting member from server! [" + err + "]"),
   						()  => this.lg$.log("    |<- deleteMember() - finished")

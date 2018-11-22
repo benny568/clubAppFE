@@ -7,8 +7,9 @@ import { LoggerService } from '../../../services/logger.service';
 import { CommonService } from './../../../services/common.service';
 import { SessionDataService } from '../../../services/session-data.service';
 import { MemberService } from '../../../services/member.service';
+import { DateUtilsService } from '../../../services/date-utils.service';
 
-import { Member } from './../../../model/member';
+import { Member } from '../../../model/member';
 
 @Component({
   selector: 'app-add-member',
@@ -34,6 +35,7 @@ export class AddMemberComponent implements OnInit {
                private com$: CommonService,
                public d$: SessionDataService,
                private mbr$: MemberService,
+               private date$: DateUtilsService,
                public dialogRef: MatDialogRef<AddMemberComponent>,
                @Inject(MAT_DIALOG_DATA) public data: any ) 
   { 
@@ -60,15 +62,20 @@ export class AddMemberComponent implements OnInit {
   }
 
   onCloseConfirm() {
-    this.data.member.dob =  this.convertDate( this.xdob );
+    this.data.member.dob =  this.date$.toDateStr( this.xdob );
     this.data.member.team = this.convertTeam( this.team );
     this.data.member.team2 = this.convertTeam( this.team2 );
     this.data.member.team3 = this.convertTeam( this.team3 );
     this.data.member.position = this.convertPosition( this.position );
     this.data.member.position2 = this.convertPosition( this.position2 );
     this.data.member.position3 = this.convertPosition( this.position3 );
+    if( this.data.member.amount > 0 )
+      this.data.member.paydate = this.date$.toDateStr( new Date() );
+    else
+      this.data.member.paydate = '1900-01-01';
+
     // Save the new member data
-    this.mbr$.addMember( this.data.member );
+    this.mbr$.addMember( this.data.member, this.applyMemberAdd );
 
     this.lg$.log("Member name: " + this.data.member.name );
     this.lg$.log("Address    : " + this.data.member.address );
@@ -88,6 +95,25 @@ export class AddMemberComponent implements OnInit {
   onCloseCancel() {
     this.dialogRef.close('Cancel');
   }
+
+   /**********************************************************
+   * Name       : applyMemberAdd()
+   * Description: Applies a change to the local data so the
+   *              user sees the change on the view.
+   * Scope    : Internal
+   * Params in: None
+   * Return   : 
+   **********************************************************/
+  public applyMemberAdd( allMembers: Array<Member>, member: Member, teams: Array<any>, lg$: LoggerService, mbr$: MemberService )
+	{
+      lg$.log("-> applyMemberAdd("+member+")");
+
+      lg$.log("Adding member from list..");
+      allMembers.push(member);
+
+      if( member.team > 0 )
+        teams[member.team].push(member);	
+	}
 
   convertDate( dob: Date )
   {

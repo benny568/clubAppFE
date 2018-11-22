@@ -6,6 +6,7 @@ import { RequestOptions } from '@angular/http';
 
 import { LoggerService }  from '../../../services/logger.service';
 import { CommonService }  from '../../../services/common.service';
+import { DateUtilsService, DateStr } from '../../../services/date-utils.service';
 import { ServerMode }     from '../../../model/server-mode';
 import { Member }         from '../../../model/member';
 import { Data } from '@angular/router/src/config';
@@ -14,7 +15,7 @@ export class regDetails {
 	firstname     : string;
 	lastname      : string;
 	email         : string;
-	dob           : string;
+	dob           ; Date;
 	address       : string;
 	phone1        : string;
 	phone2        : string;
@@ -57,7 +58,7 @@ export class regDetails {
 	setFirstname( name: string )        { this.firstname = name; }
 	setLastname(name: string )          { this.lastname = name; }
 	setEmail( email: string )           { this.email = email; }
-	setDob( date: string )              { this.dob = date; }
+	setDob( date: Date )              	{ this.dob = date; }
 	setAddress( value: string )         { this.address = value; }
 	setPhone1( phone: string )          { this.phone1 = phone; }
 	setPhone2( phone: string )          { this.phone2 = phone; }
@@ -88,7 +89,10 @@ export class AcademyRegistrationService {
 	regData: regDetails;
 	timeStamp = new Date().getMinutes();
 
-	constructor ( private lg$: LoggerService, private com$: CommonService, private _http: Http )
+	constructor ( private lg$: LoggerService, 
+								private com$: CommonService,
+								private date$: DateUtilsService,
+								private _http: Http )
 	{
 		this.lg$.setLogHdr(this.logdepth, this.serviceName);
 		this.regData = new regDetails();
@@ -146,14 +150,14 @@ export class AcademyRegistrationService {
 		let options = new RequestOptions({ headers: headers });
 
     // (1) Convert the array of values to a Mmeber object
-    this.convertToMember();
+		this.convertToMember();
 
     // (2) Store the Member object as a cookie so we can use it to send the
     //     confirmation email to the user when we return from PayPal
     this.saveMemberCookie(this.member);
 
     // (3) Store the new member in the db
-    this.storeDetails( this.member );
+		this.storeDetails( this.member );
 
     // (4) Calculate the cost and redirec to PayPal for payment
     this.lg$.log("    |- Calling http post to PayPal..");
@@ -234,9 +238,10 @@ export class AcademyRegistrationService {
 		this.member.address      = this.regData.getAddress();
 		this.member.phone        = this.regData.getPhone1();
 		this.member.phone2       = this.regData.getPhone2();
-		this.member.dob          = this.regData.getDob();
+		this.member.dob          = this.date$.toDateStr(this.regData.getDob());
 		this.member.email        = this.regData.getEmail();
 		this.member.amount       = this.payment;
+		this.member.paydate			 = new Date().toISOString().substring(0, 10);							// Today's date "yyyy-mm-dd" format
 		this.member.receiptid    = "";                                                    // TODO: generate this
 		this.member.team         = 0;                                                     // TODO: this.sortingHat();
 		this.member.team2        = 0;

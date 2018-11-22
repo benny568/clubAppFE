@@ -100,7 +100,7 @@ export class AdminAllMembersComponent implements OnInit {
       this.delDialogRef = this.dialog.open(DeleteMemberComponent, {
         //width: '500px',
         //hasBackdrop: true,
-        data: { member: this.thisMember }
+        data: { member: this.thisMember, allMembers: this.mbr$.msAllMembers }
       });
 
       this.delDialogRef.afterClosed().subscribe(result => {
