@@ -108,6 +108,13 @@ export class AddMemberComponent implements OnInit {
 	{
       lg$.log("-> applyMemberAdd("+member+")");
 
+      // Dates are in the wrong format of yyyy-mm-dd and we need it in dd-mm-yyyy to display
+      // So, we need to reverse the format before adding the member to the lists
+      let parts: string [] = member.dob.split("-", 3);
+      member.dob = parts[2] + "-" + parts[1] + "-" + parts[0];
+      parts = member.paydate.split("-", 3);
+      member.paydate = parts[2] + "-" + parts[1] + "-" + parts[0];
+
       lg$.log("Adding member from list..");
       allMembers.push(member);
 
