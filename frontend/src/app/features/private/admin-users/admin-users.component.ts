@@ -1,9 +1,10 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { UserEditComponent } from './../user-edit/user-edit.component';
 import { UserDeleteComponent } from './../user-delete/user-delete.component';
 import { AddUserComponent } from './../add-user/add-user.component';
-import { Component, OnInit } from '@angular/core';
-
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { LoggerService } from '../../../services/logger.service';
 import { CommonService } from './../../../services/common.service';
@@ -26,6 +27,8 @@ export class AdminUsersComponent implements OnInit {
   dialogRef   : MatDialogRef<UserEditComponent>;
   addDialogRef: MatDialogRef<AddUserComponent>;
   delDialogRef: MatDialogRef<UserDeleteComponent>;
+  dataSource: MatTableDataSource<User>;
+  displayedColumns: string[] = ['id', 'name', 'address', 'email', 'phone', 'operations'];
 
   constructor(  private lg$   : LoggerService,
                 private com$  : CommonService,
@@ -36,8 +39,20 @@ export class AdminUsersComponent implements OnInit {
     this.lg$.setLogHdr(this.logdepth, this.componentName);
   }
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   ngOnInit() {
-    this.usr$.getAllUsers();
+    this.usr$.getAllUsers('', 'asc', 0, 5).subscribe( results => {
+      if( !results )
+          return;
+      this.lg$.trace("Got users from db, setting up table..");
+      this.dataSource = new MatTableDataSource(results);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.usr$.allUsers = results;
+    });
+
     this.user = new User();
   }
 

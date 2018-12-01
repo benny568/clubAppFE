@@ -35,3 +35,14 @@
     clear: both;
     display: table;
   }
+
+  mat-header-cell {
+    font-weight: bolder;
+    font-size: large;
+    color: black;
+  }
+
+  .mat-row.hovered {
+    background: #eee;
+  }
+ 

@@ -27,7 +27,7 @@ export class UserEditComponent implements OnInit {
   Statuses     : string[];
   accStatus    : string;
 
-  constructor( private lg$: LoggerService,
+  constructor( private lg$                         : LoggerService,
                private com$                        : CommonService,
                public  d$                          : SessionDataService,
                private usr$                        : UserService,

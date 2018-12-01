@@ -3,8 +3,8 @@ import { HttpClient,
          HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { Observable }   from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import { User }          from '../model/site-user';
 import { LoggerService } from '../services/logger.service';
@@ -61,13 +61,16 @@ export class UserService {
     }
 
     /**********************************************************
-     * Name       : getAllUsers()
-     * Description: Read the application users from the server
-     * Scope      : Externally accessible
-     * Params in  : None
-     * Return     : None
+     * @Name       : getAllUsers()
+     * @Description: Read the application users from the server
+     * @Scope      : Externally accessible
+     * @Params     : filter: the string the user wants to filter with
+     *               sort: sort direction, asc or desc 
+     *               page: the page number, of data to return
+     *               pagesize: The size of each page to return
+     * @Return     : Observable<User[]>
      **********************************************************/
-    public getAllUsers()
+    public getAllUsers( filter: string, sort: string, page: number, pagesize: number ): Observable<User[]>
     {
       this.lg$.log("getAllUsers()");
 
@@ -76,12 +79,15 @@ export class UserService {
       let headers: HttpHeaders = this.com$.setupHeaders();
 
       this.lg$.log("-->" + "getAllUsers(), loading users from: " + url + '/admin/users/' );
-      this.http$.get( url + 'admin/users/', {headers} )
-        .subscribe( (data: User[]) => { this.allUsers = data, this.logUsers(this.allUsers) },
-                    error => console.error("ERROR: Reading users from server, Error: " + error )
-	   				      );
-    }
 
+      return this.http$.get<User[]>( url + 'admin/users/', {headers} );
+    }
+    //   this.lg$.log("-->" + "getAllUsers(), loading users from: " + url + '/admin/users/' );
+    //   this.http$.get( url + 'admin/users/', {headers} )
+    //     .subscribe( (data: User[]) => { this.allUsers = data, this.logUsers(this.allUsers) },
+    //                 error => console.error("ERROR: Reading users from server, Error: " + error )
+    //  				      );
+    
     /**********************************************************
      * Name       : logUsers()
      * Description: Log the list of users in memory

@@ -22,6 +22,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { AdminAllMembersComponent } from './admin-all-members/admin-all-members.component';
 
 import { FilterMembersPipe } from '../../pipes/filter.pipe';
+import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { FilterMembersPipe } from '../../pipes/filter.pipe';
     UserDeleteComponent,
     UserEditComponent,
     AdminAllMembersComponent,
-    FilterMembersPipe
+    FilterMembersPipe,
+    AdminReportsComponent
   ],
   entryComponents: [
     AddMemberComponent,

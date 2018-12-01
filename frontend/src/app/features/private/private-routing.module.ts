@@ -8,6 +8,7 @@ import { AdminTutorialsComponent } from './admin-tutorials/admin-tutorials.compo
 import { AdminMembersComponent } from './admin-members/admin-members.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminAllMembersComponent } from './admin-all-members/admin-all-members.component';
+import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 
 const routes: Routes = [
   { path: '', component: PrivateComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'adminTutorials', component: AdminTutorialsComponent },
   { path: 'adminMembers', component: AdminMembersComponent },
   { path: 'adminAllMembers', component: AdminAllMembersComponent },
-  { path: 'adminUsers', component: AdminUsersComponent }
+  { path: 'adminUsers', component: AdminUsersComponent },
+  { path: 'adminReports', component: AdminReportsComponent }
 ];
 
 @NgModule({

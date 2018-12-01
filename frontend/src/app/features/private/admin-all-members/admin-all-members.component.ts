@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 import { LoggerService } from '../../../services/logger.service';
 import { CommonService } from './../../../services/common.service';
@@ -27,6 +28,9 @@ export class AdminAllMembersComponent implements OnInit {
   dialogRef: MatDialogRef<EditMemberComponent>;
   addDialogRef: MatDialogRef<AddMemberComponent>;
   delDialogRef: MatDialogRef<DeleteMemberComponent>;
+  searchText: string;
+  dataSource: MatTableDataSource<Member>;// = new UserDataSource(this.userService);
+  displayedColumns: string[] = ['id', 'name', 'address', 'phone', 'operations'];
 
   constructor(  private lg$: LoggerService,
                 private com$: CommonService,
@@ -37,9 +41,19 @@ export class AdminAllMembersComponent implements OnInit {
       this.lg$.setLogHdr(this.logdepth, this.componentName);
     }
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   ngOnInit() {
     this.season = this.com$.calculateCurrentSeason();
-    this.mbr$.getAllMembers( this.gotMembers( this.lg$, this.mbr$ ) );
+    this.mbr$.getAllMembers( this.gotMembers( this.lg$, this.mbr$ ) ).subscribe( results => {
+      if( !results )
+          return;
+      this.lg$.trace("Got users from db, setting up table..");
+      this.dataSource = new MatTableDataSource(results);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   /**********************************************************
@@ -63,6 +77,20 @@ export class AdminAllMembersComponent implements OnInit {
     }
   }
 
+  /**********************************************************
+   * Name:		addMember()
+   * Description:	Add a new member
+   * Scope:		Internal
+   * Params in:	None
+   * Return:
+   **********************************************************/
+  addmember()
+  {
+    this.lg$.log("    |-> addMember()");
+
+    this.openAddDialog();
+
+  }
   /**********************************************************
    * Name:		editMember()
    * Description:	Edit the current selected member
@@ -113,7 +141,7 @@ export class AdminAllMembersComponent implements OnInit {
       this.addDialogRef = this.dialog.open(AddMemberComponent, {
         //width: '500px',
         //hasBackdrop: true,
-        data: { member: this.thisMember }
+        //data: { member: this.thisMember }
       });
 
       this.addDialogRef.afterClosed().subscribe(result => {

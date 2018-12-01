@@ -5,6 +5,8 @@ import { Headers,
          RequestOptionsArgs } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
 
+import { Observable }   from 'rxjs/Observable';
+
 import { LoggerService } from '../services/logger.service';
 import { CommonService } from '../services/common.service';
 import { ServerMode } from '../model/server-mode';
@@ -58,9 +60,9 @@ export class MemberService {
      * Description: Load all members from the database
      * Scope      : Externally accessable
      * Params in  : A call back to call ehen done
-     * Return     : Members
+     * Return     : Observal of Member[]
      **********************************************************/
-    public getAllMembers( callback: any )
+    public getAllMembers( callback: any ): Observable<Member[]>
     {
         this.lg$.log("getAllMembers()");
 
@@ -77,12 +79,14 @@ export class MemberService {
             this.lg$.log("Headers set are: " + headers.keys() );
 
             this.lg$.log("-->" + "getAllMembers()" );
-            this.http$.get( url + 'admin/members/', {headers} )
-                .subscribe( (data:Array<Member>) => { this.msAllMembers = data, callback() },
-                            error => console.error("ERROR: Reading members from server"
-                                                    + ", Error: " + error ),
-	   					              () => this.lg$.log("<-- Members read successfully")
-	   				  );
+            return this.http$.get<Member[]>( url + 'admin/members/', {headers} );
+
+            // this.http$.get( url + 'admin/members/', {headers} )
+            //     .subscribe( (data:Array<Member>) => { this.msAllMembers = data, callback() },
+            //                 error => console.error("ERROR: Reading members from server"
+            //                                         + ", Error: " + error ),
+	   		// 			              () => this.lg$.log("<-- Members read successfully")
+	   		// 		  );
         }
 
 

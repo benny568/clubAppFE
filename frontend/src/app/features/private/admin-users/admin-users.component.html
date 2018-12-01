@@ -6,25 +6,48 @@
             <button type="button" class="btn btn-warning btn-xs" (click)="addUser()" style="cursor:pointer;" data-toggle="tooltip" data-placement="right">Add User</button>
           </div>
         </div>
-        <div class="panel-body avenue-body">
-          <div class="row">
-              <div class="col-md-2 tblHdr">Username</div>
-              <div class="col-md-4 tblHdr">Address</div>
-              <div class="col-md-2 tblHdr">email</div>
-              <div class="col-md-2 tblHdr">Phone</div>
-              <div class="col-md-2 tblHdr">Operations</div>
-          </div> <!-- end of row -->
-          <div *ngFor="let user of usr$.allUsers">
-            <div class="row">
-                <div class="col-md-2 tblHdr">{{user.name}}</div>
-                <div class="col-md-4 tblHdr">{{user.address}}</div>
-                <div class="col-md-2 tblHdr">{{user.email}}</div>
-                <div class="col-md-2 tblHdr">{{user.phone}}</div>
-                <div class="col-md-2">
-                    <i (click)="editUser(user)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Edit" class="glyphicon glyphicon-pencil" style="float:left;padding-left:10px;"> </i>&nbsp;
-                    <i (click)="deleteUser(user)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Delete" class="glyphicon glyphicon-trash" style="float:left;padding-left:10px;"></i>
-                  </div>
-              </div>
-            </div> <!-- end of row -->
-        </div>
-</div>
+        <div class="panel-body">
+  
+  <div class="mat-elevation-z8">
+    <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+        <mat-spinner></mat-spinner>
+    </div> -->
+    <mat-table [dataSource]="dataSource" matSort >
+      <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.userId}} </mat-cell>
+        </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-cell *matCellDef="let user" > {{user.name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="address">
+          <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.address}} </mat-cell>
+        </ng-container>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> E-Mail </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.phone}} </mat-cell>
+      </ng-container>
+      <ng-container  matColumnDef="operations">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header> Operations </mat-header-cell>      
+          <mat-cell *matCellDef="let user">
+               <i (click)="editUser(user)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Edit" class="glyphicon glyphicon-pencil" style="float:left;padding-left:10px;"> </i>&nbsp;
+              <i (click)="deleteUser(user)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Delete" class="glyphicon glyphicon-trash" style="float:left;padding-left:10px;"></i>
+          </mat-cell>
+        </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}" (click)="row.highlighted = !row.highlighted" (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></mat-row>
+    </mat-table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+  
+  </div>
+    </div>
+  </div>
+  
