@@ -7,10 +7,9 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { Observable }   from 'rxjs/Observable';
 
-import { LoggerService } from '../services/logger.service';
+import { LoggerService, LogType } from '../services/logger.service';
 import { CommonService } from '../services/common.service';
-import { ServerMode } from '../model/server-mode';
-import { Team } from '../model/team';
+import { DateUtilsService } from '../services/date-utils.service';
 import { Member } from '../model/member';
 import { Position } from '../model/position';
 
@@ -26,8 +25,9 @@ export class MemberService {
     msDisplayMember: boolean = false;
     msPosition     : Array<Position>;
 
-    constructor( private lg$: LoggerService,
+    constructor( private lg$  : LoggerService,
                  private com$ : CommonService,
+                 private date$: DateUtilsService,
                  private http$: HttpClient )
     {
         this.lg$.setLogHdr(this.logdepth, this.serviceName);
@@ -68,13 +68,13 @@ export class MemberService {
 
         let url = this.com$.getHome();
 
-        if ( this.membersAreLoaded() )
-        {
-        	this.lg$.log("    |- Members already loaded..");
-        	return; // Already loaded
-        }
-        else
-        {
+        // if ( this.membersAreLoaded() )
+        // {
+        // 	this.lg$.log("    |- Members already loaded..");
+        // 	return; // Already loaded
+        // }
+        // else
+        // {
             let headers: HttpHeaders = this.setupHeaders();
             this.lg$.log("Headers set are: " + headers.keys() );
 
@@ -87,7 +87,7 @@ export class MemberService {
             //                                         + ", Error: " + error ),
 	   		// 			              () => this.lg$.log("<-- Members read successfully")
 	   		// 		  );
-        }
+        //}
 
 
     }
@@ -339,6 +339,39 @@ export class MemberService {
   		}
 
   		return index;
+    }
+
+    /**********************************************************
+     * Name       : runPaidMembersReport()
+     * Description: Find those members that are paid up between
+     *              the dates specified.
+     * Scope    : External
+     * Params in: Start and end dates of search
+     * Return   : Array of members matching
+     **********************************************************/
+    public runPaidMembersReport( startDate: Date, endDate: Date ):Array<Member>
+	{
+        this.lg$.trace("runPaidMembersReport()", LogType.function);
+        let report: Array<Member>;
+        let datePD: Date;
+
+        report = new Array<Member>();
+
+        for( let member of this.msAllMembers )
+        {
+            this.lg$.trace("Checking member: " + member.name, LogType.message);
+            datePD = this.date$.convertStringToDate( member.paydate, "yyyy/mm/dd", "-" );
+            this.lg$.trace("datePD: " + datePD, LogType.message);
+            this.lg$.trace("startDate: " + startDate, LogType.message);
+            this.lg$.trace("endDate: " + endDate, LogType.message);
+            if( datePD > startDate && datePD < endDate )
+            {
+                report.push(member);
+                this.lg$.trace("Adding member to report.", LogType.message);
+            }
+        }
+
+        return report;
     }
 
     private membersAreLoaded()

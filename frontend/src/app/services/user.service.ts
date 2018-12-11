@@ -234,25 +234,24 @@ export class UserService {
      * Params in  : The user object
      * Return     : None
      **********************************************************/
-    public updateUser( user: User, callback: any )//: Observable<User>
+    public updateUser( member: User, callback: any )//: Observable<User>
     {
-      this.lg$.log("|-> updateUser(" + user.name + ")");
+      this.lg$.log("    |-> saveMember(" + member.name + ")");
+    	var home      = this.com$.getHome();
+    	let memberUrl = home + 'admin/user/';
 
-      var home    = this.com$.getHome();
-      let userUrl = home + '/admin/user/';
-
-    	this.lg$.log("URL: " + userUrl);
+    	this.lg$.log("URL: " + memberUrl);
 
       // Set the headers, including the JWT
       let headers: HttpHeaders = this.com$.setupHeaders();
 
-    	return this.http$.put( userUrl, user, {headers} )
-            .subscribe( data => {
-                                  this.lg$.log("|<- updateUser("+data+")");
-                                },
-                        err => this.com$.handleHttpError(err),              // this.lg$.log("UserService: ERROR updating user on server! [" + err + "]"),
-                        ()  => this.lg$.log("|<- updateUser() - finished")
-                      );
+    	return this.http$.put( memberUrl, member, {headers} )
+  			.subscribe( data => {
+                                    this.lg$.log("    |<- saveMember("+data+")");
+  								},
+  						err => this.lg$.log("MemberService: ERROR saving member to server! [" + err + "]"),
+  						()  => this.lg$.log("    |<- saveMember() - finished")
+  					);
     }
 
     private setUserDetails( user: User )
@@ -265,4 +264,16 @@ export class UserService {
   		this.lg$.log('User login status: ' + this.isAuthenticated );
     }
 
+    private defaultUserFields( user: User ): User
+    {
+        user.address = user.address === null ? '' : user.address;
+        user.dob = user.dob === null ? '1900-1-1' : user.dob;
+        user.email = user.email === null ? '' : user.email;
+        user.phone = user.phone === null ? '' : user.phone;
+        user.enabled = user.enabled === null ? false : user.enabled;
+        user.role = user.role === null ? '' : user.role;
+        
+        return user;
+    }
+    
 }

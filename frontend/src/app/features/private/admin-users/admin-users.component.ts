@@ -106,7 +106,7 @@ export class AdminUsersComponent implements OnInit {
 
     openEditDialog(): void
     {
-      console.log("In open dialog....")
+      console.log("In openEditDialog() .... user is: " + this.user.name);
       this.dialogRef = this.dialog.open(UserEditComponent, {
         //width: '500px',
         //hasBackdrop: true,

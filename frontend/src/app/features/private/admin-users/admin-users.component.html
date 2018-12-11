@@ -36,8 +36,8 @@
       <ng-container  matColumnDef="operations">
           <mat-header-cell *matHeaderCellDef  mat-sort-header> Operations </mat-header-cell>      
           <mat-cell *matCellDef="let user">
-               <i (click)="editUser(user)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Edit" class="glyphicon glyphicon-pencil" style="float:left;padding-left:10px;"> </i>&nbsp;
-              <i (click)="deleteUser(user)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Delete" class="glyphicon glyphicon-trash" style="float:left;padding-left:10px;"></i>
+            <i (click)="editUser(user)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Edit" class="glyphicon glyphicon-pencil" style="float:left;padding-left:10px;"> </i>&nbsp;
+            <i (click)="deleteUser(user)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Delete" class="glyphicon glyphicon-trash" style="float:left;padding-left:10px;"></i>
           </mat-cell>
         </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

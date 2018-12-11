@@ -1,16 +1,41 @@
 import { Injectable } from '@angular/core';
 
+export enum LogType
+{
+  function,
+  message
+}
+
 @Injectable()
 export class LoggerService {
 
   constructor() { }
 
   loghdr = '';  // The header for this instance, to be used in each log message
+  readonly functionPrefix = "|->";
+  readonly messagePrefix  = "   |- ";
+  readonly moduleSpace = 25;
 
-  trace(msg: any) { /*if(process.env.DEBUG)*/ console.log(this.loghdr + msg); }
-  log(msg: any)   { console.log(this.loghdr + msg); }
-  error(msg: any) { console.error(this.loghdr + msg); }
-  warn(msg: any)  { console.warn(this.loghdr + msg); }
+  //trace(msg: any, type?:string) { /*if(process.env.DEBUG)*/ console.log( this.loghdr + msg); }
+  log(msg: any, prefix?:string)   { console.log(this.loghdr + msg); }
+  error(msg: any, prefix?:string) { console.error(this.loghdr + msg); }
+  warn(msg: any, prefix?:string)  { console.warn(this.loghdr + msg); }
+
+  trace(msg: any, type?:LogType) 
+  {
+      switch( type )
+      {
+        case LogType.function: // function call
+          console.log( this.loghdr + this.functionPrefix + msg);
+          break;
+        case LogType.message: // function call
+          console.log( this.loghdr + this.messagePrefix + msg);
+          break;
+        default:
+          console.warn(this.loghdr + msg);
+          break;
+      }
+  }
 
   /**********************************************************
    * Name       : setLogHdr()
@@ -25,19 +50,22 @@ export class LoggerService {
     console.log(indent + '--> Setting log header for [' + moduleName + ']');
     let   i           = 0;
     const depth       = logdepth * 4;
-    const moduleSpace = 25;
     let   hdr         = ' ' +  moduleName;
 
-  // Make sure the field width is the standard, pad if necessary
-  //		if ( hdr.length < moduleSpace )
-  //		{
-  //			let diff = moduleSpace - hdr.length;
-  //			let i = 0;
-  //			for ( i = 0; i < diff; i++ )
-  //			{
-  //				hdr += ' ';
-  //			}
-  //		}
+    if( moduleName.length > this.moduleSpace )
+    {
+      hdr = hdr.slice(0,this.moduleSpace-1)
+    }
+    else if( moduleName.length < this.moduleSpace )
+    {
+      let diff = this.moduleSpace - moduleName.length;
+      for( let i=0; i<diff; i++ )
+      {
+        hdr += ' ';
+      }
+    }
+
+    // Make sure the field width is the standard, pad if necessary
 
     // (1) Set the indentation according to the depth
     for ( i = 0; i < depth; i++ ) {
@@ -45,7 +73,7 @@ export class LoggerService {
     }
 
     // (2) Add on call stack indicator
-    hdr += ' |-';
+    // hdr += ' |-';
 
     this.loghdr = hdr;
   }

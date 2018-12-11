@@ -11,6 +11,7 @@ export class ViewTeamComponent implements OnInit {
 	teamName:string;
 	componentName:string = 'ViewTeam';
 	logdepth:number = 2;
+	count: number = 0;
 
     constructor(private lg$: LoggerService, public d$: SessionDataService) { }
 

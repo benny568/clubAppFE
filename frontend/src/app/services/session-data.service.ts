@@ -341,6 +341,22 @@ export class SessionDataService {
     }
 
     /**********************************************************
+     * Name       : loadTeamMembersByIdByObservable()
+     * Description: Load the current team's details, return an
+     * 				observable to the caller
+     * Scope    : Externally accessible
+     * Params in: team the id of the team in question
+     * Return   : An observable
+     **********************************************************/
+    public loadTeamMembersByIdByObservable( team: number )
+    {
+        let url = this.com$.getHome();
+        console.log("loadTeamMembersByIdByObservable -> [" + url + 'public/teammembers/' + team + "]");
+
+        return this.http$.get( url + 'public/teammembers/' + team );
+    }
+
+    /**********************************************************
      * Name       : loadTeamDetailsByNameByObservable()
      * Description: Load the current team's details, return an
      * 				observable to the caller
@@ -350,7 +366,8 @@ export class SessionDataService {
      **********************************************************/
     public loadTeamDetailsByNameByObservable( teamName:string, indent: number )
     {
-    	var prefix: string = '';
+        var prefix: string = '';
+        let teamId: number;
 
     	for ( var i = 0; i < (indent + 4); i++ )
     	{
@@ -358,10 +375,10 @@ export class SessionDataService {
     	}
         console.log(prefix + "|-->" + "loadTeamDetailsByNameByObservable(" + teamName + ")");
 
-
         // Clear out the TeamMembers array first
         //this.dsCurrentTeam = null;
         var url = this.com$.getHome();
+        console.log("loadTeamDetailsByNameByObservable -> [" + url + 'public/team' + teamName + "]");
 
         return this.http$.get( url + 'public/team/' + teamName );
 

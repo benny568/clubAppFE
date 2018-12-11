@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
     	this.lg$.log("  |-- Data returned, lrFixturesCode: " + this.d$.dsCurrentTeam.lrFixturesCode);
     	this.lg$.log("  |-- Data returned, lrResultsCode: " + this.d$.dsCurrentTeam.lrResultsCode);
     	this.lg$.log("  |-- Data returned, noticeboard: " + this.d$.dsCurrentTeam.noticeboard);
-    	this.d$.loadCurrentTeamMembersByNameByObservable(this.d$.dsCurrentTeam.name, this.logdepth)
+    	this.d$.loadTeamMembersByIdByObservable(this.d$.dsCurrentTeam.id)
 	        .subscribe( data => this.changeToTeamPage( data ),
 						error => this.lg$.log("ERROR: Reading team members from server, team: " + this.d$.dsCurrentTeam.name),
 						()    => this.lg$.log("<-- Team members read successfully for team: " + this.d$.dsCurrentTeam.name)
