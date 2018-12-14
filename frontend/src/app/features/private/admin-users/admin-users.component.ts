@@ -89,8 +89,8 @@ export class AdminUsersComponent implements OnInit {
     }
 
     /**********************************************************
-     * Name       : deleteMember()
-     * Description: Delete the current selected member
+     * Name       : deleteUser()
+     * Description: Delete the current selected user
      * Scope      : Internal
      * Params in  : None
      * Return     :
@@ -98,7 +98,7 @@ export class AdminUsersComponent implements OnInit {
     deleteUser( user: User )
     {
 
-      this.lg$.log("    |-> deleteMember(" + user.name + ")");
+      this.lg$.log("    |-> deleteUser(" + user.name + ")");
       this.user = user;
 
       this.openDelDialog();
@@ -132,7 +132,7 @@ export class AdminUsersComponent implements OnInit {
     openDelDialog(): void
     {
       this.delDialogRef = this.dialog.open(UserDeleteComponent, {
-        data: { user: this.user }
+        data: { user: this.user, paginator: this.paginator, dataSource: this.dataSource }
       });
 
       this.delDialogRef.afterClosed().subscribe(result => {

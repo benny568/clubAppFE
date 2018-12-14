@@ -2,6 +2,7 @@ import { Injectable }    from '@angular/core';
 import { HttpClient,
          HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 import { Observable }   from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -149,7 +150,7 @@ export class UserService {
      * Params in  : The user object
      * Return     : None
      **********************************************************/
-    public deleteUser( user: User, callback: any )
+    public deleteUser( user: User, callback: any, dataSource: any, paginator: any )
     {
       this.lg$.log("    |-> deleteUser(" + user.name + ")");
 
@@ -166,24 +167,25 @@ export class UserService {
     	return this.http$.delete( userUrl, {headers} )
   			.subscribe( data => {
                               this.lg$.log("    |<- deleteUser("+data+")");
-                              callback(user, this.allUsers);
+                              callback(user, dataSource, paginator);
   								          },
         						err => this.com$.handleHttpError(err),                  //this.lg$.log("UserService: ERROR deleting user from server! [" + err + "]"),
         						()  => this.lg$.log("    |<- deleteUser() - finished")
         					);
     }
 
-    public applyUserDelete( user, allUsers )
+    public applyUserDelete( user: User, dataSource: MatTableDataSource<User>, paginator: MatPaginator )
     {
       console.log("** applyUserDelete(" + user.name + ")");
 
       let i = 0;
-      for( let u of allUsers )
+      for( let u of dataSource.data )
       {
         console.log("** Checking user: " + u.name + ", user.id: " + user.userId + ", u.userId: "+ u.userId);
         if( user.userId === u.userId )
         {
-          allUsers.splice(i, 1);
+          dataSource.data.splice(i, 1);
+          dataSource.paginator = paginator;
           console.log("User deleted.");
         }
 
@@ -234,9 +236,9 @@ export class UserService {
      * Params in  : The user object
      * Return     : None
      **********************************************************/
-    public updateUser( member: User, callback: any )//: Observable<User>
+    public updateUser( user: User, callback: any )//: Observable<User>
     {
-      this.lg$.log("    |-> saveMember(" + member.name + ")");
+      this.lg$.log("    |-> updateUser(" + user.name + ")");
     	var home      = this.com$.getHome();
     	let memberUrl = home + 'admin/user/';
 
@@ -245,13 +247,13 @@ export class UserService {
       // Set the headers, including the JWT
       let headers: HttpHeaders = this.com$.setupHeaders();
 
-    	return this.http$.put( memberUrl, member, {headers} )
+    	return this.http$.put( memberUrl, user, {headers} )
   			.subscribe( data => {
-                                    this.lg$.log("    |<- saveMember("+data+")");
-  								},
-  						err => this.lg$.log("MemberService: ERROR saving member to server! [" + err + "]"),
-  						()  => this.lg$.log("    |<- saveMember() - finished")
-  					);
+                              this.lg$.log("    |<- updateUser("+data+")");
+  								          },
+                    err => this.lg$.log("UserService: ERROR saving member to server! [" + err + "]"),
+                    ()  => this.lg$.log("    |<- updateUser() - finished")
+                  );
     }
 
     private setUserDetails( user: User )

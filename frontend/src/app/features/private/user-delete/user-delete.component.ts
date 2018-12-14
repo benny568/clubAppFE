@@ -41,7 +41,7 @@ export class UserDeleteComponent implements OnInit {
 
   onCloseConfirm() {
     this.lg$.trace("-> onCloseConfirm() - delete user [" + this.data.user.userId + "]");
-    this.usr$.deleteUser( this.data.user, this.usr$.applyUserDelete );
+    this.usr$.deleteUser( this.data.user, this.usr$.applyUserDelete, this.data.dataSource, this.data.paginator );
     this.dialogRef.close('Confirm');
   }
   onCloseCancel() {
