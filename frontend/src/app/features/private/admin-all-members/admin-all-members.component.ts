@@ -126,9 +126,7 @@ export class AdminAllMembersComponent implements OnInit {
   openDelDialog(): void
     {
       this.delDialogRef = this.dialog.open(DeleteMemberComponent, {
-        //width: '500px',
-        //hasBackdrop: true,
-        data: { member: this.thisMember, allMembers: this.mbr$.msAllMembers }
+        data: { member: this.thisMember, callback: this.mbr$.applyMemberDelete, dataSource: this.dataSource, paginator: this.paginator }
       });
 
       this.delDialogRef.afterClosed().subscribe(result => {
@@ -141,7 +139,7 @@ export class AdminAllMembersComponent implements OnInit {
       this.addDialogRef = this.dialog.open(AddMemberComponent, {
         //width: '500px',
         //hasBackdrop: true,
-        //data: { member: this.thisMember }
+        //data: { member: this.thisMember, dataSource: this.dataSource, paginator: this.paginator }
       });
 
       this.addDialogRef.afterClosed().subscribe(result => {

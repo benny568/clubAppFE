@@ -121,7 +121,7 @@ export class AdminUsersComponent implements OnInit {
   openAddDialog(): void
     {
       this.addDialogRef = this.dialog.open(AddUserComponent, {
-        data: { user: this.user }
+        data: { user: this.user, dataSource: this.dataSource, paginator: this.paginator }
       });
 
       this.addDialogRef.afterClosed().subscribe(result => {

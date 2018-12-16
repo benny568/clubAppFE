@@ -4,6 +4,7 @@ import { Headers,
          RequestOptions,
          RequestOptionsArgs } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 import { Observable }   from 'rxjs/Observable';
 
@@ -165,7 +166,7 @@ export class MemberService {
      * Params in  : None
      * Return     : 
      **********************************************************/
-    public deleteMember( member:Member, callback )
+    public deleteMember( member:Member, callback, dataSource: MatTableDataSource<Member>, paginator: MatPaginator )
 	{
     	this.lg$.log("    |-> deleteMember(" + member.name + ")");
     	var home      = this.com$.getHome();
@@ -183,7 +184,7 @@ export class MemberService {
     	return this.http$.delete( memberUrl, {headers} )
   			.subscribe( (data: number) => {
                               this.lg$.log("    |<- deleteMember("+data+")");
-                              callback(this.msAllMembers, member, this.msTeamMembers, this.lg$, this);
+                              callback( member, dataSource, paginator );
   								          },
   						err => this.lg$.log("MemberService: ERROR deleting member from server! [" + err + "]"),
   						()  => this.lg$.log("    |<- deleteMember() - finished")
@@ -217,7 +218,27 @@ export class MemberService {
   						err => this.lg$.log("MemberService: ERROR saving member to server! [" + err + "]"),
   						()  => this.lg$.log("    |<- saveMember() - finished")
   					);
-	}
+    }
+    
+
+    public applyMemberDelete( member: Member, dataSource: MatTableDataSource<Member>, paginator: MatPaginator )
+    {
+      console.log("** applyMemberDelete(" + member.name + ")");
+
+      let i = 0;
+      for( let u of dataSource.data )
+      {
+        console.log("** Checking user: " + u.name + ", user.id: " + member.id + ", u.userId: "+ u.id);
+        if( member.id === u.id )
+        {
+          dataSource.data.splice(i, 1);
+          dataSource.paginator = paginator;
+          console.log("Member deleted.");
+        }
+
+        i++;
+      }
+    }
 
     /**********************************************************
      * Name       : applyMemberDel()
@@ -227,7 +248,7 @@ export class MemberService {
      * Params in: None
      * Return   : 
      **********************************************************/
-    public applyMemberDelFromTeam( team: Array<Member>, member: number )
+    public applyMemberDelFromTeam( team: Array<Member>, member: number, dataSource: MatTableDataSource<Member>, paginator: MatPaginator )
 	{
         this.lg$.log("-> applyMemberDelFromTeam("+team+","+member+")");
 

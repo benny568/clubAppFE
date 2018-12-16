@@ -44,7 +44,7 @@ export class DeleteMemberComponent implements OnInit {
   }
 
   onCloseConfirm() {
-    this.mbr$.deleteMember( this.data.member, this.applyMemberDel );
+    this.mbr$.deleteMember( this.data.member, this.data.callback, this.data.dataSource, this.data.paginator );
     this.dialogRef.close('Confirm');
   }
   onCloseCancel() {

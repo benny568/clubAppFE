@@ -64,7 +64,7 @@ export class AddUserComponent implements OnInit {
     this.lg$.trace("onCloseConfirm - this.accStatus=" + this.accStatus);
     this.data.user.enabled = this.accStatus === 'Enabled' ? true : false;
     this.usr$.logUser( this.data.user );
-    this.usr$.addUser( this.data.user, this.usr$.applyUserAdd );
+    this.usr$.addUser( this.data.user, this.usr$.applyUserAdd, this.data.dataSource, this.data.paginator );
     this.dialogRef.close('Confirm');
   }
   onCloseCancel() {

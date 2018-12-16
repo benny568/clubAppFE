@@ -200,12 +200,13 @@ export class UserService {
      * Params in  : The user object
      * Return     : None
      **********************************************************/
-    public addUser( user: User, callback: any )//: Observable<User>
+    public addUser( user: User, callback: any, dataSource: MatTableDataSource<User>, paginator: MatPaginator )//: Observable<User>
     {
       this.lg$.log("|-> addUser(" + user.name + ")");
+      this.lg$.log("|-> addUser(" + dataSource + ")");
 
       var home    = this.com$.getHome();
-      let userUrl = home + '/admin/user/';
+      let userUrl = home + 'admin/user/';
 
     	this.lg$.log("URL: " + userUrl);
 
@@ -214,19 +215,20 @@ export class UserService {
 
     	return this.http$.post( userUrl, user, {headers} )
             .subscribe( data => {
-                                  this.lg$.log("|<- addUser("+data+")");
-                                  callback(user, this.allUsers);
+                                  callback(user, dataSource, paginator);
                                 },
                         err => this.lg$.log("UserService: ERROR adding user to server! [" + err + "]"),
                         ()  => this.lg$.log("|<- addUser() - finished")
             );
     }
 
-    public applyUserAdd( user: User, allUsers: User[] ): void
+    public applyUserAdd( user: User, dataSource: MatTableDataSource<User>, paginator: MatPaginator ): void
     {
       console.log("** applyUserAdd(" + user.name + ")");
 
-      allUsers.push(user);
+      let allusers: User [] = dataSource.data.concat(user);
+      dataSource.data = allusers;
+      dataSource.paginator = paginator;
     }
 
     /**********************************************************

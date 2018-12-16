@@ -128,6 +128,7 @@ export class EditMemberComponent implements OnInit {
 
   getTeamFromName( team: string )
   {
+    this.lg$.trace("getTeamFromName(" + "team" + ")")
     if( team === "None" )
       return 0;
     else
