@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { LoggerService } from '../../../services/logger.service';
 import { CommonService } from './../../../services/common.service';
+import { ErrorService } from '../../../services/error.service';
 import { SessionDataService } from '../../../services/session-data.service';
 import { MemberService } from '../../../services/member.service';
 
@@ -33,6 +34,7 @@ export class AdminMembersComponent implements OnInit {
 
   constructor( private lg$: LoggerService,
                private com$: CommonService,
+               private err$: ErrorService,
                public d$: SessionDataService,
                public mbr$: MemberService,
                private router : Router,
@@ -62,7 +64,10 @@ export class AdminMembersComponent implements OnInit {
   getMembers4team( team: number )
   {
       this.lg$.log("    --> getMembers4team(" + team + ")");
-      this.mbr$.loadCurrentTeamMembersByTeamId( team, this.gotTeamMembers(this.lg$, this.showArray) );
+      this.mbr$.loadCurrentTeamMembersByTeamId( team, this.gotTeamMembers(this.lg$, this.showArray) )
+          .subscribe( (data:Array<Member>) => { this.mbr$.msTeamMembers[team] = data, this.showArray[team] = !this.showArray[team] },
+                      error => this.err$.snackBar.open( "You do not have permissions to perform this action!", 'Error', { duration: this.err$.msgDuration } )
+                    );
   }
 
   /**********************************************************

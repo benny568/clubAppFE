@@ -33,11 +33,11 @@ export class AcademyRegistrationFormComponent implements OnInit {
 	/* ************************************************* */
 
 	constructor( private lg$   : LoggerService,
-			         private com$  : CommonService,
-			         private err$  : ErrorService,
-			         public  ar$   : AcademyRegistrationService,
-			         private router: Router,
-			                 fb    : FormBuilder )
+			     private com$  : CommonService,
+			     private err$  : ErrorService,
+			     public  ar$   : AcademyRegistrationService,
+			     private router: Router,
+			     fb            : FormBuilder )
 	{
 		this.lg$.setLogHdr(this.logdepth, this.componentName);
 		this.lg$.log("** Reg Component constructor called.");

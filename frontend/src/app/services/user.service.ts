@@ -1,15 +1,15 @@
 import { Injectable }    from '@angular/core';
-import { HttpClient,
-         HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 
-import { Observable }   from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { User }          from '../model/site-user';
 import { LoggerService } from '../services/logger.service';
 import { CommonService } from '../services/common.service';
+import { ErrorService }  from '../services/error.service';
 
 @Injectable()
 export class UserService {
@@ -22,8 +22,9 @@ export class UserService {
     roles: string[];
 
 
-    constructor ( private lg$: LoggerService,
+    constructor ( private lg$  : LoggerService,
                   private com$ : CommonService,
+                  private err$ : ErrorService,
                   private http$: HttpClient )
     {
         this.lg$.setLogHdr(this.logdepth, this.componentName);
@@ -31,6 +32,9 @@ export class UserService {
         this.allUsers    = new Array<User>();
         // TODO: read the roles from the db
         this.roles = ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_SECRETARY', 'ROLE_ADMIN'];
+        console.log("*********** CONSTRUCTOR OF " + this.componentName );
+        console.log("Error service: " + this.err$ );
+        this.err$.openAlert("TEST ALERT !!!!!!!")
     }
 
     public setCurrentUser( user: User )
@@ -81,13 +85,11 @@ export class UserService {
 
       this.lg$.log("-->" + "getAllUsers(), loading users from: " + url + '/admin/users/' );
 
-      return this.http$.get<User[]>( url + 'admin/users/', {headers} );
+      return this.http$.get<User[]>( url + 'admin/users/', {headers} )
+        .pipe(
+          catchError(this.err$.handleError)
+        );
     }
-    //   this.lg$.log("-->" + "getAllUsers(), loading users from: " + url + '/admin/users/' );
-    //   this.http$.get( url + 'admin/users/', {headers} )
-    //     .subscribe( (data: User[]) => { this.allUsers = data, this.logUsers(this.allUsers) },
-    //                 error => console.error("ERROR: Reading users from server, Error: " + error )
-    //  				      );
     
     /**********************************************************
      * Name       : logUsers()
@@ -169,7 +171,7 @@ export class UserService {
                               this.lg$.log("    |<- deleteUser("+data+")");
                               callback(user, dataSource, paginator);
   								          },
-        						err => this.com$.handleHttpError(err),                  //this.lg$.log("UserService: ERROR deleting user from server! [" + err + "]"),
+        						err => this.err$.handleError(err),                  //this.lg$.log("UserService: ERROR deleting user from server! [" + err + "]"),
         						()  => this.lg$.log("    |<- deleteUser() - finished")
         					);
     }
@@ -217,7 +219,7 @@ export class UserService {
             .subscribe( data => {
                                   callback(user, dataSource, paginator);
                                 },
-                        err => this.lg$.log("UserService: ERROR adding user to server! [" + err + "]"),
+                        err => this.err$.handleError(err), 
                         ()  => this.lg$.log("|<- addUser() - finished")
             );
     }

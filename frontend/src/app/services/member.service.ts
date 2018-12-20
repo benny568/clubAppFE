@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Headers,
-         RequestOptions,
-         RequestOptionsArgs } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 import { Observable }   from 'rxjs/Observable';
+import { catchError } from 'rxjs/operators';
 
 import { LoggerService, LogType } from '../services/logger.service';
 import { CommonService } from '../services/common.service';
+import { ErrorService } from '../services/error.service';
 import { DateUtilsService } from '../services/date-utils.service';
 import { Member } from '../model/member';
 import { Position } from '../model/position';
@@ -28,6 +27,7 @@ export class MemberService {
 
     constructor( private lg$  : LoggerService,
                  private com$ : CommonService,
+                 private err$ : ErrorService,
                  private date$: DateUtilsService,
                  private http$: HttpClient )
     {
@@ -100,7 +100,7 @@ export class MemberService {
      * Params in  : The team id and a call back to call ehen done
      * Return     : Members in the team
      **********************************************************/
-    public loadCurrentTeamMembersByTeamId( team: number, callback: any )
+    public loadCurrentTeamMembersByTeamId( team: number, callback: any ): Observable<Member[]>
     {
         this.lg$.log("loadCurrentTeamMembersByTeamId()");
 
@@ -119,12 +119,16 @@ export class MemberService {
             this.lg$.log("Headers set are: " + headers.keys() );
 
            this.lg$.log("-->" + "loadCurrentTeamMembersByTeamId(), loading team:" + team );
-           this.http$.get( url + '/admin/team/' + team, {headers} )
-                .subscribe( (data:Array<Member>) => { this.msTeamMembers[team] = data, callback(team) , this.logTeamMembersForTeamId(team) },
-                            error => console.error("ERROR: Reading team members from server, team: " + team
-                                                    + ", Error: " + error ),
-	   					              () => this.lg$.log("<-- Team members read successfully for team: " + team)
-	   				  );
+        //    this.http$.get( url + '/admin/team/' + team, {headers} )
+        //         .subscribe( (data:Array<Member>) => { this.msTeamMembers[team] = data, callback(team) , this.logTeamMembersForTeamId(team) },
+        //                     error => console.error("ERROR: Reading team members from server, team: " + team
+        //                                             + ", Error: " + error ),
+	   	// 				              () => this.lg$.log("<-- Team members read successfully for team: " + team)
+        //                  );
+            return this.http$.get<Member[]>( url + 'admin/team/' + team, {headers} )
+                .pipe(
+                        catchError(this.err$.handleError)
+                    );
         }
 
 

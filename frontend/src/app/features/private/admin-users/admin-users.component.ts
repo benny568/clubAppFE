@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { UserEditComponent } from './../user-edit/user-edit.component';
 import { UserDeleteComponent } from './../user-delete/user-delete.component';
 import { AddUserComponent } from './../add-user/add-user.component';
 
 import { LoggerService } from '../../../services/logger.service';
-import { CommonService } from './../../../services/common.service';
 import { SessionDataService } from '../../../services/session-data.service';
 import { UserService } from '../../../services/user.service';
+import { ErrorService } from '../../../services/error.service';
 
 import { User } from '../../../model/site-user';
 
@@ -31,7 +31,7 @@ export class AdminUsersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'address', 'email', 'phone', 'operations'];
 
   constructor(  private lg$   : LoggerService,
-                private com$  : CommonService,
+                private err$  : ErrorService,
                 public  d$    : SessionDataService,
                 public  usr$  : UserService,
                 private dialog: MatDialog )
@@ -51,7 +51,8 @@ export class AdminUsersComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.usr$.allUsers = results;
-    });
+    },
+    err => this.err$.snackBar.open( "You do not have permissions to perform this action!", 'Error', { duration: this.err$.msgDuration } ));
 
     this.user = new User();
   }
