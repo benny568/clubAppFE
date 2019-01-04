@@ -1,0 +1,28 @@
+<div class="col-md-7">
+    <div class="panel">
+      <div class="panel-heading avenue-heading">
+        <span style="font-weight:bold">{{user$.CurrentUser.name}}</span>
+        <div  style="float:right; align:bottom;">
+          <button type="button" class="btn btn-warning btn-xs" (click)="editProfile()" style="cursor:pointer;" data-toggle="tooltip" data-placement="right">Edit</button>
+        </div>
+      </div>
+      <div class="panel-body avenue-body">
+        <img src='{{user$.CurrentUser.avatar}}' align="left" HSPACE="5" VSPACE="5" width="40%">
+        <div>
+          <span class="avenue-yellow-text">Username: </span>
+          <span style="color:#D1CDCD">{{user$.CurrentUser.name}}</span> <br/>
+          <br/><span class="avenue-yellow-text">Address: </span>
+          <span style="color:#D1CDCD">{{user$.CurrentUser.address}}</span> <br/>
+          <span class="avenue-yellow-text">Phone: </span>
+          <span style="color:#D1CDCD">{{user$.CurrentUser.phone}}</span> <br/>
+          <span class="avenue-yellow-text">Email: </span>
+          <span style="color:#D1CDCD">{{user$.CurrentUser.email}}</span> <br/>
+          <span class="avenue-yellow-text">Date of Birth: </span>
+          <span style="color:#D1CDCD">{{user$.CurrentUser.dob}}</span> <br/>
+          <span class="avenue-yellow-text">Avatar: </span>
+          <span style="color:#D1CDCD">{{user$.CurrentUser.avatar}}</span> <br/>
+        </div>
+
+      </div>
+    </div>
+  </div>

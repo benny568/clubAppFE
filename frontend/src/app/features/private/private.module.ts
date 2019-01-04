@@ -25,6 +25,8 @@ import { FilterMembersPipe } from '../../pipes/filter.pipe';
 import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 import { PaidMembersReportComponent } from './paid-members-report/paid-members-report.component';
 import { PaymentsDueReportComponent } from './payments-due-report/payments-due-report.component';
+import { AdminMyProfileComponent } from './admin-my-profile/admin-my-profile.component';
+import { EditMyProfileComponent } from './edit-my-profile/edit-my-profile.component';
 
 @NgModule({
   imports: [
@@ -55,7 +57,9 @@ import { PaymentsDueReportComponent } from './payments-due-report/payments-due-r
     FilterMembersPipe,
     AdminReportsComponent,
     PaidMembersReportComponent,
-    PaymentsDueReportComponent
+    PaymentsDueReportComponent,
+    AdminMyProfileComponent,
+    EditMyProfileComponent
   ],
   entryComponents: [
     AddMemberComponent,
@@ -63,7 +67,8 @@ import { PaymentsDueReportComponent } from './payments-due-report/payments-due-r
     DeleteMemberComponent,
     UserEditComponent,
     UserDeleteComponent,
-    AddUserComponent
+    AddUserComponent,
+    EditMyProfileComponent
   ]
 })
 export class PrivateModule { }

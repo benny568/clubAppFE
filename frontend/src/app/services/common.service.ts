@@ -16,9 +16,9 @@ export class CommonService {
     loghdr      = "";
     serviceName = 'CommonService';
 
-     constructor () 
+     constructor() 
      {
-        var svr                    = new ServerMode();
+        var svr                = new ServerMode();
         this.CurrentServerMode = svr.getServerMode();
      }
 
@@ -207,8 +207,8 @@ export class CommonService {
         let headers = new HttpHeaders()
           .set('Content-Type', 'application/json')
           .set('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
-        // this.lg$.log("Token read from storage: " + localStorage.getItem('id_token') );
-        // this.lg$.log("Auth Hdr: " + headers.get('Authorization'));
+          console.log("Token read from storage: " + localStorage.getItem('id_token') );
+          console.log("Auth Hdr: " + headers.get('Authorization'));
         return headers;
     }
 

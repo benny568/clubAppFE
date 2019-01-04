@@ -176,7 +176,6 @@ export class AdminMembersComponent implements OnInit {
 
       this.dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
-        //this.animal = result;
       });
     }
 

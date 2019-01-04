@@ -65,6 +65,29 @@ export class UserService {
         this.isAuthenticated = true;
     }
 
+     /**********************************************************
+     * @Name       : getUser()
+     * @Description: Read a given uewer from the server
+     * @Scope      : Externally accessible
+     * @Params     : user: name of the user to retrieve
+     * @Return     : Observable<User>
+     **********************************************************/
+    public getUser( user: string ): Observable<User>
+    {
+      this.lg$.log("getUser()");
+
+      let url = this.com$.getHome();
+
+      let headers: HttpHeaders = this.com$.setupHeaders();
+
+      this.lg$.log("-->" + "getUser(), reading user from: " + url + 'admin/me/' + user );
+
+      return this.http$.get<User>( url + 'admin/me/' + user, {headers} )
+        .pipe(
+          catchError(this.err$.handleError)
+        );
+    }
+
     /**********************************************************
      * @Name       : getAllUsers()
      * @Description: Read the application users from the server
@@ -98,7 +121,7 @@ export class UserService {
      * Params in  : None
      * Return     : None
      **********************************************************/
-    public logUsers(allUsers)
+    public logUsers(allUsers): void
     {
       let i = 0;
       for( let user of allUsers )
@@ -260,7 +283,7 @@ export class UserService {
                   );
     }
 
-    private setUserDetails( user: User )
+    private setUserDetails( user: User ): void
   	{
   		this.lg$.log("-> setUserDetails()");
   		this.CurrentUser = user;
