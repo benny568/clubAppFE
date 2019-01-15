@@ -3,7 +3,6 @@ import { Router,
   ActivatedRoute,
   Params          }    from '@angular/router';
 
-import { MenuItem } from 'primeng/primeng';
 
 import { Media } 			        from '../../model/media';
 import { SessionDataService } from '../../services/session-data.service';
@@ -20,7 +19,7 @@ export class AcademyGalleryComponent implements OnInit {
 	aAlbum : Array<Media>;
 	path : string = '';
 	logdepth:number = 1;
-	private items: MenuItem[];
+	private items; //MenuItem[];
 
 	constructor( private lg$: LoggerService, 
 	             private d$: SessionDataService,
@@ -42,20 +41,21 @@ export class AcademyGalleryComponent implements OnInit {
 		this.aAlbum = new Array<Media>();
 
 
-		this.items = [{
-            label: 'File',
-            items: [
-                {label: 'New', icon: 'fa-plus'},
-                {label: 'Open', icon: 'fa-download'}
-            ]
-        },
-        {
-            label: 'Edit',
-            items: [
-                {label: 'Undo', icon: 'fa-refresh'},
-                {label: 'Redo', icon: 'fa-repeat'}
-            ]
-        }];
+		this.items = [];
+		// [{
+        //     label: 'File',
+        //     items: [
+        //         {label: 'New', icon: 'fa-plus'},
+        //         {label: 'Open', icon: 'fa-download'}
+        //     ]
+        // },
+        // {
+        //     label: 'Edit',
+        //     items: [
+        //         {label: 'Undo', icon: 'fa-refresh'},
+        //         {label: 'Redo', icon: 'fa-repeat'}
+        //     ]
+        // }];
 
 
 		this.route.params.forEach((params: Params) => {

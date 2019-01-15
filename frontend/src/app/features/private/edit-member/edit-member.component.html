@@ -20,7 +20,8 @@
               <input matInput
                     [matDatepicker]="picker"
                     name="dob"
-                    [(ngModel)]="dateOfBirth">
+                    [value]="xdob"
+                    [(ngModel)]="xdob">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
             </mat-form-field>

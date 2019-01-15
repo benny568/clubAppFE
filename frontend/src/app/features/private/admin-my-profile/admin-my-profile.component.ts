@@ -23,7 +23,7 @@ export class AdminMyProfileComponent implements OnInit {
   dialogRef: MatDialogRef<EditMyProfileComponent>;
 
   constructor( private lg$   : LoggerService,
-               private user$ : UserService,
+               public  user$ : UserService,
                private err$  : ErrorService,
                private dialog: MatDialog  ) 
   {
@@ -51,7 +51,7 @@ export class AdminMyProfileComponent implements OnInit {
    * Params in:	None
    * Return:
    **********************************************************/
-  private editProfile()
+  public editProfile()
   {
     this.lg$.log("    |-> editProfile(" + this.user$.CurrentUser.name + ")");
 

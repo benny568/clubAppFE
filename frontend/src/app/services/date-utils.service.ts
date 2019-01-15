@@ -76,7 +76,7 @@ export class DateUtilsService {
   public convertDateToString( dob: Date ): string
   {
     console.log("convertDateToString("+dob+")");
-    let day:number   = dob.getUTCDate()+1;
+    let day:number   = dob.getUTCDate();
     console.log("Day: "+day);
     let month:number = dob.getUTCMonth()+1;
     console.log("Month: "+month);
@@ -129,75 +129,6 @@ export class DateUtilsService {
     console.log("Returning date of: " + date );
 
     return date;
-  }
-
-  /**********************************************************
-   * Name       : convertDateToSlashDelimitedString()
-   * Description: Convert a Date type to the string value of
-   *              dd-mm-yy as this is what the server expects
-   * Scope    : Externally accessible
-   * Params in: Date
-   * Return   : The string format of the date.
-   **********************************************************/
-  public convertDateToSlashDelimitedString( dob: Date ): string
-  {
-    let day:number   = dob.getUTCDate()+1;
-    let month:number = dob.getUTCMonth()+1;
-    let year:number  = dob.getUTCFullYear();
-
-    let sDate = (day < 10 ? ("0"+day) : day) + "/" + (month < 10 ? ("0"+month) : month ) + "/" +  year;
-    // this.lg$.log("The date built is: " + birthday );
-    // this.lg$.log("The day is: " + day );
-    // this.lg$.log("The month is: " + month );
-
-    return sDate;
-  }
-
-  /**********************************************************
-   * Name       : convertDateToDashDelimitedString()
-   * Description: Convert a Date type to the string value of
-   *              dd-mm-yy as this is what the server expects
-   * Scope    : Externally accessible
-   * Params in: Date
-   * Return   : The string format of the date.
-   **********************************************************/
-  public convertDateToDashDelimitedString( dob: Date ): string
-  {
-    let day:number   = dob.getUTCDate();
-    let month:number = dob.getUTCMonth()+1;
-    let year:number  = dob.getUTCFullYear();
-
-    console.log("common service.convertDateToDashDelimitedString()...")
-
-    let sDate = (day < 10 ? ("0"+day) : day) + "-" + (month < 10 ? ("0"+month) : month ) + "-" +  year;
-    // this.lg$.log("The date built is: " + birthday );
-    // this.lg$.log("The day is: " + day );
-    // this.lg$.log("The month is: " + month );
-    console.log("Returning a date of: " + sDate);
-
-    return sDate;
-  }
-
-  /**********************************************************
-   * Name       : convertSlashDateStringToDashDateString()
-   * Description: Convert a string representation of a date
-   *              delimited by '/' and replace the '/' with
-   *              '-' delimiters.
-   * Scope    : Externally accessible
-   * Params in: string
-   * Return   : The modified string
-   **********************************************************/
-  public convertSlashDateStringToDashDateString( inDate: string ): string
-  {
-    if( inDate != null && inDate != '' )
-    {
-      let dateParts = inDate.split("/");
-      // for( let i=0; i<dateParts.length; i++ )
-      //   this.lg$.trace("Date part [" + i + "] + " + dateParts[i]);
-      return dateParts[1] + "-" + dateParts[0]+ "-" + dateParts[2];
-    }
-    else
-      return '1-1-1900';
   }
 
 }

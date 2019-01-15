@@ -22,6 +22,7 @@ export class EditMyProfileComponent implements OnInit {
   xdob         : Date;
   Statuses     : string[];
   accStatus    : string;
+  startDate    : Date = new Date();
 
   constructor( private lg$     : LoggerService,
                private user$   : UserService,
@@ -51,10 +52,7 @@ export class EditMyProfileComponent implements OnInit {
 
     // Convert the date
     this.lg$.trace("DOB beforehand: " + this.data.user.dob == null ? '' :this.data.user.dob);
-    //this.lg$.trace("Transformed date: " + this.date$.convertSlashDateStringToDashDateString(this.data.user.dob));
-    //this.xdob = new Date(this.date$.convertSlashDateStringToDashDateString(this.data.user.dob == null ? '' :this.data.user.dob));
     this.xdob = new Date( this.date$.convertStringToDate( this.data.user.dob, "dd/mm/yyyy", "-") );
-    //this.xdob = new Date( this.data.user.dob);
     this.lg$.trace("Transformed date: " + this.xdob );
 
     // Role
@@ -70,7 +68,7 @@ export class EditMyProfileComponent implements OnInit {
   }
 
   onCloseConfirm() {
-    this.lg$.trace("-> onCloseConfirm()");
+    this.lg$.trace("-> onCloseConfirm(" + this.xdob + ")");
     this.data.user.dob = this.date$.convertDateToString( this.xdob );
     this.lg$.trace("onCloseConfirm - this.data.user.dob=" + this.data.user.dob);
     this.data.user.enabled = this.accStatus === 'Enabled' ? true : false;

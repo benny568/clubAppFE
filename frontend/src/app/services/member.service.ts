@@ -16,7 +16,7 @@ import { Position } from '../model/position';
 
 @Injectable()
 export class MemberService {
-    serviceName: string  = "MemberService";
+    serviceName: string  = 'MemberService';
     logdepth    : number = 3;
 
     msTeamMembers  : Array<any>;
@@ -65,28 +65,28 @@ export class MemberService {
      **********************************************************/
     public getAllMembers( callback: any ): Observable<Member[]>
     {
-        this.lg$.log("getAllMembers()");
+        this.lg$.log('getAllMembers()');
 
         let url = this.com$.getHome();
 
         // if ( this.membersAreLoaded() )
         // {
-        // 	this.lg$.log("    |- Members already loaded..");
+        // 	this.lg$.log('    |- Members already loaded..');
         // 	return; // Already loaded
         // }
         // else
         // {
             let headers: HttpHeaders = this.setupHeaders();
-            this.lg$.log("Headers set are: " + headers.keys() );
+            this.lg$.log('Headers set are: ' + headers.keys() );
 
-            this.lg$.log("-->" + "getAllMembers()" );
+            this.lg$.log('-->' + 'getAllMembers()' );
             return this.http$.get<Member[]>( url + 'admin/members/', {headers} );
 
             // this.http$.get( url + 'admin/members/', {headers} )
             //     .subscribe( (data:Array<Member>) => { this.msAllMembers = data, callback() },
-            //                 error => console.error("ERROR: Reading members from server"
-            //                                         + ", Error: " + error ),
-	   		// 			              () => this.lg$.log("<-- Members read successfully")
+            //                 error => console.error('ERROR: Reading members from server'
+            //                                         + ', Error: ' + error ),
+	   		// 			              () => this.lg$.log('<-- Members read successfully')
 	   		// 		  );
         //}
 
@@ -102,13 +102,13 @@ export class MemberService {
      **********************************************************/
     public loadCurrentTeamMembersByTeamId( team: number, callback: any ): Observable<Member[]>
     {
-        this.lg$.log("loadCurrentTeamMembersByTeamId()");
+        this.lg$.log('loadCurrentTeamMembersByTeamId()');
 
         let url = this.com$.getHome();
 
         if ( this.teamMembersAreLoaded( team ) )
         {
-        	this.lg$.log("    |- Team already loaded..");
+        	this.lg$.log('    |- Team already loaded..');
         	return; // Already loaded
         }
         else
@@ -116,14 +116,14 @@ export class MemberService {
 
 
             let headers: HttpHeaders = this.setupHeaders();
-            this.lg$.log("Headers set are: " + headers.keys() );
+            this.lg$.log('Headers set are: ' + headers.keys() );
 
-           this.lg$.log("-->" + "loadCurrentTeamMembersByTeamId(), loading team:" + team );
+           this.lg$.log('-->' + 'loadCurrentTeamMembersByTeamId(), loading team:' + team );
         //    this.http$.get( url + '/admin/team/' + team, {headers} )
         //         .subscribe( (data:Array<Member>) => { this.msTeamMembers[team] = data, callback(team) , this.logTeamMembersForTeamId(team) },
-        //                     error => console.error("ERROR: Reading team members from server, team: " + team
-        //                                             + ", Error: " + error ),
-	   	// 				              () => this.lg$.log("<-- Team members read successfully for team: " + team)
+        //                     error => console.error('ERROR: Reading team members from server, team: ' + team
+        //                                             + ', Error: ' + error ),
+	   	// 				              () => this.lg$.log('<-- Team members read successfully for team: ' + team)
         //                  );
             return this.http$.get<Member[]>( url + 'admin/team/' + team, {headers} )
                 .pipe(
@@ -143,22 +143,22 @@ export class MemberService {
      **********************************************************/
     public addMember( member: Member, callback )
 	{
-      this.lg$.log("    |-> addMember(" + member.name + ")");
-    	var home      = this.com$.getHome();
+      this.lg$.log('    |-> addMember(' + member.name + ')');
+    	let home      = this.com$.getHome();
     	let memberUrl = home + '/admin/member/';
 
-        this.lg$.log("URL: " + memberUrl);
+        this.lg$.log('URL: ' + memberUrl);
 
         // Set the headers, including the JWT
         let headers: HttpHeaders = this.setupHeaders();
 
         return this.http$.post( memberUrl, member, {headers} )
             .subscribe( data => {
-                                  this.lg$.log("    |<- addMember("+data+")");
+                                  this.lg$.log('    |<- addMember('+data+')');
                                   callback(this.msAllMembers, member, this.msTeamMembers, this.lg$, this);
                                 },
-                        err => this.lg$.log("MemberService: ERROR adding member to server! [" + err + "]"),
-                        ()  => this.lg$.log("    |<- addMember() - finished")
+                        err => this.lg$.log('MemberService: ERROR adding member to server! [' + err + ']'),
+                        ()  => this.lg$.log('    |<- addMember() - finished')
             );
 
     }
@@ -172,11 +172,11 @@ export class MemberService {
      **********************************************************/
     public deleteMember( member:Member, callback, dataSource: MatTableDataSource<Member>, paginator: MatPaginator )
 	{
-    	this.lg$.log("    |-> deleteMember(" + member.name + ")");
-    	var home      = this.com$.getHome();
+    	this.lg$.log('    |-> deleteMember(' + member.name + ')');
+    	let home      = this.com$.getHome();
     	let memberUrl = home + '/admin/member/' + member.id;
 
-    	this.lg$.log("URL: " + memberUrl);
+    	this.lg$.log('URL: ' + memberUrl);
 
         // Set the headers, including the JWT
         let headers: HttpHeaders = this.setupHeaders();
@@ -187,11 +187,11 @@ export class MemberService {
 
     	return this.http$.delete( memberUrl, {headers} )
   			.subscribe( (data: number) => {
-                              this.lg$.log("    |<- deleteMember("+data+")");
+                              this.lg$.log('    |<- deleteMember('+data+')');
                               callback( member, dataSource, paginator );
   								          },
-  						err => this.lg$.log("MemberService: ERROR deleting member from server! [" + err + "]"),
-  						()  => this.lg$.log("    |<- deleteMember() - finished")
+  						err => this.lg$.log('MemberService: ERROR deleting member from server! [' + err + ']'),
+  						()  => this.lg$.log('    |<- deleteMember() - finished')
   					);
     }
 
@@ -206,38 +206,38 @@ export class MemberService {
      **********************************************************/
     public saveMember( member:Member )
 	{
-    	this.lg$.log("    |-> saveMember(" + member.name + ")");
-    	var home      = this.com$.getHome();
+    	this.lg$.log('    |-> saveMember(' + member.name + ')');
+    	let home      = this.com$.getHome();
     	let memberUrl = home + 'admin/member/';
 
-    	this.lg$.log("URL: " + memberUrl);
+    	this.lg$.log('URL: ' + memberUrl);
 
       // Set the headers, including the JWT
       let headers: HttpHeaders = this.setupHeaders();
 
     	return this.http$.put( memberUrl, member, {headers} )
   			.subscribe( data => {
-                                    this.lg$.log("    |<- saveMember("+data+")");
+                                    this.lg$.log('    |<- saveMember('+data+')');
   								},
-  						err => this.lg$.log("MemberService: ERROR saving member to server! [" + err + "]"),
-  						()  => this.lg$.log("    |<- saveMember() - finished")
+  						err => this.lg$.log('MemberService: ERROR saving member to server! [' + err + ']'),
+  						()  => this.lg$.log('    |<- saveMember() - finished')
   					);
     }
     
 
     public applyMemberDelete( member: Member, dataSource: MatTableDataSource<Member>, paginator: MatPaginator )
     {
-      console.log("** applyMemberDelete(" + member.name + ")");
+      console.log('** applyMemberDelete(' + member.name + ')');
 
       let i = 0;
       for( let u of dataSource.data )
       {
-        console.log("** Checking user: " + u.name + ", user.id: " + member.id + ", u.userId: "+ u.id);
+        console.log('** Checking user: ' + u.name + ', user.id: ' + member.id + ', u.userId: '+ u.id);
         if( member.id === u.id )
         {
           dataSource.data.splice(i, 1);
           dataSource.paginator = paginator;
-          console.log("Member deleted.");
+          console.log('Member deleted.');
         }
 
         i++;
@@ -254,16 +254,16 @@ export class MemberService {
      **********************************************************/
     public applyMemberDelFromTeam( team: Array<Member>, member: number, dataSource: MatTableDataSource<Member>, paginator: MatPaginator )
 	{
-        this.lg$.log("-> applyMemberDelFromTeam("+team+","+member+")");
+        this.lg$.log('-> applyMemberDelFromTeam('+team+','+member+')');
 
-  		var index:number = this.findMemberIndexFromTeam( team, member );
+  		let index:number = this.findMemberIndexFromTeam( team, member );
 
   		if ( index === -1 )
   		{
   			return;
   		} else if ( index > -1 )
   		{   // Delete the member at index
-              this.lg$.log("Removing member from team..");
+              this.lg$.log('Removing member from team..');
   		    team.splice( index, 1 );
   		}
 	}
@@ -284,14 +284,14 @@ export class MemberService {
   			//getMembers4team(member.team);
   		}
 
-  		var index = this.findMemberIndex( this.msTeamMembers[member.team], member.id );
+  		let index = this.findMemberIndex( this.msTeamMembers[member.team], member.id );
 
   		if ( index === -1 )
   		{// Add the member if it doesn't exits
   		    members[member.team].push( member );
   		} else if ( index > -1 )
   		{
-  			//log.debug(loghdr + "###### ERROR: applyMemberAdd - member not found!");
+  			//log.debug(loghdr + '###### ERROR: applyMemberAdd - member not found!');
   		}
 	}
 
@@ -305,21 +305,21 @@ export class MemberService {
      **********************************************************/
     public findMemberIndex( members: Array<Member>, memberId: number )
 	{
-        this.lg$.log("findMemberIndex - id: " + memberId);
-		var index = -1;
+        this.lg$.log('findMemberIndex - id: ' + memberId);
+		let index = -1;
 
-        for(var c=0; c<members.length; c++)
-            this.lg$.log("---- "+c+": "+members[c].name + ", "+ members[c].id);
+        for(let c=0; c<members.length; c++)
+            this.lg$.log('---- '+c+': '+members[c].name + ', '+ members[c].id);
 
 		if ( typeof members !== undefined )
 		{
-			for ( var i = 0; i < members.length; i++ )
+			for ( let i = 0; i < members.length; i++ )
 			{
                 if( members[i] !== undefined && members[i] !== null ) // If it's not empty
                 {
                     if ( members[i].id === memberId )
                     {
-                        this.lg$.log("....Found member to remove, index: " + i);
+                        this.lg$.log('....Found member to remove, index: ' + i);
                         index = i;
                         break;
                     }
@@ -340,22 +340,22 @@ export class MemberService {
      **********************************************************/
     public findMemberIndexFromTeam( members: Array<Member>, memberId: number )
 	{
-      this.lg$.log("findMemberIndex - id: " + memberId);
-		  var index = -1;
+      this.lg$.log('findMemberIndex - id: ' + memberId);
+		  let index = -1;
 
-      for(var c=0; c<members.length; c++)
-            this.lg$.log("---- "+c+": "+members[c] + ", "+ c);
+      for(let c=0; c<members.length; c++)
+            this.lg$.log('---- '+c+': '+members[c] + ', '+ c);
 
   		if ( typeof members !== undefined )
   		{
-  			for ( var i = 0; i < members.length; i++ )
+  			for ( let i = 0; i < members.length; i++ )
   			{
                   if( members[i] !== undefined && members[i] !== null ) // If it's not empty
                   {
                       let mem: Member = members[i];
                       if ( mem.id === memberId )
                       {
-                          this.lg$.log("....Found member to remove, index: " + i);
+                          this.lg$.log('....Found member to remove, index: ' + i);
                           index = i;
                           break;
                       }
@@ -376,7 +376,7 @@ export class MemberService {
      **********************************************************/
     public runPaidMembersReport( startDate: Date, endDate: Date ):Array<Member>
 	{
-        this.lg$.trace("runPaidMembersReport()", LogType.function);
+        this.lg$.trace('runPaidMembersReport()', LogType.function);
         let report: Array<Member>;
         let datePD: Date;
 
@@ -384,15 +384,15 @@ export class MemberService {
 
         for( let member of this.msAllMembers )
         {
-            this.lg$.trace("Checking member: " + member.name, LogType.message);
-            datePD = this.date$.convertStringToDate( member.paydate, "yyyy/mm/dd", "-" );
-            this.lg$.trace("datePD: " + datePD, LogType.message);
-            this.lg$.trace("startDate: " + startDate, LogType.message);
-            this.lg$.trace("endDate: " + endDate, LogType.message);
+            this.lg$.trace('Checking member: ' + member.name, LogType.message);
+            datePD = this.date$.convertStringToDate( member.paydate, 'yyyy/mm/dd', '-' );
+            this.lg$.trace('datePD: ' + datePD, LogType.message);
+            this.lg$.trace('startDate: ' + startDate, LogType.message);
+            this.lg$.trace('endDate: ' + endDate, LogType.message);
             if( datePD > startDate && datePD < endDate )
             {
                 report.push(member);
-                this.lg$.trace("Adding member to report.", LogType.message);
+                this.lg$.trace('Adding member to report.', LogType.message);
             }
         }
 
@@ -401,7 +401,7 @@ export class MemberService {
 
     private membersAreLoaded()
     {
-        this.lg$.log("    |--> membersAreLoaded()");
+        this.lg$.log('    |--> membersAreLoaded()');
         let loaded: boolean = false;
 
         if( this.msAllMembers.length > 0 )
@@ -409,13 +409,13 @@ export class MemberService {
             loaded = true;
         }
 
-        this.lg$.log("    |- <-- membersAreLoaded("+loaded+")");
+        this.lg$.log('    |- <-- membersAreLoaded('+loaded+')');
         return loaded;
     }
 
     private teamMembersAreLoaded( team: number )
     {
-        this.lg$.log("    |--> teamMembersAreLoaded()");
+        this.lg$.log('    |--> teamMembersAreLoaded()');
         let loaded: boolean = false;
 
         if( this.msTeamMembers[team] > 0 )
@@ -424,18 +424,18 @@ export class MemberService {
             this.logTeamMembersForTeamId( team );
         }
 
-        this.lg$.log("    |- <-- teamMembersAreLoaded("+loaded+")");
+        this.lg$.log('    |- <-- teamMembersAreLoaded('+loaded+')');
         return loaded;
     }
 
     private logTeamMembersForTeamId( teamId: number )
     {
-        this.lg$.log("logTeamMembersForTeamId(" + teamId + ")");
-        this.lg$.log("Number of members: " + this.msTeamMembers[teamId].length);
+        this.lg$.log('logTeamMembersForTeamId(' + teamId + ')');
+        this.lg$.log('Number of members: ' + this.msTeamMembers[teamId].length);
         for ( let i = 0; i < this.msTeamMembers[teamId].length; i++ )
     		{
-                this.lg$.log("-- [" + i + "]: " + this.msTeamMembers[teamId][i].name);
-                this.lg$.log("-- [" + i + "]: " + this.msTeamMembers[teamId][i].dob);
+                this.lg$.log('-- [' + i + ']: ' + this.msTeamMembers[teamId][i].name);
+                this.lg$.log('-- [' + i + ']: ' + this.msTeamMembers[teamId][i].dob);
     		}
     }
 
@@ -444,8 +444,8 @@ export class MemberService {
         let headers = new HttpHeaders()
           .set('Content-Type', 'application/json')
           .set('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
-        this.lg$.log("Token read from storage: " + localStorage.getItem('id_token') );
-        this.lg$.log("Auth Hdr: " + headers.get('Authorization'));
+        this.lg$.log('Token read from storage: ' + localStorage.getItem('id_token') );
+        this.lg$.log('Auth Hdr: ' + headers.get('Authorization'));
         return headers;
     }
 }

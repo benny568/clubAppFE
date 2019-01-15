@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { LoggerService }        from '../services/logger.service';
 
-/* PrimeNG */
-import { MenuModule, MenuItem } from 'primeng/primeng';
 
 /* Utility Modules */
 import { DisplayUtilitiesModule } from '../display-utilities/display-utilities.module';

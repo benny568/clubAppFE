@@ -58,7 +58,7 @@ export class UserEditComponent implements OnInit {
     // Convert the date
     this.lg$.trace("DOB beforehand: " + this.data.user.dob == null ? '' :this.data.user.dob);
     this.lg$.trace("Transformed date: " + this.parseDate(this.data.user.dob));
-    this.xdob = new Date(this.parseDate(this.data.user.dob == null ? '' :this.data.user.dob));
+    this.xdob = new Date( this.date$.convertStringToDate( this.data.user.dob, "dd/mm/yyyy", "-") );
 
     // Role
     this.lg$.trace("User role currently set to: " + this.data.user.role == null ? '' :this.data.user.role );
@@ -74,6 +74,7 @@ export class UserEditComponent implements OnInit {
   }
 
   onCloseConfirm() {
+    this.lg$.trace("-> onCloseConfirm(" + this.xdob + ")");
     this.data.user.dob = this.date$.convertDateToString( this.xdob );
     this.lg$.trace("onCloseConfirm - this.data.user.dob=" + this.data.user.dob);
     this.data.user.enabled = this.accStatus === 'Enabled' ? true : false;
