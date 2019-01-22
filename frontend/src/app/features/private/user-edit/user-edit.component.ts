@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
+import * as moment from 'moment';
+
 import { LoggerService } from '../../../services/logger.service';
 import { CommonService } from './../../../services/common.service';
 import { SessionDataService } from '../../../services/session-data.service';
@@ -36,6 +38,7 @@ export class UserEditComponent implements OnInit {
                @Inject(MAT_DIALOG_DATA) public data: any )
   {
     this.lg$.setLogHdr(this.logdepth, this.componentName);
+    this.startDate.setUTCHours(0,0,0);
   }
 
   ngOnInit() {
@@ -49,15 +52,14 @@ export class UserEditComponent implements OnInit {
       //this.lg$.trace("Pushing: " + role);
       this.options.push( role );
     }
-    //this.lg$.trace("Options has [" + this.options.length + "] elements");
+    // this.lg$.trace("Options has [" + this.options.length + "] elements");
 
     this.Statuses = new Array<string>();
     this.Statuses.push("Disabled");
     this.Statuses.push("Enabled");
 
     // Convert the date
-    this.lg$.trace("DOB beforehand: " + this.data.user.dob == null ? '' :this.data.user.dob);
-    this.lg$.trace("Transformed date: " + this.parseDate(this.data.user.dob));
+    this.lg$.trace("#### ngOnInit() ##### Transformed date: " + this.parseDate(this.data.user.dob));
     this.xdob = new Date( this.date$.convertStringToDate( this.data.user.dob, "dd/mm/yyyy", "-") );
 
     // Role
@@ -76,7 +78,6 @@ export class UserEditComponent implements OnInit {
   onCloseConfirm() {
     this.lg$.trace("-> onCloseConfirm(" + this.xdob + ")");
     this.data.user.dob = this.date$.convertDateToString( this.xdob );
-    this.lg$.trace("onCloseConfirm - this.data.user.dob=" + this.data.user.dob);
     this.data.user.enabled = this.accStatus === 'Enabled' ? true : false;
     this.usr$.logUser( this.data.user );
     this.usr$.updateUser( this.data.user, null );
@@ -89,11 +90,10 @@ export class UserEditComponent implements OnInit {
 
   private parseDate(dbDate: string): string
   {
+    this.lg$.log("parseDate(" + dbDate + ")");
     if( dbDate != null && dbDate != '' )
     {
-      let dateParts = dbDate.split("/");
-      // for( let i=0; i<dateParts.length; i++ )
-      //   this.lg$.trace("Date part [" + i + "] + " + dateParts[i]);
+      let dateParts = dbDate.split("-");
       return dateParts[1] + "-" + dateParts[0]+ "-" + dateParts[2];
     }
     else

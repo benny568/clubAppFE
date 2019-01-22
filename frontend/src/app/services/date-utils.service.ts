@@ -66,7 +66,7 @@ export class DateUtilsService {
   // formatDate(toDateStr('2017-07-04')); // 07/04/17
  
   /**********************************************************
-   * Name       : convertDate()
+   * Name       : convertDateToString()
    * Description: Convert a Date type to the string value of
    *              dd-mm-yy as this is what the server expects
    * Scope    : Externally accessible
@@ -75,18 +75,19 @@ export class DateUtilsService {
    **********************************************************/
   public convertDateToString( dob: Date ): string
   {
+    dob.setUTCHours(0,0,0); // Set the timezone to UTC
     console.log("convertDateToString("+dob+")");
-    let day:number   = dob.getUTCDate();
+    let day:number  = dob.getUTCDate();
     console.log("Day: "+day);
-    let month:number = dob.getUTCMonth()+1;
+    let month:number = dob.getUTCMonth() + 1; // Month is zero based
     console.log("Month: "+month);
     let year:number  = dob.getUTCFullYear();
     console.log("Year: "+year);
 
     let birthday: string = (day < 10 ? ("0"+(day)) : (day)) + "-" + (month < 10 ? ("0"+month) : month ) + "-" +  year;
-    // this.lg$.log("The date built is: " + birthday );
-    // this.lg$.log("The day is: " + day );
-    // this.lg$.log("The month is: " + month );
+    console.log("The date built is: " + birthday );
+    console.log("The day is: " + day );
+    console.log("The month is: " + month );
 
     return birthday;
   }
@@ -100,7 +101,7 @@ export class DateUtilsService {
    **********************************************************/
   public convertStringToDate( dob: string, format: string, delimitor: string ): Date
   {
-    console.log("commonService --> convertStringToDate("+dob+", "+"\""+format+"\""+", \""+delimitor+"\""+")")
+    console.log("DateUtilsService --> convertStringToDate("+dob+", "+"\""+format+"\""+", \""+delimitor+"\""+")")
     let format_parts: String[] = format.split("/", 3);
     let dateParts: String[] = dob.split(delimitor, 3);
     let day: number = 0;
@@ -108,6 +109,8 @@ export class DateUtilsService {
     let year: number = 0;
     let i: number = 0;
     let date:Date = new Date();
+
+    date.setUTCHours(0,0,0); // Set the timezone to UTC
 
     for( let part of format_parts )
     {
