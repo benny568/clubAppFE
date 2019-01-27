@@ -29,6 +29,7 @@
     "@covalent/highlight": "^1.0.1",
     "@covalent/http": "^1.0.1",
     "@covalent/markdown": "^1.0.1",
+    "angular2-jwt": "^0.2.3",
     "core-js": "^2.5.7",
     "hammerjs": "^2.0.8",
     "list-files-in-dir": "^0.1.5",

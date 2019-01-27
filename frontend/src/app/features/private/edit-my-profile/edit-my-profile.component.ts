@@ -36,6 +36,8 @@ export class EditMyProfileComponent implements OnInit {
   ngOnInit() {
     this.myControl = new FormControl();
 
+    this.xdob.setUTCHours(0,0,0);
+
     // setup up the drop-down to select a role
     this.options = new Array<string>();
     this.options.push("None"); // 1st option is no role

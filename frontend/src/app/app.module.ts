@@ -48,6 +48,7 @@ import { NewsComponent } from './news/news.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
 import { PhotosComponent } from './photos/photos.component';
 import { VideosComponent } from './videos/videos.component';
+import { FacebookFeedComponent } from './facebook-feed/facebook-feed.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { VideosComponent } from './videos/videos.component';
     PhotosComponent,
     VideosComponent,
     VisitorCountComponent,
-    CookieConsentComponent
+    CookieConsentComponent,
+    FacebookFeedComponent
   ],
   entryComponents: [CookieConsentComponent],
   imports        : [

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { CookieConsentComponent } from './../cookie-consent/cookie-consent.component';
+import { FacebookFeedComponent } from '../facebook-feed/facebook-feed.component';
 
 import { LoggerService } from '../services/logger.service';
 import { SessionDataService } from '../services/session-data.service';
