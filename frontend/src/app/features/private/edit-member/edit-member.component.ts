@@ -79,6 +79,7 @@ export class EditMemberComponent implements OnInit {
     this.lg$.log("Position value is: " + this.data.member.position );
     this.lg$.log("Position2 value is: " + this.data.member.position2 );
     this.lg$.log("Position3 value is: " + this.data.member.position3 );
+    this.lg$.log("academyinfo: " + this.data.member.academyinfo );
     this.lg$.log("Date of birth: " + this.data.member.dob )
 
     this.xdob = new Date( this.date$.convertStringToDate( this.data.member.dob, "dd/mm/yyyy", "-") );
@@ -119,6 +120,7 @@ export class EditMemberComponent implements OnInit {
     this.lg$.log(this.logPrefix + "position   : " + this.data.member.position );
     this.lg$.log(this.logPrefix + "position2  : " + this.data.member.position2 );
     this.lg$.log(this.logPrefix + "position3  : " + this.data.member.position3 );
+    this.lg$.log(this.logPrefix + "academyinfo: " + this.data.member.academyinfo );
     this.dialogRef.close('Confirm');
     this.logdepth -= 2;
     this.lg$.trace("<- onCloseConfirm()");

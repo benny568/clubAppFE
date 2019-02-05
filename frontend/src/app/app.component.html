@@ -203,10 +203,10 @@
               <li><a href="http://www.teamwearireland.ie/avenue-united-fc-2018-1379-c.asp"><i class="fa fa-shopping-cart"></i> Merchandise</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown" *ngIf="user$.isAuthenticated">
+              <li class="dropdown" *ngIf="auth$.isLoggedIn()">
                   <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                      <li><a routerLink="/adminHome"><i class="fa fa-home"></i> Admin Home</a></li>
+                      <li *ngIf="auth$.isLoggedIn()"><a routerLink="/adminHome"><i class="fa fa-home"></i> Admin Home</a></li>
                       <li><a routerLink="/adminOverview"><i class="fas fa-users-class"></i> Overview</a></li>
                       <li><a routerLink="/adminTutorials"><i class="fa fa-book"></i> Tutorials</a></li>
                       <li><a routerLink="/adminMembers"><i class="fas fa-child"></i> Members</a></li>
@@ -231,8 +231,8 @@
               <li class="dropdown">
                   <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                      <li><a routerLink="/login" *ngIf="!user$.isAuthenticated"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                      <li><a (click)="logout()" *ngIf="user$.isAuthenticated"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                      <li><a routerLink="/login" *ngIf="!auth$.isLoggedIn()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                      <li><a (click)="logout()" *ngIf="auth$.isLoggedIn()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                   </ul>
               </li>
           </ul>

@@ -13,6 +13,7 @@ class User {
     dob     : string;
     avatar  : string;
     role    : string;
+    permissions: string [];
     enabled : boolean;
     //roles   : ArrayLike<string>;
     // authorities:ArrayLike<string>;

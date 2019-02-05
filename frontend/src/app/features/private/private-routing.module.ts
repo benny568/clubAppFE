@@ -12,16 +12,17 @@ import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 import { AdminMyProfileComponent } from './admin-my-profile/admin-my-profile.component';
 import { PaidMembersReportComponent } from './paid-members-report/paid-members-report.component';
 import { PaymentsDueReportComponent } from './payments-due-report/payments-due-report.component';
+import { AuthGaurd } from '../../services/auth-gaurd.service';
 
 const routes: Routes = [
   { path: '', component: PrivateComponent },
   { path: 'adminHome', component: AdminHomeComponent },
   { path: 'adminOverview', component: AdminOverviewComponent },
   { path: 'adminTutorials', component: AdminTutorialsComponent },
-  { path: 'adminMembers', component: AdminMembersComponent },
-  { path: 'adminAllMembers', component: AdminAllMembersComponent },
-  { path: 'adminUsers', component: AdminUsersComponent },
-  { path: 'adminReports', component: AdminReportsComponent },
+  { path: 'adminMembers', component: AdminMembersComponent, canActivate: [ AuthGaurd] },
+  { path: 'adminAllMembers', component: AdminAllMembersComponent, canActivate: [ AuthGaurd] },
+  { path: 'adminUsers', component: AdminUsersComponent, canActivate: [ AuthGaurd] },
+  { path: 'adminReports', component: AdminReportsComponent, canActivate: [ AuthGaurd] },
   { path: 'adminMyProfile', component: AdminMyProfileComponent },
   { path: 'paidMembersReport', component: PaidMembersReportComponent },
   { path: 'paymentsDueReport', component: PaymentsDueReportComponent }

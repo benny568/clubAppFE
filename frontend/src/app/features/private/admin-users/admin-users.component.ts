@@ -52,7 +52,7 @@ export class AdminUsersComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.usr$.allUsers = results;
     },
-    err => this.err$.snackBar.open( "You do not have permissions to perform this action!", 'Error', { duration: this.err$.msgDuration } ));
+    (error: Response) => this.err$.handleError(error)); // err => this.err$.snackBar.open( "You do not have permissions to perform this action!", 'Error', { duration: this.err$.msgDuration } ));
 
     this.user = new User();
   }

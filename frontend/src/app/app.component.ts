@@ -6,7 +6,7 @@ import { Http, Headers,
 import { LoggerService } from './services/logger.service';
 import { CommonService } from './services/common.service';
 import { SessionDataService } from './services/session-data.service';
-import { LoginService } from './services/login.service';
+import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { CookieService } from './services/cookie.service';
 
@@ -22,10 +22,10 @@ export class AppComponent implements OnInit {
   logdepth      = 0;
   loggedIn      = '';
 
-  constructor( private lg$: LoggerService,
+  constructor( private lg$    : LoggerService,
                private com$   : CommonService,
                public  d$     : SessionDataService,
-               private login$ : LoginService,
+               public auth$   : AuthService,
                public  user$  : UserService,
                public  cookie$: CookieService,
                private router : Router,
@@ -38,21 +38,6 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
-    // if( this.cookie$.isVisitorCookiePresent() )
-    // {
-    //   this.lg$.log("Visitor cookie detected, not incrementing visitor count.");
-    // }
-    // else
-    // {
-    //   this.lg$.log("Visitor cookie NOT detected, incrementing visitor count on server.");
-    //   this.cookie$.saveVisitorCookie();
-    //   this.updateVisitorCount();
-    // }
-  }
-
-  public media(year:string, team:string, category:string)
-  {
-
   }
 
   goToTeamView(team) {
@@ -122,7 +107,7 @@ export class AppComponent implements OnInit {
 
   logout()
   {
-    this.login$.logout();
+    this.auth$.logout();
     localStorage.setItem('AdminHasLoggedIn', 'false');
     localStorage.removeItem('id_token');
     this.d$.dsAuthenticated = false;

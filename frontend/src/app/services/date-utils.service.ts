@@ -75,6 +75,9 @@ export class DateUtilsService {
    **********************************************************/
   public convertDateToString( dob: Date ): string
   {
+    if( !dob )
+      return null;
+      
     dob.setUTCHours(0,0,0); // Set the timezone to UTC
     console.log("convertDateToString("+dob+")");
     let day:number  = dob.getUTCDate();

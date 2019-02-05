@@ -32,7 +32,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { DisplayUtilitiesModule } from './display-utilities/display-utilities.module';
 import { NewsService } from './services/news.service';
 import { UserService } from './services/user.service';
-import { LoginService } from './services/login.service';
+import { AuthService } from './services/auth.service';
 import { CommonService } from './services/common.service';
 import { SessionDataService } from './services/session-data.service';
 import { LoggerService } from './services/logger.service';
@@ -49,6 +49,7 @@ import { SponsorsComponent } from './sponsors/sponsors.component';
 import { PhotosComponent } from './photos/photos.component';
 import { VideosComponent } from './videos/videos.component';
 import { FacebookFeedComponent } from './facebook-feed/facebook-feed.component';
+import { AuthGaurd } from './services/auth-gaurd.service';
 
 @NgModule({
   declarations: [
@@ -89,12 +90,14 @@ import { FacebookFeedComponent } from './facebook-feed/facebook-feed.component';
     SessionDataService,
     CommonService,
     ErrorService,
-    LoginService,
+    AuthService,
     UserService,
     NewsService,
     MemberService,
     CookieService,
-    DateUtilsService
+    DateUtilsService,
+    AuthService,
+    AuthGaurd
   ],
   bootstrap: [AppComponent]
 })

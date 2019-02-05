@@ -16,8 +16,9 @@ import { Position } from '../model/position';
 
 @Injectable()
 export class MemberService {
-    serviceName: string  = 'MemberService';
-    logdepth    : number = 3;
+    serviceName    : string = 'MemberService';
+    logdepth       : number = 3;
+    lg$            : LoggerService;
 
     msTeamMembers  : Array<any>;
     msCurrentMember: Member;
@@ -25,12 +26,12 @@ export class MemberService {
     msDisplayMember: boolean = false;
     msPosition     : Array<Position>;
 
-    constructor( private lg$  : LoggerService,
-                 private com$ : CommonService,
+    constructor( private com$ : CommonService,
                  private err$ : ErrorService,
                  private date$: DateUtilsService,
                  private http$: HttpClient )
     {
+        this.lg$ = new LoggerService();
         this.lg$.setLogHdr(this.logdepth, this.serviceName);
 
         this.msCurrentMember = new Member();
@@ -69,28 +70,11 @@ export class MemberService {
 
         let url = this.com$.getHome();
 
-        // if ( this.membersAreLoaded() )
-        // {
-        // 	this.lg$.log('    |- Members already loaded..');
-        // 	return; // Already loaded
-        // }
-        // else
-        // {
-            let headers: HttpHeaders = this.setupHeaders();
-            this.lg$.log('Headers set are: ' + headers.keys() );
+        let headers: HttpHeaders = this.com$.setupHeaders();
+        this.lg$.log('Headers set are: ' + headers.keys() );
 
-            this.lg$.log('-->' + 'getAllMembers()' );
-            return this.http$.get<Member[]>( url + 'admin/members/', {headers} );
-
-            // this.http$.get( url + 'admin/members/', {headers} )
-            //     .subscribe( (data:Array<Member>) => { this.msAllMembers = data, callback() },
-            //                 error => console.error('ERROR: Reading members from server'
-            //                                         + ', Error: ' + error ),
-	   		// 			              () => this.lg$.log('<-- Members read successfully')
-	   		// 		  );
-        //}
-
-
+        this.lg$.log('-->' + 'getAllMembers()' );
+        return this.http$.get<Member[]>( url + 'admin/members/', {headers} );
     }
 
     /**********************************************************
@@ -115,22 +99,15 @@ export class MemberService {
         {
 
 
-            let headers: HttpHeaders = this.setupHeaders();
+            let headers: HttpHeaders = this.com$.setupHeaders();
             this.lg$.log('Headers set are: ' + headers.keys() );
 
-           this.lg$.log('-->' + 'loadCurrentTeamMembersByTeamId(), loading team:' + team );
-        //    this.http$.get( url + '/admin/team/' + team, {headers} )
-        //         .subscribe( (data:Array<Member>) => { this.msTeamMembers[team] = data, callback(team) , this.logTeamMembersForTeamId(team) },
-        //                     error => console.error('ERROR: Reading team members from server, team: ' + team
-        //                                             + ', Error: ' + error ),
-	   	// 				              () => this.lg$.log('<-- Team members read successfully for team: ' + team)
-        //                  );
+            this.lg$.log('-->' + 'loadCurrentTeamMembersByTeamId(), loading team:' + team );
             return this.http$.get<Member[]>( url + 'admin/team/' + team, {headers} )
                 .pipe(
                         catchError(this.err$.handleError)
                     );
         }
-
 
     }
 
@@ -150,14 +127,17 @@ export class MemberService {
         this.lg$.log('URL: ' + memberUrl);
 
         // Set the headers, including the JWT
-        let headers: HttpHeaders = this.setupHeaders();
+        let headers: HttpHeaders = this.com$.setupHeaders();
 
         return this.http$.post( memberUrl, member, {headers} )
             .subscribe( data => {
                                   this.lg$.log('    |<- addMember('+data+')');
                                   callback(this.msAllMembers, member, this.msTeamMembers, this.lg$, this);
                                 },
-                        err => this.lg$.log('MemberService: ERROR adding member to server! [' + err + ']'),
+                        err => { 
+                                    this.lg$.log('MemberService: ERROR adding member to server! [' + err + ']');
+                                    this.err$.handleError(err)
+                                },
                         ()  => this.lg$.log('    |<- addMember() - finished')
             );
 
@@ -179,7 +159,7 @@ export class MemberService {
     	this.lg$.log('URL: ' + memberUrl);
 
         // Set the headers, including the JWT
-        let headers: HttpHeaders = this.setupHeaders();
+        let headers: HttpHeaders = this.com$.setupHeaders();
         // Save the team so we can update the internal memory if successful
         let thisTeam = member.team;
 
@@ -187,10 +167,13 @@ export class MemberService {
 
     	return this.http$.delete( memberUrl, {headers} )
   			.subscribe( (data: number) => {
-                              this.lg$.log('    |<- deleteMember('+data+')');
-                              callback( member, dataSource, paginator );
+                                            this.lg$.log('    |<- deleteMember('+data+')');
+                                            callback( member, dataSource, paginator );
   								          },
-  						err => this.lg$.log('MemberService: ERROR deleting member from server! [' + err + ']'),
+                          err => { 
+                                    this.lg$.log('MemberService: ERROR deleting member from server! [' + err + ']');
+                                    this.err$.handleError(err)
+                                },
   						()  => this.lg$.log('    |<- deleteMember() - finished')
   					);
     }
@@ -213,13 +196,16 @@ export class MemberService {
     	this.lg$.log('URL: ' + memberUrl);
 
       // Set the headers, including the JWT
-      let headers: HttpHeaders = this.setupHeaders();
+      let headers: HttpHeaders = this.com$.setupHeaders();
 
     	return this.http$.put( memberUrl, member, {headers} )
   			.subscribe( data => {
                                     this.lg$.log('    |<- saveMember('+data+')');
   								},
-  						err => this.lg$.log('MemberService: ERROR saving member to server! [' + err + ']'),
+  						err => { 
+                                    this.lg$.log('MemberService: ERROR saving member to server! [' + err + ']');
+                                    this.err$.handleError(err)
+                                },
   						()  => this.lg$.log('    |<- saveMember() - finished')
   					);
     }
@@ -437,15 +423,5 @@ export class MemberService {
                 this.lg$.log('-- [' + i + ']: ' + this.msTeamMembers[teamId][i].name);
                 this.lg$.log('-- [' + i + ']: ' + this.msTeamMembers[teamId][i].dob);
     		}
-    }
-
-    private setupHeaders(): HttpHeaders
-    {
-        let headers = new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
-        this.lg$.log('Token read from storage: ' + localStorage.getItem('id_token') );
-        this.lg$.log('Auth Hdr: ' + headers.get('Authorization'));
-        return headers;
     }
 }

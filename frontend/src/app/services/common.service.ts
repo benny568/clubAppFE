@@ -15,11 +15,14 @@ export class CommonService {
     logdepth    = 3;
     loghdr      = "";
     serviceName = 'CommonService';
+    lg$: LoggerService;
 
      constructor() 
      {
         var svr                = new ServerMode();
         this.CurrentServerMode = svr.getServerMode();
+        this.lg$               = new LoggerService();
+        this.lg$.setLogHdr(this.logdepth, this.serviceName);
      }
 
     /**********************************************************
@@ -204,12 +207,15 @@ export class CommonService {
      **********************************************************/
     public setupHeaders(): HttpHeaders
     {
-        let headers = new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
-          console.log("Token read from storage: " + localStorage.getItem('id_token') );
-          console.log("Auth Hdr: " + headers.get('Authorization'));
-        return headers;
+      this.lg$.log("setupHeaders()")
+      let headers = new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set('Authorization', 'Bearer ' + localStorage.getItem('id_token'))
+        .set('Access-Control-Allow-Origin', '*')
+        .set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+      this.lg$.log("Token read from storage: " + localStorage.getItem('id_token') );
+      this.lg$.log("Auth Hdr: " + headers.get('Authorization'));
+      return headers;
     }
 
     /**********************************************************

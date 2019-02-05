@@ -40,8 +40,8 @@ export class AdminMyProfileComponent implements OnInit {
         this.lg$.trace("Logged in user is: " + this.user$.CurrentUser.name );
         this.lg$.trace("Address: " + this.user$.CurrentUser.address );
         this.lg$.trace("Phone: " + this.user$.CurrentUser.phone );
-      },
-      err => this.err$.snackBar.open( "You do not have permissions to perform this action!", 'Error', { duration: this.err$.msgDuration } ));
+      },      
+      (error: Response) => this.err$.handleError(error)); // this.err$.snackBar.open( "You do not have permissions to perform this action!", 'Error', { duration: this.err$.msgDuration } ));
     }
 
   /**********************************************************

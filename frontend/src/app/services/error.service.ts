@@ -4,16 +4,19 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { throwError } from 'rxjs';
 
+import { LoggerService, LogType } from '../services/logger.service';
+
 @Injectable()
 export class ErrorService {
   
       logdepth = 3;
-      loghdr = "";
       serviceName = 'ErrorService';
-      msgDuration = 3000; // 3 seconds
+      msgDuration = 5000; // 5 seconds
+      lg$: LoggerService;
   
        constructor ( public snackBar: MatSnackBar ) {
-  
+        this.lg$ = new LoggerService();
+        this.lg$.setLogHdr(this.logdepth, this.serviceName);
        }
   
       /**********************************************************
@@ -23,7 +26,7 @@ export class ErrorService {
        * Return:
        **********************************************************/
       public openAlert( msg: string ): void {
-        console.log("########## INSIDE OPEN ALERT!!");
+        this.lg$.log("########## INSIDE OPEN ALERT!!");
 
         this.snackBar.open( msg, 'Error', { duration: this.msgDuration } );
 
@@ -36,28 +39,30 @@ export class ErrorService {
          * Params in: Date
          * Return   : None.
          **********************************************************/
-        public handleError(error: HttpErrorResponse) {
+        public handleError(error: Response) {
           let msg = 'You do not have permissions to perform this action!';
-
-          if (error.error instanceof ErrorEvent) {
-            // A client-side or network error occurred. Handle it accordingly.
-            console.error('An error occurred:', error.error.message);
-          } 
-          else 
-          {   
-              switch( error.status )
-              {
-                case 403:
-                  console.error("You do not have permissions to perform this action!");
-                  break;
-                default:
-                  // The backend returned an unsuccessful response code.
-                  // The response body may contain clues as to what went wrong,
-                  console.error(
-                    `Backend returned code ${error.status}, ` +
-                    `body was: ${error.error}`);
-                    break;
-              }
+  
+          switch( error.status )
+          {
+            case 400:
+              this.lg$.error("BAD REQUEST!");
+              this.snackBar.open( "You have sent a bad request to the server!", 'Error', { duration: this.msgDuration } )
+              break;
+            case 403:
+              this.lg$.error("You do not have permissions to perform this action!");
+              this.snackBar.open( "You do not have permissions to perform this action!", 'Error', { duration: this.msgDuration } )
+              break;
+            case 404:
+              this.lg$.error("Requested data not found!");
+              this.snackBar.open( "The data you requested was not found by the server!", 'Error', { duration: this.msgDuration } )
+              break;
+            default:
+              // The backend returned an unsuccessful response code.
+              // The response body may contain clues as to what went wrong,
+              this.lg$.error(
+                `Backend returned code ${error.status}, ` +
+                `body was: ${error.body}`);
+                break;
           }
           // return an observable with a user-facing error message
           return throwError(

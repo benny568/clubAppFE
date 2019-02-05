@@ -7,7 +7,7 @@ import { FormGroup,
 
 import { SessionDataService } from '../services/session-data.service';
 import { LoggerService }      from '../services/logger.service';
-import { LoginService }       from '../services/login.service';
+import { AuthService }       from '../services/auth.service';
 import { UserService }        from '../services/user.service';
 
 import { User }               from '../model/site-user';
@@ -31,10 +31,10 @@ export class LoginComponent {
 	password    : string;
 
 	constructor( private lg$    : LoggerService,
-				       private login$ : LoginService,
-				       private user$  : UserService,
-				       private _router: Router,
-				       private fb     : FormBuilder )
+				 private auth$  : AuthService,
+				 private user$  : UserService,
+				 private _router: Router,
+				 private fb     : FormBuilder )
 	{
 		this.lg$.setLogHdr(this.logdepth, this.componentName);
 		this.loginDetails = { username: '', password: ''};
@@ -59,15 +59,16 @@ export class LoginComponent {
 		this.lg$.log( "->onSubmit(): you submitted values:" + this.username + ":" + this.password);
 		this.user$.CurrentUser.name = this.username;
 
-		this.login$.sendCredential( this.username, this.password )
+		this.auth$.authenticate( this.username, this.password )
 			.subscribe(
 				res => {
 							if( res.status === 200 )
 							{
-                this.lg$.log("SUCCESS !!!!!!!!!!!!!!!");
+                				this.lg$.log("SUCCESS !!!!!!!!!!!!!!!");
 								this.lg$.log("BODY: " + res.text() );
 								this.saveJwt(res.text());
 								this.user$.setUserAsAuthenticated();
+								this.auth$.isLoggedIn(); // TEMP
 								this.lg$.log("Routing to home page");
 								this._router.navigate( ['adminHome', {}] );
 							}

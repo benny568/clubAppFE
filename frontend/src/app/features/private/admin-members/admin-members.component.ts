@@ -7,6 +7,7 @@ import { CommonService } from './../../../services/common.service';
 import { ErrorService } from '../../../services/error.service';
 import { SessionDataService } from '../../../services/session-data.service';
 import { MemberService } from '../../../services/member.service';
+import { AuthService } from '../../../services/auth.service';
 
 import { AddMemberComponent } from './../add-member/add-member.component';
 import { EditMemberComponent } from '../edit-member/edit-member.component';
@@ -37,6 +38,7 @@ export class AdminMembersComponent implements OnInit {
                private err$: ErrorService,
                public d$: SessionDataService,
                public mbr$: MemberService,
+               public auth$: AuthService,
                private router : Router,
                private dialog: MatDialog )
   {
@@ -66,7 +68,7 @@ export class AdminMembersComponent implements OnInit {
       this.lg$.log("    --> getMembers4team(" + team + ")");
       this.mbr$.loadCurrentTeamMembersByTeamId( team, this.gotTeamMembers(this.lg$, this.showArray) )
           .subscribe( (data:Array<Member>) => { this.mbr$.msTeamMembers[team] = data, this.showArray[team] = !this.showArray[team] },
-                      error => this.err$.snackBar.open( "You do not have permissions to perform this action!", 'Error', { duration: this.err$.msgDuration } )
+                      (error: Response) => this.err$.handleError(error)
                     );
   }
 
@@ -118,9 +120,13 @@ export class AdminMembersComponent implements OnInit {
     editMember( member: Member )
     {
       this.lg$.log("    |-> editMember(" + member.name + ")");
-      this.thisMember = member;
-
-      this.openDialog();
+      // if( this.auth$.isLoggedIn() && this.auth$.isAllowed("ROLE_MANAGER") )
+      // {
+        this.thisMember = member;
+        this.openDialog();
+      // }
+      // else
+      //   this.lg$.trace("YOU DON'T HAVE PERMISSIONS TO EDIT THIS MEMBER!!");
 
     }
 
