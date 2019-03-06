@@ -1,0 +1,14 @@
+.note { 
+  border-left: 6px solid red; 
+  background-color: lightyellow; 
+  padding: 10px;
+  margin: 10px;
+  font-style: italic;
+  width: auto;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

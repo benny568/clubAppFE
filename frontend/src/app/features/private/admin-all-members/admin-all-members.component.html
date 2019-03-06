@@ -1,0 +1,97 @@
+<div class="container" style="width: 90%">
+  <div class="panel">
+      <div class="panel-heading avenue-heading">
+        <strong>Member Administration</strong>
+        <div  style="float:right; align:bottom;">
+          <button type="button" class="btn btn-warning btn-xs" (click)="addmember()" style="cursor:pointer;" data-toggle="tooltip" data-placement="right">Add Member</button>
+        </div>
+      </div>
+      <div class="panel-body">
+
+<div class="mat-elevation-z8">
+  <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+      <mat-spinner></mat-spinner>
+  </div> -->
+  <mat-table [dataSource]="dataSource" matSort >
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+        <mat-cell *matCellDef="let member"> {{member.id}} </mat-cell>
+      </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let member" > {{member.name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+      <mat-cell *matCellDef="let member"> {{member.address}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
+      <mat-cell *matCellDef="let member"> {{member.phone}} </mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="operations">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header> Operations </mat-header-cell>      
+      <mat-cell *matCellDef="let member">
+          <i *ngIf="(member.amount>0)" class="glyphicon glyphicon-euro" data-toggle="tooltip" data-placement="right" title="Paid" style="float:left;"></i>&nbsp;
+          <i *ngIf="!(member.amount>0)" class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="right" title="Not Paid" style="float:left;"></i>&nbsp;
+          <i (click)="editMember(member)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Edit" class="glyphicon glyphicon-pencil" style="float:left;padding-left:10px;"> </i>&nbsp;
+          <i (click)="deleteMember(member)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Delete" class="glyphicon glyphicon-trash" style="float:left;padding-left:10px;"></i>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}" (click)="row.highlighted = !row.highlighted" (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+  <div style="margin-left:auto;margin-right:auto;width:80%;">
+      <div class="row">
+        <div class="col-md-8">
+          <h3 style="color:white">Club Register {{season}} Season</h3>
+        </div>
+        <div class="col-md-4">
+          <input [(ngModel)]="searchText" type="text" placeholder="Search.." name="searchText">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+
+      <div class="row">
+
+          <div class="panel">
+
+            <div class="panel-body avenue-body" style="height:100%;">
+              <div class="row">
+                  <div class="col-md-1 tblHdr">#</div>
+                  <div class="col-md-3 tblHdr">Name</div>
+                  <div class="col-md-4 tblHdr">Address</div>
+                  <div class="col-md-2 tblHdr">Phone</div>
+                  <div class="col-md-2 tblHdr">Operations</div>
+              </div>
+              <div *ngFor="let member of mbr$.msAllMembers| filterMembers:searchText; index as i" class="row light-line">
+                <div class="col-md-1">{{i+1}}</div>						    
+                <div class="col-md-3">{{member.name}}</div>
+                <div class="col-md-4">{{member.address}}</div>
+                <div class="col-md-2">{{member.phone}}</div>
+                <div class="col-md-2">
+                  <i *ngIf="(member.amount>0)" class="glyphicon glyphicon-euro" data-toggle="tooltip" data-placement="right" title="Paid" style="float:left;"></i>&nbsp;
+                  <i *ngIf="!(member.amount>0)" class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="right" title="Not Paid" style="float:left;"></i>&nbsp;
+                  <i (click)="editMember(member)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Edit" class="glyphicon glyphicon-pencil" style="float:left;padding-left:10px;"> </i>&nbsp;
+                  <i (click)="deleteMember(member)" style="cursor:pointer;" data-toggle="tooltip" data-placement="right" title="Delete" class="glyphicon glyphicon-trash" style="float:left;padding-left:10px;"></i>
+                </div>	
+              </div>
+
+            </div>
+          </div> 		
+
+      </div>
+  </div>
+</div>  -->

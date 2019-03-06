@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body,
+html {
+    background-image: url("/assets/img/stadium1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    background-attachment: fixed;
+    height: 100%
+}
+
+.avenue-yellow-text { color: #fae900  }
+.a-orange-text { color: #fae900  }
+.avenue-heading { background-color: #d90404; color: #fae900; min-height: 40px }
+.avenue-body { background-color: #303030; color: #fff }

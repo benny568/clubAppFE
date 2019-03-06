@@ -1,0 +1,13 @@
+table {
+    width: 100%;
+  }
+
+  mat-header-cell {
+    font-weight: bolder;
+    font-size: large;
+    color: black;
+  }
+
+  .mat-row.hovered {
+    background: #eee;
+  }

@@ -1,0 +1,34 @@
+<div class="loginbox">
+    <div class="loginhead"><i class="glyphicon glyphicon-user" style="align:right;margin-right:0px;"></i> Please Login</div>
+    <div class="loginbody">
+ 
+            <div class="form-row">
+                <div class="form-graphic">
+                    Username:
+                </div>
+                <div class="form-input">
+                    <input type="text" [(ngModel)]="username">   
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-graphic">
+                    Password:
+                </div>
+                <div class="form-input">
+                    <input type="{{showPassword}}" [(ngModel)]="password">   
+                </div>
+            </div>
+            <div class="form-row">
+                <mat-checkbox (click)="toggleShowPassword()">
+                    <div style="font-weight: normal">
+                        Show Password
+                    </div>
+                </mat-checkbox>
+            </div>
+            <div class="form-row">
+                <button mat-raised-button (click)="login()">Login Now</button>
+            </div>
+
+    </div> 
+</div>

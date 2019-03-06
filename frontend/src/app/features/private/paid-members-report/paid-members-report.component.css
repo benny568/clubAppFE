@@ -1,0 +1,23 @@
+.lefty {
+    float: left;
+}
+
+.noFloat {
+    float: none;
+}
+
+button {
+    float: right;
+}
+
+.top {
+    /* height: 10em; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fitem {
+    /* flex-basis: 25%; */
+    width: 25%;
+}

@@ -1,0 +1,37 @@
+.reg-form {
+  background-color: #eee;
+}
+
+.form-full-width { width: 100%; }
+.form-name-field { width: 100px; }
+.form-dob-field { width: 100px }
+.form-email-field { width: 200px }
+.form-phone-field { width: 150px }
+.form-address-field { width: 330px }
+
+.lightline { 
+  min-height: 1px; 
+  border-bottom: 1px solid lightgrey;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.consent-text {
+  font-weight: normal;
+  word-wrap: break-word;
+  float: right;
+}
+
+.left { float: left; }
+.form-container { 
+  max-width: 500px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

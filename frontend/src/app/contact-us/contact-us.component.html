@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+      <div class="col-sm-6" style="padding-left:50px;">
+
+          <div class="panel" style="width:auto;">
+              <div class="panel-heading avenue-heading">
+                  <h3>Avenue United contact details</h3>
+              </div>
+          </div>
+
+          <br/><br/>
+          <table class="table table-bordered" style="background-color:#E6E3E3;">
+              <thead>
+                  <tr class="avenue-heading">
+                      <th style="min-width:140px;"><i class="fa fa-futbol-o"></i> Office</th>
+                      <th style="min-width:140px;"><i class="fa fa-user"></i> Name</th>
+                      <th style="min-width:120px;"><i class="fa fa-phone"></i> Phone</th>
+                      <th><i class="fa fa-envelope"></i> Email</th>
+                  </tr>
+              </thead>
+              <tbody class="avenue-body">
+                  <tr *ngFor="let office of officers">
+                      <th scope="row">{{office.office}}</th>
+                      <td>{{office.name}}</td>
+                      <td>{{office.phone}}</td>
+                      <td>{{office.email}}</td>
+                  </tr>
+              </tbody>
+          </table>
+
+      </div>
+      <!-- end col -->
+      <div class="col-sm-6">
+
+      </div>
+      <!-- end col -->
+  </div>
+  <!-- end row -->
+
+  <div class="row">
+
+  </div>
+  <!-- end row -->
+</div>

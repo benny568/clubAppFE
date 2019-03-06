@@ -1,0 +1,250 @@
+<h3 mat-dialog-title class="dialogTitle">Add Member</h3>
+    <mat-dialog-content class="dialogContent">
+
+      <form>
+        <div class="container">
+          <div class="item">
+            <mat-form-field class="form-name-field">
+              <mat-label>Name:</mat-label>
+              <input matInput 
+                    class="formfield" 
+                    name="name" 
+                    [value]="data.member.name" 
+                    [(ngModel)]="data.member.name">
+            </mat-form-field>
+          </div> 
+          
+          <div class="item">
+            <mat-form-field class="form-dob-field">
+              <mat-label>Date of Birth:</mat-label>
+              <input matInput
+                    [matDatepicker]="picker"
+                    name="dob"
+                    [value]="xdob"
+                    [(ngModel)]="xdob">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-full-width">
+              <mat-label>Address:</mat-label>
+              <textarea matInput 
+                        class="formfield"
+                        rows="1"
+                        name="address"
+                        [value]="data.member.address"
+                        [(ngModel)]="data.member.address">
+              </textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-email-field">
+              <mat-label>Email:</mat-label>
+              <input matInput 
+                    name="email" 
+                    [value]="data.member.email" 
+                    [(ngModel)]="data.member.email">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Phone:</mat-label>
+              <input matInput 
+                    name="phone"
+                    [value]="data.member.phone"
+                    [(ngModel)]="data.member.phone">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Phone2:</mat-label>
+              <input matInput 
+                    name="phone2"
+                    [value]="data.member.phone2"
+                    [(ngModel)]="data.member.phone2">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Fees paid:</mat-label>
+              <input matInput 
+                    name="amount"
+                    [value]="data.member.amount"
+                    [(ngModel)]="data.member.amount">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Receipt Id:</mat-label>
+              <input matInput 
+                    name="receiptid"
+                    [value]="data.member.receiptid"
+                    [(ngModel)]="data.member.receiptid">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Team 1:</mat-label>
+              <mat-select [(value)]="team">
+                <mat-option *ngFor="let option of options" value="{{option}}" >{{option}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Team 2:</mat-label>
+              <mat-select [(value)]="team2">
+                <mat-option *ngFor="let option of options" value="{{option}}" >{{option}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Team 3:</mat-label>
+              <mat-select [(value)]="team3">
+                <mat-option *ngFor="let option of options" value="{{option}}" >{{option}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Position 1:</mat-label>
+              <mat-select [(value)]="position">
+                <mat-option *ngFor="let pos of d$.dsPosition" value="{{pos}}" >{{pos}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Position 2:</mat-label>
+              <mat-select [(value)]="position2">
+                <mat-option *ngFor="let pos of d$.dsPosition" value="{{pos}}" >{{pos}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Position 3:</mat-label>
+              <mat-select [(value)]="position3">
+                <mat-option *ngFor="let pos of d$.dsPosition" value="{{pos}}" >{{pos}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Favourite Team:</mat-label>
+              <input matInput 
+                    name="favteam"
+                    [value]="data.member.favteam"
+                    [(ngModel)]="data.member.favteam">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Favourite Player:</mat-label>
+              <input matInput 
+                    name="favplayer"
+                    [value]="data.member.favplayer"
+                    [(ngModel)]="data.member.favplayer">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Season Appearences:</mat-label>
+              <input matInput 
+                    name="sappears"
+                    [value]="data.member.sappears"
+                    [(ngModel)]="data.member.sappears">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Season Assists:</mat-label>
+              <input matInput 
+                    name="sassists"
+                    [value]="data.member.sassists"
+                    [(ngModel)]="data.member.sassists">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Season Goals:</mat-label>
+              <input matInput 
+                    name="sgoals"
+                    [value]="data.member.sgoals"
+                    [(ngModel)]="data.member.sgoals">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Photo:</mat-label>
+              <input matInput 
+                    name="photo"
+                    [value]="data.member.photo"
+                    [(ngModel)]="data.member.photo">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-full-width">
+              <mat-label>Achievements:</mat-label>
+              <textarea matInput 
+                        class="formfield"
+                        rows="2"
+                        name="achievements"
+                        [value]="data.member.achievements"
+                        [(ngModel)]="data.member.achievements">
+              </textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-phone-field">
+              <mat-label>Account Status:</mat-label>
+              <input matInput 
+                    name="status"
+                    [value]="data.member.status"
+                    [(ngModel)]="data.member.status">
+            </mat-form-field>
+          </div>
+
+          <div class="item">
+            <mat-form-field class="form-full-width">
+              <mat-label>Academy Info:</mat-label>
+              <textarea matInput 
+                        class="formfield"
+                        rows="1"
+                        name="academyinfo"
+                        [value]="data.member.academyinfo"
+                        [(ngModel)]="data.member.academyinfo">
+              </textarea>
+            </mat-form-field>
+          </div>
+
+        </div>
+      </form>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="onCloseConfirm()">Confirm</button>
+      <button mat-button (click)="onCloseCancel()">Cancel</button>
+    </mat-dialog-actions>

@@ -1,0 +1,64 @@
+<div class="panel">
+  <div class="panel-heading avenue-heading">
+      Step 3: Payment
+  </div>
+  <div class="panel-body avenue-body">
+
+      <div>
+
+        <strong>Details entered:</strong><br><br>
+
+		First name: {{ar$.regData.getFirstname() }}<br>
+		Last name: {{ar$.regData.getLastname() }}<br>
+		Email: {{ar$.regData.getEmail() }}<br>
+		Date of Birth: {{ar$.regData.getDob() }}<br>
+		Phone1: {{ar$.regData.getPhone1() }}<br>
+		Phone2 {{ar$.regData.getPhone2() }}<br>
+		Allergies {{ar$.regData.getAllergies() }}<br>
+		Asthma: {{ar$.regData.getAsthma() }}<br>
+		Diabetes: {{ar$.regData.getDiabetes() }}<br>
+		Medication {{ar$.regData.getMedication() }}<br>
+		Notes: {{ar$.regData.getNotes() }}<br>
+		Reg Date: {{ar$.regData.getRegdate() }}<br>
+		Mother: {{ar$.regData.getMotherName() }}<br>
+		Father: {{ar$.regData.getFatherName() }}<br>
+		Half Term: {{ar$.regData.getHalfterm() }}<br>
+		Second Child: {{ar$.regData.getSecondchild() }}<br>
+		Third Child: {{ar$.regData.getThirdchild() }}<br>
+		Gen Consent: {{ar$.regData.getGeneralconsent() }}<br>
+		Pic Consent: {{ar$.regData.getPictureconsent() }}<br>
+      </div>
+
+      <!-- Leave a space -->
+      <div>
+          <br />
+      </div>
+
+      <!-- Add the total cost calculations -->
+
+      <div >
+          <div>
+              <strong>TOTAL PAYMENT DUE:</strong>
+          </div>
+          <div>
+              {{ar$.payment | currency:'EUR':'true':'1.2-2'}}
+          </div>
+      </div>
+
+      <div>
+        <button style="float: left;background-color: black; border: none;" (click)="ar$.tst_payPal()"></button>
+      </div>
+
+      <div style="padding-top:50px;">
+          <div>
+            <button mat-raised-button color="warn" style="float: left" (click)="back()">Back</button>
+          </div>
+          <div>
+              <button type="button" (click)="ar$.payPal()" style="float:right;">
+                  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0">
+              </button>
+          </div>
+      </div>
+  </div>
+</div>
+
